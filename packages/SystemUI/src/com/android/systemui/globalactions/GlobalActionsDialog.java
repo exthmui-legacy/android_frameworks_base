@@ -420,7 +420,6 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             } else if (GLOBAL_ACTION_KEY_ASSIST.equals(actionKey)) {
                 mItems.add(getAssistAction());
             } else if (GLOBAL_ACTION_KEY_RESTART.equals(actionKey)) {
-<<<<<<< HEAD
                 if (!mIsRestartMenu) {
                     continue;
                 } else {
@@ -429,18 +428,13 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             } else if (GLOBAL_ACTION_KEY_RESTART_RECOVERY.equals(actionKey) &&
                     PowerMenuUtils.isAdvancedRestartPossible(mContext)) {
                 mItems.add(new RestartRecoveryAction());
-            } else if (GLOBAL_ACTION_KEY_RESTART_BOOTLOADER.equals(actionKey) &&
-                    PowerMenuUtils.isAdvancedRestartPossible(mContext)) {
-                mItems.add(new RestartBootloaderAction());
             } else if (GLOBAL_ACTION_KEY_RESTART_DOWNLOAD.equals(actionKey) &&
                     PowerMenuUtils.isAdvancedRestartPossible(mContext)) {
                 mItems.add(new RestartDownloadAction());
-=======
                 if (Settings.System.getInt(mContext.getContentResolver(),
                         Settings.System.POWERMENU_RESTART, 1) == 1) {
                     mItems.add(new RestartAction());
                 }
->>>>>>> cff723afed2... Pimp the power menu out [1/2]
             } else if (GLOBAL_ACTION_KEY_SCREENSHOT.equals(actionKey)) {
                 if (Settings.System.getInt(mContext.getContentResolver(),
                         Settings.System.POWERMENU_SCREENSHOT, 0) == 1) {
@@ -458,14 +452,11 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                         && !mEmergencyAffordanceManager.needsEmergencyAffordance()) {
                     mItems.add(new EmergencyDialerAction());
                 }
-<<<<<<< HEAD
-=======
             } else if (GLOBAL_ACTION_KEY_RESTART_RECOVERY.equals(actionKey)) {
                 if (Settings.System.getInt(mContext.getContentResolver(),
                         Settings.System.POWERMENU_RESTART_RECOVERY, 1) == 1) {
                     mItems.add(new AdvancedRestartAction());
                 }
->>>>>>> cff723afed2... Pimp the power menu out [1/2]
             } else {
                 Log.e(TAG, "Invalid global action key " + actionKey);
             }
