@@ -105,6 +105,7 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
             mNetworkTraffic.setAlpha(newAlpha);
             mBattery.setAlpha(newAlphaBC);
             mClockCenter.setAlpha(newAlpha);
+            mNetworkTraffic.setAlpha(newAlpha);
         }
     }
 }
