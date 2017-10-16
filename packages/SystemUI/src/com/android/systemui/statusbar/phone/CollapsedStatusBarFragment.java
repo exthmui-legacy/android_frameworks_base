@@ -22,11 +22,13 @@ import android.annotation.Nullable;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.ImageSwitcher;
 import android.widget.LinearLayout;
 
 import com.android.systemui.Dependency;
@@ -37,6 +39,7 @@ import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.StatusBarState;
 import com.android.systemui.statusbar.phone.StatusBarIconController.DarkIconManager;
+import com.android.systemui.statusbar.phone.TickerView;
 import com.android.systemui.statusbar.policy.EncryptionHelper;
 import com.android.systemui.statusbar.policy.KeyguardMonitor;
 import com.android.systemui.statusbar.policy.NetworkController;
@@ -71,6 +74,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private CommandQueue mCommandQueue;
     private ClockController mClockController;
     private boolean mIsClockBlacklisted;
+
+    private int mTickerEnabled;
+    private View mTickerViewFromStub;
+
+    private static final String STATUS_BAR_SHOW_TICKER =
+            "system:" + Settings.System.STATUS_BAR_SHOW_TICKER;
 
     private SignalCallback mSignalCallback = new SignalCallback() {
         @Override
@@ -114,6 +123,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         showClock(false);
         initEmergencyCryptkeeperText();
         initOperatorName();
+        Dependency.get(TunerService.class).addTunable(this,
+                STATUS_BAR_SHOW_TICKER);
     }
 
     @Override
@@ -141,6 +152,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Dependency.get(TunerService.class).removeTunable(this);
         Dependency.get(StatusBarIconController.class).removeIconGroup(mDarkIconManager);
         if (mNetworkController.hasEmergencyCryptKeeperText()) {
             mNetworkController.removeCallback(mSignalCallback);
@@ -153,6 +165,15 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mIsClockBlacklisted = StatusBarIconController.getIconBlacklist(newValue).contains("clock");
         if (wasClockBlacklisted && !mIsClockBlacklisted) {
             showClock(false);
+        }
+        switch (key) {
+            case STATUS_BAR_SHOW_TICKER:
+                mTickerEnabled =
+                        TunerService.parseInteger(newValue, 0);
+                initTickerView();
+                break;
+            default:
+                break;
         }
     }
 
@@ -403,5 +424,20 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     @Override
     public void onDozingChanged(boolean isDozing) {
         disable(getContext().getDisplayId(), mDisabled1, mDisabled1, false /* animate */);
+    }
+
+    private void initTickerView() {
+        if (mTickerEnabled != 0) {
+            View tickerStub = mStatusBar.findViewById(R.id.ticker_stub);
+            if (mTickerViewFromStub == null && tickerStub != null) {
+                mTickerViewFromStub = ((ViewStub) tickerStub).inflate();
+            }
+            TickerView tickerView = (TickerView) mStatusBar.findViewById(R.id.tickerText);
+            ImageSwitcher tickerIcon = (ImageSwitcher) mStatusBar.findViewById(R.id.tickerIcon);
+            mStatusBarComponent.createTicker(
+                    mTickerEnabled, getContext(), mStatusBar, tickerView, tickerIcon, mTickerViewFromStub);
+        } else {
+            mStatusBarComponent.disableTicker();
+        }
     }
 }
