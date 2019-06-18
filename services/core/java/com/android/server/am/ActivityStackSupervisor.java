@@ -1527,6 +1527,7 @@ public class ActivityStackSupervisor extends ConfigurationContainer implements D
                         r.launchedFromPackage, task.voiceInteractor, app.repProcState, r.icicle,
                         r.persistentState, results, newIntents, mService.isNextTransitionForward(),
                         profilerInfo));
+                        PreventRunningUtils.onLaunchActivity(r.appToken);
 
                 // Set desired final state.
                 final ActivityLifecycleItem lifecycleItem;
@@ -3082,6 +3083,15 @@ public class ActivityStackSupervisor extends ConfigurationContainer implements D
     }
 
     void cleanUpRemovedTaskLocked(TaskRecord tr, boolean killProcess, boolean removeFromRecents) {
+        try {
+            cleanUpRemovedTaskLocked$Pr(tr, killProcess, removeFromRecents);
+        } finally {
+            if (killProcess) {
+                PreventRunningUtils.onCleanUpRemovedTask(tr.getBaseIntent());
+            }
+        }
+    }
+    private void cleanUpRemovedTaskLocked$Pr(TaskRecord tr, boolean killProcess, boolean removeFromRecents) {
         if (removeFromRecents) {
             mRecentTasks.remove(tr);
         }
