@@ -2356,6 +2356,11 @@
   <java-symbol type="drawable" name="decor_close_button_light" />
   <java-symbol type="drawable" name="decor_maximize_button_dark" />
   <java-symbol type="drawable" name="decor_maximize_button_light" />
+  <!-- region @cobra -->
+  <java-symbol type="id" name="minimize_window" />
+  <java-symbol type="drawable" name="decor_minimize_button_dark" />
+  <java-symbol type="drawable" name="decor_minimize_button_light" />
+  <!-- endregion -->
   <java-symbol type="color" name="decor_button_dark_color" />
   <java-symbol type="color" name="decor_button_light_color" />
   <java-symbol type="array" name="unloggable_phone_numbers" />

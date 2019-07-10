@@ -4995,6 +4995,9 @@
     <!-- Free style window strings -->
     <!-- Accessibility text for the maximize window button -->
     <string name="maximize_button_text">Maximize</string>
+    <!-- region @cobra -->
+    <string name="minimize_button_text">Minimize</string>
+    <!-- endregion -->
     <!-- Accessibility text for the close window button -->
     <string name="close_button_text">Close</string>
 

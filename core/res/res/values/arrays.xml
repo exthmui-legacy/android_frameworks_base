@@ -139,6 +139,10 @@
    <array name="preloaded_freeform_multi_window_drawables">
       <item>@drawable/decor_maximize_button_dark</item>
       <item>@drawable/decor_maximize_button_light</item>
+       <!-- region @cobra -->
+       <item>@drawable/decor_minimize_button_dark</item>
+       <item>@drawable/decor_minimize_button_light</item>
+       <!-- endregion -->
    </array>
 
     <!-- Used in LocalePicker -->
