@@ -16,6 +16,7 @@
 
 package com.android.internal.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -145,6 +146,9 @@ public class DecorCaptionView extends ViewGroup implements View.OnTouchListener,
         // background without removing the shadow.
         mOwner.getDecorView().setOutlineProvider(ViewOutlineProvider.BOUNDS);
         mMaximize = findViewById(R.id.maximize_window);
+        // region @cobra
+        mMinimize = findViewById(R.id.minimize_window);
+        // endregion
         mClose = findViewById(R.id.close_window);
     }
 
@@ -159,6 +163,11 @@ public class DecorCaptionView extends ViewGroup implements View.OnTouchListener,
             if (mMaximizeRect.contains(x, y - mRootScrollY)) {
                 mClickTarget = mMaximize;
             }
+            // region @cobra
+            if (mMinimizeRect.contains(x, y - mRootScrollY)) {
+                mClickTarget = mMinimize;
+            }
+            // endregion
             if (mCloseRect.contains(x, y - mRootScrollY)) {
                 mClickTarget = mClose;
             }
@@ -308,6 +317,9 @@ public class DecorCaptionView extends ViewGroup implements View.OnTouchListener,
             mCaption.layout(0, 0, mCaption.getMeasuredWidth(), mCaption.getMeasuredHeight());
             captionHeight = mCaption.getBottom() - mCaption.getTop();
             mMaximize.getHitRect(mMaximizeRect);
+            // region @cobra
+            mMinimize.getHitRect(mMinimizeRect);
+            // endregion
             mClose.getHitRect(mCloseRect);
         } else {
             captionHeight = 0;
@@ -325,8 +337,12 @@ public class DecorCaptionView extends ViewGroup implements View.OnTouchListener,
         }
 
         // This assumes that the caption bar is at the top.
-        mOwner.notifyRestrictedCaptionAreaCallback(mMaximize.getLeft(), mMaximize.getTop(),
+        // region @cobra
+        // mOwner.notifyRestrictedCaptionAreaCallback(mMaximize.getLeft(), mMaximize.getTop(),
+        //         mClose.getRight(), mClose.getBottom());
+        mOwner.notifyRestrictedCaptionAreaCallback(mMinimize.getLeft(), mMinimize.getTop(),
                 mClose.getRight(), mClose.getBottom());
+        // endregion
     }
 
     /**
@@ -403,6 +419,16 @@ public class DecorCaptionView extends ViewGroup implements View.OnTouchListener,
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
+        // region @cobra
+        if (mClickTarget == mMinimize) {
+            Window.WindowControllerCallback callback = mOwner.getWindowControllerCallback();
+            if (callback instanceof Activity) {
+                Activity activity = (Activity) callback;
+                activity.moveTaskToBack(true);
+            }
+            return true;
+        }
+        // endregion
         if (mClickTarget == mMaximize) {
             toggleFreeformWindowingMode();
         } else if (mClickTarget == mClose) {
@@ -426,6 +452,10 @@ public class DecorCaptionView extends ViewGroup implements View.OnTouchListener,
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         return false;
     }
+
+    // region @cobra
+    private View mMinimize;
+    private final Rect mMinimizeRect = new Rect();
 
     /**
      * Called when {@link android.view.ViewRootImpl} scrolls for adjustPan.
