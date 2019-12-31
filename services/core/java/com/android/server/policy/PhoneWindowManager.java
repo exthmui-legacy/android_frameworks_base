@@ -2044,12 +2044,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     mScreenshotHelper.notifyScreenshotCaptureError();
                     return;
             }
-            if (!mPocketLockShowing){
-                mScreenshotHelper.takeScreenshot(mScreenshotType,
-                        mStatusBar != null && mStatusBar.isVisibleLw(),
-                        mNavigationBar != null && mNavigationBar.isVisibleLw(), mHandler, longshot, screenshotBundle);
-            }
-        }
+            mScreenshotHelper.takeScreenshot(mScreenshotType,
+                mStatusBar != null && mStatusBar.isVisibleLw(),
+                mNavigationBar != null && mNavigationBar.isVisibleLw(), mHandler, longshot, screenshotBundle);
         }
     }
 
