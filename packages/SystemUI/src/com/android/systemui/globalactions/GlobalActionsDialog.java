@@ -135,24 +135,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
     // Default scrim color
     private static final int SCRIM_DEFAULT_COLOR = Color.BLACK;
-    private static final boolean SHOW_SILENT_TOGGLE = true;
 
-    /* Valid settings for global actions keys.
-     * see config.xml config_globalActionList */
-    private static final String GLOBAL_ACTION_KEY_POWER = "power";
-    private static final String GLOBAL_ACTION_KEY_AIRPLANE = "airplane";
-    private static final String GLOBAL_ACTION_KEY_BUGREPORT = "bugreport";
-    private static final String GLOBAL_ACTION_KEY_SILENT = "silent";
-    private static final String GLOBAL_ACTION_KEY_USERS = "users";
-    private static final String GLOBAL_ACTION_KEY_SETTINGS = "settings";
-    private static final String GLOBAL_ACTION_KEY_LOCKDOWN = "lockdown";
-    private static final String GLOBAL_ACTION_KEY_VOICEASSIST = "voiceassist";
-    private static final String GLOBAL_ACTION_KEY_ASSIST = "assist";
-    private static final String GLOBAL_ACTION_KEY_RESTART = "restart";
-    private static final String GLOBAL_ACTION_KEY_LOGOUT = "logout";
-    private static final String GLOBAL_ACTION_KEY_EMERGENCY = "emergency";
-    private static final String GLOBAL_ACTION_KEY_SCREENSHOT = "screenshot";
-    private static final String GLOBAL_ACTION_KEY_RESTART_RECOVERY = "recovery";
     private static final String GLOBAL_ACTION_KEY_TORCH = "torch";
 
     private final Context mContext;
@@ -190,9 +173,6 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     private String[] mRestartMenuActions;
     private String[] mCurrentMenuActions;
     private boolean mIsRestartMenu;
-    private final ScreenRecordHelper mScreenRecordHelper;
-    private final ActivityStarter mActivityStarter;
-    private GlobalActionsPanelPlugin mPanelPlugin;
     private boolean mTorchEnabled = false;
 
     /**
@@ -482,11 +462,6 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 if (mSeparatedEmergencyButtonEnabled
                         && !mEmergencyAffordanceManager.needsEmergencyAffordance()) {
                     mItems.add(new EmergencyDialerAction());
-                }
-            } else if (GLOBAL_ACTION_KEY_RESTART_RECOVERY.equals(actionKey)) {
-                if (Settings.System.getInt(mContext.getContentResolver(),
-                        Settings.System.POWERMENU_RESTART_RECOVERY, 1) == 1) {
-                    mItems.add(new AdvancedRestartAction());
                 }
             } else {
                 Log.e(TAG, "Invalid global action key " + actionKey);
