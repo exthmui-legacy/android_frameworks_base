@@ -4136,6 +4136,179 @@ public final class Settings {
         public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
 
         /**
+         * Whether to display sound panel in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_SOUNDPANEL = "powermenu_soundpanel";
+        /** @hide */
+        private static final Validator POWERMENU_SOUNDPANEL_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display screenshot in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_SCREENSHOT = "powermenu_screenshot";
+        /** @hide */
+        private static final Validator POWERMENU_SCREENSHOT_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display settings in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_SETTINGS = "powermenu_settings";
+        /** @hide */
+        private static final Validator POWERMENU_SETTINGS_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display lock in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_LOCKDOWN = "powermenu_lockdown";
+        /** @hide */
+        private static final Validator POWERMENU_LOCKDOWN_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display airplane in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_AIRPLANE = "powermenu_airplane";
+        /** @hide */
+        private static final Validator POWERMENU_AIRPLANE_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display reboot in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_RESTART = "powermenu_restart";
+        /** @hide */
+        private static final Validator POWERMENU_RESTART_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display advanced reboot in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_RESTART_RECOVERY = "powermenu_restart_recovery";
+        /** @hide */
+        private static final Validator POWERMENU_RESTART_RECOVERY_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display power in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_POWER = "powermenu_power";
+        /** @hide */
+        private static final Validator POWERMENU_POWER_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display the users option in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_USERS = "powermenu_users";
+        /** @hide */
+        private static final Validator POWERMENU_USERS_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display the users option in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_LOGOUT = "powermenu_logout";
+        /** @hide */
+        private static final Validator POWERMENU_LOGOUT_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display the power menu dialog while on the lockscreen
+         * @hide
+         */
+        public static final String POWERMENU_LOCKSCREEN = "powermenu_lockscreen";
+        /** @hide */
+        private static final Validator POWERMENU_LOCKSCREEN_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Whether to display the torch option in the power menu
+         *
+         * @hide
+         */
+        public static final String POWERMENU_TORCH = "powermenu_torch";
+        /** @hide */
+        private static final Validator POWERMENU_TORCH_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Settings to backup. This is here so that it's in the same place as the settings
+         * keys and easy to update.
+         *
+         * NOTE: Settings are backed up and restored in the order they appear
+         *       in this array. If you have one setting depending on another,
+         *       make sure that they are ordered appropriately.
+         *
+         * Whether to show the battery info on the lockscreen while charging
+         * @hide
+         */
+        public static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
+        /** @hide */
+        private static final Validator LOCKSCREEN_BATTERY_INFO_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * whether to enable or disable vibration on succesful fingerprint auth
+         *
+         * @hide
+         */
+        public static final String FINGERPRINT_SUCCESS_VIB = "fingerprint_success_vib";
+        /** @hide */
+        private static final Validator FINGERPRINT_SUCCESS_VIB_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+
+         * Wheter to show network traffic indicator in statusbar
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
+        /** @hide */
+        private static final Validator NETWORK_TRAFFIC_STATE_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
+         * Network traffic inactivity threshold (default is 1 kBs)
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD = "network_traffic_autohide_threshold";
+         /** @hide */
+        private static final Validator NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
+        /**
+          * Whether to disable showing arrows in network traffic indicators
+          * @hide
+         */
+        public static final String NETWORK_TRAFFIC_HIDEARROW = "network_traffic_hidearrow";
+         /** @hide */
+        private static final Validator NETWORK_TRAFFIC_HIDEARROW_VALIDATOR =
+                ANY_INTEGER_VALIDATOR;
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4195,6 +4368,47 @@ public final class Settings {
             HAPTIC_FEEDBACK_INTENSITY,
             DISPLAY_COLOR_MODE,
             NOTIFICATION_LIGHT_PULSE,
+            BUTTON_EXTRA_KEY_MAPPING,
+            DEVICE_PROXI_CHECK_ENABLED,
+            ANBI_ENABLED_OPTION,
+            ALLOW_INCALL_HOME,
+            VOLUME_ROCKER_WAKE,
+            VOLUME_BUTTON_MUSIC_CONTROL,
+            VOLUME_KEY_CURSOR_CONTROL,
+            TORCH_LONG_PRESS_POWER_GESTURE,
+            TORCH_LONG_PRESS_POWER_TIMEOUT,
+            ENABLE_CONDITIONS,
+            ENABLE_SUGGESTIONS,
+            SCREENSHOT_SOUND,
+            LOCKSCREEN_BATTERY_INFO,
+            BATTERY_LIGHT_ENABLED,
+            BATTERY_LIGHT_ALLOW_ON_DND,
+            BATTERY_LIGHT_LOW_BLINKING,
+            BATTERY_LIGHT_LOW_COLOR,
+            BATTERY_LIGHT_MEDIUM_COLOR,
+            BATTERY_LIGHT_FULL_COLOR,
+            BATTERY_LIGHT_REALLYFULL_COLOR,
+            VIBRATE_ON_CONNECT,
+            VIBRATE_ON_CALLWAITING,
+            VIBRATE_ON_DISCONNECT,
+            HEADS_UP_STOPLIST_VALUES,
+            HEADS_UP_BLACKLIST_VALUES,
+            FINGERPRINT_SUCCESS_VIB,
+            NETWORK_TRAFFIC_STATE,
+            NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD,
+            NETWORK_TRAFFIC_HIDEARROW,
+            POWERMENU_SOUNDPANEL,
+            POWERMENU_SCREENSHOT,
+            POWERMENU_SETTINGS,
+            POWERMENU_LOCKDOWN,
+            POWERMENU_AIRPLANE,
+            POWERMENU_RESTART,
+            POWERMENU_RESTART_RECOVERY,
+            POWERMENU_POWER,
+            POWERMENU_USERS,
+            POWERMENU_LOGOUT,
+            POWERMENU_LOCKSCREEN,
+            POWERMENU_TORCH,
         };
 
         /**
@@ -4322,6 +4536,50 @@ public final class Settings {
             PRIVATE_SETTINGS.add(EGG_MODE);
             PRIVATE_SETTINGS.add(SHOW_BATTERY_PERCENT);
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE);
+            PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_TIMEOUT);
+            PRIVATE_SETTINGS.add(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED);
+            PRIVATE_SETTINGS.add(BUTTON_BRIGHTNESS);
+            PRIVATE_SETTINGS.add(BUTTON_EXTRA_KEY_MAPPING);
+            PRIVATE_SETTINGS.add(DEVICE_PROXI_CHECK_ENABLED);
+            PRIVATE_SETTINGS.add(ANBI_ENABLED_OPTION);
+            PRIVATE_SETTINGS.add(ALLOW_INCALL_HOME);
+            PRIVATE_SETTINGS.add(VOLUME_ROCKER_WAKE);
+            PRIVATE_SETTINGS.add(VOLUME_BUTTON_MUSIC_CONTROL);
+            PRIVATE_SETTINGS.add(VOLUME_KEY_CURSOR_CONTROL);
+            PRIVATE_SETTINGS.add(TORCH_LONG_PRESS_POWER_GESTURE);
+            PRIVATE_SETTINGS.add(TORCH_LONG_PRESS_POWER_TIMEOUT);
+            PRIVATE_SETTINGS.add(ENABLE_CONDITIONS);
+            PRIVATE_SETTINGS.add(ENABLE_SUGGESTIONS);
+            PRIVATE_SETTINGS.add(SCREENSHOT_SOUND);
+            PRIVATE_SETTINGS.add(LOCKSCREEN_BATTERY_INFO);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_ENABLED);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_ALLOW_ON_DND);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_LOW_BLINKING);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_LOW_COLOR);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_MEDIUM_COLOR);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_FULL_COLOR);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_REALLYFULL_COLOR);
+            PRIVATE_SETTINGS.add(VIBRATE_ON_CONNECT);
+            PRIVATE_SETTINGS.add(VIBRATE_ON_CALLWAITING);
+            PRIVATE_SETTINGS.add(VIBRATE_ON_DISCONNECT);
+            PRIVATE_SETTINGS.add(HEADS_UP_STOPLIST_VALUES);
+            PRIVATE_SETTINGS.add(HEADS_UP_BLACKLIST_VALUES);
+            PRIVATE_SETTINGS.add(FINGERPRINT_SUCCESS_VIB);
+            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_STATE);
+            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD);
+            PRIVATE_SETTINGS.add(NETWORK_TRAFFIC_HIDEARROW);
+            PRIVATE_SETTINGS.add(POWERMENU_SOUNDPANEL);
+            PRIVATE_SETTINGS.add(POWERMENU_SCREENSHOT);
+            PRIVATE_SETTINGS.add(POWERMENU_SETTINGS);
+            PRIVATE_SETTINGS.add(POWERMENU_LOCKDOWN);
+            PRIVATE_SETTINGS.add(POWERMENU_AIRPLANE);
+            PRIVATE_SETTINGS.add(POWERMENU_RESTART);
+            PRIVATE_SETTINGS.add(POWERMENU_RESTART_RECOVERY);
+            PRIVATE_SETTINGS.add(POWERMENU_POWER);
+            PRIVATE_SETTINGS.add(POWERMENU_USERS);
+            PRIVATE_SETTINGS.add(POWERMENU_LOGOUT);
+            PRIVATE_SETTINGS.add(POWERMENU_LOCKSCREEN);
+            PRIVATE_SETTINGS.add(POWERMENU_TORCH);
         }
 
         /**
@@ -4413,6 +4671,50 @@ public final class Settings {
             VALIDATORS.put(NOTIFICATION_LIGHT_PULSE, BOOLEAN_VALIDATOR);
             VALIDATORS.put(ACCELEROMETER_ROTATION_ANGLES,
                     ACCELEROMETER_ROTATION_ANGLES_VALIDATOR);
+            VALIDATORS.put(BUTTON_BACKLIGHT_TIMEOUT, BUTTON_BACKLIGHT_TIMEOUT_VALIDATOR);
+            VALIDATORS.put(BUTTON_BRIGHTNESS, BUTTON_BRIGHTNESS_VALIDATOR);
+            VALIDATORS.put(BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED, BUTTON_BACKLIGHT_ONLY_WHEN_PRESSED_VALIDATOR);
+            VALIDATORS.put(BUTTON_EXTRA_KEY_MAPPING, BUTTON_EXTRA_KEY_MAPPING_VALIDATOR);
+            VALIDATORS.put(DEVICE_PROXI_CHECK_ENABLED, DEVICE_PROXI_CHECK_ENABLED_VALIDATOR);
+            VALIDATORS.put(ANBI_ENABLED_OPTION, ANBI_ENABLED_OPTION_VALIDATOR);
+            VALIDATORS.put(ALLOW_INCALL_HOME, ALLOW_INCALL_HOME_VALIDATOR);
+            VALIDATORS.put(VOLUME_ROCKER_WAKE, VOLUME_ROCKER_WAKE_VALIDATOR);
+            VALIDATORS.put(VOLUME_BUTTON_MUSIC_CONTROL, VOLUME_BUTTON_MUSIC_CONTROL_VALIDATOR);
+            VALIDATORS.put(VOLUME_KEY_CURSOR_CONTROL, VOLUME_KEY_CURSOR_CONTROL_VALIDATOR);
+            VALIDATORS.put(TORCH_LONG_PRESS_POWER_GESTURE, TORCH_LONG_PRESS_POWER_GESTURE_VALIDATOR);
+            VALIDATORS.put(TORCH_LONG_PRESS_POWER_TIMEOUT, TORCH_LONG_PRESS_POWER_TIMEOUT_VALIDATOR);
+            VALIDATORS.put(ENABLE_CONDITIONS, ENABLE_CONDITIONS_VALIDATOR);
+            VALIDATORS.put(ENABLE_SUGGESTIONS, ENABLE_SUGGESTIONS_VALIDATOR);
+            VALIDATORS.put(SCREENSHOT_SOUND, SCREENSHOT_SOUND_VALIDATOR);
+            VALIDATORS.put(LOCKSCREEN_BATTERY_INFO, LOCKSCREEN_BATTERY_INFO_VALIDATOR);
+            VALIDATORS.put(BATTERY_LIGHT_ENABLED, BATTERY_LIGHT_ENABLED_VALIDATOR);
+            VALIDATORS.put(BATTERY_LIGHT_ALLOW_ON_DND, BATTERY_LIGHT_ALLOW_ON_DND_VALIDATOR);
+            VALIDATORS.put(BATTERY_LIGHT_LOW_BLINKING, BATTERY_LIGHT_LOW_BLINKING_VALIDATOR);
+            VALIDATORS.put(BATTERY_LIGHT_LOW_COLOR, BATTERY_LIGHT_LOW_COLOR_VALIDATOR);
+            VALIDATORS.put(BATTERY_LIGHT_MEDIUM_COLOR, BATTERY_LIGHT_MEDIUM_COLOR_VALIDATOR);
+            VALIDATORS.put(BATTERY_LIGHT_FULL_COLOR, BATTERY_LIGHT_FULL_COLOR_VALIDATOR);
+            VALIDATORS.put(BATTERY_LIGHT_REALLYFULL_COLOR, BATTERY_LIGHT_REALLYFULL_COLOR_VALIDATOR);
+            VALIDATORS.put(VIBRATE_ON_CONNECT, VIBRATE_ON_CONNECT_VALIDATOR);
+            VALIDATORS.put(VIBRATE_ON_CALLWAITING, VIBRATE_ON_CALLWAITING_VALIDATOR);
+            VALIDATORS.put(VIBRATE_ON_DISCONNECT, VIBRATE_ON_DISCONNECT_VALIDATOR);
+            VALIDATORS.put(HEADS_UP_STOPLIST_VALUES, HEADS_UP_STOPLIST_VALUES_VALIDATOR);
+            VALIDATORS.put(HEADS_UP_BLACKLIST_VALUES, HEADS_UP_BLACKLIST_VALUES_VALIDATOR);
+            VALIDATORS.put(FINGERPRINT_SUCCESS_VIB, FINGERPRINT_SUCCESS_VIB_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_STATE, NETWORK_TRAFFIC_STATE_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD, NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD_VALIDATOR);
+            VALIDATORS.put(NETWORK_TRAFFIC_HIDEARROW, NETWORK_TRAFFIC_HIDEARROW_VALIDATOR);
+            VALIDATORS.put(POWERMENU_SOUNDPANEL, POWERMENU_SOUNDPANEL_VALIDATOR);
+            VALIDATORS.put(POWERMENU_SCREENSHOT, POWERMENU_SCREENSHOT_VALIDATOR);
+            VALIDATORS.put(POWERMENU_SETTINGS, POWERMENU_SETTINGS_VALIDATOR);
+            VALIDATORS.put(POWERMENU_LOCKDOWN, POWERMENU_LOCKDOWN_VALIDATOR);
+            VALIDATORS.put(POWERMENU_AIRPLANE, POWERMENU_AIRPLANE_VALIDATOR);
+            VALIDATORS.put(POWERMENU_RESTART, POWERMENU_RESTART_VALIDATOR);
+            VALIDATORS.put(POWERMENU_RESTART_RECOVERY, POWERMENU_RESTART_RECOVERY_VALIDATOR);
+            VALIDATORS.put(POWERMENU_POWER, POWERMENU_POWER_VALIDATOR);
+            VALIDATORS.put(POWERMENU_USERS, POWERMENU_USERS_VALIDATOR);
+            VALIDATORS.put(POWERMENU_LOGOUT, POWERMENU_LOGOUT_VALIDATOR);
+            VALIDATORS.put(POWERMENU_LOCKSCREEN, POWERMENU_LOCKSCREEN_VALIDATOR);
+            VALIDATORS.put(POWERMENU_TORCH, POWERMENU_TORCH_VALIDATOR);
         }
 
         /**
@@ -8026,6 +8328,16 @@ public final class Settings {
         private static final Validator VOLUME_LINK_NOTIFICATION_VALIDATOR = BOOLEAN_VALIDATOR;
 
         /**
+         * Enable face auto unlock on secure lock screens
+         *
+         * @hide
+         */
+        public static final String FACE_AUTO_UNLOCK = "face_auto_unlock";
+        /** @hide */
+        private static final Validator FACE_AUTO_UNLOCK_VALIDATOR =
+                BOOLEAN_VALIDATOR;
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
@@ -8129,6 +8441,35 @@ public final class Settings {
             LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
             LOCK_SCREEN_SHOW_NOTIFICATIONS,
             VOLUME_LINK_NOTIFICATION,
+            LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS,
+            SHOW_NOTIFICATION_SNOOZE,
+            ZEN_DURATION,
+            SHOW_ZEN_UPGRADE_NOTIFICATION,
+            SHOW_ZEN_SETTINGS_SUGGESTION,
+            ZEN_SETTINGS_UPDATED,
+            ZEN_SETTINGS_SUGGESTION_VIEWED,
+            CHARGING_SOUNDS_ENABLED,
+            CHARGING_VIBRATION_ENABLED,
+            ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS,
+            ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS,
+            NOTIFICATION_NEW_INTERRUPTION_MODEL,
+            TRUST_AGENTS_EXTEND_UNLOCK,
+            UI_NIGHT_MODE,
+            LOCK_SCREEN_WHEN_TRUST_LOST,
+            SKIP_GESTURE,
+            SILENCE_GESTURE,
+            THEME_CUSTOMIZATION_OVERLAY_PACKAGES,
+            NAVIGATION_MODE,
+            AWARE_ENABLED,
+            SKIP_GESTURE_COUNT,
+            SILENCE_ALARMS_GESTURE_COUNT,
+            SILENCE_NOTIFICATION_GESTURE_COUNT,
+            SILENCE_CALL_GESTURE_COUNT,
+            SILENCE_TIMER_GESTURE_COUNT,
+            DARK_MODE_DIALOG_SEEN,
+            GLOBAL_ACTIONS_PANEL_ENABLED,
+            AWARE_LOCK_ENABLED,
+            FACE_AUTO_UNLOCK
         };
 
         /**
@@ -8278,6 +8619,41 @@ public final class Settings {
             VALIDATORS.put(LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, BOOLEAN_VALIDATOR);
             VALIDATORS.put(LOCK_SCREEN_SHOW_NOTIFICATIONS, BOOLEAN_VALIDATOR);
             VALIDATORS.put(VOLUME_LINK_NOTIFICATION, VOLUME_LINK_NOTIFICATION_VALIDATOR);
+            VALIDATORS.put(LOCK_SCREEN_SHOW_SILENT_NOTIFICATIONS, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(SHOW_NOTIFICATION_SNOOZE, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(ZEN_DURATION, ZEN_DURATION_VALIDATOR);
+            VALIDATORS.put(SHOW_ZEN_UPGRADE_NOTIFICATION, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(SHOW_ZEN_SETTINGS_SUGGESTION, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(ZEN_SETTINGS_UPDATED, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(ZEN_SETTINGS_SUGGESTION_VIEWED, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(CHARGING_SOUNDS_ENABLED, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(CHARGING_VIBRATION_ENABLED, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(ACCESSIBILITY_NON_INTERACTIVE_UI_TIMEOUT_MS,
+                    NON_NEGATIVE_INTEGER_VALIDATOR);
+            VALIDATORS.put(ACCESSIBILITY_INTERACTIVE_UI_TIMEOUT_MS, NON_NEGATIVE_INTEGER_VALIDATOR);
+            VALIDATORS.put(USER_SETUP_COMPLETE, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(ASSIST_GESTURE_SETUP_COMPLETE, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(NOTIFICATION_NEW_INTERRUPTION_MODEL, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(TRUST_AGENTS_EXTEND_UNLOCK, TRUST_AGENTS_EXTEND_UNLOCK_VALIDATOR);
+            VALIDATORS.put(LOCK_SCREEN_CUSTOM_CLOCK_FACE, LOCK_SCREEN_CUSTOM_CLOCK_FACE_VALIDATOR);
+            VALIDATORS.put(LOCK_SCREEN_WHEN_TRUST_LOST, LOCK_SCREEN_WHEN_TRUST_LOST_VALIDATOR);
+            VALIDATORS.put(SKIP_GESTURE, SKIP_GESTURE_VALIDATOR);
+            VALIDATORS.put(SILENCE_GESTURE, SILENCE_GESTURE_VALIDATOR);
+            VALIDATORS.put(THEME_CUSTOMIZATION_OVERLAY_PACKAGES,
+                    THEME_CUSTOMIZATION_OVERLAY_PACKAGES_VALIDATOR);
+            VALIDATORS.put(NAVIGATION_MODE, NAVIGATION_MODE_VALIDATOR);
+            VALIDATORS.put(AWARE_ENABLED, AWARE_ENABLED_VALIDATOR);
+            VALIDATORS.put(SKIP_GESTURE_COUNT, SKIP_GESTURE_COUNT_VALIDATOR);
+            VALIDATORS.put(SILENCE_ALARMS_GESTURE_COUNT, SILENCE_GESTURE_COUNT_VALIDATOR);
+            VALIDATORS.put(SILENCE_TIMER_GESTURE_COUNT, SILENCE_GESTURE_COUNT_VALIDATOR);
+            VALIDATORS.put(SILENCE_CALL_GESTURE_COUNT, SILENCE_GESTURE_COUNT_VALIDATOR);
+            VALIDATORS.put(SILENCE_NOTIFICATION_GESTURE_COUNT, SILENCE_GESTURE_COUNT_VALIDATOR);
+            VALIDATORS.put(ODI_CAPTIONS_ENABLED, ODI_CAPTIONS_ENABLED_VALIDATOR);
+            VALIDATORS.put(DARK_MODE_DIALOG_SEEN, BOOLEAN_VALIDATOR);
+            VALIDATORS.put(UI_NIGHT_MODE, UI_NIGHT_MODE_VALIDATOR);
+            VALIDATORS.put(GLOBAL_ACTIONS_PANEL_ENABLED, GLOBAL_ACTIONS_PANEL_ENABLED_VALIDATOR);
+            VALIDATORS.put(AWARE_LOCK_ENABLED, AWARE_LOCK_ENABLED_VALIDATOR);
+            VALIDATORS.put(FACE_AUTO_UNLOCK, FACE_AUTO_UNLOCK_VALIDATOR);
         }
 
         /**

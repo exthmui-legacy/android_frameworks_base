@@ -50,6 +50,9 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.camera2.CameraManager;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraAccessException;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
@@ -132,6 +135,25 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
 
     // Default scrim color
     private static final int SCRIM_DEFAULT_COLOR = Color.BLACK;
+    private static final boolean SHOW_SILENT_TOGGLE = true;
+
+    /* Valid settings for global actions keys.
+     * see config.xml config_globalActionList */
+    private static final String GLOBAL_ACTION_KEY_POWER = "power";
+    private static final String GLOBAL_ACTION_KEY_AIRPLANE = "airplane";
+    private static final String GLOBAL_ACTION_KEY_BUGREPORT = "bugreport";
+    private static final String GLOBAL_ACTION_KEY_SILENT = "silent";
+    private static final String GLOBAL_ACTION_KEY_USERS = "users";
+    private static final String GLOBAL_ACTION_KEY_SETTINGS = "settings";
+    private static final String GLOBAL_ACTION_KEY_LOCKDOWN = "lockdown";
+    private static final String GLOBAL_ACTION_KEY_VOICEASSIST = "voiceassist";
+    private static final String GLOBAL_ACTION_KEY_ASSIST = "assist";
+    private static final String GLOBAL_ACTION_KEY_RESTART = "restart";
+    private static final String GLOBAL_ACTION_KEY_LOGOUT = "logout";
+    private static final String GLOBAL_ACTION_KEY_EMERGENCY = "emergency";
+    private static final String GLOBAL_ACTION_KEY_SCREENSHOT = "screenshot";
+    private static final String GLOBAL_ACTION_KEY_RESTART_RECOVERY = "recovery";
+    private static final String GLOBAL_ACTION_KEY_TORCH = "torch";
 
     private final Context mContext;
     private final GlobalActionsManager mWindowManagerFuncs;
@@ -168,6 +190,10 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     private String[] mRestartMenuActions;
     private String[] mCurrentMenuActions;
     private boolean mIsRestartMenu;
+    private final ScreenRecordHelper mScreenRecordHelper;
+    private final ActivityStarter mActivityStarter;
+    private GlobalActionsPanelPlugin mPanelPlugin;
+    private boolean mTorchEnabled = false;
 
     /**
      * @param context everything needs a context :(
@@ -380,32 +406,45 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 continue;
             }
             if (GLOBAL_ACTION_KEY_POWER.equals(actionKey)) {
-                continue;
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_POWER, 1) == 1) {
+                    mItems.add(new PowerAction());
+                }
             } else if (GLOBAL_ACTION_KEY_AIRPLANE.equals(actionKey)) {
-                mItems.add(mAirplaneModeOn);
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_AIRPLANE, 0) == 1) {
+                    mItems.add(mAirplaneModeOn);
+                }
             } else if (GLOBAL_ACTION_KEY_BUGREPORT.equals(actionKey)) {
                 if (Settings.Global.getInt(mContext.getContentResolver(),
                         Settings.Global.BUGREPORT_IN_POWER_MENU, 0) != 0 && isCurrentUserOwner()) {
                     mItems.add(new BugReportAction());
                 }
             } else if (GLOBAL_ACTION_KEY_SILENT.equals(actionKey)) {
-                if (mShowSilentToggle) {
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_SOUNDPANEL, 0) == 1) {
                     mItems.add(mSilentModeAction);
                 }
             } else if (GLOBAL_ACTION_KEY_USERS.equals(actionKey)) {
-                List<UserInfo> users = ((UserManager) mContext.getSystemService(
-                        Context.USER_SERVICE)).getUsers();
-                if (users.size() > 1) {
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_USERS, 0) == 1) {
                     addUsersToMenu(mItems);
                 }
             } else if (GLOBAL_ACTION_KEY_SETTINGS.equals(actionKey)) {
-                mItems.add(getSettingsAction());
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_SETTINGS, 0) != 0) {
+                    mItems.add(getSettingsAction());
+                }
             } else if (GLOBAL_ACTION_KEY_LOCKDOWN.equals(actionKey)) {
-                if (Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                            Settings.Secure.LOCKDOWN_IN_POWER_MENU, 0, getCurrentUser().id) != 0
-                        && shouldDisplayLockdown()) {
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_LOCKDOWN, 0) != 0) {
                     mItems.add(getLockdownAction());
                     mHasLockdownButton = true;
+                }
+            } else if (GLOBAL_ACTION_KEY_TORCH.equals(actionKey)) {
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_TORCH, 0) != 0) {
+                    mItems.add(getTorchToggleAction());
                 }
             } else if (GLOBAL_ACTION_KEY_VOICEASSIST.equals(actionKey)) {
                 mItems.add(getVoiceAssistAction());
@@ -420,16 +459,21 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             } else if (GLOBAL_ACTION_KEY_RESTART_RECOVERY.equals(actionKey) &&
                     PowerMenuUtils.isAdvancedRestartPossible(mContext)) {
                 mItems.add(new RestartRecoveryAction());
-            } else if (GLOBAL_ACTION_KEY_RESTART_BOOTLOADER.equals(actionKey) &&
-                    PowerMenuUtils.isAdvancedRestartPossible(mContext)) {
-                mItems.add(new RestartBootloaderAction());
             } else if (GLOBAL_ACTION_KEY_RESTART_DOWNLOAD.equals(actionKey) &&
                     PowerMenuUtils.isAdvancedRestartPossible(mContext)) {
                 mItems.add(new RestartDownloadAction());
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_RESTART, 1) == 1) {
+                    mItems.add(new RestartAction());
+                }
             } else if (GLOBAL_ACTION_KEY_SCREENSHOT.equals(actionKey)) {
-                mItems.add(new ScreenshotAction());
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_SCREENSHOT, 0) == 1) {
+                    mItems.add(new ScreenshotAction());
+                }
             } else if (GLOBAL_ACTION_KEY_LOGOUT.equals(actionKey)) {
-                if (mDevicePolicyManager.isLogoutEnabled()
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_LOGOUT, 0) == 1
                         && getCurrentUser().id != UserHandle.USER_SYSTEM) {
                     mItems.add(new LogoutAction());
                     mHasLogoutButton = true;
@@ -438,6 +482,11 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 if (mSeparatedEmergencyButtonEnabled
                         && !mEmergencyAffordanceManager.needsEmergencyAffordance()) {
                     mItems.add(new EmergencyDialerAction());
+                }
+            } else if (GLOBAL_ACTION_KEY_RESTART_RECOVERY.equals(actionKey)) {
+                if (Settings.System.getInt(mContext.getContentResolver(),
+                        Settings.System.POWERMENU_RESTART_RECOVERY, 1) == 1) {
+                    mItems.add(new AdvancedRestartAction());
                 }
             } else {
                 Log.e(TAG, "Invalid global action key " + actionKey);
@@ -709,6 +758,37 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         }
     }
 
+    private Action getTorchToggleAction() {
+        return new SinglePressAction(com.android.systemui.R.drawable.ic_lock_torch,
+                com.android.systemui.R.string.quick_settings_flashlight_label) {
+
+            public void onPress() {
+                try {
+                    CameraManager cameraManager = (CameraManager)
+                            mContext.getSystemService(Context.CAMERA_SERVICE);
+                    for (final String cameraId : cameraManager.getCameraIdList()) {
+                        CameraCharacteristics characteristics =
+                            cameraManager.getCameraCharacteristics(cameraId);
+                        int orient = characteristics.get(CameraCharacteristics.LENS_FACING);
+                        if (orient == CameraCharacteristics.LENS_FACING_BACK) {
+                            cameraManager.setTorchMode(cameraId, !mTorchEnabled);
+                            mTorchEnabled = !mTorchEnabled;
+                        }
+                    }
+                } catch (CameraAccessException e) {
+                }
+            }
+
+            public boolean showDuringKeyguard() {
+                return true;
+            }
+
+            public boolean showBeforeProvisioning() {
+                return false;
+            }
+        };
+    }
+
     private class BugReportAction extends SinglePressAction implements LongPressAction {
 
         public BugReportAction() {
@@ -807,7 +887,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     }
 
     private Action getSettingsAction() {
-        return new SinglePressAction(R.drawable.ic_settings,
+        return new SinglePressAction(com.android.systemui.R.drawable.ic_lock_settings,
                 R.string.global_action_settings) {
 
             @Override
@@ -894,7 +974,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     }
 
     private Action getLockdownAction() {
-        return new SinglePressAction(R.drawable.ic_lock_lockdown,
+        return new SinglePressAction(com.android.systemui.R.drawable.ic_lock_lock,
                 R.string.global_action_lockdown) {
 
             @Override

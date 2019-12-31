@@ -999,68 +999,77 @@ public class Build {
      * @hide
      */
     public static boolean isBuildConsistent() {
-        // Don't care on eng builds.  Incremental build may trigger false negative.
-        if (IS_ENG) return true;
+        if (getResources().getBoolean(R.bool.build_fingerprint_compare_enabled)) {
+            // Don't care on eng builds.  Incremental build may trigger false negative.
+            if (IS_ENG) return true;
 
-        if (IS_TREBLE_ENABLED) {
-            // If we can run this code, the device should already pass AVB.
-            // So, we don't need to check AVB here.
-            int result = VintfObject.verifyWithoutAvb();
+            if (IS_TREBLE_ENABLED) {
+                // If we can run this code, the device should already pass AVB.
+                // So, we don't need to check AVB here.
+                int result = VintfObject.verifyWithoutAvb();
 
-            if (result != 0) {
-                Slog.e(TAG, "Vendor interface is incompatible, error="
-                        + String.valueOf(result));
+                if (result != 0) {
+                    Slog.e(TAG, "Vendor interface is incompatible, error="
+                            + String.valueOf(result));
+                }
+
+                return result == 0;
             }
 
-            return result == 0;
-        }
+            final String system = SystemProperties.get("ro.build.fingerprint");
+            final String vendor = SystemProperties.get("ro.vendor.build.fingerprint");
+            final String bootimage = SystemProperties.get("ro.bootimage.build.fingerprint");
+            final String requiredBootloader = SystemProperties.get("ro.build.expect.bootloader");
+            final String currentBootloader = SystemProperties.get("ro.bootloader");
+            final String requiredRadio = SystemProperties.get("ro.build.expect.baseband");
+            final String currentRadio = SystemProperties.get("gsm.version.baseband");
 
-        final String system = SystemProperties.get("ro.build.fingerprint");
-        final String vendor = SystemProperties.get("ro.vendor.build.fingerprint");
-        final String bootimage = SystemProperties.get("ro.bootimage.build.fingerprint");
-        final String requiredBootloader = SystemProperties.get("ro.build.expect.bootloader");
-        final String currentBootloader = SystemProperties.get("ro.bootloader");
-        final String requiredRadio = SystemProperties.get("ro.build.expect.baseband");
-        final String currentRadio = SystemProperties.get("gsm.version.baseband");
-
-        if (TextUtils.isEmpty(system)) {
-            Slog.e(TAG, "Required ro.build.fingerprint is empty!");
-            return false;
-        }
-
-        if (!TextUtils.isEmpty(vendor)) {
-            if (!Objects.equals(system, vendor)) {
-                Slog.e(TAG, "Mismatched fingerprints; system reported " + system
-                        + " but vendor reported " + vendor);
+            if (TextUtils.isEmpty(system)) {
+                Slog.e(TAG, "Required ro.build.fingerprint is empty!");
                 return false;
             }
-        }
 
-        /* TODO: Figure out issue with checks failing
-        if (!TextUtils.isEmpty(bootimage)) {
-            if (!Objects.equals(system, bootimage)) {
-                Slog.e(TAG, "Mismatched fingerprints; system reported " + system
-                        + " but bootimage reported " + bootimage);
-                return false;
+            if (!TextUtils.isEmpty(vendor)) {
+                if (!Objects.equals(system, vendor)) {
+                    Slog.e(TAG, "Mismatched fingerprints; system reported " + system
+                            + " but vendor reported " + vendor);
+                    return false;
+                }
             }
-        }
 
-        if (!TextUtils.isEmpty(requiredBootloader)) {
-            if (!Objects.equals(currentBootloader, requiredBootloader)) {
-                Slog.e(TAG, "Mismatched bootloader version: build requires " + requiredBootloader
-                        + " but runtime reports " + currentBootloader);
-                return false;
+            /* TODO: Figure out issue with checks failing
+            if (!TextUtils.isEmpty(bootimage)) {
+                if (!Objects.equals(system, bootimage)) {
+                    Slog.e(TAG, "Mismatched fingerprints; system reported " + system
+                            + " but bootimage reported " + bootimage);
+                    return false;
+                }
             }
-        }
 
-        if (!TextUtils.isEmpty(requiredRadio)) {
-            if (!Objects.equals(currentRadio, requiredRadio)) {
-                Slog.e(TAG, "Mismatched radio version: build requires " + requiredRadio
-                        + " but runtime reports " + currentRadio);
-                return false;
+            if (!TextUtils.isEmpty(requiredBootloader)) {
+                if (!Objects.equals(currentBootloader, requiredBootloader)) {
+                    Slog.e(TAG, "Mismatched bootloader version: build requires " + requiredBootloader
+                            + " but runtime reports " + currentBootloader);
+                    return false;
+                }
             }
+
+            if (!TextUtils.isEmpty(requiredRadio)) {
+                if (!Objects.equals(currentRadio, requiredRadio)) {
+                    Slog.e(TAG, "Mismatched radio version: build requires " + requiredRadio
+                            + " but runtime reports " + currentRadio);
+                    return false;
+                }
+            }
+            */
         }
-        */
+    } else {
+        Slog.e(TAG, "exTHmUI: isBuildConsistent() is disabled");
+        return true;
+    }
+
+    Slog.e(TAG,"exTHmUI:  Now build_fingerprint_compare_enabled = "
+            + getResources().getBoolean(R.bool.build_fingerprint_compare_enabled))
 
         return true;
     }
