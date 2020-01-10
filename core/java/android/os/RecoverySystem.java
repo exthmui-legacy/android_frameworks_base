@@ -513,9 +513,15 @@ public class RecoverySystem {
      * fails, or if the reboot itself fails.
      */
     @RequiresPermission(android.Manifest.permission.RECOVERY)
+    public static void installPackage(Context context, File packageFile, String appendCommands)
+            throws IOException {
+        installPackage(context, packageFile, false, appendCommands);
+    }
+
+    @RequiresPermission(android.Manifest.permission.RECOVERY)
     public static void installPackage(Context context, File packageFile)
             throws IOException {
-        installPackage(context, packageFile, false);
+        installPackage(context, packageFile, false, "");
     }
 
     /**
@@ -535,7 +541,7 @@ public class RecoverySystem {
      */
     @SystemApi
     @RequiresPermission(android.Manifest.permission.RECOVERY)
-    public static void installPackage(Context context, File packageFile, boolean processed)
+    public static void installPackage(Context context, File packageFile, boolean processed, String appendCommands)
             throws IOException {
         synchronized (sRequestLock) {
             LOG_FILE.delete();
@@ -588,6 +594,8 @@ public class RecoverySystem {
             if (securityUpdate) {
                 command += securityArg;
             }
+
+            command += appendCommands;
 
             RecoverySystem rs = (RecoverySystem) context.getSystemService(
                     Context.RECOVERY_SERVICE);
