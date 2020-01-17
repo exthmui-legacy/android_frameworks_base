@@ -72,6 +72,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
+import android.content.ContentResolver;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.PointF;
