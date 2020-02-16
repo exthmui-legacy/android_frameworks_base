@@ -11328,8 +11328,10 @@ public class PackageManagerService extends IPackageManager.Stub
                                     platformPkgSetting.signatures.mSigningDetails.signatures,
                                     pkg.mSigningDetails.signatures)
                                             != PackageManager.SIGNATURE_MATCH)) {
-                        throw new PackageManagerException("Overlay " + pkg.packageName +
-                                " must be signed with the platform certificate.");
+                        /* throw new PackageManagerException("Overlay " + pkg.packageName +
+                                " must be signed with the platform certificate."); */
+                        Log.w(TAG, ("Overlay " + pkg.packageName +
+                                " is not signed with a platform certificate."));
                     }
                 }
             }
