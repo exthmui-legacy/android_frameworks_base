@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ *               2019-2020 The exTHmUI Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +27,10 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +40,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.keyguard.AlphaOptimizedLinearLayout;
-import com.android.settingslib.graph.SignalDrawable;
+import com.android.settingslib.Utils;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy.MobileIconState;
 import com.android.systemui.statusbar.policy.DarkIconDispatcher.DarkReceiver;
@@ -52,13 +55,14 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
     private LinearLayout mMobileGroup;
     private String mSlot;
     private MobileIconState mState;
-    private SignalDrawable mMobileDrawable;
     private View mInoutContainer;
     private ImageView mIn;
     private ImageView mOut;
     private ImageView mMobile, mMobileType, mMobileRoaming;
     private View mMobileRoamingSpace;
     private int mVisibleState = -1;
+    private float mDarkIntensity = 0;
+    private NeutralGoodDrawable mMobileDrawable;
 
     public static StatusBarMobileView fromContext(Context context, String slot) {
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -109,9 +113,10 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mOut = findViewById(R.id.mobile_out);
         mInoutContainer = findViewById(R.id.inout_container);
 
-        mMobileDrawable = new SignalDrawable(getContext());
-        mMobile.setImageDrawable(mMobileDrawable);
-
+        int height = mContext.getResources().getDimensionPixelSize(R.dimen.status_bar_icon_size);
+        mMobile.setAdjustViewBounds(true);
+        mMobile.setMaxHeight(height);
+        
         initDotView();
     }
 
@@ -150,7 +155,7 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         } else {
             mMobileGroup.setVisibility(View.VISIBLE);
         }
-        mMobileDrawable.setLevel(mState.strengthId);
+        updateDataLevel(mState.strengthId);
         if (mState.typeId > 0) {
             mMobileType.setContentDescription(mState.typeContentDescription);
             mMobileType.setImageResource(mState.typeId);
@@ -172,7 +177,7 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mMobileGroup.setVisibility(state.visible && state.provisioned
                 ? View.VISIBLE : View.GONE);
         if (mState.strengthId != state.strengthId) {
-            mMobileDrawable.setLevel(state.strengthId);
+            updateDataLevel(state.strengthId);
         }
         if (mState.typeId != state.typeId) {
             if (state.typeId != 0) {
@@ -194,12 +199,24 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mState = state;
     }
 
+    private void updateDataLevel(int strengthId) {
+        mMobileDrawable = NeutralGoodDrawable.create(getContext(), strengthId);
+        mMobileDrawable.setDarkIntensity(mDarkIntensity);
+        mMobile.setImageDrawable(mMobileDrawable);
+    }
+
     @Override
     public void onDarkChanged(Rect area, float darkIntensity, int tint) {
         if (!isInArea(area, this)) {
             return;
         }
-        mMobileDrawable.setDarkIntensity(darkIntensity);
+
+        mDarkIntensity = darkIntensity;
+        Drawable d = mMobile.getDrawable();
+        if (d instanceof NeutralGoodDrawable) {
+            ((NeutralGoodDrawable)d).setDarkIntensity(darkIntensity);
+        }
+
         ColorStateList color = ColorStateList.valueOf(getTint(area, this, tint));
         mIn.setImageTintList(color);
         mOut.setImageTintList(color);
@@ -222,6 +239,7 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
     public void setStaticDrawableColor(int color) {
         ColorStateList list = ColorStateList.valueOf(color);
         float intensity = color == Color.WHITE ? 0 : 1;
+        mDarkIntensity = intensity;
         mMobileDrawable.setDarkIntensity(intensity);
 
         mIn.setImageTintList(list);

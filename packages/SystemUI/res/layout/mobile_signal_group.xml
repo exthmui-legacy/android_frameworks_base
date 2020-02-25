@@ -65,6 +65,7 @@
         android:layout_gravity="center_vertical">
         <com.android.systemui.statusbar.AnimatedImageView
             android:id="@+id/mobile_signal"
+            android:scaleType="centerInside"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             systemui:hasOverlappingRendering="false"

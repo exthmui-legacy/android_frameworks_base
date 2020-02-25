@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ *               2019-2020 The exTHmUI Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -19,12 +20,12 @@ import android.graphics.drawable.Drawable;
 import android.service.quicksettings.Tile;
 import android.widget.ImageView;
 
-import com.android.settingslib.graph.SignalDrawable;
 import com.android.settingslib.Utils;
 import com.android.systemui.R;
 import com.android.systemui.plugins.qs.QSTile.Icon;
 import com.android.systemui.plugins.qs.QSTile.State;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
+import com.android.systemui.statusbar.NeutralGoodDrawable;
 
 import java.util.Objects;
 
@@ -32,15 +33,20 @@ import java.util.Objects;
 // TODO Find a better way to handle this and remove it.
 public class CellTileView extends SignalTileView {
 
-    private final SignalDrawable mSignalDrawable;
+    private NeutralGoodDrawable mSignalDrawable;
+    private int foregroundColor;
+    private int backgroundColor;
+    private int iconSize;
+    private Context mContext;
 
     public CellTileView(Context context) {
         super(context);
-        mSignalDrawable = new SignalDrawable(mContext);
-        mSignalDrawable.setColors(QSTileImpl.getColorForState(context, Tile.STATE_UNAVAILABLE),
-                QSTileImpl.getColorForState(context, Tile.STATE_ACTIVE));
-        mSignalDrawable.setIntrinsicSize(context.getResources().getDimensionPixelSize(
-                R.dimen.qs_tile_icon_size));
+
+        mContext = context;
+
+        backgroundColor = QSTileImpl.getColorForState(context, Tile.STATE_UNAVAILABLE);
+        foregroundColor = QSTileImpl.getColorForState(context, Tile.STATE_ACTIVE);
+        iconSize = context.getResources().getDimensionPixelSize(R.dimen.qs_tile_icon_size);
     }
 
     protected void updateIcon(ImageView iv, State state) {
@@ -48,8 +54,9 @@ public class CellTileView extends SignalTileView {
             super.updateIcon(iv, state);
             return;
         } else if (!Objects.equals(state.icon, iv.getTag(R.id.qs_icon_tag))) {
-            mSignalDrawable.setLevel(((SignalIcon) state.icon).getState());
+            mSignalDrawable = NeutralGoodDrawable.create(mContext, ((SignalIcon) state.icon).getState());
             iv.setImageDrawable(mSignalDrawable);
+            iv.setBackgroundColor(backgroundColor);
             iv.setTag(R.id.qs_icon_tag, state.icon);
         }
     }
@@ -69,10 +76,7 @@ public class CellTileView extends SignalTileView {
         @Override
         public Drawable getDrawable(Context context) {
             //TODO: Not the optimal solution to create this drawable
-            SignalDrawable d = new SignalDrawable(context);
-            d.setColors(QSTileImpl.getColorForState(context, Tile.STATE_UNAVAILABLE),
-                    QSTileImpl.getColorForState(context, Tile.STATE_ACTIVE));
-            d.setLevel(getState());
+            NeutralGoodDrawable d = NeutralGoodDrawable.create(context, getState());
             return d;
         }
     }

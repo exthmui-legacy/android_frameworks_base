@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2018 The Android Open Source Project
+ *               2019-2020 The exTHmUI Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +25,7 @@ import static com.android.systemui.statusbar.policy.DarkIconDispatcher.isInArea;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -102,7 +104,12 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
     @Override
     public void setStaticDrawableColor(int color) {
         ColorStateList list = ColorStateList.valueOf(color);
-        mWifiIcon.setImageTintList(list);
+        float intensity = color == Color.WHITE ? 0 : 1;
+        mDarkIntensity = intensity;
+        Drawable d = mWifiIcon.getDrawable();
+        if (d instanceof NeutralGoodDrawable) {
+            ((NeutralGoodDrawable)d).setDarkIntensity(intensity);
+        }
         mIn.setImageTintList(list);
         mOut.setImageTintList(list);
         mDotView.setDecorColor(color);
@@ -177,6 +184,10 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
         mAirplaneSpacer = findViewById(R.id.wifi_airplane_spacer);
         mInoutContainer = findViewById(R.id.inout_container);
 
+        int height = mContext.getResources().getDimensionPixelSize(R.dimen.status_bar_icon_size);
+        mWifiIcon.setAdjustViewBounds(true);
+        mWifiIcon.setMaxHeight(height);
+
         initDotView();
     }
 
@@ -207,13 +218,17 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
         }
     }
 
+    private void updateDrawableState(WifiIconState state) {
+        NeutralGoodDrawable drawable = NeutralGoodDrawable.create(
+                    mLightContext, mDarkContext, state.resId);
+        drawable.setDarkIntensity(mDarkIntensity);
+        mWifiIcon.setImageDrawable(drawable);
+    }
+
     private void updateState(WifiIconState state) {
         setContentDescription(state.contentDescription);
         if (mState.resId != state.resId && state.resId >= 0) {
-            NeutralGoodDrawable drawable = NeutralGoodDrawable
-                    .create(mLightContext, mDarkContext, state.resId);
-            drawable.setDarkIntensity(mDarkIntensity);
-            mWifiIcon.setImageDrawable(drawable);
+            updateDrawableState(state);
         }
 
         mIn.setVisibility(state.activityIn ? View.VISIBLE : View.GONE);
@@ -232,10 +247,7 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
     private void initViewState() {
         setContentDescription(mState.contentDescription);
         if (mState.resId >= 0) {
-            NeutralGoodDrawable drawable = NeutralGoodDrawable.create(
-                    mLightContext, mDarkContext, mState.resId);
-            drawable.setDarkIntensity(mDarkIntensity);
-            mWifiIcon.setImageDrawable(drawable);
+            updateDrawableState(mState);
         }
 
         mIn.setVisibility(mState.activityIn ? View.VISIBLE : View.GONE);

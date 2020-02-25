@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ *               2019-2020 The exTHmUI Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +55,23 @@ public class NeutralGoodDrawable extends LayerDrawable {
         return new NeutralGoodDrawable(
                 new Drawable[] {
                         light.getDrawable(resId).mutate(),
-                        dark.getDrawable(resId).mutate() });
+                        dark.getDrawable(getDarkResId(dark, resId)).mutate() });
+    }
+
+    static int getDarkResId(Context context, int lightResId) {
+        int resId = 0;
+        try {
+            String resourceName = context.getResources().getResourceEntryName(lightResId);
+            resId = context.getResources().getIdentifier(resourceName + "_dark", "drawable", context.getPackageName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        if (resId == 0) {
+            return lightResId;
+        } else {
+            return resId;
+        }
     }
 
     protected NeutralGoodDrawable(Drawable []drawables) {

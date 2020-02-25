@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2017 The Android Open Source Project
+ *               2019-2020 The exTHmUI Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,12 +47,12 @@ import com.android.keyguard.CarrierText;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.settingslib.Utils;
 import com.android.settingslib.drawable.UserIconDrawable;
-import com.android.settingslib.graph.SignalDrawable;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.R.dimen;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.qs.TouchAnimator.Builder;
+import com.android.systemui.statusbar.NeutralGoodDrawable;
 import com.android.systemui.statusbar.phone.MultiUserSwitch;
 import com.android.systemui.statusbar.phone.SettingsButton;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
@@ -133,6 +134,10 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         // RenderThread is doing more harm than good when touching the header (to expand quick
         // settings), so disable it for this view
         ((RippleDrawable) mSettingsButton.getBackground()).setForceSoftware(true);
+
+        int height = mContext.getResources().getDimensionPixelSize(R.dimen.qs_footer_icon_size);
+        mMobileSignal.setAdjustViewBounds(true);
+        mMobileSignal.setMaxHeight(height);
 
         updateResources();
 
@@ -399,10 +404,9 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         if (mInfo.visible) {
             mMobileRoaming.setVisibility(mInfo.roaming ? View.VISIBLE : View.GONE);
             mMobileRoaming.setImageTintList(ColorStateList.valueOf(mColorForeground));
-            SignalDrawable d = new SignalDrawable(mContext);
+            NeutralGoodDrawable d = NeutralGoodDrawable.create(mContext, mInfo.mobileSignalIconId);
             d.setDarkIntensity(QuickStatusBarHeader.getColorIntensity(mColorForeground));
             mMobileSignal.setImageDrawable(d);
-            mMobileSignal.setImageLevel(mInfo.mobileSignalIconId);
 
             StringBuilder contentDescription = new StringBuilder();
             if (mInfo.contentDescription != null) {

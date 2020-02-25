@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2015 The Android Open Source Project
+ *               2019-2020 The exTHmUI Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +36,6 @@ import android.util.SparseArray;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.cdma.EriInfo;
-import com.android.settingslib.graph.SignalDrawable;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.NetworkController.IconState;
 import com.android.systemui.statusbar.policy.NetworkController.SignalCallback;
@@ -71,6 +71,7 @@ public class MobileSignalController extends SignalController<
     private SignalStrength mSignalStrength;
     private MobileIconGroup mDefaultIcons;
     private Config mConfig;
+    private Context mContext;
 
     // TODO: Reduce number of vars passed in, if we have the NetworkController, probably don't
     // need listener lists anymore.
@@ -83,6 +84,7 @@ public class MobileSignalController extends SignalController<
                 networkController);
         mNetworkToIconLookup = new SparseArray<>();
         mConfig = config;
+        mContext = context;
         mPhone = phone;
         mDefaults = defaults;
         mSubscriptionInfo = info;
@@ -247,7 +249,7 @@ public class MobileSignalController extends SignalController<
     @Override
     public int getCurrentIconId() {
         if (mCurrentState.iconGroup == TelephonyIcons.CARRIER_NETWORK_CHANGE) {
-            return SignalDrawable.getCarrierChangeState(getNumLevels());
+            return TelephonyIcons.TELEPHONY_CARRIER_NETWORK_CHANGE;
         } else if (mCurrentState.connected) {
             int level = mCurrentState.level;
             if (mConfig.inflateSignalStrengths) {
@@ -257,9 +259,10 @@ public class MobileSignalController extends SignalController<
                     && mCurrentState.iconGroup == TelephonyIcons.DATA_DISABLED;
             boolean noInternet = mCurrentState.inetCondition == 0;
             boolean cutOut = dataDisabled || noInternet;
-            return SignalDrawable.getState(level, getNumLevels(), cutOut);
+
+            return TelephonyIcons.TELEPHONY_SIGNAL_STRENGTH[cutOut ? 0 : 1][level];
         } else if (mCurrentState.enabled) {
-            return SignalDrawable.getEmptyState(getNumLevels());
+            return TelephonyIcons.TELEPHONY_NO_NETWORK;
         } else {
             return 0;
         }
@@ -268,7 +271,7 @@ public class MobileSignalController extends SignalController<
     @Override
     public int getQsCurrentIconId() {
         if (mCurrentState.airplaneMode) {
-            return SignalDrawable.getAirplaneModeState(getNumLevels());
+            return TelephonyIcons.FLIGHT_MODE_ICON;
         }
 
         return getCurrentIconId();

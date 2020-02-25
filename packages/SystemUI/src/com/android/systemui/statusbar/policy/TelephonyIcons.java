@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
+ *               2019-2020 The exTHmUI Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +23,8 @@ import com.android.systemui.statusbar.policy.MobileSignalController.MobileIconGr
 class TelephonyIcons {
     //***** Data connection icons
     static final int FLIGHT_MODE_ICON = R.drawable.stat_sys_airplane_mode;
+    static final int TELEPHONY_CARRIER_NETWORK_CHANGE = R.drawable.stat_sys_signal_carrier_network_change_animation;
+    static final int TELEPHONY_NO_NETWORK = R.drawable.stat_sys_signal_null;
 
     static final int ICON_LTE = R.drawable.ic_lte_mobiledata;
     static final int ICON_LTE_PLUS = R.drawable.ic_lte_plus_mobiledata;
@@ -211,5 +214,18 @@ class TelephonyIcons {
             R.string.cell_data_off_content_description,
             0,
             false);
+
+    static final int[][] TELEPHONY_SIGNAL_STRENGTH = {
+            { R.drawable.stat_sys_signal_0,
+              R.drawable.stat_sys_signal_1,
+              R.drawable.stat_sys_signal_2,
+              R.drawable.stat_sys_signal_3,
+              R.drawable.stat_sys_signal_4 },
+            { R.drawable.stat_sys_signal_0_fully,
+              R.drawable.stat_sys_signal_1_fully,
+              R.drawable.stat_sys_signal_2_fully,
+              R.drawable.stat_sys_signal_3_fully,
+              R.drawable.stat_sys_signal_4_fully }
+        };
 }
 
