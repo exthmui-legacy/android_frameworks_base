@@ -1,0 +1,28 @@
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:maxLevel="0" android:drawable="@drawable/stat_sys_battery_charging_0_dark" />
+    <item android:minLevel="1" android:maxLevel="4" android:drawable="@drawable/stat_sys_battery_charging_1_dark" />
+    <item android:minLevel="5" android:maxLevel="8" android:drawable="@drawable/stat_sys_battery_charging_2_dark" />
+    <item android:minLevel="9" android:maxLevel="12" android:drawable="@drawable/stat_sys_battery_charging_3_dark" />
+    <item android:minLevel="13" android:maxLevel="16" android:drawable="@drawable/stat_sys_battery_charging_4_dark" />
+    <item android:minLevel="17" android:maxLevel="20" android:drawable="@drawable/stat_sys_battery_charging_5_dark" />
+    <item android:minLevel="21" android:maxLevel="24" android:drawable="@drawable/stat_sys_battery_charging_6_dark" />
+    <item android:minLevel="25" android:maxLevel="28" android:drawable="@drawable/stat_sys_battery_charging_7_dark" />
+    <item android:minLevel="29" android:maxLevel="32" android:drawable="@drawable/stat_sys_battery_charging_8_dark" />
+    <item android:minLevel="33" android:maxLevel="36" android:drawable="@drawable/stat_sys_battery_charging_9_dark" />
+    <item android:minLevel="37" android:maxLevel="40" android:drawable="@drawable/stat_sys_battery_charging_10_dark" />
+    <item android:minLevel="41" android:maxLevel="44" android:drawable="@drawable/stat_sys_battery_charging_11_dark" />
+    <item android:minLevel="45" android:maxLevel="48" android:drawable="@drawable/stat_sys_battery_charging_12_dark" />
+    <item android:minLevel="49" android:maxLevel="52" android:drawable="@drawable/stat_sys_battery_charging_13_dark" />
+    <item android:minLevel="53" android:maxLevel="56" android:drawable="@drawable/stat_sys_battery_charging_14_dark" />
+    <item android:minLevel="57" android:maxLevel="60" android:drawable="@drawable/stat_sys_battery_charging_15_dark" />
+    <item android:minLevel="61" android:maxLevel="64" android:drawable="@drawable/stat_sys_battery_charging_16_dark" />
+    <item android:minLevel="65" android:maxLevel="68" android:drawable="@drawable/stat_sys_battery_charging_17_dark" />
+    <item android:minLevel="69" android:maxLevel="72" android:drawable="@drawable/stat_sys_battery_charging_18_dark" />
+    <item android:minLevel="73" android:maxLevel="76" android:drawable="@drawable/stat_sys_battery_charging_19_dark" />
+    <item android:minLevel="77" android:maxLevel="80" android:drawable="@drawable/stat_sys_battery_charging_20_dark" />
+    <item android:minLevel="81" android:maxLevel="84" android:drawable="@drawable/stat_sys_battery_charging_21_dark" />
+    <item android:minLevel="85" android:maxLevel="88" android:drawable="@drawable/stat_sys_battery_charging_22_dark" />
+    <item android:minLevel="89" android:maxLevel="92" android:drawable="@drawable/stat_sys_battery_charging_23_dark" />
+    <item android:minLevel="93" android:maxLevel="96" android:drawable="@drawable/stat_sys_battery_charging_24_dark" />
+    <item android:minLevel="97" android:maxLevel="100" android:drawable="@drawable/stat_sys_battery_charging_25_dark" />
+</level-list>

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2013 The Android Open Source Project
+ *               2019-2020 The exTHmUI Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,6 +50,7 @@ import android.widget.TextView;
 import com.android.settingslib.Utils;
 import com.android.settingslib.graph.BatteryMeterDrawableBase;
 import com.android.systemui.settings.CurrentUserTracker;
+import com.android.systemui.statusbar.BatteryCustomDrawable;
 import com.android.systemui.statusbar.phone.StatusBarIconController;
 import com.android.systemui.statusbar.policy.BatteryController;
 import com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback;
@@ -77,6 +79,8 @@ public class BatteryMeterView extends LinearLayout implements
     private final CurrentUserTracker mUserTracker;
     private TextView mBatteryPercentView;
 
+    private BatteryCustomDrawable mBatteryCustomDrawable;
+    private boolean mCustomizeBatteryIcon;
     private boolean mCharging;
     private boolean mBatteryHidden;
     private int mBatteryStyle = BATTERY_STYLE_PORTRAIT;
@@ -121,7 +125,20 @@ public class BatteryMeterView extends LinearLayout implements
                 defStyle, 0);
         final int frameColor = atts.getColor(R.styleable.BatteryMeterView_frameColor,
                 context.getColor(R.color.meter_background_color));
+
+        mCustomizeBatteryIcon = context.getResources().getBoolean(R.bool.customize_battery_icon);
         mDrawable = new BatteryMeterDrawableBase(context, frameColor);
+        try {
+            mBatteryCustomDrawable = BatteryCustomDrawable.create(context,
+                                 R.drawable.stat_sys_battery,
+                                 R.drawable.stat_sys_battery_charging,
+                                 R.drawable.stat_sys_battery_powersave);
+        } catch (Exception e) {
+            e.printStackTrace();
+            mCustomizeBatteryIcon = false;
+            mBatteryCustomDrawable = null;
+        }
+        
         atts.recycle();
 
         mSettingObserver = new SettingObserver(new Handler(context.getMainLooper()));
@@ -132,13 +149,17 @@ public class BatteryMeterView extends LinearLayout implements
         mSlotBattery = context.getString(
                 com.android.internal.R.string.status_bar_battery);
         mBatteryIconView = new ImageView(context);
-        mBatteryIconView.setImageDrawable(mDrawable);
-        final MarginLayoutParams mlp = new MarginLayoutParams(
-                getResources().getDimensionPixelSize(R.dimen.status_bar_battery_icon_width),
-                getResources().getDimensionPixelSize(R.dimen.status_bar_battery_icon_height));
-        mlp.setMargins(0, 0, 0,
-                getResources().getDimensionPixelOffset(R.dimen.battery_margin_bottom));
-        addView(mBatteryIconView, mlp);
+
+        mBatteryIconView.setAdjustViewBounds(true);
+        mBatteryIconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        mBatteryIconView.setMaxHeight(getResources().getDimensionPixelSize(R.dimen.status_bar_icon_size));
+
+        if (mCustomizeBatteryIcon) {
+            mBatteryIconView.setImageDrawable(mBatteryCustomDrawable);
+        } else {
+            mBatteryIconView.setImageDrawable(mDrawable);
+        }
+        addView(mBatteryIconView, getBatteryIconLayoutParams(getResources()));
 
         updateShowPercent();
         setColorsFromContext(context);
@@ -250,6 +271,10 @@ public class BatteryMeterView extends LinearLayout implements
 
     @Override
     public void onBatteryLevelChanged(int level, boolean pluggedIn, boolean charging) {
+        if (mCustomizeBatteryIcon) {
+            mBatteryCustomDrawable.setBatteryLevel(level);
+            mBatteryCustomDrawable.setCharging(pluggedIn);
+        }
         mDrawable.setBatteryLevel(level);
         mDrawable.setCharging(pluggedIn);
         mLevel = level;
@@ -265,6 +290,7 @@ public class BatteryMeterView extends LinearLayout implements
 
     @Override
     public void onPowerSaveChanged(boolean isPowerSave) {
+        if (mCustomizeBatteryIcon) mBatteryCustomDrawable.setPowerSave(isPowerSave);
         mDrawable.setPowerSave(isPowerSave);
     }
 
@@ -326,23 +352,32 @@ public class BatteryMeterView extends LinearLayout implements
      */
     private void scaleBatteryMeterViews() {
         Resources res = getContext().getResources();
-        TypedValue typedValue = new TypedValue();
+        mBatteryIconView.setLayoutParams(getBatteryIconLayoutParams(res));
+        FontSizeUtils.updateFontSize(mBatteryPercentView, R.dimen.qs_time_expanded_size);
+    }
 
+    private LayoutParams getBatteryIconLayoutParams(Resources res) {
+        TypedValue typedValue = new TypedValue();
         res.getValue(R.dimen.status_bar_icon_scale_factor, typedValue, true);
         float iconScaleFactor = typedValue.getFloat();
-
-        int batteryHeight = res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_height);
-        int batteryWidth = mBatteryStyle == BATTERY_STYLE_CIRCLE ?
-                res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_circle_width) :
-                res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_width);
-        int marginBottom = res.getDimensionPixelSize(R.dimen.battery_margin_bottom);
+        int batteryHeight, batteryWidth, marginBottom;
+        if (mCustomizeBatteryIcon) {
+            batteryHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
+            batteryWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
+            marginBottom = 0;
+        } else {
+            batteryHeight = (int) (iconScaleFactor * res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_height));
+            batteryWidth = (int) (iconScaleFactor * (mBatteryStyle == BATTERY_STYLE_CIRCLE ?
+                    res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_circle_width) :
+                    res.getDimensionPixelSize(R.dimen.status_bar_battery_icon_width)));
+            marginBottom = res.getDimensionPixelSize(R.dimen.battery_margin_bottom);
+        }
 
         LinearLayout.LayoutParams scaledLayoutParams = new LinearLayout.LayoutParams(
-                (int) (batteryWidth * iconScaleFactor), (int) (batteryHeight * iconScaleFactor));
+                batteryWidth, batteryHeight);
         scaledLayoutParams.setMargins(0, 0, 0, marginBottom);
 
-        mBatteryIconView.setLayoutParams(scaledLayoutParams);
-        FontSizeUtils.updateFontSize(mBatteryPercentView, R.dimen.qs_time_expanded_size);
+        return scaledLayoutParams;
     }
 
     private void updateBatteryStyle() {
@@ -352,7 +387,11 @@ public class BatteryMeterView extends LinearLayout implements
         } else {
             mDrawable.setMeterStyle(mBatteryStyle);
             mBatteryIconView.setVisibility(View.VISIBLE);
-            mBatteryIconView.setImageDrawable(mDrawable);
+            if (mCustomizeBatteryIcon) {
+                mBatteryIconView.setImageDrawable(mBatteryCustomDrawable);
+            } else {
+                mBatteryIconView.setImageDrawable(mDrawable);
+            }
             scaleBatteryMeterViews();
         }
         setVisibility(mBatteryHidden ? View.GONE : View.VISIBLE);
@@ -361,6 +400,10 @@ public class BatteryMeterView extends LinearLayout implements
     @Override
     public void onDarkChanged(Rect area, float darkIntensity, int tint) {
         mDarkIntensity = darkIntensity;
+
+        if (mCustomizeBatteryIcon) {
+            mBatteryCustomDrawable.setDarkIntensity(darkIntensity);
+        }
 
         float intensity = DarkIconDispatcher.isInArea(area, this) ? darkIntensity : 0;
         mNonAdaptedForegroundColor = getColorForDarkIntensity(
@@ -404,4 +447,6 @@ public class BatteryMeterView extends LinearLayout implements
             updateShowPercent();
         }
     }
+
+
 }

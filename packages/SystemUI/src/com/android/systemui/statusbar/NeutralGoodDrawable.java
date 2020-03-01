@@ -58,7 +58,7 @@ public class NeutralGoodDrawable extends LayerDrawable {
                         dark.getDrawable(getDarkResId(dark, resId)).mutate() });
     }
 
-    static int getDarkResId(Context context, int lightResId) {
+    public static int getDarkResId(Context context, int lightResId) {
         int resId = 0;
         try {
             String resourceName = context.getResources().getResourceEntryName(lightResId);
