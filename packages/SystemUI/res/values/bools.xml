@@ -20,4 +20,5 @@
     <bool name="qs_show_user_switcher_for_single_user">false</bool>
     
     <bool name="customize_battery_icon">false</bool>
+    <bool name="customize_mobile_signal_icon">false</bool>
 </resources>

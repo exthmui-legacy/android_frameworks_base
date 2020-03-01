@@ -45,6 +45,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.keyguard.CarrierText;
 import com.android.keyguard.KeyguardUpdateMonitor;
+import com.android.settingslib.graph.SignalDrawable;
 import com.android.settingslib.Utils;
 import com.android.settingslib.drawable.UserIconDrawable;
 import com.android.systemui.Dependency;
@@ -72,6 +73,8 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     protected View mSettingsContainer;
     private PageIndicator mPageIndicator;
     private CarrierText mCarrierText;
+
+    private boolean mCustomizeSignalIcon;
 
     private boolean mQsDisabled;
     private QSPanel mQsPanel;
@@ -135,10 +138,13 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         // settings), so disable it for this view
         ((RippleDrawable) mSettingsButton.getBackground()).setForceSoftware(true);
 
-        int height = mContext.getResources().getDimensionPixelSize(R.dimen.qs_footer_icon_size);
-        mMobileSignal.setAdjustViewBounds(true);
-        mMobileSignal.setMaxHeight(height);
-
+        mCustomizeSignalIcon = mContext.getResources().getBoolean(R.bool.customize_mobile_signal_icon);
+        if (mCustomizeSignalIcon) {
+            int height = mContext.getResources().getDimensionPixelSize(R.dimen.qs_footer_icon_size);
+            mMobileSignal.setAdjustViewBounds(true);
+            mMobileSignal.setMaxHeight(height);
+        }
+        
         updateResources();
 
         mUserInfoController = Dependency.get(UserInfoController.class);
@@ -404,9 +410,16 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         if (mInfo.visible) {
             mMobileRoaming.setVisibility(mInfo.roaming ? View.VISIBLE : View.GONE);
             mMobileRoaming.setImageTintList(ColorStateList.valueOf(mColorForeground));
-            NeutralGoodDrawable d = NeutralGoodDrawable.create(mContext, mInfo.mobileSignalIconId);
-            d.setDarkIntensity(QuickStatusBarHeader.getColorIntensity(mColorForeground));
-            mMobileSignal.setImageDrawable(d);
+            if (mCustomizeSignalIcon) {
+                NeutralGoodDrawable d = NeutralGoodDrawable.create(mContext, mInfo.mobileSignalIconId);
+                d.setDarkIntensity(QuickStatusBarHeader.getColorIntensity(mColorForeground));
+                mMobileSignal.setImageDrawable(d);
+            } else {
+                SignalDrawable d = new SignalDrawable(mContext);
+                d.setDarkIntensity(QuickStatusBarHeader.getColorIntensity(mColorForeground));
+                mMobileSignal.setImageDrawable(d);
+                mMobileSignal.setImageLevel(mInfo.mobileSignalIconId);
+            }
 
             StringBuilder contentDescription = new StringBuilder();
             if (mInfo.contentDescription != null) {

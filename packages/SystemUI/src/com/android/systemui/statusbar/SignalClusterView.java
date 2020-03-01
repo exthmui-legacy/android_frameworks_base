@@ -39,6 +39,7 @@ import android.view.accessibility.AccessibilityEvent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.android.settingslib.graph.SignalDrawable;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.StatusBarIconController;
@@ -614,12 +615,15 @@ public class SignalClusterView extends LinearLayout implements NetworkController
         private ImageView mMobileActivityOut;
         public boolean mActivityIn;
         public boolean mActivityOut;
-        private NeutralGoodDrawable mMobileSignalDrawable;
+        private boolean mCustomizeSignalIcon;
+        private SignalDrawable mMobileSignalDrawable;
+        private NeutralGoodDrawable mCustomSignalDrawable;
 
         public PhoneState(int subId, Context context) {
             ViewGroup root = (ViewGroup) LayoutInflater.from(context)
                     .inflate(R.layout.mobile_signal_group, null);
             setViews(root);
+            mCustomizeSignalIcon = context.getResources().getBoolean(R.bool.customize_mobile_signal_icon);
             mSubId = subId;
         }
 
@@ -636,9 +640,14 @@ public class SignalClusterView extends LinearLayout implements NetworkController
         public boolean apply(boolean isSecondaryIcon) {
             if (mMobileVisible && !mIsAirplaneMode) {
                 if (mLastMobileStrengthId != mMobileStrengthId) {
-                    mMobileSignalDrawable = NeutralGoodDrawable.create(mMobile.getContext(),
+                    if (mCustomizeSignalIcon) {
+                        mCustomSignalDrawable = NeutralGoodDrawable.create(mMobile.getContext(),
                                             mMobileStrengthId);
-                    mMobile.setImageDrawable(mMobileSignalDrawable);
+                        mMobile.setImageDrawable(mCustomSignalDrawable);
+                    } else {
+                        mMobileSignalDrawable = new SignalDrawable(mMobile.getContext());
+                        mMobile.setImageDrawable(mMobileSignalDrawable);
+                    }
                     mLastMobileStrengthId = mMobileStrengthId;
                 }
 
@@ -679,7 +688,8 @@ public class SignalClusterView extends LinearLayout implements NetworkController
         }
 
         public void setIconTint(int tint, float darkIntensity, Rect tintArea) {
-            if (mMobileSignalDrawable != null) mMobileSignalDrawable.setDarkIntensity(darkIntensity);
+            if (mCustomizeSignalIcon) mCustomSignalDrawable.setDarkIntensity(darkIntensity);
+            mMobileSignalDrawable.setDarkIntensity(darkIntensity);
             setTint(mMobileType, DarkIconDispatcher.getTint(tintArea, mMobileType, tint));
             setTint(mMobileRoaming, DarkIconDispatcher.getTint(tintArea, mMobileRoaming,
                     tint));

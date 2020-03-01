@@ -40,6 +40,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.keyguard.AlphaOptimizedLinearLayout;
+import com.android.settingslib.graph.SignalDrawable;
 import com.android.settingslib.Utils;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy.MobileIconState;
@@ -62,7 +63,9 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
     private View mMobileRoamingSpace;
     private int mVisibleState = -1;
     private float mDarkIntensity = 0;
-    private NeutralGoodDrawable mMobileDrawable;
+    private boolean mCustomizeSignalIcon;
+    private SignalDrawable mMobileDrawable;
+    private NeutralGoodDrawable mCustomMobileDrawable;
 
     public static StatusBarMobileView fromContext(Context context, String slot) {
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -113,10 +116,15 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mOut = findViewById(R.id.mobile_out);
         mInoutContainer = findViewById(R.id.inout_container);
 
-        int height = mContext.getResources().getDimensionPixelSize(R.dimen.status_bar_icon_size);
-        mMobile.setAdjustViewBounds(true);
-        mMobile.setMaxHeight(height);
-        
+        mCustomizeSignalIcon = mContext.getResources().getBoolean(R.bool.customize_mobile_signal_icon);
+        mMobileDrawable = new SignalDrawable(getContext());
+        if (mCustomizeSignalIcon) {
+            int height = mContext.getResources().getDimensionPixelSize(R.dimen.status_bar_icon_size);
+            mMobile.setAdjustViewBounds(true);
+            mMobile.setMaxHeight(height);
+        } else {
+            mMobile.setImageDrawable(mMobileDrawable);
+        }
         initDotView();
     }
 
@@ -200,9 +208,14 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
     }
 
     private void updateDataLevel(int strengthId) {
-        mMobileDrawable = NeutralGoodDrawable.create(getContext(), strengthId);
-        mMobileDrawable.setDarkIntensity(mDarkIntensity);
-        mMobile.setImageDrawable(mMobileDrawable);
+        if (mCustomizeSignalIcon) {
+            mCustomMobileDrawable = NeutralGoodDrawable.create(getContext(), strengthId);
+            mCustomMobileDrawable.setDarkIntensity(mDarkIntensity);
+            mMobile.setImageDrawable(mCustomMobileDrawable);
+        } else {
+            mMobileDrawable.setLevel(strengthId);
+            mMobile.setImageDrawable(mMobileDrawable);
+        }
     }
 
     @Override
@@ -212,10 +225,8 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         }
 
         mDarkIntensity = darkIntensity;
-        Drawable d = mMobile.getDrawable();
-        if (d instanceof NeutralGoodDrawable) {
-            ((NeutralGoodDrawable)d).setDarkIntensity(darkIntensity);
-        }
+        mMobileDrawable.setDarkIntensity(darkIntensity);
+        if (mCustomizeSignalIcon) mCustomMobileDrawable.setDarkIntensity(darkIntensity);
 
         ColorStateList color = ColorStateList.valueOf(getTint(area, this, tint));
         mIn.setImageTintList(color);
@@ -240,6 +251,7 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         ColorStateList list = ColorStateList.valueOf(color);
         float intensity = color == Color.WHITE ? 0 : 1;
         mDarkIntensity = intensity;
+        if (mCustomizeSignalIcon) mCustomMobileDrawable.setDarkIntensity(intensity);
         mMobileDrawable.setDarkIntensity(intensity);
 
         mIn.setImageTintList(list);

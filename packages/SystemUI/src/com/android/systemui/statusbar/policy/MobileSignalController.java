@@ -36,6 +36,7 @@ import android.util.SparseArray;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.cdma.EriInfo;
+import com.android.settingslib.graph.SignalDrawable;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.NetworkController.IconState;
 import com.android.systemui.statusbar.policy.NetworkController.SignalCallback;
@@ -72,6 +73,7 @@ public class MobileSignalController extends SignalController<
     private MobileIconGroup mDefaultIcons;
     private Config mConfig;
     private Context mContext;
+    private boolean mCustomizeSignalIcon;
 
     // TODO: Reduce number of vars passed in, if we have the NetworkController, probably don't
     // need listener lists anymore.
@@ -93,6 +95,7 @@ public class MobileSignalController extends SignalController<
         mNetworkNameSeparator = getStringIfExists(R.string.status_bar_network_name_separator);
         mNetworkNameDefault = getStringIfExists(
                 com.android.internal.R.string.lockscreen_carrier_default);
+        mCustomizeSignalIcon = context.getResources().getBoolean(R.bool.customize_mobile_signal_icon);
 
         mapIconSets();
 
@@ -249,7 +252,8 @@ public class MobileSignalController extends SignalController<
     @Override
     public int getCurrentIconId() {
         if (mCurrentState.iconGroup == TelephonyIcons.CARRIER_NETWORK_CHANGE) {
-            return TelephonyIcons.TELEPHONY_CARRIER_NETWORK_CHANGE;
+            if (mCustomizeSignalIcon) return TelephonyIcons.TELEPHONY_CARRIER_NETWORK_CHANGE;
+            return SignalDrawable.getCarrierChangeState(getNumLevels());
         } else if (mCurrentState.connected) {
             int level = mCurrentState.level;
             if (mConfig.inflateSignalStrengths) {
@@ -260,9 +264,11 @@ public class MobileSignalController extends SignalController<
             boolean noInternet = mCurrentState.inetCondition == 0;
             boolean cutOut = dataDisabled || noInternet;
 
-            return TelephonyIcons.TELEPHONY_SIGNAL_STRENGTH[cutOut ? 0 : 1][level];
+            if (mCustomizeSignalIcon) return TelephonyIcons.TELEPHONY_SIGNAL_STRENGTH[cutOut ? 0 : 1][level];
+            return SignalDrawable.getState(level, getNumLevels(), cutOut);
         } else if (mCurrentState.enabled) {
-            return TelephonyIcons.TELEPHONY_NO_NETWORK;
+            if (mCustomizeSignalIcon) return TelephonyIcons.TELEPHONY_NO_NETWORK;
+            return SignalDrawable.getEmptyState(getNumLevels());
         } else {
             return 0;
         }
@@ -271,7 +277,8 @@ public class MobileSignalController extends SignalController<
     @Override
     public int getQsCurrentIconId() {
         if (mCurrentState.airplaneMode) {
-            return TelephonyIcons.FLIGHT_MODE_ICON;
+            if (mCustomizeSignalIcon) return TelephonyIcons.FLIGHT_MODE_ICON;
+            return SignalDrawable.getAirplaneModeState(getNumLevels());
         }
 
         return getCurrentIconId();
