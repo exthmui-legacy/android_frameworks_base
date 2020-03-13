@@ -102,8 +102,8 @@ public class NetworkMonitor extends StateMachine {
     // TODO: append a random length parameter to the default HTTPS url.
     // TODO: randomize browser version ids in the default User-Agent String.
     private static final String DEFAULT_HTTPS_URL     = "https://connect.rom.miui.com/generate_204";
-    private static final String DEFAULT_HTTP_URL      = "http://connect.rom.miui.com/generate_204"
-            "http://connectivitycheck.gstatic.com/generate_204";
+    private static final String DEFAULT_HTTP_URL      = 
+            "http://connect.rom.miui.com/generate_204";
     private static final String DEFAULT_FALLBACK_URL  = "http://www.google.com/gen_204";
     private static final String DEFAULT_OTHER_FALLBACK_URLS =
             "http://play.googleapis.com/generate_204";
