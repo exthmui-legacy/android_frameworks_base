@@ -51,6 +51,7 @@ struct OverlayManifestInfo {
   uint32_t resource_mapping;                // NOLINT(misc-non-private-member-variables-in-classes)
   bool is_static;                           // NOLINT(misc-non-private-member-variables-in-classes)
   int priority = -1;                        // NOLINT(misc-non-private-member-variables-in-classes)
+  bool is_theme_overlay;                    // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 Result<OverlayManifestInfo> ExtractOverlayManifestInfo(const std::string& path,

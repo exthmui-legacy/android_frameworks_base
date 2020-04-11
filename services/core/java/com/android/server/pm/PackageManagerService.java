@@ -511,6 +511,8 @@ public class PackageManagerService extends IPackageManager.Stub
     private static final int SE_UID = Process.SE_UID;
     private static final int NETWORKSTACK_UID = Process.NETWORK_STACK_UID;
 
+    private static final String THEME_MANAGER_PACKAGE = "org.exthmui.theme";
+
     static final int SCAN_NO_DEX = 1 << 0;
     static final int SCAN_UPDATE_SIGNATURE = 1 << 1;
     static final int SCAN_NEW_INSTALL = 1 << 2;
@@ -533,6 +535,7 @@ public class PackageManagerService extends IPackageManager.Stub
     static final int SCAN_AS_SYSTEM_EXT = 1 << 21;
     static final int SCAN_AS_ODM = 1 << 22;
     static final int SCAN_AS_APK_IN_APEX = 1 << 23;
+    static final int SCAN_AS_THEME_OVERLAY = 1 << 26;
 
     @IntDef(flag = true, prefix = { "SCAN_" }, value = {
             SCAN_NO_DEX,
@@ -10967,6 +10970,7 @@ public class PackageManagerService extends IPackageManager.Stub
      * <li>{@link #SCAN_AS_INSTANT_APP}</li>
      * <li>{@link #SCAN_AS_VIRTUAL_PRELOAD}</li>
      * <li>{@link #SCAN_AS_ODM}</li>
+     * <li>{@link #SCAN_AS_THEME_OVERLAY}</li>
      * </ul>
      */
     private @ScanFlags int adjustScanFlags(@ScanFlags int scanFlags,
@@ -11015,6 +11019,9 @@ public class PackageManagerService extends IPackageManager.Stub
             }
             if (pkgSetting.getVirtulalPreload(userId)) {
                 scanFlags |= SCAN_AS_VIRTUAL_PRELOAD;
+            }
+            if (THEME_MANAGER_PACKAGE.equals(pkgSetting.getInstallerPackageName())) {
+                scanFlags |= SCAN_AS_THEME_OVERLAY;
             }
         }
 
@@ -12250,6 +12257,14 @@ public class PackageManagerService extends IPackageManager.Stub
                                     + " must target Q or later, "
                                     + "or be signed with the platform certificate");
                         }
+                    }
+
+                    if (pkg.getMetaData() != null && 
+                        pkg.getMetaData().getBoolean("is_theme_overlay", false) &&
+                        (scanFlags & SCAN_AS_THEME_OVERLAY) == 0) {
+                            throw new PackageManagerException("Overlay " + pkg.getPackageName()
+                                        + " has is_theme_overlay flag,"
+                                        + " but it's installer is not " + THEME_MANAGER_PACKAGE);
                     }
 
                     // A non-preloaded overlay package, without <overlay android:targetName>, will
@@ -17293,6 +17308,9 @@ public class PackageManagerService extends IPackageManager.Stub
         }
         if (virtualPreload) {
             scanFlags |= SCAN_AS_VIRTUAL_PRELOAD;
+        }
+        if (THEME_MANAGER_PACKAGE.equals(args.installSource.installerPackageName)) {
+            scanFlags |= SCAN_AS_THEME_OVERLAY;
         }
 
         if (DEBUG_INSTALL) Slog.d(TAG, "installPackageLI: path=" + tmpPackageFile);

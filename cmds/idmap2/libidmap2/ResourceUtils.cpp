@@ -171,6 +171,28 @@ Result<OverlayManifestInfo> ExtractOverlayManifestInfo(const std::string& path,
     info.requiredSystemPropertyValue = *result_str;
   }
 
+  auto application_it = std::find_if(manifest_it.begin(), manifest_it.end(), [](const auto& it) {
+    return it.event() == XmlParser::Event::START_TAG && 
+           it.name() == "application";
+  });
+
+  if (application_it != manifest_it.end()) {
+    auto metadata_it = std::find_if(application_it.begin(), application_it.end(), [](const auto& it) {
+      return it.event() == XmlParser::Event::START_TAG && 
+            it.name() == "meta-data" && 
+            *(it.GetAttributeStringValue("name")) == "is_theme_overlay";
+    });
+    if (metadata_it != application_it.end()) {
+      auto result_value = metadata_it->GetAttributeValue("value");
+      if ((*result_value).dataType >= Res_value::TYPE_FIRST_INT &&
+          (*result_value).dataType <= Res_value::TYPE_LAST_INT) {
+        info.is_theme_overlay = (*result_value).data != 0U;
+      } else {
+        return Error("value of is_theme_overlay is not a boolean in AndroidManifest.xml of %s", path.c_str());
+      }
+    }
+  }
+
   return info;
 }
 

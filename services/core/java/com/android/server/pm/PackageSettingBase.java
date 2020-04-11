@@ -207,6 +207,10 @@ public abstract class PackageSettingBase extends SettingBase {
         this.updateAvailable = updateAvailable;
     }
 
+    public String getInstallerPackageName() {
+        return installSource.installerPackageName;
+    }
+
     public boolean isUpdateAvailable() {
         return updateAvailable;
     }
