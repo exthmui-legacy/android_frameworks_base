@@ -103,6 +103,17 @@ Result<OverlayManifestInfo> ExtractOverlayManifestInfo(const std::string& path,
     info.priority = std::stoi(iter->second);
   }
 
+  const auto metaTag = xml->FindTag("meta-data");
+  if (metaTag) {
+    iter = metaTag->find("name");
+    if (iter != metaTag->end() && iter->second == "is_theme_overlay") {
+      iter = metaTag->find("value");
+      if (iter != metaTag->end()) {
+        info.is_theme_overlay = std::stoul(iter->second) != 0U;
+      }
+    }
+  }
+
   return info;
 }
 

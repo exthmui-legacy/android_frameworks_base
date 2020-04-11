@@ -287,9 +287,9 @@ Result<Unit> CheckOverlayable(const LoadedPackage& target_package,
       PolicyFlags::POLICY_PRODUCT_PARTITION | PolicyFlags::POLICY_SIGNATURE;
 
   // If the resource does not have an overlayable definition, allow the resource to be overlaid if
-  // the overlay is preinstalled or signed with the same signature as the target.
-  if (!target_package.DefinesOverlayable()) {
-    return (sDefaultPolicies & fulfilled_policies) != 0
+  // the overlay is preinstalled or installed for theme, or signed with the same signature as the target.
+  if (!target_package.DefinesOverlayable() ) {
+    return (sDefaultPolicies & fulfilled_policies) != 0 || overlay_info.is_theme_overlay
                ? Result<Unit>({})
                : Error(
                      "overlay must be preinstalled or signed with the same signature as the "

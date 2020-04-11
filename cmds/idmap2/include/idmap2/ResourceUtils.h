@@ -31,6 +31,7 @@ struct OverlayManifestInfo {
   std::string target_package;  // NOLINT(misc-non-private-member-variables-in-classes)
   std::string target_name;     // NOLINT(misc-non-private-member-variables-in-classes)
   bool is_static;              // NOLINT(misc-non-private-member-variables-in-classes)
+  bool is_theme_overlay;       // NOLINT(misc-non-private-member-variables-in-classes)
   int priority = -1;           // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
