@@ -11015,10 +11015,7 @@ public class PackageManagerService extends IPackageManager.Stub
             if (pkgSetting.getVirtulalPreload(userId)) {
                 scanFlags |= SCAN_AS_VIRTUAL_PRELOAD;
             }
-
-            if (THEME_MANAGER_PACKAGE.equals(pkgSetting.installerPackageName)
-                && pkg.applicationInfo.metaData != null 
-                && pkg.applicationInfo.metaData.getBoolean("is_theme_overlay", false)) {
+            if (THEME_MANAGER_PACKAGE.equals(pkgSetting.installerPackageName)) {
                 scanFlags |= SCAN_AS_THEME_OVERLAY;
             }
         }
@@ -12154,7 +12151,13 @@ public class PackageManagerService extends IPackageManager.Stub
                         }
                     }
 
-                    if ((scanFlags & SCAN_AS_THEME_OVERLAY) != 0) return;
+                    if (pkg.mAppMetaData != null && 
+                        pkg.mAppMetaData.getBoolean("is_theme_overlay", false) &&
+                        (scanFlags & SCAN_AS_THEME_OVERLAY) == 0) {
+                            throw new PackageManagerException("Overlay " + pkg.packageName
+                                        + " has is_theme_overlay flag,"
+                                        + " but it's installer is not " + THEME_MANAGER_PACKAGE);
+                    }
 
                     // A non-preloaded overlay package, without <overlay android:targetName>, will
                     // only be used if it is signed with the same certificate as its target. If the
@@ -17391,6 +17394,9 @@ public class PackageManagerService extends IPackageManager.Stub
         }
         if (virtualPreload) {
             scanFlags |= SCAN_AS_VIRTUAL_PRELOAD;
+        }
+        if (THEME_MANAGER_PACKAGE.equals(installerPackageName)) {
+            scanFlags |= SCAN_AS_THEME_OVERLAY;
         }
 
         if (DEBUG_INSTALL) Slog.d(TAG, "installPackageLI: path=" + tmpPackageFile);
