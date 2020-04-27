@@ -6906,6 +6906,7 @@ HSPLandroid/graphics/fonts/FontVariationAxis;->fromFontVariationSettings(Ljava/l
 HSPLandroid/graphics/fonts/SystemFonts;->$closeResource(Ljava/lang/Throwable;Ljava/lang/AutoCloseable;)V
 HSPLandroid/graphics/fonts/SystemFonts;->appendNamedFamily(Landroid/text/FontConfig$Family;Ljava/util/HashMap;Landroid/util/ArrayMap;Ljava/util/ArrayList;)V
 HSPLandroid/graphics/fonts/SystemFonts;->buildSystemFallback(Ljava/lang/String;Ljava/lang/String;Landroid/graphics/fonts/FontCustomizationParser$Result;Landroid/util/ArrayMap;Ljava/util/ArrayList;)[Landroid/text/FontConfig$Alias;
+HSPLandroid/graphics/fonts/SystemFonts;->buildSystemFallback(Ljava/lang/String;Ljava/lang/String;Landroid/graphics/fonts/FontCustomizationParser$Result;Landroid/graphics/fonts/FontCustomizationParser$Result;Landroid/util/ArrayMap;Ljava/util/ArrayList;)[Landroid/text/FontConfig$Alias;
 HSPLandroid/graphics/fonts/SystemFonts;->createFontFamily(Ljava/lang/String;Ljava/util/List;Ljava/lang/String;ILjava/util/Map;Ljava/util/ArrayList;)Landroid/graphics/fonts/FontFamily;
 HSPLandroid/graphics/fonts/SystemFonts;->getAliases()[Landroid/text/FontConfig$Alias;
 HSPLandroid/graphics/fonts/SystemFonts;->getRawSystemFallbackMap()Ljava/util/Map;

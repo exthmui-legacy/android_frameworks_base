@@ -53,6 +53,8 @@ struct ASystemFontIterator {
 
     // The OEM customization XML.
     XmlDocUniquePtr mCustomizationXmlDoc;
+    // The theme customization XML.
+    XmlDocUniquePtr mThemeCustomizationXmlDoc;
 };
 
 struct AFont {
@@ -205,6 +207,7 @@ ASystemFontIterator* ASystemFontIterator_open() {
     std::unique_ptr<ASystemFontIterator> ite(new ASystemFontIterator());
     ite->mXmlDoc.reset(xmlReadFile("/system/etc/fonts.xml", nullptr, 0));
     ite->mCustomizationXmlDoc.reset(xmlReadFile("/product/etc/fonts_customization.xml", nullptr, 0));
+    ite->mThemeCustomizationXmlDoc.reset(xmlReadFile("/data/theme/fonts/fonts_customization.xml", nullptr, 0));
     return ite.release();
 }
 
@@ -314,13 +317,30 @@ AFont* ASystemFontIterator_next(ASystemFontIterator* ite) {
         // TODO: Filter only customizationType="new-named-family"
         ite->mFontNode = findNextFontNode(ite->mCustomizationXmlDoc, ite->mFontNode);
         if (ite->mFontNode == nullptr) {
-            // Reached end of the XML file. Finishing
+            // Reached end of the XML file. Continue theme customization.
             ite->mCustomizationXmlDoc.reset();
             ite->mFontNode = nullptr;
             return nullptr;
         } else {
             std::unique_ptr<AFont> font = std::make_unique<AFont>();
             copyFont(ite->mCustomizationXmlDoc, ite->mFontNode, font.get(), "/product/fonts/");
+            if (!isFontFileAvailable(font->mFilePath)) {
+                return ASystemFontIterator_next(ite);
+            }
+            return font.release();
+        }
+    }
+    if (ite->mThemeCustomizationXmlDoc) {
+        // TODO: Filter only customizationType="new-named-family"
+        ite->mFontNode = findNextFontNode(ite->mThemeCustomizationXmlDoc, ite->mFontNode);
+        if (ite->mFontNode == nullptr) {
+            // Reached end of the XML file. Finishing
+            ite->mThemeCustomizationXmlDoc.reset();
+            ite->mFontNode = nullptr;
+            return nullptr;
+        } else {
+            std::unique_ptr<AFont> font = std::make_unique<AFont>();
+            copyFont(ite->mThemeCustomizationXmlDoc, ite->mFontNode, font.get(), "/data/theme/fonts/");
             if (!isFontFileAvailable(font->mFilePath)) {
                 return ASystemFontIterator_next(ite);
             }
