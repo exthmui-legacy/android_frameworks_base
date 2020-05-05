@@ -286,6 +286,18 @@ public final class SystemFonts {
             }
 
             // Then, add fallback fonts to the each fallback map.
+            if (themeCustomization != null) {
+                for (int i = 0; i < themeCustomization.mAdditionalNamedFamilies.size(); ++i) {
+                    pushFamilyToFallback(themeCustomization.mAdditionalFallbackFamilies.get(i),
+                        fallbackListMap, bufferCache, availableFonts);
+                }
+            }
+
+            for (int i = 0; i < oemCustomization.mAdditionalFallbackFamilies.size(); ++i) {
+                pushFamilyToFallback(oemCustomization.mAdditionalFallbackFamilies.get(i),
+                        fallbackListMap, bufferCache, availableFonts);
+            }
+
             for (int i = 0; i < xmlFamilies.length; i++) {
                 final FontConfig.Family xmlFamily = xmlFamilies[i];
                 // The first family (usually the sans-serif family) is always placed immediately
