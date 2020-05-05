@@ -40,6 +40,7 @@ public class FontCustomizationParser {
      */
     public static class Result {
         ArrayList<FontConfig.Family> mAdditionalNamedFamilies = new ArrayList<>();
+        ArrayList<FontConfig.Family> mAdditionalFallbackFamilies = new ArrayList<>();
         ArrayList<FontConfig.Alias> mAdditionalAliases = new ArrayList<>();
     }
 
@@ -98,6 +99,8 @@ public class FontCustomizationParser {
         }
         if (customizationType.equals("new-named-family")) {
             out.mAdditionalNamedFamilies.add(FontListParser.readFamily(parser, fontDir));
+        } else if (customizationType.equals("new-fallback")) {
+            out.mAdditionalFallbackFamilies.add(FontListParser.readFamily(parser, fontDir));
         } else {
             throw new IllegalArgumentException("Unknown customizationType=" + customizationType);
         }
