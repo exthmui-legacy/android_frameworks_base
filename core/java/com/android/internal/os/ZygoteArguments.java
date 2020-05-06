@@ -205,6 +205,11 @@ class ZygoteArguments {
     int mHiddenApiAccessStatslogSampleRate = -1;
 
     /**
+     * Whether to refresh displayed fonts
+     */
+    boolean mRefreshFonts;
+
+    /**
      * Constructs instance and parses args
      *
      * @param args zygote command-line args
@@ -409,6 +414,8 @@ class ZygoteArguments {
                 mUsapPoolStatusSpecified = true;
                 mUsapPoolEnabled = Boolean.parseBoolean(arg.substring(arg.indexOf('=') + 1));
                 expectRuntimeArgs = false;
+            } else if (arg.equals("--refresh-fonts")) {
+                mRefreshFonts = true;
             } else {
                 break;
             }

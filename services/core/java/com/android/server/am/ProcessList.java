@@ -253,6 +253,9 @@ public final class ProcessList {
     // If true, then we pass the flag to ART to load the app image startup cache.
     private static final String PROPERTY_USE_APP_IMAGE_STARTUP_CACHE =
             "persist.device_config.runtime_native.use_app_image_startup_cache";
+    
+    // System prop for refreshing font
+    private static final String PROPERTY_REFRESH_FONTS = "sys.refresh_fonts";
 
     // Low Memory Killer Daemon command codes.
     // These must be kept in sync with the definitions in lmkd.c
@@ -1802,12 +1805,18 @@ public final class ProcessList {
                     app.processName);
             checkSlow(startTime, "startProcess: asking zygote to start proc");
             final Process.ProcessStartResult startResult;
+
+            boolean refreshFonts = SystemProperties.getBoolean(PROPERTY_REFRESH_FONTS, false);
+            if (refreshFonts) {
+                SystemProperties.set(PROPERTY_REFRESH_FONTS, "false");
+            }
+
             if (hostingRecord.usesWebviewZygote()) {
                 startResult = startWebView(entryPoint,
                         app.processName, uid, uid, gids, runtimeFlags, mountExternal,
                         app.info.targetSdkVersion, seInfo, requiredAbi, instructionSet,
                         app.info.dataDir, null, app.info.packageName,
-                        new String[] {PROC_START_SEQ_IDENT + app.startSeq});
+                        new String[] {PROC_START_SEQ_IDENT + app.startSeq}, refreshFonts);
             } else if (hostingRecord.usesAppZygote()) {
                 final AppZygote appZygote = createAppZygoteForProcessIfNeeded(app);
 
@@ -1816,13 +1825,13 @@ public final class ProcessList {
                         app.info.targetSdkVersion, seInfo, requiredAbi, instructionSet,
                         app.info.dataDir, null, app.info.packageName,
                         /*useUsapPool=*/ false,
-                        new String[] {PROC_START_SEQ_IDENT + app.startSeq});
+                        new String[] {PROC_START_SEQ_IDENT + app.startSeq}, refreshFonts);
             } else {
                 startResult = Process.start(entryPoint,
                         app.processName, uid, uid, gids, runtimeFlags, mountExternal,
                         app.info.targetSdkVersion, seInfo, requiredAbi, instructionSet,
                         app.info.dataDir, invokeWith, app.info.packageName,
-                        new String[] {PROC_START_SEQ_IDENT + app.startSeq});
+                        new String[] {PROC_START_SEQ_IDENT + app.startSeq}, refreshFonts);
             }
             checkSlow(startTime, "startProcess: returned from zygote!");
             return startResult;

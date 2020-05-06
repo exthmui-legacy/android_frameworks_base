@@ -685,6 +685,7 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
             CONFIG_LAYOUT_DIRECTION,
             CONFIG_COLOR_MODE,
             CONFIG_FONT_SCALE,
+            CONFIG_THEME_FONT,
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface Config {}
@@ -816,6 +817,11 @@ public class ActivityInfo extends ComponentInfo implements Parcelable {
      * {@link Configuration}.
      */
     public static final int CONFIG_WINDOW_CONFIGURATION = 0x20000000;
+    /**
+     * Bit in {@link #configChanges} that indicates a font change occurred
+     * @hide
+     */
+    public static final int CONFIG_THEME_FONT = 0x200000;
 
     /** @hide
      * Unfortunately the constants for config changes in native code are

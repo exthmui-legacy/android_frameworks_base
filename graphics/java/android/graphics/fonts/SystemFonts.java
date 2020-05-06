@@ -52,7 +52,7 @@ public final class SystemFonts {
     private SystemFonts() {}  // Do not instansiate.
 
     private static final Map<String, FontFamily[]> sSystemFallbackMap;
-    private static final FontConfig.Alias[] sAliases;
+    private static final List<FontConfig.Alias> sAliases;
     private static final List<Font> sAvailableFonts;
 
     /**
@@ -86,7 +86,7 @@ public final class SystemFonts {
      * @hide
      */
     public static @NonNull Map<String, FontFamily[]> getRawSystemFallbackMap() {
-        return sSystemFallbackMap;
+        return Collections.unmodifiableMap(sSystemFallbackMap);
     }
 
     /**
@@ -96,7 +96,7 @@ public final class SystemFonts {
      * @hide
      */
     public static @NonNull FontConfig.Alias[] getAliases() {
-        return sAliases;
+        return sAliases.toArray(new FontConfig.Alias[sAliases.size()]);
     }
 
     private static @Nullable ByteBuffer mmap(@NonNull String fullPath) {
@@ -243,14 +243,14 @@ public final class SystemFonts {
             @NonNull FontCustomizationParser.Result oemCustomization,
             @NonNull ArrayMap<String, FontFamily[]> fallbackMap,
             @NonNull ArrayList<Font> availableFonts) {
-            return buildSystemFallback(xmlPath, fontDir, oemCustomization, null, fallbackMap, availableFonts);
+        List<FontConfig.Alias> list = buildSystemFallback(xmlPath, fontDir, oemCustomization, null, fallbackMap, availableFonts);
+        return list.toArray(new FontConfig.Alias[list.size()]);
     }
 
     /**
      * @hide
      */
-    @VisibleForTesting
-    public static FontConfig.Alias[] buildSystemFallback(@NonNull String xmlPath,
+    public static List<FontConfig.Alias> buildSystemFallback(@NonNull String xmlPath,
             @NonNull String fontDir,
             @NonNull FontCustomizationParser.Result oemCustomization,
             @NonNull FontCustomizationParser.Result themeCustomization,
@@ -322,10 +322,10 @@ public final class SystemFonts {
             if (themeCustomization != null) {
                 list.addAll(themeCustomization.mAdditionalAliases);
             }
-            return list.toArray(new FontConfig.Alias[list.size()]);
+            return list;
         } catch (IOException | XmlPullParserException e) {
             Log.e(TAG, "Failed initialize system fallbacks.", e);
-            return ArrayUtils.emptyArray(FontConfig.Alias.class);
+            return new ArrayList<FontConfig.Alias>();
         }
     }
 
@@ -341,16 +341,31 @@ public final class SystemFonts {
         }
     }
 
-    static {
+    /**
+     * refresh fonts list for theme
+     * @hide
+     */
+    public static void updateFontsList() {
         final ArrayMap<String, FontFamily[]> systemFallbackMap = new ArrayMap<>();
         final ArrayList<Font> availableFonts = new ArrayList<>();
         final FontCustomizationParser.Result oemCustomization =
                 readFontCustomization("/product/etc/fonts_customization.xml", "/product/fonts/");
         final FontCustomizationParser.Result themeCustomization =
                 readFontCustomization("/data/theme/fonts/fonts_customization.xml", "/data/theme/fonts/");
-        sAliases = buildSystemFallback("/system/etc/fonts.xml", "/system/fonts/",
-                oemCustomization, themeCustomization, systemFallbackMap, availableFonts);
-        sSystemFallbackMap = Collections.unmodifiableMap(systemFallbackMap);
-        sAvailableFonts = Collections.unmodifiableList(availableFonts);
+        sAliases.clear();
+        sSystemFallbackMap.clear();
+        sAvailableFonts.clear();
+
+        sAliases.addAll(buildSystemFallback("/system/etc/fonts.xml", "/system/fonts/",
+                oemCustomization, themeCustomization, systemFallbackMap, availableFonts));
+        sSystemFallbackMap.putAll(systemFallbackMap);
+        sAvailableFonts.addAll(availableFonts);
+    }
+
+    static {
+        sAliases = new ArrayList<FontConfig.Alias>();
+        sSystemFallbackMap = new ArrayMap<String, FontFamily[]>();
+        sAvailableFonts = new ArrayList<Font>();
+        updateFontsList();
     }
 }

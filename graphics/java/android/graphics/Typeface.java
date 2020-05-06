@@ -92,6 +92,13 @@ public class Typeface {
     /** The NORMAL style of the default monospace typeface. */
     public static final Typeface MONOSPACE;
 
+    // Typefaces that we can garbage collect when changing fonts, and so we don't break public APIs
+    private static Typeface DEFAULT_INTERNAL;
+    private static Typeface DEFAULT_BOLD_INTERNAL;
+    private static Typeface SANS_SERIF_INTERNAL;
+    private static Typeface SERIF_INTERNAL;
+    private static Typeface MONOSPACE_INTERNAL;
+
     /**
      * The default {@link Typeface}s for different text styles.
      * Call {@link #defaultFromStyle(int)} to get the default typeface for the given text style.
@@ -1136,11 +1143,9 @@ public class Typeface {
         }
     }
 
-    static {
-        final HashMap<String, Typeface> systemFontMap = new HashMap<>();
-        initSystemDefaultTypefaces(systemFontMap, SystemFonts.getRawSystemFallbackMap(),
+    private static void initTypefacesPrev() {
+        initSystemDefaultTypefaces(sSystemFontMap, SystemFonts.getRawSystemFallbackMap(),
                 SystemFonts.getAliases());
-        sSystemFontMap = Collections.unmodifiableMap(systemFontMap);
 
         // We can't assume DEFAULT_FAMILY available on Roboletric.
         if (sSystemFontMap.containsKey(DEFAULT_FAMILY)) {
@@ -1148,11 +1153,59 @@ public class Typeface {
         }
 
         // Set up defaults and typefaces exposed in public API
-        DEFAULT         = create((String) null, 0);
-        DEFAULT_BOLD    = create((String) null, Typeface.BOLD);
-        SANS_SERIF      = create("sans-serif", 0);
-        SERIF           = create("serif", 0);
-        MONOSPACE       = create("monospace", 0);
+        DEFAULT_INTERNAL         = create((String) null, 0);
+        DEFAULT_BOLD_INTERNAL    = create((String) null, Typeface.BOLD);
+        SANS_SERIF_INTERNAL      = create("sans-serif", 0);
+        SERIF_INTERNAL           = create("serif", 0);
+        MONOSPACE_INTERNAL       = create("monospace", 0);
+    }
+
+    private static void initTypefacesPost() {
+        // A list of generic families to be registered in native.
+        // https://www.w3.org/TR/css-fonts-4/#generic-font-families
+        String[] genericFamilies = {
+            "serif", "sans-serif", "cursive", "fantasy", "monospace", "system-ui"
+        };
+
+        for (String genericFamily : genericFamilies) {
+            registerGenericFamilyNative(genericFamily, sSystemFontMap.get(genericFamily));
+        }
+    }
+
+    /**
+     * Clears caches in java and skia.
+     * Skia will then reparse font config
+     * @hide
+     */
+    public static void refreshFonts() {
+        sDynamicTypefaceCache.evictAll();
+        sSystemFontMap.clear();
+
+        SystemFonts.updateFontsList();
+        
+        initTypefacesPrev();
+
+        DEFAULT.native_instance = DEFAULT_INTERNAL.native_instance;
+        DEFAULT_BOLD.native_instance = DEFAULT_BOLD_INTERNAL.native_instance;
+        SANS_SERIF.native_instance = SANS_SERIF_INTERNAL.native_instance;
+        SERIF.native_instance = SERIF_INTERNAL.native_instance;
+        MONOSPACE.native_instance = MONOSPACE_INTERNAL.native_instance;
+
+        sDefaults[2] = create((String) null, Typeface.ITALIC);
+        sDefaults[3] = create((String) null, Typeface.BOLD_ITALIC);
+
+        initTypefacesPost();
+    }
+    
+    static {
+        sSystemFontMap = new HashMap<>();
+        initTypefacesPrev();
+
+        DEFAULT         = new Typeface(DEFAULT_INTERNAL.native_instance);
+        DEFAULT_BOLD    = new Typeface(DEFAULT_BOLD_INTERNAL.native_instance);
+        SANS_SERIF      = new Typeface(SANS_SERIF_INTERNAL.native_instance);
+        SERIF           = new Typeface(SERIF_INTERNAL.native_instance);
+        MONOSPACE       = new Typeface(MONOSPACE_INTERNAL.native_instance);
 
         sDefaults = new Typeface[] {
             DEFAULT,
@@ -1161,15 +1214,7 @@ public class Typeface {
             create((String) null, Typeface.BOLD_ITALIC),
         };
 
-        // A list of generic families to be registered in native.
-        // https://www.w3.org/TR/css-fonts-4/#generic-font-families
-        String[] genericFamilies = {
-            "serif", "sans-serif", "cursive", "fantasy", "monospace", "system-ui"
-        };
-
-        for (String genericFamily : genericFamilies) {
-            registerGenericFamilyNative(genericFamily, systemFontMap.get(genericFamily));
-        }
+        initTypefacesPost();
     }
 
     @Override
