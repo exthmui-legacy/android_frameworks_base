@@ -363,6 +363,38 @@ public class ZygoteProcess {
                                                   boolean bindMountAppsData,
                                                   boolean bindMountAppStorageDirs,
                                                   @Nullable String[] zygoteArgs) {
+        return start(processClass, niceName, uid, gid, gids,
+                     runtimeFlags, mountExternal, targetSdkVersion, 
+                     seInfo, abi, instructionSet, appDataDir, invokeWith, 
+                     packageName, zygotePolicyFlags, isTopApp, disabledCompatChanges,
+                     pkgDataInfoMap, whitelistedDataInfoMap, bindMountAppsData, bindMountAppStorageDirs, zygoteArgs, /* refreshFonts */ false);
+    }
+
+    /*
+     * @hide
+     */
+    public final Process.ProcessStartResult start(@NonNull final String processClass,
+                                                  final String niceName,
+                                                  int uid, int gid, @Nullable int[] gids,
+                                                  int runtimeFlags, int mountExternal,
+                                                  int targetSdkVersion,
+                                                  @Nullable String seInfo,
+                                                  @NonNull String abi,
+                                                  @Nullable String instructionSet,
+                                                  @Nullable String appDataDir,
+                                                  @Nullable String invokeWith,
+                                                  @Nullable String packageName,
+                                                  int zygotePolicyFlags,
+                                                  boolean isTopApp,
+                                                  @Nullable long[] disabledCompatChanges,
+                                                  @Nullable Map<String, Pair<String, Long>>
+                                                          pkgDataInfoMap,
+                                                  @Nullable Map<String, Pair<String, Long>>
+                                                           whitelistedDataInfoMap,
+                                                  boolean bindMountAppsData,
+                                                  boolean bindMountAppStorageDirs,
+                                                  @Nullable String[] zygoteArgs,
+                                                  boolean refreshFonts) {
         // TODO (chriswailes): Is there a better place to check this value?
         if (fetchUsapPoolEnabledPropWithMinInterval()) {
             informZygotesOfUsapPoolStatus();
@@ -374,7 +406,7 @@ public class ZygoteProcess {
                     abi, instructionSet, appDataDir, invokeWith, /*startChildZygote=*/ false,
                     packageName, zygotePolicyFlags, isTopApp, disabledCompatChanges,
                     pkgDataInfoMap, whitelistedDataInfoMap, bindMountAppsData,
-                    bindMountAppStorageDirs, zygoteArgs);
+                    bindMountAppStorageDirs, zygoteArgs, refreshFonts);
         } catch (ZygoteStartFailedEx ex) {
             Log.e(LOG_TAG,
                     "Starting VM process through Zygote failed");
@@ -645,7 +677,8 @@ public class ZygoteProcess {
                                                               whitelistedDataInfoMap,
                                                       boolean bindMountAppsData,
                                                       boolean bindMountAppStorageDirs,
-                                                      @Nullable String[] extraArgs)
+                                                      @Nullable String[] extraArgs,
+                                                      boolean refreshFonts)
                                                       throws ZygoteStartFailedEx {
         ArrayList<String> argsForZygote = new ArrayList<>();
 
@@ -781,6 +814,10 @@ public class ZygoteProcess {
             }
 
             argsForZygote.add(sb.toString());
+        }
+
+        if (refreshFonts) {
+            argsForZygote.add("--refresh-fonts");
         }
 
         argsForZygote.add(processClass);
@@ -1307,6 +1344,21 @@ public class ZygoteProcess {
                                                String instructionSet,
                                                int uidRangeStart,
                                                int uidRangeEnd) {
+        return startChildZygote(processClass, niceName, uid, gid, gids, runtimeFlags, seInfo, abi, acceptedAbiList, instructionSet, uidRangeStart, uidRangeEnd, false);
+    }
+
+    /** @hide */
+    public ChildZygoteProcess startChildZygote(final String processClass,
+                                               final String niceName,
+                                               int uid, int gid, int[] gids,
+                                               int runtimeFlags,
+                                               String seInfo,
+                                               String abi,
+                                               String acceptedAbiList,
+                                               String instructionSet,
+                                               int uidRangeStart,
+                                               int uidRangeEnd,
+                                               boolean refreshFonts) {
         // Create an unguessable address in the global abstract namespace.
         final LocalSocketAddress serverAddress = new LocalSocketAddress(
                 processClass + "/" + UUID.randomUUID().toString());
@@ -1327,7 +1379,7 @@ public class ZygoteProcess {
                     ZYGOTE_POLICY_FLAG_SYSTEM_PROCESS /* zygotePolicyFlags */, false /* isTopApp */,
                     null /* disabledCompatChanges */, null /* pkgDataInfoMap */,
                     null /* whitelistedDataInfoMap */, true /* bindMountAppsData*/,
-                    /* bindMountAppStorageDirs */ false, extraArgs);
+                    /* bindMountAppStorageDirs */ false, extraArgs, refreshFonts);
 
         } catch (ZygoteStartFailedEx ex) {
             throw new RuntimeException("Starting child-zygote through Zygote failed", ex);

@@ -243,6 +243,11 @@ class ZygoteArguments {
     boolean mBindMountAppDataDirs;
 
     /**
+     * Whether to refresh displayed fonts
+     */
+    boolean mRefreshFonts;
+
+    /**
      * Constructs instance and parses args
      *
      * @param args zygote command-line args
@@ -469,6 +474,8 @@ class ZygoteArguments {
                 mBindMountAppStorageDirs = true;
             } else if (arg.equals(Zygote.BIND_MOUNT_APP_DATA_DIRS)) {
                 mBindMountAppDataDirs = true;
+            } else if (arg.equals("--refresh-fonts")) {
+                mRefreshFonts = true;
             } else {
                 break;
             }

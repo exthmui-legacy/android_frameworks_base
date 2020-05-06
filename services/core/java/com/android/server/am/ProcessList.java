@@ -303,6 +303,9 @@ public final class ProcessList {
     // If true, then we pass the flag to ART to load the app image startup cache.
     private static final String PROPERTY_USE_APP_IMAGE_STARTUP_CACHE =
             "persist.device_config.runtime_native.use_app_image_startup_cache";
+    
+    // System prop for refreshing font
+    private static final String PROPERTY_REFRESH_FONTS = "sys.refresh_fonts";
 
     // The socket path for zygote to send unsolicited msg.
     // Must keep sync with com_android_internal_os_Zygote.cpp.
@@ -2274,12 +2277,18 @@ public final class ProcessList {
             }
 
             final Process.ProcessStartResult startResult;
+
+            boolean refreshFonts = SystemProperties.getBoolean(PROPERTY_REFRESH_FONTS, false);
+            if (refreshFonts) {
+                SystemProperties.set(PROPERTY_REFRESH_FONTS, "false");
+            }
+
             if (hostingRecord.usesWebviewZygote()) {
                 startResult = startWebView(entryPoint,
                         app.processName, uid, uid, gids, runtimeFlags, mountExternal,
                         app.info.targetSdkVersion, seInfo, requiredAbi, instructionSet,
                         app.info.dataDir, null, app.info.packageName, app.mDisabledCompatChanges,
-                        new String[]{PROC_START_SEQ_IDENT + app.startSeq});
+                        new String[]{PROC_START_SEQ_IDENT + app.startSeq}, refreshFonts);
             } else if (hostingRecord.usesAppZygote()) {
                 final AppZygote appZygote = createAppZygoteForProcessIfNeeded(app);
 
@@ -2291,7 +2300,7 @@ public final class ProcessList {
                         /*zygotePolicyFlags=*/ ZYGOTE_POLICY_FLAG_EMPTY, isTopApp,
                         app.mDisabledCompatChanges, pkgDataInfoMap, whitelistedAppDataInfoMap,
                         false, false,
-                        new String[]{PROC_START_SEQ_IDENT + app.startSeq});
+                        new String[]{PROC_START_SEQ_IDENT + app.startSeq}, refreshFonts);
             } else {
                 startResult = Process.start(entryPoint,
                         app.processName, uid, uid, gids, runtimeFlags, mountExternal,
@@ -2299,7 +2308,7 @@ public final class ProcessList {
                         app.info.dataDir, invokeWith, app.info.packageName, zygotePolicyFlags,
                         isTopApp, app.mDisabledCompatChanges, pkgDataInfoMap,
                         whitelistedAppDataInfoMap, bindMountAppsData, bindMountAppStorageDirs,
-                        new String[]{PROC_START_SEQ_IDENT + app.startSeq});
+                        new String[]{PROC_START_SEQ_IDENT + app.startSeq}, refreshFonts);
             }
             checkSlow(startTime, "startProcess: returned from zygote!");
             return startResult;

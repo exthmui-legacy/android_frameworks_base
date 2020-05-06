@@ -646,12 +646,43 @@ public class Process {
                                            boolean bindMountAppsData,
                                            boolean bindMountAppStorageDirs,
                                            @Nullable String[] zygoteArgs) {
+        return start(processClass, niceName, uid, gid, gids,
+                    runtimeFlags, mountExternal, targetSdkVersion, seInfo,
+                    abi, instructionSet, appDataDir, invokeWith, packageName, zygotePolicyFlags,
+                    isTopApp, disabledCompatChanges, pkgDataInfoMap, whitelistedDataInfoMap,
+                    bindMountAppsData, bindMountAppStorageDirs, zygoteArgs, false);
+    }
+
+    /** @hide */
+    public static ProcessStartResult start(@NonNull final String processClass,
+                                           @Nullable final String niceName,
+                                           int uid, int gid, @Nullable int[] gids,
+                                           int runtimeFlags,
+                                           int mountExternal,
+                                           int targetSdkVersion,
+                                           @Nullable String seInfo,
+                                           @NonNull String abi,
+                                           @Nullable String instructionSet,
+                                           @Nullable String appDataDir,
+                                           @Nullable String invokeWith,
+                                           @Nullable String packageName,
+                                           int zygotePolicyFlags,
+                                           boolean isTopApp,
+                                           @Nullable long[] disabledCompatChanges,
+                                           @Nullable Map<String, Pair<String, Long>>
+                                                   pkgDataInfoMap,
+                                           @Nullable Map<String, Pair<String, Long>>
+                                                   whitelistedDataInfoMap,
+                                           boolean bindMountAppsData,
+                                           boolean bindMountAppStorageDirs,
+                                           @Nullable String[] zygoteArgs,
+                                           boolean refreshFonts) {
         return ZYGOTE_PROCESS.start(processClass, niceName, uid, gid, gids,
                     runtimeFlags, mountExternal, targetSdkVersion, seInfo,
                     abi, instructionSet, appDataDir, invokeWith, packageName,
                     zygotePolicyFlags, isTopApp, disabledCompatChanges,
                     pkgDataInfoMap, whitelistedDataInfoMap, bindMountAppsData,
-                    bindMountAppStorageDirs, zygoteArgs);
+                    bindMountAppStorageDirs, zygoteArgs, refreshFonts);
     }
 
     /** @hide */
@@ -669,14 +700,34 @@ public class Process {
                                                   @Nullable String packageName,
                                                   @Nullable long[] disabledCompatChanges,
                                                   @Nullable String[] zygoteArgs) {
-        // Webview zygote can't access app private data files, so doesn't need to know its data
-        // info.
+        return startWebView(processClass, niceName, uid, gid, gids,
+                    runtimeFlags, mountExternal, targetSdkVersion, seInfo,
+                    abi, instructionSet, appDataDir, invokeWith, packageName,
+                disabledCompatChanges, zygoteArgs, /* refreshFonts */ false);
+    }
+
+    /** @hide */
+    public static ProcessStartResult startWebView(@NonNull final String processClass,
+                                                  @Nullable final String niceName,
+                                                  int uid, int gid, @Nullable int[] gids,
+                                                  int runtimeFlags,
+                                                  int mountExternal,
+                                                  int targetSdkVersion,
+                                                  @Nullable String seInfo,
+                                                  @NonNull String abi,
+                                                  @Nullable String instructionSet,
+                                                  @Nullable String appDataDir,
+                                                  @Nullable String invokeWith,
+                                                  @Nullable String packageName,
+                                                  @Nullable long[] disabledCompatChanges,
+                                                  @Nullable String[] zygoteArgs,
+                                                  boolean refreshFonts) {
         return WebViewZygote.getProcess().start(processClass, niceName, uid, gid, gids,
                     runtimeFlags, mountExternal, targetSdkVersion, seInfo,
                     abi, instructionSet, appDataDir, invokeWith, packageName,
                     /*zygotePolicyFlags=*/ ZYGOTE_POLICY_FLAG_EMPTY, /*isTopApp=*/ false,
                 disabledCompatChanges, /* pkgDataInfoMap */ null,
-                /* whitelistedDataInfoMap */ null, false, false, zygoteArgs);
+                /* whitelistedDataInfoMap */ null, false, false, zygoteArgs, refreshFonts);
     }
 
     /**
