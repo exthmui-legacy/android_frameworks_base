@@ -281,6 +281,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             "system:" + Settings.System.SCREEN_BRIGHTNESS_MODE;
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL =
             "lineagesystem:" + LineageSettings.System.STATUS_BAR_BRIGHTNESS_CONTROL;
+    private static final String NOTIFICATION_MATERIAL_DISMISS =
+            "system:" + Settings.System.NOTIFICATION_MATERIAL_DISMISS;
 
     private static final String BANNER_ACTION_CANCEL =
             "com.android.systemui.statusbar.banner_action_cancel";
@@ -487,7 +489,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     private final MetricsLogger mMetricsLogger;
 
     private ImageButton mDismissAllButton;
-    public boolean mClearableNotifications = true;
+    private boolean mClearableNotifications = true;
+    private boolean mShowDimissButton;
 
     private final Runnable mLongPressBrightnessChange = new Runnable() {
         @Override
@@ -935,6 +938,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         mTunerService.addTunable(this, FORCE_SHOW_NAVBAR);
         mTunerService.addTunable(this, SCREEN_BRIGHTNESS_MODE);
         mTunerService.addTunable(this, STATUS_BAR_BRIGHTNESS_CONTROL);
+        mTunerService.addTunable(this, NOTIFICATION_MATERIAL_DISMISS);
 
         mDisplayManager = mContext.getSystemService(DisplayManager.class);
 
@@ -2343,7 +2347,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     }
 
     public void updateDismissAllVisibility(boolean visible) {
-        if (mClearableNotifications && mState != StatusBarState.KEYGUARD && visible) {
+        if (mDismissAllButton == null) return;
+        if (mShowDimissButton && mClearableNotifications && mState != StatusBarState.KEYGUARD && visible) {
             mDismissAllButton.setVisibility(View.VISIBLE);
             int DismissAllAlpha = Math.round(255.0f * mNotificationPanelViewController.getExpandedFraction());
             mDismissAllButton.setAlpha(DismissAllAlpha);
@@ -2351,7 +2356,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         } else {
             mDismissAllButton.setAlpha(0);
             mDismissAllButton.getBackground().setAlpha(0);
-            mDismissAllButton.setVisibility(View.INVISIBLE);
+            mDismissAllButton.setVisibility(View.GONE);
         }
     }
 
@@ -4708,6 +4713,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                             Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
         } else if (STATUS_BAR_BRIGHTNESS_CONTROL.equals(key)) {
             mBrightnessControl = TunerService.parseIntegerSwitch(newValue, false);
+        } else if (NOTIFICATION_MATERIAL_DISMISS.equals(key)) {
+            mShowDimissButton = TunerService.parseIntegerSwitch(newValue, false);
+            updateDismissAllVisibility(true);
         }
     }
     // End Extra BaseStatusBarMethods.
