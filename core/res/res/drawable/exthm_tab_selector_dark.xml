@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list android:paddingMode="nest"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <ripple android:color="@color/tab_highlight_material">
+            <item android:id="@id/mask">
+                <color android:color="@color/white" />
+            </item>
+        </ripple>
+    </item>
+    <item>
+        <selector>
+            <item android:state_focused="true" android:state_selected="true" android:drawable="@drawable/exthm_tab_selected_focused_dark" />
+            <item android:state_selected="true" android:state_pressed="true" android:drawable="@drawable/exthm_tab_selected_pressed_dark" />
+            <item android:state_selected="true" android:drawable="@drawable/exthm_tab_selected_dark" />
+            <item android:state_focused="true" android:state_selected="false" android:drawable="@drawable/exthm_tab_unselected_focused_dark" />
+            <item android:state_selected="false" android:state_pressed="true" android:drawable="@drawable/exthm_tab_unselected_pressed_dark" />
+            <item android:drawable="@drawable/exthm_tab_unselected_dark" />
+        </selector>
+    </item>
+</layer-list>

@@ -3029,4 +3029,165 @@
        Items added outside of a group may have their value recalculated
        every time something new is added to this file.
        =============================================================== -->
+     
+     <!-- exTHmUI theming resources group -->
+    <public-group type="anim" first-id="0x010a1000">
+    </public-group>
+
+    <public-group type="attr" first-id="0x01011000">
+          <public name="toastTextColor" />
+    </public-group>
+
+    <public-group type="color" first-id="0x01061000">
+          <!-- toast -->
+          <public name="exthm_color_toast_text_dark" />
+          <public name="exthm_color_toast_text_light" />
+    </public-group>
+    
+    <public-group type="drawable" first-id="0x01081000">
+          <!-- check -->
+          <public name="exthm_btn_check_normal_light" />
+          <public name="exthm_btn_check_checked_light" />
+          <public name="exthm_btn_check_checked_focused_light" />
+          <public name="exthm_btn_check_checked_pressed_light" />
+          <public name="exthm_btn_check_focused_light" />
+          <public name="exthm_btn_check_pressed_light" />
+          <public name="exthm_btn_check_disabled_light" />
+          <public name="exthm_btn_check_disabled_checked_light" />
+          <public name="exthm_btn_check_disabled_checked_focused_light" />
+          <public name="exthm_btn_check_disabled_focused_light" />
+          <public name="exthm_btn_check_normal_dark" />
+          <public name="exthm_btn_check_checked_dark" />
+          <public name="exthm_btn_check_checked_focused_dark" />
+          <public name="exthm_btn_check_checked_pressed_dark" />
+          <public name="exthm_btn_check_focused_dark" />
+          <public name="exthm_btn_check_pressed_dark" />
+          <public name="exthm_btn_check_disabled_dark" />
+          <public name="exthm_btn_check_disabled_checked_dark" />
+          <public name="exthm_btn_check_disabled_checked_focused_dark" />
+          <public name="exthm_btn_check_disabled_focused_dark" />
+
+          <!-- radio -->
+          <public name="exthm_btn_radio_normal_light" />
+          <public name="exthm_btn_radio_checked_light" />
+          <public name="exthm_btn_radio_checked_focused_light" />
+          <public name="exthm_btn_radio_checked_pressed_light" />
+          <public name="exthm_btn_radio_focused_light" />
+          <public name="exthm_btn_radio_pressed_light" />
+          <public name="exthm_btn_radio_disabled_light" />
+          <public name="exthm_btn_radio_disabled_checked_light" />
+          <public name="exthm_btn_radio_disabled_checked_focused_light" />
+          <public name="exthm_btn_radio_disabled_focused_light" />
+          <public name="exthm_btn_radio_normal_dark" />
+          <public name="exthm_btn_radio_checked_dark" />
+          <public name="exthm_btn_radio_checked_focused_dark" />
+          <public name="exthm_btn_radio_checked_pressed_dark" />
+          <public name="exthm_btn_radio_focused_dark" />
+          <public name="exthm_btn_radio_pressed_dark" />
+          <public name="exthm_btn_radio_disabled_dark" />
+          <public name="exthm_btn_radio_disabled_checked_dark" />
+          <public name="exthm_btn_radio_disabled_checked_focused_dark" />
+          <public name="exthm_btn_radio_disabled_focused_dark" />
+
+          <!-- switch -->
+          <public name="exthm_switch_thumb_on_light" />
+          <public name="exthm_switch_thumb_on_focused_light" />
+          <public name="exthm_switch_thumb_on_pressed_light" />
+          <public name="exthm_switch_thumb_off_light" />
+          <public name="exthm_switch_thumb_off_focused_light" />
+          <public name="exthm_switch_thumb_off_pressed_light" />
+          <public name="exthm_switch_thumb_disabled_on_light" />
+          <public name="exthm_switch_thumb_disabled_on_focused_light" />
+          <public name="exthm_switch_thumb_disabled_off_light" />
+          <public name="exthm_switch_thumb_disabled_off_focused_light" />
+          <public name="exthm_switch_thumb_on_dark" />
+          <public name="exthm_switch_thumb_on_focused_dark" />
+          <public name="exthm_switch_thumb_on_pressed_dark" />
+          <public name="exthm_switch_thumb_off_dark" />
+          <public name="exthm_switch_thumb_off_focused_dark" />
+          <public name="exthm_switch_thumb_off_pressed_dark" />
+          <public name="exthm_switch_thumb_disabled_on_dark" />
+          <public name="exthm_switch_thumb_disabled_on_focused_dark" />
+          <public name="exthm_switch_thumb_disabled_off_dark" />
+          <public name="exthm_switch_thumb_disabled_off_focused_dark" />
+
+          <!-- action bar -->
+          <public name="exthm_actionbar_top_background_dark" />
+          <public name="exthm_actionbar_top_background_light" />
+          <public name="exthm_actionbar_middle_background_dark" />
+          <public name="exthm_actionbar_middle_background_light" />
+          <public name="exthm_actionbar_bottom_background_dark" />
+          <public name="exthm_actionbar_bottom_background_light" />
+
+          <!-- tab -->
+          <public name="exthm_tab_selector_dark" />
+          <public name="exthm_tab_selector_light" />
+          <public name="exthm_tab_selected_dark" />
+          <public name="exthm_tab_selected_light" />
+          <public name="exthm_tab_unselected_dark" />
+          <public name="exthm_tab_unselected_light" />
+          <public name="exthm_tab_selected_focused_dark" />
+          <public name="exthm_tab_selected_focused_light" />
+          <public name="exthm_tab_selected_pressed_dark" />
+          <public name="exthm_tab_selected_pressed_light" />
+          <public name="exthm_tab_unselected_focused_dark" />
+          <public name="exthm_tab_unselected_focused_light" />
+          <public name="exthm_tab_unselected_pressed_dark" />
+          <public name="exthm_tab_unselected_pressed_light" />
+
+          <!-- toast -->
+          <public name="exthm_toast_dark" />
+          <public name="exthm_toast_light" />
+
+          <!-- switch anim -->
+          <public name="exthm_switch_thumb_to_on_01_dark" />
+          <public name="exthm_switch_thumb_to_on_02_dark" />
+          <public name="exthm_switch_thumb_to_on_03_dark" />
+          <public name="exthm_switch_thumb_to_on_04_dark" />
+          <public name="exthm_switch_thumb_to_on_05_dark" />
+          <public name="exthm_switch_thumb_to_on_06_dark" />
+          <public name="exthm_switch_thumb_to_on_07_dark" />
+          <public name="exthm_switch_thumb_to_on_08_dark" />
+          <public name="exthm_switch_thumb_to_on_09_dark" />
+          <public name="exthm_switch_thumb_to_on_10_dark" />
+          <public name="exthm_switch_thumb_to_on_11_dark" />
+          <public name="exthm_switch_thumb_to_on_12_dark" />
+          <public name="exthm_switch_thumb_to_on_01_light" />
+          <public name="exthm_switch_thumb_to_on_02_light" />
+          <public name="exthm_switch_thumb_to_on_03_light" />
+          <public name="exthm_switch_thumb_to_on_04_light" />
+          <public name="exthm_switch_thumb_to_on_05_light" />
+          <public name="exthm_switch_thumb_to_on_06_light" />
+          <public name="exthm_switch_thumb_to_on_07_light" />
+          <public name="exthm_switch_thumb_to_on_08_light" />
+          <public name="exthm_switch_thumb_to_on_09_light" />
+          <public name="exthm_switch_thumb_to_on_10_light" />
+          <public name="exthm_switch_thumb_to_on_11_light" />
+          <public name="exthm_switch_thumb_to_on_12_light" />
+
+          <public name="exthm_switch_thumb_to_off_01_dark" />
+          <public name="exthm_switch_thumb_to_off_02_dark" />
+          <public name="exthm_switch_thumb_to_off_03_dark" />
+          <public name="exthm_switch_thumb_to_off_04_dark" />
+          <public name="exthm_switch_thumb_to_off_05_dark" />
+          <public name="exthm_switch_thumb_to_off_06_dark" />
+          <public name="exthm_switch_thumb_to_off_07_dark" />
+          <public name="exthm_switch_thumb_to_off_08_dark" />
+          <public name="exthm_switch_thumb_to_off_09_dark" />
+          <public name="exthm_switch_thumb_to_off_10_dark" />
+          <public name="exthm_switch_thumb_to_off_11_dark" />
+          <public name="exthm_switch_thumb_to_off_12_dark" />
+          <public name="exthm_switch_thumb_to_off_01_light" />
+          <public name="exthm_switch_thumb_to_off_02_light" />
+          <public name="exthm_switch_thumb_to_off_03_light" />
+          <public name="exthm_switch_thumb_to_off_04_light" />
+          <public name="exthm_switch_thumb_to_off_05_light" />
+          <public name="exthm_switch_thumb_to_off_06_light" />
+          <public name="exthm_switch_thumb_to_off_07_light" />
+          <public name="exthm_switch_thumb_to_off_08_light" />
+          <public name="exthm_switch_thumb_to_off_09_light" />
+          <public name="exthm_switch_thumb_to_off_10_light" />
+          <public name="exthm_switch_thumb_to_off_11_light" />
+          <public name="exthm_switch_thumb_to_off_12_light" />
+    </public-group>
 </resources>

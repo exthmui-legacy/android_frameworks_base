@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list android:paddingMode="nest"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle" />
+    </item>
+    <item android:gravity="bottom">
+        <shape android:tint="?colorControlActivated" android:shape="rectangle">
+            <size android:height="2.0dip" />
+            <solid android:color="@color/tab_indicator_material" />
+        </shape>
+    </item>
+    <item android:drawable="@color/transparent" android:bottom="2.0dip" />
+</layer-list>

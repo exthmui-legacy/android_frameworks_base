@@ -9124,4 +9124,7 @@
     </declare-styleable>
 
     <attr name="autoSizePresetSizes" />
+
+    <!-- exTHmUI theme -->
+    <attr name="toastTextColor" />
 </resources>
