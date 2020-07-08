@@ -9238,4 +9238,6 @@
 
     <attr name="iconfactoryIconSize" format="dimension"/>
     <attr name="iconfactoryBadgeSize" format="dimension"/>
+    <!-- exTHmUI theme -->
+    <attr name="toastTextColor" />
 </resources>
