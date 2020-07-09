@@ -320,7 +320,6 @@ AFont* ASystemFontIterator_next(ASystemFontIterator* ite) {
             // Reached end of the XML file. Continue theme customization.
             ite->mCustomizationXmlDoc.reset();
             ite->mFontNode = nullptr;
-            return nullptr;
         } else {
             std::unique_ptr<AFont> font = std::make_unique<AFont>();
             copyFont(ite->mCustomizationXmlDoc, ite->mFontNode, font.get(), "/product/fonts/");

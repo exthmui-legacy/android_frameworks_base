@@ -279,17 +279,25 @@ public final class SystemFonts {
             }
 
             if (themeCustomization != null) {
-                for (int i = 0; i < themeCustomization.mAdditionalNamedFamilies.size(); ++i) {
-                    appendNamedFamily(themeCustomization.mAdditionalNamedFamilies.get(i),
-                            bufferCache, fallbackListMap, availableFonts);
+                try {
+                    for (int i = 0; i < themeCustomization.mAdditionalNamedFamilies.size(); ++i) {
+                        appendNamedFamily(themeCustomization.mAdditionalNamedFamilies.get(i),
+                                bufferCache, fallbackListMap, availableFonts);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to parse customize fonts family.", e);
                 }
             }
 
             // Then, add fallback fonts to the each fallback map.
             if (themeCustomization != null) {
-                for (int i = 0; i < themeCustomization.mAdditionalNamedFamilies.size(); ++i) {
-                    pushFamilyToFallback(themeCustomization.mAdditionalFallbackFamilies.get(i),
-                        fallbackListMap, bufferCache, availableFonts);
+                try {
+                    for (int i = 0; i < themeCustomization.mAdditionalNamedFamilies.size(); ++i) {
+                        pushFamilyToFallback(themeCustomization.mAdditionalFallbackFamilies.get(i),
+                            fallbackListMap, bufferCache, availableFonts);
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Failed to parse customize fonts fallback.", e);
                 }
             }
 
