@@ -18,4 +18,7 @@
 <resources>
     <!-- Whether to show the user switcher in quick settings when only a single user is present. -->
     <bool name="qs_show_user_switcher_for_single_user">false</bool>
+
+    <!-- use exTHmUI theme's battery icon -->
+    <bool name="exthm_use_custom_battery">false</bool>
 </resources>
