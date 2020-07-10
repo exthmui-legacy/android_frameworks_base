@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright (C) 2020 The exTHmUI Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_00">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_01">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_02">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_03">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_04">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_05">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_06">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_07">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_08">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_09">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_10">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_11">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_12">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_13">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_14">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_15">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_16">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_17">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_18">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_19">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_20">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_21">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_22">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_23">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_24">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_normal_25">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_00">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_01">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_02">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_03">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_04">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_05">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_06">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_07">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_08">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_09">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_10">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_11">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_12">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_13">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_14">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_15">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_16">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_17">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_18">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_19">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_20">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_21">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_22">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_23">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_24">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_powersave_25">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_00">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_01">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_02">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_03">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_04">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_05">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_06">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_07">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_08">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_09">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_10">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_11">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_12">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_13">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_14">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_15">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_16">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_17">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_18">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_19">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_20">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_21">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_22">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_23">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_24">@drawable/stat_sys_dnd</item>
+    <item type="drawable" name="exthm_stat_sys_battery_charging_25">@drawable/stat_sys_dnd</item>
+</resources>
