@@ -376,9 +376,6 @@ public class BatteryMeterView extends LinearLayout implements
     }
 
     private void updateCustomizeBatteryView() {
-        mCustomNormalDrawable.setLevel(mLevel);
-        mCustomChargingDrawable.setLevel(mLevel);
-        mCustomPowersaveDrawable.setLevel(mLevel);
         if (mCharging) {
             mBatteryIconView.setImageDrawable(mCustomChargingDrawable);
         } else if (mThemedDrawable != null && mThemedDrawable.getPowerSaveEnabled()) {
@@ -386,6 +383,7 @@ public class BatteryMeterView extends LinearLayout implements
         } else {
             mBatteryIconView.setImageDrawable(mCustomNormalDrawable);
         }
+        mBatteryIconView.setImageLevel(mLevel);
     }
 
     private TextView loadPercentView() {
