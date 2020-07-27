@@ -208,6 +208,11 @@ class ZygoteArguments {
      * Whether to refresh displayed fonts
      */
     boolean mRefreshFonts;
+    
+    /**
+     * @see Zygote#START_AS_TOP_APP_ARG
+     */
+    boolean mIsTopApp;
 
     /**
      * Constructs instance and parses args
@@ -416,6 +421,8 @@ class ZygoteArguments {
                 expectRuntimeArgs = false;
             } else if (arg.equals("--refresh-fonts")) {
                 mRefreshFonts = true;
+            } else if (arg.startsWith(Zygote.START_AS_TOP_APP_ARG)) {
+                mIsTopApp = true;
             } else {
                 break;
             }
