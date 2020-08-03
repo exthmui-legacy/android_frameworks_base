@@ -69,6 +69,7 @@ easier.
     <style name="Widget.DeviceDefault.Spinner" parent="Widget.Material.Spinner"/>
     <style name="Widget.DeviceDefault.CompoundButton.Star" parent="Widget.Material.CompoundButton.Star"/>
     <style name="Widget.DeviceDefault.TabWidget" parent="Widget.Material.TabWidget">
+        <item name="tabLayout">@layout/exthm_tab_indicator_dark</item>
         <item name="textAppearance">@style/TextAppearance.DeviceDefault.Widget.TabWidget</item>
     </style>
     <style name="Widget.DeviceDefault.WebTextView" parent="Widget.Material.WebTextView"/>
@@ -217,7 +218,9 @@ easier.
         <item name="thumb">@drawable/exthm_switch_thumb_light</item>
         <item name="track">@drawable/exthm_switch_track_light</item>
     </style>
-    <style name="Widget.DeviceDefault.Light.TabWidget" parent="Widget.DeviceDefault.TabWidget"/>
+    <style name="Widget.DeviceDefault.Light.TabWidget" parent="Widget.DeviceDefault.TabWidget">
+        <item name="tabLayout">@layout/exthm_tab_indicator_light</item>
+    </style>
     <style name="Widget.DeviceDefault.Light.WebTextView" parent="Widget.Material.Light.WebTextView"/>
     <style name="Widget.DeviceDefault.Light.WebView" parent="Widget.Material.Light.WebView"/>
     <style name="Widget.DeviceDefault.Light.DropDownItem" parent="Widget.DeviceDefault.DropDownItem"/>
