@@ -33,6 +33,7 @@ import android.service.dreams.DreamService;
 import android.service.dreams.IDreamManager;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
+import android.text.TextUtils;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.systemui.Dependency;
@@ -75,6 +76,8 @@ public class NotificationInterruptionStateProvider {
     @VisibleForTesting
     protected boolean mUseHeadsUp = false;
     private boolean mDisableNotificationAlerts;
+
+    private boolean mGamingModeNoAlert = false;
 
     @Inject
     public NotificationInterruptionStateProvider(Context context, NotificationFilter filter,
@@ -214,6 +217,10 @@ public class NotificationInterruptionStateProvider {
         } else {
             return shouldHeadsUpWhenAwake(entry);
         }
+    }
+
+    public void setGamingModeNoAlert(boolean value) {
+        mGamingModeNoAlert = value;
     }
 
     private boolean shouldHeadsUpWhenAwake(NotificationEntry entry) {
@@ -365,6 +372,15 @@ public class NotificationInterruptionStateProvider {
     @VisibleForTesting
     public boolean canAlertAwakeCommon(NotificationEntry entry) {
         StatusBarNotification sbn = entry.notification;
+
+        if (mGamingModeNoAlert && 
+            (!TextUtils.equals(sbn.getNotification().category, Notification.CATEGORY_CALL) &&
+             !TextUtils.equals(sbn.getNotification().category, Notification.CATEGORY_ALARM))) {
+            if (DEBUG_HEADS_UP) {
+                Log.d(TAG, "No alerting: gaming mode, category is not alarm or call");
+            }
+            return false;
+        }
 
         if (mPresenter.isDeviceInVrMode()) {
             if (DEBUG_HEADS_UP) {

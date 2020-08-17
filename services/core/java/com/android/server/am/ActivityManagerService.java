@@ -30,6 +30,8 @@ import static android.app.ActivityManager.PROCESS_STATE_NONEXISTENT;
 import static android.app.ActivityManagerInternal.ALLOW_FULL_ONLY;
 import static android.app.ActivityManagerInternal.ALLOW_NON_FULL;
 import static android.app.AppOpsManager.OP_NONE;
+import static android.app.WindowConfiguration.ACTIVITY_TYPE_UNDEFINED;
+import static android.app.WindowConfiguration.WINDOWING_MODE_FREEFORM;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.pm.ApplicationInfo.HIDDEN_API_ENFORCEMENT_DEFAULT;
 import static android.content.pm.PackageManager.GET_PROVIDERS;
@@ -329,6 +331,7 @@ import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.FastPrintWriter;
+import com.android.internal.util.GamingModeHelper; 
 import com.android.internal.util.MemInfoReader;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.function.QuadFunction;
@@ -1008,6 +1011,8 @@ public class ActivityManagerService extends IActivityManager.Stub
             new SparseArray<ArrayMap<String, ArrayList<Intent>>>();
 
     final ActiveServices mServices;
+
+    private GamingModeHelper mGamingModeHelper;
 
     final static class Association {
         final int mSourceUid;
@@ -7560,6 +7565,8 @@ public class ActivityManagerService extends IActivityManager.Stub
         RescueParty.onSettingsProviderPublished(mContext);
 
         //mUsageStatsService.monitorPackages();
+
+        mGamingModeHelper = new GamingModeHelper(mContext);
     }
 
     void startPersistentApps(int matchFlags) {
@@ -15069,6 +15076,9 @@ public class ActivityManagerService extends IActivityManager.Stub
                                         mServices.forceStopPackageLocked(ssp, userId);
                                         mAtmInternal.onPackageUninstalled(ssp);
                                         mBatteryStatsService.notePackageUninstalled(ssp);
+                                        if (mGamingModeHelper != null) {
+                                            mGamingModeHelper.onPackageUninstalled(ssp);
+                                        }
                                     }
                                 } else {
                                     if (killProcess) {
@@ -16742,6 +16752,15 @@ public class ActivityManagerService extends IActivityManager.Stub
                 Binder.restoreCallingIdentity(identity);
             }
 
+            if (mGamingModeHelper != null) {
+                List<RunningTaskInfo> tasks = getFilteredTasks(1, ACTIVITY_TYPE_UNDEFINED, WINDOWING_MODE_FREEFORM);
+                if (tasks != null && tasks.size() > 0) {
+                    String mTopAppOnTasks = tasks.get(0).topActivity.getPackageName();
+                    if (TextUtils.equals(mTopAppOnTasks, pkg)) {
+                        mGamingModeHelper.onTopAppChanged(pkg);
+                    }
+                }
+            }
         }
         return r;
     }

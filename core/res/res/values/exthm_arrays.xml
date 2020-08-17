@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="game_package_regex">
+        <item>klb\.android\..*</item>
+    </string-array>
+</resources>

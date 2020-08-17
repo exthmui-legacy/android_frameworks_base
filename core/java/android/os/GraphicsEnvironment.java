@@ -31,6 +31,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.internal.util.GamingModeHelper; 
+
 import dalvik.system.VMRuntime;
 
 import java.io.BufferedReader;
@@ -708,6 +710,10 @@ public class GraphicsEnvironment {
         if (ai.isPrivilegedApp() || (ai.isSystemApp() && !ai.isUpdatedSystemApp())) {
             if (DEBUG) Log.v(TAG, "Ignoring driver package for privileged/non-updated system app.");
             return null;
+        }
+
+        if (GamingModeHelper.useGameDriver(context, packageName)) {
+            return gameDriver;
         }
 
         final boolean enablePrereleaseDriver =

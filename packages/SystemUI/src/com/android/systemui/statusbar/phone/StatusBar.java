@@ -65,6 +65,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -73,6 +74,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -662,6 +664,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     private ActivityIntentHelper mActivityIntentHelper;
     private ShadeController mShadeController;
 
+    private ExtraSettingsObserver mExtraSettingsObserver;
+
     @Override
     public void onActiveStateChanged(int code, int uid, String packageName, boolean active) {
         Dependency.get(MAIN_HANDLER).post(() -> {
@@ -855,6 +859,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         int disabledFlags2 = result.mDisabledFlags2;
         Dependency.get(InitController.class).addPostInitTask(
                 () -> setUpDisableFlags(disabledFlags1, disabledFlags2));
+        
+        mExtraSettingsObserver = new ExtraSettingsObserver(mHandler);
+        mExtraSettingsObserver.init();
     }
 
     // ================================================================================
@@ -4898,6 +4905,37 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     public @TransitionMode int getStatusBarMode() {
         return mStatusBarMode;
+    }
+
+    private class ExtraSettingsObserver extends ContentObserver {
+
+        private Uri mUriForGamingModeActive = Settings.System.getUriFor(Settings.System.GAMING_MODE_ACTIVE);
+        private Uri mUriForDisableNotificationAlert = Settings.System.getUriFor(Settings.System.GAMING_MODE_DISABLE_NOTIFICATION_ALERT);
+
+        private ContentResolver resolver;
+
+        public ExtraSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        public void init() {
+            resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(mUriForGamingModeActive, false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(mUriForDisableNotificationAlert, false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (mUriForGamingModeActive.equals(uri) || mUriForDisableNotificationAlert.equals(uri)) {
+                if (mNotificationInterruptionStateProvider != null) {
+                    mNotificationInterruptionStateProvider.setGamingModeNoAlert((
+                        Settings.System.getInt(resolver, Settings.System.GAMING_MODE_ACTIVE, 0) & 
+                        Settings.System.getInt(resolver, Settings.System.GAMING_MODE_DISABLE_NOTIFICATION_ALERT, 0)) == 1
+                    );
+                }
+            }
+        }
     }
 
 }
