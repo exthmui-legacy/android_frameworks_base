@@ -77,8 +77,7 @@ public class GamingModeHelper {
 
         parseGameList();
 
-        mGamingModeOn.addFlags(Intent.FLAG_RECEIVER_FOREGROUND | Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
-        mGamingModeOff.addFlags(Intent.FLAG_RECEIVER_FOREGROUND | Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
+        mGamingModeOn.addFlags(Intent.FLAG_RECEIVER_FOREGROUND | Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND | Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
 
         Settings.System.putInt(mContext.getContentResolver(), Settings.System.GAMING_MODE_ACTIVE, 0);
 
