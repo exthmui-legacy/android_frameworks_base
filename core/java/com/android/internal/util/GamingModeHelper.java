@@ -169,28 +169,25 @@ public class GamingModeHelper {
     public void onTopAppChanged(String packageName) {
         Log.d(TAG, "onTopAppChanged: " + packageName);
 
-        if (!mGamingModeEnabled && mIsGaming) {
-            stopGamingMode();
-            return;
-        }
-
-        if (mGamingPackages.contains(packageName)) {
-            startGamingMode(packageName);
-            return;
-        }
-        if (mDynamicAddGame && !mRemovedPackages.contains(packageName)) {
-            ApplicationInfo appInfo = getAppInfo(packageName);
-            if (appInfo != null && appInfo.category == ApplicationInfo.CATEGORY_GAME) {
-                addGameToList(packageName);
+        if (mGamingModeEnabled) {
+            if (mGamingPackages.contains(packageName)) {
                 startGamingMode(packageName);
                 return;
             }
-
-            for (Pattern pattern : mGamingPackageRegex) {
-                if (pattern.matcher(packageName).matches()) {
+            if (mDynamicAddGame && !mRemovedPackages.contains(packageName)) {
+                ApplicationInfo appInfo = getAppInfo(packageName);
+                if (appInfo != null && appInfo.category == ApplicationInfo.CATEGORY_GAME) {
                     addGameToList(packageName);
                     startGamingMode(packageName);
                     return;
+                }
+
+                for (Pattern pattern : mGamingPackageRegex) {
+                    if (pattern.matcher(packageName).matches()) {
+                        addGameToList(packageName);
+                        startGamingMode(packageName);
+                        return;
+                    }
                 }
             }
         }
