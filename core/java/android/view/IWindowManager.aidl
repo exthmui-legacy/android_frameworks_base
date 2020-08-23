@@ -638,11 +638,4 @@ interface IWindowManager
      * native InputManager before proceeding with tests.
      */
     void syncInputTransactions();
-
-    /**
-     * Long screenshot
-     * @hide
-     */
-    void takeScreenshot(int type);
-    void stopLongshotConnection();
 }
