@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
@@ -40,6 +41,7 @@ import com.android.internal.R;
 public class GamingModeHelper {
 
     private static final String TAG = "GamingModeHelper";
+    private static final String GAMING_MODE_PACKAGE = "org.exthmui.game";
 
     public static final String ACTION_GAMING_MODE_ON = "exthmui.intent.action.GAMING_MODE_ON";
     public static final String ACTION_GAMING_MODE_OFF = "exthmui.intent.action.GAMING_MODE_OFF";
@@ -59,18 +61,9 @@ public class GamingModeHelper {
     private ArrayList<String> mGamingPackages = new ArrayList<>();
     private ArrayList<String> mRemovedPackages = new ArrayList<>();
 
-    private Pattern[] mGamingPackageRegex;
-
     public GamingModeHelper(Context context) {
         mContext = context;
         mPackageManager = context.getPackageManager();
-
-        // build regex array
-        String[] regexArray = context.getResources().getStringArray(R.array.game_package_regex);
-        mGamingPackageRegex = new Pattern[regexArray.length];
-        for (int i = 0; i < regexArray.length; i++) {
-            mGamingPackageRegex[i] = Pattern.compile(regexArray[i]);
-        }
 
         mGamingModeEnabled = Settings.System.getInt(mContext.getContentResolver(), Settings.System.GAMING_MODE_ENABLED, 0) == 1;
         mDynamicAddGame = Settings.System.getInt(mContext.getContentResolver(), Settings.System.GAMING_MODE_DYNAMIC_ADD, 0) == 1;
@@ -182,12 +175,21 @@ public class GamingModeHelper {
                     return;
                 }
 
-                for (Pattern pattern : mGamingPackageRegex) {
-                    if (pattern.matcher(packageName).matches()) {
-                        addGameToList(packageName);
-                        startGamingMode(packageName);
-                        return;
+                try {
+                    Resources resources = mPackageManager.getResourcesForApplication(GAMING_MODE_PACKAGE);
+                    int gamingRegexId = resources.getIdentifier("game_package_regex", "array", GAMING_MODE_PACKAGE);
+                    if (gamingRegexId != 0) {
+                        String[] regexArray = resources.getStringArray(gamingRegexId);
+                        for (String pattern : regexArray) {
+                            if (Pattern.matches(pattern, packageName)) {
+                                addGameToList(packageName);
+                                startGamingMode(packageName);
+                                return;
+                            }
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
