@@ -169,7 +169,7 @@ public class GamingModeHelper {
             }
             if (mDynamicAddGame && !mRemovedPackages.contains(packageName)) {
                 ApplicationInfo appInfo = getAppInfo(packageName);
-                if (appInfo != null && appInfo.category == ApplicationInfo.CATEGORY_GAME) {
+                if (appInfo != null && appInfo.category == ApplicationInfo.CATEGORY_GAME || (appInfo.flags & ApplicationInfo.FLAG_IS_GAME) == ApplicationInfo.FLAG_IS_GAME) {
                     addGameToList(packageName);
                     startGamingMode(packageName);
                     return;
