@@ -25,7 +25,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -54,6 +56,7 @@ import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.NetworkController.IconState;
 import com.android.systemui.statusbar.policy.NetworkController.SignalCallback;
 
+import java.util.List;
 import javax.inject.Inject;
 
 /** Quick settings tile: Cellular **/
@@ -69,6 +72,9 @@ public class CellularTile extends QSTileImpl<SignalState> {
     private final KeyguardMonitor mKeyguardMonitor;
     private final UnlockMethodCache mUnlockMethodCache;
 
+    private final SubscriptionManager mSubscriptionManager;
+    private final TelephonyManager mTelephonyManager;
+
     @Inject
     public CellularTile(QSHost host, NetworkController networkController,
             ActivityStarter activityStarter, KeyguardMonitor keyguardMonitor) {
@@ -79,6 +85,8 @@ public class CellularTile extends QSTileImpl<SignalState> {
         mUnlockMethodCache = UnlockMethodCache.getInstance(mHost.getContext());
         mDataController = mController.getMobileDataController();
         mDetailAdapter = new CellularDetailAdapter();
+        mSubscriptionManager = SubscriptionManager.from(host.getContext());
+        mTelephonyManager = TelephonyManager.from(host.getContext());
         mController.observe(getLifecycle(), mSignalCallback);
     }
 
@@ -359,7 +367,17 @@ public class CellularTile extends QSTileImpl<SignalState> {
             v.bind(info);
             v.findViewById(R.id.roaming_text).setVisibility(mSignalCallback.mInfo.roaming
                     ? View.VISIBLE : View.INVISIBLE);
+            v.setSubInfoList(mSubscriptionManager.getAvailableSubscriptionInfoList(), SubscriptionManager.getDefaultDataSubscriptionId());
+            v.setDataSimSwitchListener(this::switchDataSim);
             return v;
+        }
+
+        public void switchDataSim(int subId) {
+            boolean mobileDataEnabled = mDataController.isMobileDataEnabled();
+            mTelephonyManager.createForSubscriptionId(subId).setDataEnabled(true);
+            mSubscriptionManager.setDefaultDataSubId(subId);
+            mDataController.setMobileDataEnabled(mobileDataEnabled);
+            refreshState();
         }
 
         public void setMobileDataEnabled(boolean enabled) {

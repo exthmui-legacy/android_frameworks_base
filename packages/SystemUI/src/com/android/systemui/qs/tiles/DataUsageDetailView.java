@@ -20,12 +20,15 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.telephony.SubscriptionInfo;
 import android.text.BidiFormatter;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.android.settingslib.Utils;
@@ -35,6 +38,7 @@ import com.android.systemui.R;
 import com.android.systemui.qs.DataUsageGraph;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Layout for the data usage detail in quick settings.
@@ -42,6 +46,14 @@ import java.text.DecimalFormat;
 public class DataUsageDetailView extends LinearLayout {
 
     private final DecimalFormat FORMAT = new DecimalFormat("#.##");
+    private DataSimSwitchListener mDataSimSwitchListener;
+    private RadioGroup.OnCheckedChangeListener mSubsGroupListener = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (mDataSimSwitchListener == null) return;
+                mDataSimSwitchListener.onSwitch(checkedId);
+            }
+        };
 
     public DataUsageDetailView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -59,6 +71,7 @@ public class DataUsageDetailView extends LinearLayout {
         FontSizeUtils.updateFontSize(this, R.id.usage_period_text, R.dimen.qs_data_usage_text_size);
         FontSizeUtils.updateFontSize(this, R.id.usage_info_bottom_text,
                 R.dimen.qs_data_usage_text_size);
+        FontSizeUtils.updateFontSize(this, R.id.data_sim_title, R.dimen.qs_data_usage_text_size);
     }
 
     public void bind(DataUsageController.DataUsageInfo info) {
@@ -127,5 +140,34 @@ public class DataUsageDetailView extends LinearLayout {
                 Formatter.FLAG_IEC_UNITS);
         return BidiFormatter.getInstance().unicodeWrap(mContext.getString(
                 com.android.internal.R.string.fileSizeSuffix, res.value, res.units));
+    }
+
+    public void setSubInfoList(List<SubscriptionInfo> subInfoList, int selectedSubId) {
+        final LinearLayout subsLayout = findViewById(R.id.data_sim_switch);
+        final RadioGroup subsGroup = findViewById(R.id.data_sim_group);
+
+        if (subInfoList != null && subInfoList.size() > 1) {
+            subsGroup.removeAllViews();
+            for (SubscriptionInfo info : subInfoList) {
+                RadioButton rb = new RadioButton(mContext);
+                rb.setId(info.getSubscriptionId());
+                rb.setText(info.getCarrierName());
+                rb.setChecked(selectedSubId == info.getSubscriptionId());
+                subsGroup.addView(rb);
+            }
+            subsLayout.setVisibility(View.VISIBLE);
+        } else {
+            subsLayout.setVisibility(View.GONE);
+        }
+    }
+
+    public void setDataSimSwitchListener(DataSimSwitchListener listener) {
+        RadioGroup subsGroup = findViewById(R.id.data_sim_group);
+        subsGroup.setOnCheckedChangeListener(mSubsGroupListener);
+        mDataSimSwitchListener = listener;
+    }
+
+    public interface DataSimSwitchListener {
+        void onSwitch(int subscriptionId);
     }
 }

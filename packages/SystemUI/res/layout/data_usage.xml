@@ -91,5 +91,27 @@
         android:text="@string/data_connection_roaming"
         android:textAppearance="@style/TextAppearance.QS.DataUsage.Secondary"
         android:visibility="gone" />
+    
+    <LinearLayout
+        android:id="@+id/data_sim_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:visibility="gone"
+        android:orientation="vertical">
+        
+        <TextView
+            android:id="@+id/data_sim_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quick_settings_cellular_detail_data_sim"
+            android:textAppearance="@style/TextAppearance.QS.DataUsage" />
+
+        <RadioGroup
+            android:id="@+id/data_sim_group"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </com.android.systemui.qs.tiles.DataUsageDetailView>
