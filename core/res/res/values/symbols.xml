@@ -3872,4 +3872,7 @@
   <!-- For Pdn throttle feature -->
   <java-symbol type="bool" name="config_pdp_retry_for_29_33_55_enabled" />
 
+  <!-- region @boringdroid -->
+  <java-symbol type="dimen" name="decor_corner_radius" />
+  <!-- endregion -->
 </resources>

@@ -772,4 +772,7 @@
     <dimen name="resolver_edge_margin">24dp</dimen>
     <dimen name="resolver_elevation">1dp</dimen>
     <dimen name="chooser_action_button_icon_size">18dp</dimen>
+    <!-- region @boringdroid -->
+    <item name="decor_corner_radius" type="dimen">8dp</item>
+    <!-- endregion -->
 </resources>
