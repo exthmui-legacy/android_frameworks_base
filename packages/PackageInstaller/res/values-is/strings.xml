@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"Forritið er ekki uppsett."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"Lokað var á uppsetningu pakkans."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"Forritið var ekki sett upp vegna árekstra á milli pakkans og annars pakka."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Forritið var ekki sett upp því að forritið er ekki samhæft við spjaldtölvuna þína."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Þetta forrit er ekki samhæft við sjónvarpið."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Forritið var ekki sett upp því að forritið er ekki samhæft við spjaldtölvuna þína."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Þetta forrit er ekki samhæft við sjónvarpið."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"Forritið var ekki sett upp því að forritið er ekki samhæft við símann þinn."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"Forritið var ekki sett upp því að pakkinn virðist vera ógildur."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"Ekki tókst að setja <xliff:g id="APP_NAME">%1$s</xliff:g> upp í spjaldtölvunni."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"Ekki tókst að setja <xliff:g id="APP_NAME">%1$s</xliff:g> upp í sjónvarpinu."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"Ekki tókst að setja <xliff:g id="APP_NAME">%1$s</xliff:g> upp í spjaldtölvunni."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"Ekki tókst að setja <xliff:g id="APP_NAME">%1$s</xliff:g> upp í sjónvarpinu."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"Ekki tókst að setja <xliff:g id="APP_NAME">%1$s</xliff:g> upp í símanum."</string>
     <string name="launch" msgid="3952550563999890101">"Opna"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"Kerfisstjórinn leyfir ekki uppsetningu forrita af óþekktum uppruna"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Aðgerðir til að setja upp / fjarlægja eru ekki studdar í Wear."</string>
     <string name="message_staging" msgid="8032722385658438567">"Setur upp forrit…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"Óþekkt"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Til að tryggja öryggi þitt er ekki heimild í spjaldtölvunni þinni fyrir uppsetningu óþekktra forrita frá þessari veitu."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Til að tryggja öryggi þitt er ekki heimild í sjónvarpinu þínu fyrir uppsetningu óþekktra forrita frá þessari veitu."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Til að tryggja öryggi þitt er ekki heimild í spjaldtölvunni þinni fyrir uppsetningu óþekktra forrita frá þessari veitu."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Til að tryggja öryggi þitt er ekki heimild í sjónvarpinu þínu fyrir uppsetningu óþekktra forrita frá þessari veitu."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"Til að tryggja öryggi þitt er ekki heimild í símanum þínum fyrir uppsetningu óþekktra forrita frá þessari veitu."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"Síminn þinn og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Með uppsetningu þessa forrits samþykkirðu að bera fulla ábyrgð á hverju því tjóni sem verða kann á símanum eða gagnatapi sem leiða kann af notkun þess."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Spjaldtölvan þín og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Með uppsetningu þessa forrits samþykkirðu að bera fulla ábyrgð á hverju því tjóni sem verða kann á spjaldtölvunni eða gagnatapi sem leiða kann af notkun þess."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Sjónvarpið þitt og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Með uppsetningu þessa forrits samþykkirðu að bera fulla ábyrgð á hverju því tjóni sem verða kann á sjónvarpinu eða gagnatapi sem leiða kann af notkun þess."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Spjaldtölvan þín og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Með uppsetningu þessa forrits samþykkirðu að bera fulla ábyrgð á hverju því tjóni sem verða kann á spjaldtölvunni eða gagnatapi sem leiða kann af notkun þess."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Sjónvarpið þitt og persónuleg gögn eru berskjaldaðri fyrir árásum forrita af óþekktum uppruna. Með uppsetningu þessa forrits samþykkirðu að bera fulla ábyrgð á hverju því tjóni sem verða kann á sjónvarpinu eða gagnatapi sem leiða kann af notkun þess."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Áfram"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Stillingar"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Uppsetning/fjarlæging Wear forrita"</string>

@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"Appen har inte installerats."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"Paketet har blockerats för installation."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"Appen har inte installerats på grund av en konflikt mellan detta paket och ett befintligt paket."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Appen har inte installerats eftersom den inte är kompatibel med surfplattan."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Appen är inte kompatibel med din tv."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Appen har inte installerats eftersom den inte är kompatibel med surfplattan."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Appen är inte kompatibel med din tv."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"Appen har inte installerats eftersom den inte är kompatibel med mobilen."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"Appen har inte installerats eftersom paketet verkar vara ogiltigt."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"Det gick inte att installera <xliff:g id="APP_NAME">%1$s</xliff:g> på pekdatorn."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> kunde inte installeras på tv:n."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"Det gick inte att installera <xliff:g id="APP_NAME">%1$s</xliff:g> på pekdatorn."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> kunde inte installeras på tv:n."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"Det gick inte att installera <xliff:g id="APP_NAME">%1$s</xliff:g> på mobilen."</string>
     <string name="launch" msgid="3952550563999890101">"Öppna"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"Administratören tillåter inte installation av appar från okända källor"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Åtgärder för att installera/avinstallera stöds inte på Wear."</string>
     <string name="message_staging" msgid="8032722385658438567">"Provkör appen …"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"Okänd"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Av säkerhetsskäl får okända appar från den här källan inte installeras av surfplattan."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Av säkerhetsskäl får okända appar från den här källan inte installeras av TV:n."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Av säkerhetsskäl får okända appar från den här källan inte installeras av surfplattan."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Av säkerhetsskäl får okända appar från den här källan inte installeras av TV:n."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"Av säkerhetsskäl får okända appar från den här källan inte installeras av mobilen."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"Din mobil och personliga data är mer sårbara för attacker från okända appar. Genom att installera denna app bekräftar du att du är ansvarig för eventuella skador på mobilen och för dataförlust som kan uppstå vid användning av denna app."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Din surfplatta och personliga data är mer sårbara för attacker från okända appar. Genom att installera denna app bekräftar du att du är ansvarig för eventuella skador på surfplattan och för dataförlust som kan uppstå vid användning av denna app."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Din tv och personliga data är mer sårbar för attacker från okända appar. Genom att installera denna app bekräftar du att du är ansvarig för eventuella skador på tv:n och för dataförlust som kan uppstå vid användning av denna app."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Din surfplatta och personliga data är mer sårbara för attacker från okända appar. Genom att installera denna app bekräftar du att du är ansvarig för eventuella skador på surfplattan och för dataförlust som kan uppstå vid användning av denna app."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Din tv och personliga data är mer sårbar för attacker från okända appar. Genom att installera denna app bekräftar du att du är ansvarig för eventuella skador på tv:n och för dataförlust som kan uppstå vid användning av denna app."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Fortsätt"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Inställningar"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Wear-appar installeras/avinstalleras"</string>

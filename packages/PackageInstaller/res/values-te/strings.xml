@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"యాప్ ఇన్‌స్టాల్ చేయబడలేదు."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"ప్యాకేజీ ఇన్‌స్టాల్ కాకుండా బ్లాక్ చేయబడింది."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"ప్యాకేజీ, అలాగే ఇప్పటికే ఉన్న ప్యాకేజీ మధ్య వైరుధ్యం ఉన్నందున యాప్ ఇన్‌స్టాల్ చేయబడలేదు."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"యాప్ మీ టాబ్లెట్‌కు అనుకూలంగా లేని కారణంగా ఇన్‌స్టాల్ చేయబడలేదు."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"ఈ యాప్ మీ టీవీకి అనుకూలంగా లేదు."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"యాప్ మీ టాబ్లెట్‌కు అనుకూలంగా లేని కారణంగా ఇన్‌స్టాల్ చేయబడలేదు."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"ఈ యాప్ మీ టీవీకి అనుకూలంగా లేదు."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"యాప్ మీ ఫోన్‌కు అనుకూలంగా లేని కారణంగా ఇన్‌స్టాల్ చేయబడలేదు."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"ప్యాకేజీ చెల్లుబాటు కానట్లు ఉన్నందున యాప్ ఇన్‌స్టాల్ చేయబడలేదు."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"మీ టాబ్లెట్‌లో <xliff:g id="APP_NAME">%1$s</xliff:g>ని ఇన్‌స్టాల్ చేయడం సాధ్యపడలేదు."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"మీ టీవీలో <xliff:g id="APP_NAME">%1$s</xliff:g>ని ఇన్‌స్టాల్ చేయడం సాధ్యపడలేదు."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"మీ టాబ్లెట్‌లో <xliff:g id="APP_NAME">%1$s</xliff:g>ని ఇన్‌స్టాల్ చేయడం సాధ్యపడలేదు."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"మీ టీవీలో <xliff:g id="APP_NAME">%1$s</xliff:g>ని ఇన్‌స్టాల్ చేయడం సాధ్యపడలేదు."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"మీ ఫోన్‌లో <xliff:g id="APP_NAME">%1$s</xliff:g>ని ఇన్‌స్టాల్ చేయడం సాధ్యపడలేదు."</string>
     <string name="launch" msgid="3952550563999890101">"తెరువు"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"మీ నిర్వాహకులు తెలియని మూలాల నుండి పొందిన యాప్‌ల ఇన్‌స్టాలేషన్‌ను అనుమతించరు"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Wearలో ఇన్‌స్టాల్/అన్ఇన్‌స్టాల్ చర్యలకు మద్దతు లేదు."</string>
     <string name="message_staging" msgid="8032722385658438567">"యాప్‌ను సిద్ధం చేస్తుంది…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"తెలియదు"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"మీ భద్రత దృష్ట్యా, ఈ మూలం నుండి తెలియని యాప్‌లను ఇన్‌స్టాల్ చేయడానికి మీ టాబ్లెట్ అనుమతించబడదు."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"మీ భద్రత దృష్ట్యా, ఈ మూలం నుండి తెలియని యాప్‌లను ఇన్‌స్టాల్ చేయడానికి మీ టీవీ అనుమతించబడదు."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"మీ భద్రత దృష్ట్యా, ఈ మూలం నుండి తెలియని యాప్‌లను ఇన్‌స్టాల్ చేయడానికి మీ టాబ్లెట్ అనుమతించబడదు."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"మీ భద్రత దృష్ట్యా, ఈ మూలం నుండి తెలియని యాప్‌లను ఇన్‌స్టాల్ చేయడానికి మీ టీవీ అనుమతించబడదు."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"మీ భద్రత దృష్ట్యా, ఈ మూలం నుండి తెలియని యాప్‌లను ఇన్‌స్టాల్ చేయడానికి మీ ఫోన్ అనుమతించబడదు."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"మీ ఫోన్ మరియు వ్యక్తిగత డేటాపై తెలియని యాప్‌లు దాడి చేయడానికి ఎక్కువ అవకాశం ఉంది. మీరు ఈ యాప్‌ను ఇన్‌స్టాల్ చేయడం ద్వారా, దీనిని ఉపయోగించడం వలన మీ ఫోన్‌కు ఏదైనా హాని జరిగినా లేదా డేటా కోల్పోయినా బాధ్యత మీదేనని అంగీకరిస్తున్నారు."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"మీ టాబ్లెట్ మరియు వ్యక్తిగత డేటాపై తెలియని యాప్‌లు దాడి చేయడానికి ఎక్కువ అవకాశం ఉంది. మీరు ఈ యాప్‌ను ఇన్‌స్టాల్ చేయడం ద్వారా, దీనిని ఉపయోగించడం వలన మీ టాబ్లెట్‌కు ఏదైనా హాని జరిగినా లేదా డేటా కోల్పోయినా బాధ్యత మీదేనని అంగీకరిస్తున్నారు."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"మీ టీవీ మరియు వ్యక్తిగత డేటాపై తెలియని యాప్‌లు దాడి చేయడానికి ఎక్కువ అవకాశం ఉంది. మీరు ఈ యాప్‌ను ఇన్‌స్టాల్ చేయడం ద్వారా, దీనిని ఉపయోగించడం వలన మీ టీవీకి ఏదైనా హాని జరిగినా లేదా డేటా కోల్పోయినా బాధ్యత మీదేనని అంగీకరిస్తున్నారు."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"మీ టాబ్లెట్ మరియు వ్యక్తిగత డేటాపై తెలియని యాప్‌లు దాడి చేయడానికి ఎక్కువ అవకాశం ఉంది. మీరు ఈ యాప్‌ను ఇన్‌స్టాల్ చేయడం ద్వారా, దీనిని ఉపయోగించడం వలన మీ టాబ్లెట్‌కు ఏదైనా హాని జరిగినా లేదా డేటా కోల్పోయినా బాధ్యత మీదేనని అంగీకరిస్తున్నారు."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"మీ టీవీ మరియు వ్యక్తిగత డేటాపై తెలియని యాప్‌లు దాడి చేయడానికి ఎక్కువ అవకాశం ఉంది. మీరు ఈ యాప్‌ను ఇన్‌స్టాల్ చేయడం ద్వారా, దీనిని ఉపయోగించడం వలన మీ టీవీకి ఏదైనా హాని జరిగినా లేదా డేటా కోల్పోయినా బాధ్యత మీదేనని అంగీకరిస్తున్నారు."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"కొనసాగించు"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"సెట్టింగ్‌లు"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Wear యాప్‌లను ఇన్‌స్టాల్/అన్‌ఇన్‌స్టాల్ చేస్తోంది"</string>

@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"Ez da instalatu aplikazioa."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"Paketea instalatzeko aukera blokeatu egin da."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"Ez da instalatu aplikazioa, gatazka bat sortu delako lehendik dagoen pakete batekin."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Ez da instalatu aplikazioa, ez delako bateragarria tabletarekin."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Aplikazioa ez da bateragarria telebistarekin."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Ez da instalatu aplikazioa, ez delako bateragarria tabletarekin."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Aplikazioa ez da bateragarria telebistarekin."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"Ez da instalatu aplikazioa, ez delako bateragarria telefonoarekin."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"Ez da instalatu aplikazioa, paketeak ez duelako balio."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"Ezin izan da instalatu <xliff:g id="APP_NAME">%1$s</xliff:g> tabletan."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"Ezin izan da instalatu <xliff:g id="APP_NAME">%1$s</xliff:g> telebistan."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"Ezin izan da instalatu <xliff:g id="APP_NAME">%1$s</xliff:g> tabletan."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"Ezin izan da instalatu <xliff:g id="APP_NAME">%1$s</xliff:g> telebistan."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"Ezin izan da instalatu <xliff:g id="APP_NAME">%1$s</xliff:g> telefonoan."</string>
     <string name="launch" msgid="3952550563999890101">"Ireki"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"Administratzaileak ez du onartzen iturburu ezezagunetako aplikazioak instalatzea"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Ezin dira gauzatu instalatzeko eta desinstalatzeko ekintzak Wear gailuetan."</string>
     <string name="message_staging" msgid="8032722385658438567">"Aplikazioa prestatzen…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"Ezezaguna"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Segurtasuna bermatzeko, ezin dira instalatu iturburu honetako aplikazio ezezagunak tableta honetan."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Segurtasuna bermatzeko, ezin dira instalatu iturburu honetako aplikazio ezezagunak telebista honetan."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Segurtasuna bermatzeko, ezin dira instalatu iturburu honetako aplikazio ezezagunak tableta honetan."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Segurtasuna bermatzeko, ezin dira instalatu iturburu honetako aplikazio ezezagunak telebista honetan."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"Segurtasuna bermatzeko, ezin dira instalatu iturburu honetako aplikazio ezezagunak telefono honetan."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"Telefonoak eta datu pertsonalek aplikazio ezezagunen erasoak jaso ditzakete. Aplikazio hau instalatzen baduzu, onartu egingo duzu zeu zarela hura erabiltzeagatik telefonoak jasan ditzakeen kalteen edo datu-galeren erantzulea."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Tabletak eta datu pertsonalek aplikazio ezezagunen erasoak jaso ditzakete. Aplikazio hau instalatzen baduzu, onartu egingo duzu zeu zarela hura erabiltzeagatik tabletak jasan ditzakeen kalteen edo datu-galeren erantzulea."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Telebistak eta datu pertsonalek aplikazio ezezagunen erasoak jaso ditzakete. Aplikazio hau instalatzen baduzu, onartu egingo duzu zeu zarela hura erabiltzeagatik telebistak jasan ditzakeen kalteen edo datu-galeren erantzulea."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Tabletak eta datu pertsonalek aplikazio ezezagunen erasoak jaso ditzakete. Aplikazio hau instalatzen baduzu, onartu egingo duzu zeu zarela hura erabiltzeagatik tabletak jasan ditzakeen kalteen edo datu-galeren erantzulea."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Telebistak eta datu pertsonalek aplikazio ezezagunen erasoak jaso ditzakete. Aplikazio hau instalatzen baduzu, onartu egingo duzu zeu zarela hura erabiltzeagatik telebistak jasan ditzakeen kalteen edo datu-galeren erantzulea."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Egin aurrera"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Ezarpenak"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Wear aplikazioak instalatzea/desinstalatzea"</string>

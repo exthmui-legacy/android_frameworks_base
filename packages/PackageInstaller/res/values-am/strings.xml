@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"መተግበሪያ አልተጫነም።"</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"ጥቅሉ እንዳይጫን ታግዷል።"</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"እንደ ጥቅል ያልተጫነ መተግበሪያ ከነባር ጥቅል ጋር ይጋጫል።"</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"እንደ መተግበሪያ ያልተጫነ መተግበሪያ ከጡባዊዎ ጋር ተኳሃኝ አይደለም።"</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"ይሄ መተግበሪያ ከእርስዎ ቴሌቪዥን ጋር ተኳኋኝ አይደለም።"</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"እንደ መተግበሪያ ያልተጫነ መተግበሪያ ከጡባዊዎ ጋር ተኳሃኝ አይደለም።"</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"ይሄ መተግበሪያ ከእርስዎ ቴሌቪዥን ጋር ተኳኋኝ አይደለም።"</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"እንደ መተግበሪያ ያልተጫነ መተግበሪያ ከስልክዎ ጋር ተኳሃኝ አይደለም።"</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"እንደ ጥቅል ያልተጫነ መተግበሪያ ልክ ያልሆነ ይመስላል።"</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> በእርስዎ ጡባዊ ላይ መጫን አልተቻለም።"</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> በእርስዎ ቴሌቪዥን ላይ ሊጫን አልተቻለም።"</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> በእርስዎ ጡባዊ ላይ መጫን አልተቻለም።"</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> በእርስዎ ቴሌቪዥን ላይ ሊጫን አልተቻለም።"</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"<xliff:g id="APP_NAME">%1$s</xliff:g> በእርስዎ ስልክ ላይ መጫን አልተቻለም።"</string>
     <string name="launch" msgid="3952550563999890101">"ክፈት"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"የእርስዎ አስተዳዳሪ ካልታወቁ ምንጮች የመጡ መተግበሪያዎች እንዲጫኑ አይፈቅድም"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"በWear ላይ የመጫን/ማራገፍ እርምጃዎች አይደገፉም።"</string>
     <string name="message_staging" msgid="8032722385658438567">"መተግበሪያን በማዘጋጀት ላይ…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"ያልታወቀ"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"ለእርስዎ ደህንነት ሲባል የእርስዎ ጡባዊ ከዚህ ምንጭ የመጡ ያልታወቁ መተግበሪያዎችን እንዲጭን አልተፈቀደለትም።"</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"ለእርስዎ ደህንነት ሲባል የእርስዎ ቴሌቪዥን ከዚህ ምንጭ የመጡ ያልታወቁ መተግበሪያዎችን እንዲጭን አልተፈቀደለትም።"</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"ለእርስዎ ደህንነት ሲባል የእርስዎ ጡባዊ ከዚህ ምንጭ የመጡ ያልታወቁ መተግበሪያዎችን እንዲጭን አልተፈቀደለትም።"</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"ለእርስዎ ደህንነት ሲባል የእርስዎ ቴሌቪዥን ከዚህ ምንጭ የመጡ ያልታወቁ መተግበሪያዎችን እንዲጭን አልተፈቀደለትም።"</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"ለእርስዎ ደህንነት ሲባል የእርስዎ ስልክ ከዚህ ምንጭ የመጡ ያልታወቁ መተግበሪያዎችን እንዲጭን አልተፈቀደለትም።"</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"የእርስዎ ስልክ እና የግል ውሂብ በማይታወቁ መተግበሪያዎች ለሚደርሱ ጥቃቶች በይልበልጥ ተጋላጭ ናቸው። ይህን መተግበሪያ በመጫንዎ በእርስዎ ስልክ ላይ ለሚደርስ ማናቸውም ጉዳት ወይም መተግበሪያውን በመጠቀም ለሚከሰት የውሂብ መጥፋት ኃላፊነቱን እንደሚወስዱ ተስማምተዋል።"</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"የእርስዎ ጡባዊ እና የግል ውሂብ በማይታወቁ መተግበሪያዎች ለሚደርሱ ጥቃቶች በይበልጥ ተጋላጭ ናቸው። ይህን መተግበሪያ በመጫንዎ በእርስዎ ጡባዊ ላይ ለሚደርስ ማናቸውም ጉዳት ወይም መተግበሪያውን በመጠቀም ለሚከሰት የውሂብ መጥፋት ኃላፊነቱን እንደሚወስዱ ተስማምተዋል።"</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"የእርስዎ ቴሌቪዥን እና የግል ውሂብ በማይታወቁ መተግበሪያዎች ለሚደርሱ ጥቃቶች በይበልጥ ተጋላጭ ናቸው። ይህን መተግበሪያ በመጫንዎ በእርስዎ ቴሌቪዥን ላይ ለሚደርስ ማናቸውም ጉዳት ወይም መተግበሪያውን በመጠቀም ለሚከሰት የውሂብ መጥፋት ኃላፊነቱን እንደሚወስዱ ተስማምተዋል።"</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"የእርስዎ ጡባዊ እና የግል ውሂብ በማይታወቁ መተግበሪያዎች ለሚደርሱ ጥቃቶች በይበልጥ ተጋላጭ ናቸው። ይህን መተግበሪያ በመጫንዎ በእርስዎ ጡባዊ ላይ ለሚደርስ ማናቸውም ጉዳት ወይም መተግበሪያውን በመጠቀም ለሚከሰት የውሂብ መጥፋት ኃላፊነቱን እንደሚወስዱ ተስማምተዋል።"</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"የእርስዎ ቴሌቪዥን እና የግል ውሂብ በማይታወቁ መተግበሪያዎች ለሚደርሱ ጥቃቶች በይበልጥ ተጋላጭ ናቸው። ይህን መተግበሪያ በመጫንዎ በእርስዎ ቴሌቪዥን ላይ ለሚደርስ ማናቸውም ጉዳት ወይም መተግበሪያውን በመጠቀም ለሚከሰት የውሂብ መጥፋት ኃላፊነቱን እንደሚወስዱ ተስማምተዋል።"</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"ቀጥል"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"ቅንብሮች"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"የWear መተግበሪያዎችን መጫን/ማራገፍ"</string>

@@ -16,15 +16,11 @@
 
 package com.android.packageinstaller.handheld;
 
-import static android.os.storage.StorageManager.convert;
-import static android.text.format.Formatter.formatFileSize;
-
-import android.annotation.NonNull;
-import android.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.usage.StorageStats;
 import android.app.usage.StorageStatsManager;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
@@ -34,7 +30,6 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +42,8 @@ import com.android.packageinstaller.UninstallerActivity;
 
 import java.io.IOException;
 import java.util.List;
+
+import static android.text.format.Formatter.formatFileSize;
 
 public class UninstallAlertDialogFragment extends DialogFragment implements
         DialogInterface.OnClickListener {

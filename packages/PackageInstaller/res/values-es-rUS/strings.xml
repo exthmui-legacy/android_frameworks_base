@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"No se instaló la app."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"Se bloqueó el paquete para impedir la instalación."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"No se instaló la app debido a un conflicto con un paquete."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"No se instaló la app porque no es compatible con la tablet."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Esta app no es compatible con la TV."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"No se instaló la app porque no es compatible con la tablet."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Esta app no es compatible con la TV."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"No se instaló la app porque no es compatible con el teléfono."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"No se instaló la app porque parece que el paquete no es válido."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"No se pudo instalar <xliff:g id="APP_NAME">%1$s</xliff:g> en la tablet."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"No se pudo instalar <xliff:g id="APP_NAME">%1$s</xliff:g> en la TV."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"No se pudo instalar <xliff:g id="APP_NAME">%1$s</xliff:g> en la tablet."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"No se pudo instalar <xliff:g id="APP_NAME">%1$s</xliff:g> en la TV."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"No se pudo instalar <xliff:g id="APP_NAME">%1$s</xliff:g> en el teléfono."</string>
     <string name="launch" msgid="3952550563999890101">"Abrir"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"El administrador no permite instalar apps de fuentes desconocidas"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Wear no admite las acciones de instalación y desinstalación"</string>
     <string name="message_staging" msgid="8032722385658438567">"Preparando app…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"Desconocido"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Por tu seguridad, la tablet no tiene permitido instalar apps desconocidas de esta fuente."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Por tu seguridad, la TV no tiene permitido instalar apps desconocidas de esta fuente."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Por tu seguridad, la tablet no tiene permitido instalar apps desconocidas de esta fuente."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Por tu seguridad, la TV no tiene permitido instalar apps desconocidas de esta fuente."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"Por tu seguridad, el teléfono no tiene permitido instalar apps desconocidas de esta fuente."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"El teléfono y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas esta app, serás responsable de los daños que sufra el teléfono y de la pérdida de datos que pueda ocasionar su uso."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"La tablet y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas esta app, serás responsable de los daños que sufra la tablet y de la pérdida de datos que pueda ocasionar su uso."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"La TV y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas esta app, serás responsable de los daños que sufra la TV y de la pérdida de datos que pueda ocasionar su uso."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"La tablet y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas esta app, serás responsable de los daños que sufra la tablet y de la pérdida de datos que pueda ocasionar su uso."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"La TV y tus datos personales son más vulnerables a los ataques de apps desconocidas. Si instalas esta app, serás responsable de los daños que sufra la TV y de la pérdida de datos que pueda ocasionar su uso."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Continuar"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Configuración"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Instalando/desinstalando apps para Wear"</string>

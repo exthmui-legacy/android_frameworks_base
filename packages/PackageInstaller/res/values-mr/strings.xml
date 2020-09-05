@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"अ‍ॅप इंस्टॉल झाले नाही."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"पॅकेज इंस्टॉल होण्यापासून ब्लॉक केले होते."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"पॅकेजचा विद्यमान पॅकेजशी विरोध असल्याने अ‍ॅप इंस्टॉल झाले नाही."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"तुमच्या टॅबलेटशी कंपॅटिबल नसल्याने अ‍ॅप इंस्टॉल झाले नाही."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"हे अ‍ॅप तुमच्या टीव्हीशी कंपॅटिबल नाही."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"तुमच्या टॅबलेटशी कंपॅटिबल नसल्याने अ‍ॅप इंस्टॉल झाले नाही."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"हे अ‍ॅप तुमच्या टीव्हीशी कंपॅटिबल नाही."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"तुमच्या फोनशी कंपॅटिबल नसल्याने अ‍ॅप इंस्टॉल झाले नाही."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"पॅकेज अयोग्य असल्याचे दिसत असल्याने अ‍ॅप इंस्टॉल झाले नाही."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> तुमच्या टॅबलेटवर इंस्टॉल केले जाऊ शकत नाही."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> तुमच्या टीव्हीवर इंस्टॉल केले जाऊ शकत नाही."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> तुमच्या टॅबलेटवर इंस्टॉल केले जाऊ शकत नाही."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> तुमच्या टीव्हीवर इंस्टॉल केले जाऊ शकत नाही."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"<xliff:g id="APP_NAME">%1$s</xliff:g> तुमच्या फोनवर इंस्टॉल केले जाऊ शकत नाही."</string>
     <string name="launch" msgid="3952550563999890101">"उघडा"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"अज्ञात स्रोतांकडून मिळवलेल्या अ‍ॅप्स इंस्टॉलेशनला तुमचा प्रशासक अनुमती देत नाही"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"इंस्टॉल करा/अनइंस्टॉल करा क्रिया Wear वर सपोर्ट करत नाहीत."</string>
     <string name="message_staging" msgid="8032722385658438567">"अ‍ॅप सुरुवातीच्या स्थितीत आहे…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"अज्ञात"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"तुमच्या सुरक्षिततेसाठी, तुमच्या टॅबलेटला या स्रोताकडील अज्ञात अ‍ॅप्स इंस्टॉल करण्याची अनुमती नाही."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"तुमच्या सुरक्षिततेसाठी, तुमच्या टीव्हीला या स्रोताकडील अज्ञात अ‍ॅप्स इंस्टॉल करण्याची अनुमती नाही."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"तुमच्या सुरक्षिततेसाठी, तुमच्या टॅबलेटला या स्रोताकडील अज्ञात अ‍ॅप्स इंस्टॉल करण्याची अनुमती नाही."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"तुमच्या सुरक्षिततेसाठी, तुमच्या टीव्हीला या स्रोताकडील अज्ञात अ‍ॅप्स इंस्टॉल करण्याची अनुमती नाही."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"तुमच्या सुरक्षिततेसाठी, तुमच्या फोनला या स्रोताकडील अज्ञात अ‍ॅप्स इंस्टॉल करण्याची अनुमती नाही."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"तुमचा फोन आणि वैयक्तिक डेटा अज्ञात अ‍ॅप्‍सकडून होणार्‍या अटॅकमुळे अधिक असुरक्षित आहे. हे अ‍ॅप इंस्टॉल करून, तुम्‍ही सहमती देता की ते वापरल्‍याने होणार्‍या तुमच्‍या फोनचे कोणत्‍याही प्रकारे होणारे नुकसान किंवा डेटा हानीसाठी तुम्‍ही जबाबदार आहात."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"तुमचा टॅबलेट आणि वैयक्तिक डेटा अज्ञात अ‍ॅप्‍सकडून होणार्‍या अटॅकमुळे अधिक असुरक्षित आहे. हे अ‍ॅप इंस्टॉल करून, तुम्‍ही सहमती देता की ते वापरल्‍याने तुमच्‍या टॅबलेटचे कोणत्‍याही प्रकारे होणारे नुकसान किंवा डेटा हानीसाठी तुम्‍ही जबाबदार आहात."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"तुमचा टीव्‍ही आणि वैयक्तिक डेटा अज्ञात अ‍ॅप्‍सकडून होणार्‍या अटॅकमुळे अधिक असुरक्षित आहे. हे अ‍ॅप इंस्टॉल करून, तुम्ही सहमती देता की ते वापरल्‍याने तुमच्‍या टीव्‍हीचे कोणत्‍याही प्रकारे होणारे नुकसान किंवा डेटा हानीसाठी तुम्‍ही जबाबदार आहात."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"तुमचा टॅबलेट आणि वैयक्तिक डेटा अज्ञात अ‍ॅप्‍सकडून होणार्‍या अटॅकमुळे अधिक असुरक्षित आहे. हे अ‍ॅप इंस्टॉल करून, तुम्‍ही सहमती देता की ते वापरल्‍याने तुमच्‍या टॅबलेटचे कोणत्‍याही प्रकारे होणारे नुकसान किंवा डेटा हानीसाठी तुम्‍ही जबाबदार आहात."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"तुमचा टीव्‍ही आणि वैयक्तिक डेटा अज्ञात अ‍ॅप्‍सकडून होणार्‍या अटॅकमुळे अधिक असुरक्षित आहे. हे अ‍ॅप इंस्टॉल करून, तुम्ही सहमती देता की ते वापरल्‍याने तुमच्‍या टीव्‍हीचे कोणत्‍याही प्रकारे होणारे नुकसान किंवा डेटा हानीसाठी तुम्‍ही जबाबदार आहात."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"सुरू ठेवा"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"सेटिंग्ज"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"wear अ‍ॅप्स इंस्टॉल/अनइंस्टॉल करत आहे"</string>

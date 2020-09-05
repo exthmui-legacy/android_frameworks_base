@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"Aplikacja nie została zainstalowana."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"Instalacja pakietu została zablokowana."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"Aplikacja nie została zainstalowana, bo powoduje konflikt z istniejącym pakietem."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Aplikacja nie została zainstalowana, bo jest niezgodna z Twoim tabletem."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Aplikacja jest niezgodna z Twoim telewizorem."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Aplikacja nie została zainstalowana, bo jest niezgodna z Twoim tabletem."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Aplikacja jest niezgodna z Twoim telewizorem."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"Aplikacja nie została zainstalowana, bo jest niezgodna z Twoim telefonem."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"Aplikacja nie została zainstalowana, bo pakiet wygląda na nieprawidłowy."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"Nie można zainstalować aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> na Twoim tablecie."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"Nie udało się zainstalować <xliff:g id="APP_NAME">%1$s</xliff:g> na Twoim telewizorze."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"Nie można zainstalować aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> na Twoim tablecie."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"Nie udało się zainstalować <xliff:g id="APP_NAME">%1$s</xliff:g> na Twoim telewizorze."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"Nie można zainstalować aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> na Twoim telefonie."</string>
     <string name="launch" msgid="3952550563999890101">"Otwórz"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"Twój administrator nie zezwala na instalowanie aplikacji pochodzących z nieznanych źródeł."</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Wear nie obsługuje instalowania ani odinstalowywania."</string>
     <string name="message_staging" msgid="8032722385658438567">"Przygotowuję aplikację…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"Inny"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Ze względów bezpieczeństwa na Twoim tablecie nie można instalować nieznanych aplikacji z tego źródła."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Ze względów bezpieczeństwa na Twoim telewizorze nie można instalować nieznanych aplikacji z tego źródła."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Ze względów bezpieczeństwa na Twoim tablecie nie można instalować nieznanych aplikacji z tego źródła."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Ze względów bezpieczeństwa na Twoim telewizorze nie można instalować nieznanych aplikacji z tego źródła."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"Ze względów bezpieczeństwa na Twoim telefonie nie można instalować nieznanych aplikacji z tego źródła."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"Dane na telefonie i prywatne są bardziej narażone na atak nieznanych aplikacji. Instalując tę aplikację, bierzesz na siebie odpowiedzialność za ewentualne uszkodzenie telefonu lub utratę danych w wyniku jej używania."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Dane na tablecie i prywatne są bardziej narażone na atak nieznanych aplikacji. Instalując tę aplikację, bierzesz na siebie odpowiedzialność za ewentualne uszkodzenie tabletu lub utratę danych w wyniku jej używania."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Dane na telewizorze i prywatne są bardziej narażone na atak nieznanych aplikacji. Instalując tę aplikację, bierzesz na siebie odpowiedzialność za ewentualne uszkodzenie telewizora lub utratę danych w wyniku jej używania."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Dane na tablecie i prywatne są bardziej narażone na atak nieznanych aplikacji. Instalując tę aplikację, bierzesz na siebie odpowiedzialność za ewentualne uszkodzenie tabletu lub utratę danych w wyniku jej używania."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Dane na telewizorze i prywatne są bardziej narażone na atak nieznanych aplikacji. Instalując tę aplikację, bierzesz na siebie odpowiedzialność za ewentualne uszkodzenie telewizora lub utratę danych w wyniku jej używania."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Dalej"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Ustawienia"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Instalacja/usuwanie aplikacji na Wear"</string>

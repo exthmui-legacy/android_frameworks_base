@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="应用信息">
+
+    <Preference
+        android:key="package_label"
+        android:title="应用名称"/>
+
+    <Preference
+        android:key="package_name"
+        android:title="包名"/>
+
+    <Preference
+        android:key="package_first_install_time"
+        android:title="第一次安装时间"/>
+
+    <Preference
+        android:key="package_last_update_time"
+        android:title="最后一次升级时间"/>
+
+    <Preference
+        android:key="package_version_name"
+        android:title="版本"/>
+
+    <Preference
+        android:key="package_version_code"
+        android:title="版本号"/>
+
+</PreferenceScreen>

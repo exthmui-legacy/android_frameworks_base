@@ -16,7 +16,7 @@
 
 package com.android.packageinstaller;
 
-import android.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

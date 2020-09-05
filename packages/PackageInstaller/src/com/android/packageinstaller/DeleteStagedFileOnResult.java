@@ -16,7 +16,7 @@
 
 package com.android.packageinstaller;
 
-import android.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

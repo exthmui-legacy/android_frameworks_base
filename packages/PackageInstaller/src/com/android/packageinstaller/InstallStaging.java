@@ -16,7 +16,7 @@
 
 package com.android.packageinstaller;
 
-import android.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -30,8 +30,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.internal.app.AlertActivity;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,34 +48,45 @@ import java.io.OutputStream;
  * If a package gets installed from an content URI this step loads the package and turns it into
  * and installation from a file. Then it re-starts the installation as usual.
  */
-public class InstallStaging extends AlertActivity {
+public class InstallStaging extends Activity {
     private static final String LOG_TAG = InstallStaging.class.getSimpleName();
 
     private static final String STAGED_FILE = "STAGED_FILE";
 
-    /** Currently running task that loads the file from the content URI into a file */
-    private @Nullable StagingAsyncTask mStagingTask;
+    /**
+     * Currently running task that loads the file from the content URI into a file
+     */
+    private @Nullable
+    StagingAsyncTask mStagingTask;
 
-    /** The file the package is in */
-    private @Nullable File mStagedFile;
+    /**
+     * The file the package is in
+     */
+    private @Nullable
+    File mStagedFile;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mAlert.setIcon(R.drawable.ic_file_download);
-        mAlert.setTitle(getString(R.string.app_name_unknown));
-        mAlert.setView(R.layout.install_content_view);
-        mAlert.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel),
-                (ignored, ignored2) -> {
-                    if (mStagingTask != null) {
-                        mStagingTask.cancel(true);
-                    }
-                    setResult(RESULT_CANCELED);
-                    finish();
-                }, null);
-        setupAlert();
+        setContentView(R.layout.install_main);
+        ImageView app_icon = findViewById(R.id.app_icon);
+        app_icon.setImageDrawable(getDrawable(R.drawable.ic_file_download));
+        TextView mAppLabel = findViewById(R.id.app_name);
+        mAppLabel.setText(getString(R.string.app_name_unknown));
+        ExtendedFloatingActionButton mInstallButton = findViewById(R.id.install_button);
+        mInstallButton.setVisibility(View.GONE);
+        ExtendedFloatingActionButton mCancelButton = findViewById(R.id.cancel_button);
+        mCancelButton.setText(getString(R.string.cancel));
+        mCancelButton.setOnClickListener(view -> {
+            if (mStagingTask != null) {
+                mStagingTask.cancel(true);
+            }
+            setResult(RESULT_CANCELED);
+            finish();
+        });
         requireViewById(R.id.staging).setVisibility(View.VISIBLE);
+        requireViewById(R.id.space).setVisibility(View.GONE);
 
         if (savedInstanceState != null) {
             mStagedFile = new File(savedInstanceState.getString(STAGED_FILE));

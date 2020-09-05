@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"Ilova o‘rnatilmadi."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"Paket o‘rnatilishga qarshi bloklangan."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"Paket mavjud paket bilan zid kelganligi uchun ilovani o‘rnatib bo‘lmadi."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Ilova planshetingizga mos kelmaganligi uchun uni o‘rnatib bo‘lmadi."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Bu ilova televizoringiz bilan mos emas."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Ilova planshetingizga mos kelmaganligi uchun uni o‘rnatib bo‘lmadi."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Bu ilova televizoringiz bilan mos emas."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"Ilova telefoningizga mos kelmaganligi uchun uni o‘rnatib bo‘lmadi."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"Paket yaroqsizligi uchun ilovani o‘rnatib bo‘lmadi."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> planshetingizga o‘rnatilmadi."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> ilovasi televizoringizga o‘rnatilmadi."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> planshetingizga o‘rnatilmadi."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> ilovasi televizoringizga o‘rnatilmadi."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"<xliff:g id="APP_NAME">%1$s</xliff:g> telefoningizga o‘rnatilmadi."</string>
     <string name="launch" msgid="3952550563999890101">"Ochish"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"Administratoringiz begona manbalardan olingan ilovalarni o‘rnatishga ruxsat bermagan"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Wear qurilmasi o‘rnatish/o‘chirish amallarini qo‘llab-quvvatlamaydi."</string>
     <string name="message_staging" msgid="8032722385658438567">"Kutib turing…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"Noaniq"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Xavfsizlik yuzasidan, planshetingizga bu manbadan notanish ilovalarni o‘rnatishga ruxsat berilmagan."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Xavfsizlik yuzasidan, televizoringizga bu manbadan notanish ilovalarni o‘rnatishga ruxsat berilmagan."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Xavfsizlik yuzasidan, planshetingizga bu manbadan notanish ilovalarni o‘rnatishga ruxsat berilmagan."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Xavfsizlik yuzasidan, televizoringizga bu manbadan notanish ilovalarni o‘rnatishga ruxsat berilmagan."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"Xavfsizlik yuzasidan, telefoningizga bu manbadan notanish ilovalarni o‘rnatishga ruxsat berilmagan."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"Telefoningiz va shaxsiy axborotlaringiz notanish ilovalar hujumiga zaif bo‘ladi. Bu ilovani o‘rnatish bilan telefoningizga yetkaziladigan shikast va axborotlaringizni o‘chirib yuborilishiga javobgarlikni o‘z zimmangizga olasiz."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Planshetingiz va shaxsiy axborotlaringiz notanish ilovalar hujumiga zaif bo‘ladi. Bu ilovani o‘rnatish bilan planshetingizga yetkaziladigan shikast va axborotlaringizni o‘chirib yuborilishiga javobgarlikni o‘z zimmangizga olasiz."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"TV va shaxsiy axborotlaringiz notanish ilovalar hujumiga zaif bo‘ladi. Bu ilovani o‘rnatish bilan televizoringizga yetkaziladigan shikast va axborotlaringizni o‘chirib yuborilishiga javobgarlikni o‘z zimmangizga olasiz."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Planshetingiz va shaxsiy axborotlaringiz notanish ilovalar hujumiga zaif bo‘ladi. Bu ilovani o‘rnatish bilan planshetingizga yetkaziladigan shikast va axborotlaringizni o‘chirib yuborilishiga javobgarlikni o‘z zimmangizga olasiz."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"TV va shaxsiy axborotlaringiz notanish ilovalar hujumiga zaif bo‘ladi. Bu ilovani o‘rnatish bilan televizoringizga yetkaziladigan shikast va axborotlaringizni o‘chirib yuborilishiga javobgarlikni o‘z zimmangizga olasiz."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Davom etish"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Sozlamalar"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Wear ilovalarini o‘rnatish/o‘chirish"</string>

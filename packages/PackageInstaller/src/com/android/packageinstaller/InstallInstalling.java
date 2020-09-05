@@ -16,25 +16,28 @@
 
 package com.android.packageinstaller;
 
-import static android.content.pm.PackageInstaller.SessionParams.UID_UNKNOWN;
-
-import android.annotation.Nullable;
+import android.app.Activity;
 import android.app.PendingIntent;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageParser;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import com.android.internal.app.AlertActivity;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.palette.graphics.Palette;
+
 import com.android.internal.content.PackageHelper;
 
 import java.io.File;
@@ -43,13 +46,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import static android.content.pm.PackageInstaller.SessionParams.UID_UNKNOWN;
+
 /**
  * Send package to the package manager and handle results from package manager. Once the
  * installation succeeds, start {@link InstallSuccess} or {@link InstallFailed}.
  * <p>This has two phases: First send the data to the package manager, then wait until the package
  * manager processed the result.</p>
  */
-public class InstallInstalling extends AlertActivity {
+public class InstallInstalling extends Activity {
     private static final String LOG_TAG = InstallInstalling.class.getSimpleName();
 
     private static final String SESSION_ID = "com.android.packageinstaller.SESSION_ID";
@@ -58,32 +63,63 @@ public class InstallInstalling extends AlertActivity {
     private static final String BROADCAST_ACTION =
             "com.android.packageinstaller.ACTION_INSTALL_COMMIT";
 
-    /** Listens to changed to the session and updates progress bar */
+    /**
+     * Listens to changed to the session and updates progress bar
+     */
     private PackageInstaller.SessionCallback mSessionCallback;
 
-    /** Task that sends the package to the package installer */
+    /**
+     * Task that sends the package to the package installer
+     */
     private InstallingAsyncTask mInstallingTask;
 
-    /** Id of the session to install the package */
+    /**
+     * Id of the session to install the package
+     */
     private int mSessionId;
 
-    /** Id of the install event we wait for */
+    /**
+     * Id of the install event we wait for
+     */
     private int mInstallId;
 
-    /** URI of package to install */
+    /**
+     * URI of package to install
+     */
     private Uri mPackageURI;
 
-    /** The button that can cancel this dialog */
+    /**
+     * The button that can cancel this dialog
+     */
     private Button mCancelButton;
+
+    private String mFromSource;
+    private String mVersionName;
+
+    private TextView mAppLabelView;
+    private TextView mFromSourceView;
+    private TextView mVersionNameView;
+
+    private CardView mDeleteApkLayout;
+    private CardView mAppInfoContainer;
+    private TextView mAutoDeleteApkTitle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.install_main);
+
+        mFromSource = getIntent().getStringExtra("kew_fromSource");
+        mVersionName = getIntent().getStringExtra("key_versionName");
+
+        mAppLabelView = findViewById(R.id.app_name);
+        mFromSourceView = findViewById(R.id.from_source);
+        mVersionNameView = findViewById(R.id.app_versionName);
+
         ApplicationInfo appInfo = getIntent()
                 .getParcelableExtra(PackageUtil.INTENT_ATTR_APPLICATION_INFO);
         mPackageURI = getIntent().getData();
-
         if ("package".equals(mPackageURI.getScheme())) {
             try {
                 getPackageManager().installExistingPackage(appInfo.packageName);
@@ -93,13 +129,52 @@ public class InstallInstalling extends AlertActivity {
             }
         } else {
             final File sourceFile = new File(mPackageURI.getPath());
-            PackageUtil.AppSnippet as = PackageUtil.getAppSnippet(this, appInfo, sourceFile);
 
-            mAlert.setIcon(as.icon);
-            mAlert.setTitle(as.label);
-            mAlert.setView(R.layout.install_content_view);
-            mAlert.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel),
-                    (ignored, ignored2) -> {
+            PackageUtil.AppSnippet as = PackageUtil.getAppSnippet(this, appInfo, sourceFile);
+            ImageView app_icon = findViewById(R.id.app_icon);
+            app_icon.setImageDrawable(as.icon);
+
+            mAppLabelView.setText(as.label);
+            mFromSourceView.setText(mFromSource);
+            mVersionNameView.setText(mVersionName);
+
+            mAppInfoContainer = findViewById(R.id.app_info_container);
+            mDeleteApkLayout = findViewById(R.id.delete_apk_view);
+            mAutoDeleteApkTitle = findViewById(R.id.auto_delete_apk_title);
+
+            Palette.from(PaletteUtil.getIconBitmap(as.icon)).generate(palette1 -> {
+                int defaultColor = Color.WHITE;
+                int darkVibrantColor = palette1.getDarkVibrantColor(defaultColor);
+                int lightVibrantColor = palette1.getLightVibrantColor(defaultColor);
+                int darkMutedColor = palette1.getDarkMutedColor(defaultColor);
+                int lightMutedColor = palette1.getLightMutedColor(defaultColor);
+                int vibrantColor = palette1.getVibrantColor(defaultColor);
+                int mutedColor = palette1.getMutedColor(defaultColor);
+
+                Palette.Swatch[] vibrantSwatchs = {palette1.getDarkMutedSwatch(), palette1.getLightMutedSwatch(),
+                        palette1.getDarkMutedSwatch(), palette1.getLightMutedSwatch(),
+                        palette1.getMutedSwatch(), palette1.getVibrantSwatch(),
+                        palette1.getDominantSwatch()};
+
+                for (Palette.Swatch vibrantSwatch : vibrantSwatchs) {
+                    if (vibrantSwatch != null) {
+                        int color = vibrantSwatch.getRgb();
+                        mAppLabelView.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
+                        mVersionNameView.setTextColor(vibrantSwatch.getBodyTextColor());
+                        mAppInfoContainer.setCardBackgroundColor(color);
+                        mDeleteApkLayout.setCardBackgroundColor(color);
+                        mAutoDeleteApkTitle.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
+                        return;
+                    }
+                }
+            });
+
+            Button mInstallButton = findViewById(R.id.install_button);
+            findViewById(R.id.space).setVisibility(View.GONE);
+            mInstallButton.setVisibility(View.GONE);
+            mCancelButton = findViewById(R.id.cancel_button);
+            mCancelButton.setOnClickListener(
+                    view -> {
                         if (mInstallingTask != null) {
                             mInstallingTask.cancel(true);
                         }
@@ -111,8 +186,8 @@ public class InstallInstalling extends AlertActivity {
 
                         setResult(RESULT_CANCELED);
                         finish();
-                    }, null);
-            setupAlert();
+                    });
+
             requireViewById(R.id.installing).setVisibility(View.VISIBLE);
 
             if (savedInstanceState != null) {
@@ -173,8 +248,6 @@ public class InstallInstalling extends AlertActivity {
                 }
             }
 
-            mCancelButton = mAlert.getButton(DialogInterface.BUTTON_NEGATIVE);
-
             mSessionCallback = new InstallSessionCallback();
         }
     }
@@ -186,6 +259,10 @@ public class InstallInstalling extends AlertActivity {
         Intent successIntent = new Intent(getIntent());
         successIntent.setClass(this, InstallSuccess.class);
         successIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        successIntent.putExtra("ORIGINAL_LOCATION", getIntent().getStringExtra("ORIGINAL_LOCATION"));
+        successIntent.putExtra("DELETE_APK_ENABLE", getIntent().getBooleanExtra("DELETE_APK_ENABLE", false));
+        successIntent.putExtra("kew_fromSource", mFromSource);
+        successIntent.putExtra("key_versionName", mVersionName);
 
         startActivity(successIntent);
         finish();
@@ -203,6 +280,8 @@ public class InstallInstalling extends AlertActivity {
         failureIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         failureIntent.putExtra(PackageInstaller.EXTRA_LEGACY_STATUS, legacyStatus);
         failureIntent.putExtra(PackageInstaller.EXTRA_STATUS_MESSAGE, statusMessage);
+        failureIntent.putExtra("kew_fromSource", mFromSource);
+        failureIntent.putExtra("key_versionName", mVersionName);
 
         startActivity(failureIntent);
         finish();
@@ -391,6 +470,7 @@ public class InstallInstalling extends AlertActivity {
 
         @Override
         protected void onPostExecute(PackageInstaller.Session session) {
+            mCancelButton = findViewById(R.id.cancel_button);
             if (session != null) {
                 Intent broadcastIntent = new Intent(BROADCAST_ACTION);
                 broadcastIntent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);

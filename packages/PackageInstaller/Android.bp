@@ -24,5 +24,9 @@ android_app {
     static_libs: [
         "xz-java",
         "androidx.leanback_leanback",
+        "androidx.cardview_cardview",
+        "com.google.android.material_material",
+        "androidx.leanback_leanback",
+        "androidx.palette_palette",
     ],
 }

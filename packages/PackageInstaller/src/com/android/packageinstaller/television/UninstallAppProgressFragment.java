@@ -16,7 +16,7 @@
 
 package com.android.packageinstaller.television;
 
-import android.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;

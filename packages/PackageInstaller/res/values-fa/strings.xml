@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"برنامه نصب نشد."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"از نصب شدن بسته جلوگیری شد."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"برنامه نصب نشد چون بسته با بسته موجود تداخل دارد."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"برنامه نصب نشد چون با رایانه لوحی‌تان سازگار نیست."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"این برنامه با تلویزیون شما سازگار نیست."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"برنامه نصب نشد چون با رایانه لوحی‌تان سازگار نیست."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"این برنامه با تلویزیون شما سازگار نیست."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"برنامه نصب نشد چون با تلفنتان سازگار نیست."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"برنامه نصب نشد چون به نظر می‌رسد بسته معتبر نیست."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> در رایانه لوحی شما نصب نشد."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> را نمی‌توان روی تلویزیون شما نصب کرد."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> در رایانه لوحی شما نصب نشد."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> را نمی‌توان روی تلویزیون شما نصب کرد."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"<xliff:g id="APP_NAME">%1$s</xliff:g> در تلفن شما نصب نشد."</string>
     <string name="launch" msgid="3952550563999890101">"باز کردن"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"سرپرست سیستم شما اجازه نمی‌دهد برنامه‌های دریافت‌شده از منابع ناشناس را نصب کنید"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"‏کنش‌های نصب/حذف نصب در Wear پشتیبانی نمی‌شود."</string>
     <string name="message_staging" msgid="8032722385658438567">"مرحله‌بندی برنامه…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"نامشخص"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"برای امنیت شما، رایانه لوحی‌تان اجازه نمی‌دهد از این منبع برنامه‌های ناشناس نصب شود."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"برای امنیت شما، تلویزیونتان اجازه نمی‌دهد از این منبع برنامه‌های ناشناس نصب شود."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"برای امنیت شما، رایانه لوحی‌تان اجازه نمی‌دهد از این منبع برنامه‌های ناشناس نصب شود."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"برای امنیت شما، تلویزیونتان اجازه نمی‌دهد از این منبع برنامه‌های ناشناس نصب شود."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"برای امنیت شما، تلفنتان اجازه نمی‌دهد از این منبع برنامه‌های ناشناس نصب شود."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"تلفن و داده‌های شخصی‌تان دربرابر حمله برنامه‌های ناشناس آسیب‌پذیرتر هستند. با نصب این برنامه، موافقت می‌کنید که مسئول هرگونه آسیب به تلفن یا از دست رفتن داده‌ای هستید که ممکن است درنتیجه استفاده از آن به وجود آید."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"رایانه لوحی و داده‌های شخصی‌تان دربرابر حمله برنامه‌های ناشناس آسیب‌پذیرتر هستند. با نصب این برنامه، موافقت می‌کنید که مسئول هرگونه آسیب به رایانه لوحی یا از دست رفتن داده‌ای هستید که ممکن است درنتیجه استفاده از آن به وجود آید."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"تلویزیون و داده‌های شخصی‌تان دربرابر حمله برنامه‌های ناشناس آسیب‌پذیرتر هستند. با نصب این برنامه، موافقت می‌کنید که مسئول هرگونه آسیب به تلویزیون یا از دست رفتن داده‌ای هستید که ممکن است درنتیجه استفاده از آن به وجود آید."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"رایانه لوحی و داده‌های شخصی‌تان دربرابر حمله برنامه‌های ناشناس آسیب‌پذیرتر هستند. با نصب این برنامه، موافقت می‌کنید که مسئول هرگونه آسیب به رایانه لوحی یا از دست رفتن داده‌ای هستید که ممکن است درنتیجه استفاده از آن به وجود آید."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"تلویزیون و داده‌های شخصی‌تان دربرابر حمله برنامه‌های ناشناس آسیب‌پذیرتر هستند. با نصب این برنامه، موافقت می‌کنید که مسئول هرگونه آسیب به تلویزیون یا از دست رفتن داده‌ای هستید که ممکن است درنتیجه استفاده از آن به وجود آید."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"ادامه"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"تنظیمات"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"نصب/حذف نصب برنامه‌های پوشیدنی"</string>

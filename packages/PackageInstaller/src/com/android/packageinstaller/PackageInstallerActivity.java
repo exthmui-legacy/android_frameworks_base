@@ -1,26 +1,24 @@
 /*
-**
-** Copyright 2007, The Android Open Source Project
-**
-** Licensed under the Apache License, Version 2.0 (the "License");
-** you may not use this file except in compliance with the License.
-** You may obtain a copy of the License at
-**
-**     http://www.apache.org/licenses/LICENSE-2.0
-**
-** Unless required by applicable law or agreed to in writing, software
-** distributed under the License is distributed on an "AS IS" BASIS,
-** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-** See the License for the specific language governing permissions and
-** limitations under the License.
-*/
+ **
+ ** Copyright 2007, The Android Open Source Project
+ **
+ ** Licensed under the Apache License, Version 2.0 (the "License");
+ ** you may not use this file except in compliance with the License.
+ ** You may obtain a copy of the License at
+ **
+ **     http://www.apache.org/licenses/LICENSE-2.0
+ **
+ ** Unless required by applicable law or agreed to in writing, software
+ ** distributed under the License is distributed on an "AS IS" BASIS,
+ ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ** See the License for the specific language governing permissions and
+ ** limitations under the License.
+ */
 package com.android.packageinstaller;
 
-import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
-
 import android.Manifest;
-import android.annotation.NonNull;
 import android.annotation.StringRes;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.AppOpsManager;
@@ -40,16 +38,29 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PackageParser;
 import android.content.pm.PackageUserState;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.AdaptiveIconDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.TextView;
 
-import com.android.internal.app.AlertActivity;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.palette.graphics.Palette;
 
 import java.io.File;
 
@@ -63,7 +74,7 @@ import java.io.File;
  * Based on the user response the package is then installed by launching InstallAppConfirm
  * sub activity. All state transitions are handled in this activity
  */
-public class PackageInstallerActivity extends AlertActivity {
+public class PackageInstallerActivity extends Activity {
     private static final String TAG = "PackageInstaller";
 
     private static final int REQUEST_TRUST_EXTERNAL_SOURCE = 1;
@@ -74,6 +85,8 @@ public class PackageInstallerActivity extends AlertActivity {
     static final String EXTRA_ORIGINAL_SOURCE_INFO = "EXTRA_ORIGINAL_SOURCE_INFO";
     private static final String ALLOW_UNKNOWN_SOURCES_KEY =
             PackageInstallerActivity.class.getName() + "ALLOW_UNKNOWN_SOURCES_KEY";
+
+    private TextView mVersionNameView;
 
     private int mSessionId = -1;
     private Uri mPackageURI;
@@ -119,19 +132,40 @@ public class PackageInstallerActivity extends AlertActivity {
     // Would the mOk button be enabled if this activity would be resumed
     private boolean mEnableOk = false;
 
-    private void startInstallConfirm() {
-        View viewToEnable;
+    private boolean mIsDeleteApkEnabled;
+    private String mInstallOriginalPackage;
+    private String mApkFileSize;
+    private TextView mAppLabelView;
 
+    private TextView mInstallFromSource;
+    private CardView mDeleteApkLayout;
+    private CardView mAppInfoContainer;
+    private TextView mAutoDeleteApkTitle;
+    private String mVersionName;
+
+    private void startInstallConfirm() {
+        TextView mInstallConfirmQuestions = findViewById(R.id.install_confirm_questions);
         if (mAppInfo != null) {
-            viewToEnable = (mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0
-                    ? requireViewById(R.id.install_confirm_question_update_system)
-                    : requireViewById(R.id.install_confirm_question_update);
+            if ((mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                mInstallConfirmQuestions.setText(getString(R.string.install_confirm_question_update_system));
+            } else {
+                mInstallConfirmQuestions.setText(getString(R.string.install_confirm_question_update));
+            }
+            PackageInfo pkgInfo = new PackageInfo();
+            try {
+                pkgInfo = mPm.getPackageInfo(mPkgInfo.packageName, 0);
+            } catch (NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            mVersionName = getString(R.string.app_info_version) + mAppSnippet.versionName
+                    + String.format(getString(R.string.app_info_installed_version), pkgInfo.versionName)
+                    + "\t\t" + getString(R.string.app_info_size) + mApkFileSize;
+            mVersionNameView.setText(mVersionName);
         } else {
             // This is a new application with no permissions.
-            viewToEnable = requireViewById(R.id.install_confirm_question);
+            mInstallConfirmQuestions.setText(getString(R.string.install_confirm_question));
         }
-
-        viewToEnable.setVisibility(View.VISIBLE);
+        mInstallConfirmQuestions.setVisibility(View.VISIBLE);
 
         mEnableOk = true;
         mOk.setEnabled(true);
@@ -159,7 +193,6 @@ public class PackageInstallerActivity extends AlertActivity {
      * Create a new dialog.
      *
      * @param id The id of the dialog (determines dialog type)
-     *
      * @return The dialog
      */
     private DialogFragment createDialog(int id) {
@@ -235,6 +268,7 @@ public class PackageInstallerActivity extends AlertActivity {
         if (mCallingPackage != null && intent.getBooleanExtra(
                 Intent.EXTRA_NOT_UNKNOWN_SOURCE, false)) {
             if (mSourceInfo != null) {
+
                 if ((mSourceInfo.privateFlags & ApplicationInfo.PRIVATE_FLAG_PRIVILEGED)
                         != 0) {
                     // Privileged apps can bypass unknown sources check if they want.
@@ -249,7 +283,7 @@ public class PackageInstallerActivity extends AlertActivity {
         String pkgName = mPkgInfo.packageName;
         // Check if there is already a package on the device with this name
         // but it has been renamed to something else.
-        String[] oldName = mPm.canonicalToCurrentPackageNames(new String[] { pkgName });
+        String[] oldName = mPm.canonicalToCurrentPackageNames(new String[]{pkgName});
         if (oldName != null && oldName.length > 0 && oldName[0] != null) {
             pkgName = oldName[0];
             mPkgInfo.packageName = pkgName;
@@ -262,7 +296,7 @@ public class PackageInstallerActivity extends AlertActivity {
             // data we still want to count it as "installed".
             mAppInfo = mPm.getApplicationInfo(pkgName,
                     PackageManager.MATCH_UNINSTALLED_PACKAGES);
-            if ((mAppInfo.flags&ApplicationInfo.FLAG_INSTALLED) == 0) {
+            if ((mAppInfo.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
                 mAppInfo = null;
             }
         } catch (NameNotFoundException e) {
@@ -281,10 +315,11 @@ public class PackageInstallerActivity extends AlertActivity {
 
     @Override
     protected void onCreate(Bundle icicle) {
-        getWindow().addSystemFlags(SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
 
         super.onCreate(null);
-
+        if (checkSelfPermission("android.permission.WRITE_EXTERNAL_STORAGE") != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{"android.permission.WRITE_EXTERNAL_STORAGE"}, 1);
+        }
         if (icicle != null) {
             mAllowUnknownSources = icicle.getBoolean(ALLOW_UNKNOWN_SOURCES_KEY);
         }
@@ -299,11 +334,11 @@ public class PackageInstallerActivity extends AlertActivity {
 
         mCallingPackage = intent.getStringExtra(EXTRA_CALLING_PACKAGE);
         mSourceInfo = intent.getParcelableExtra(EXTRA_ORIGINAL_SOURCE_INFO);
+
         mOriginatingUid = intent.getIntExtra(Intent.EXTRA_ORIGINATING_UID,
                 PackageInstaller.SessionParams.UID_UNKNOWN);
         mOriginatingPackage = (mOriginatingUid != PackageInstaller.SessionParams.UID_UNKNOWN)
                 ? getPackageNameForUid(mOriginatingUid) : null;
-
 
         final Uri packageUri;
 
@@ -318,6 +353,7 @@ public class PackageInstallerActivity extends AlertActivity {
 
             mSessionId = sessionId;
             packageUri = Uri.fromFile(new File(info.resolvedBaseCodePath));
+
             mOriginatingURI = null;
             mReferrerURI = null;
         } else {
@@ -347,6 +383,15 @@ public class PackageInstallerActivity extends AlertActivity {
 
         // load dummy layout with OK button disabled until we override this layout in
         // startInstallConfirm
+
+        setContentView(R.layout.install_main);
+        mAppLabelView = findViewById(R.id.app_name);
+        mInstallFromSource = findViewById(R.id.from_source);
+        mVersionNameView = findViewById(R.id.app_versionName);
+        mAppInfoContainer = findViewById(R.id.app_info_container);
+        mDeleteApkLayout = findViewById(R.id.delete_apk_view);
+        mAutoDeleteApkTitle = findViewById(R.id.auto_delete_apk_title);
+        mApkFileSize = Formatter.formatFileSize(this, new File(getIntent().getData().getPath()).length());
         bindUi();
         checkIfAllowedAndInitiateInstall();
     }
@@ -378,33 +423,127 @@ public class PackageInstallerActivity extends AlertActivity {
     }
 
     private void bindUi() {
-        mAlert.setIcon(mAppSnippet.icon);
-        mAlert.setTitle(mAppSnippet.label);
-        mAlert.setView(R.layout.install_content_view);
-        mAlert.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.install),
-                (ignored, ignored2) -> {
-                    if (mOk.isEnabled()) {
-                        if (mSessionId != -1) {
-                            mInstaller.setPermissionsResult(mSessionId, true);
-                            finish();
-                        } else {
-                            startInstall();
-                        }
-                    }
-                }, null);
-        mAlert.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel),
-                (ignored, ignored2) -> {
-                    // Cancel and finish
-                    setResult(RESULT_CANCELED);
-                    if (mSessionId != -1) {
-                        mInstaller.setPermissionsResult(mSessionId, false);
-                    }
-                    finish();
-                }, null);
-        setupAlert();
+        ImageView app_icon = findViewById(R.id.app_icon);
+        app_icon.setImageDrawable(mAppSnippet.icon);
+        Palette.from(PaletteUtil.getIconBitmap(mAppSnippet.icon)).generate(palette1 -> {
+            int defaultColor = Color.WHITE;
+            int darkVibrantColor = palette1.getDarkVibrantColor(defaultColor);
+            int lightVibrantColor = palette1.getLightVibrantColor(defaultColor);
+            int darkMutedColor = palette1.getDarkMutedColor(defaultColor);
+            int lightMutedColor = palette1.getLightMutedColor(defaultColor);
+            int vibrantColor = palette1.getVibrantColor(defaultColor);
+            int mutedColor = palette1.getMutedColor(defaultColor);
 
-        mOk = mAlert.getButton(DialogInterface.BUTTON_POSITIVE);
+            Palette.Swatch[] vibrantSwatchs = {palette1.getDarkMutedSwatch(), palette1.getLightMutedSwatch(),
+                    palette1.getDarkMutedSwatch(), palette1.getLightMutedSwatch(),
+                    palette1.getMutedSwatch(), palette1.getVibrantSwatch(),
+                    palette1.getDominantSwatch()};
+
+            for (Palette.Swatch vibrantSwatch : vibrantSwatchs) {
+                if (vibrantSwatch != null) {
+                    int color = vibrantSwatch.getRgb();
+                    mAppLabelView.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
+                    mInstallFromSource.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
+                    mVersionNameView.setTextColor(vibrantSwatch.getBodyTextColor());
+                    mAppInfoContainer.setCardBackgroundColor(color);
+                    mDeleteApkLayout.setCardBackgroundColor(color);
+                    mAutoDeleteApkTitle.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
+                    return;
+                }
+            }
+        });
+
+        PackageInfo packageInfo1;
+        try {
+            packageInfo1 = mPm.getPackageInfo(mOriginatingPackage, 0);
+            mInstallOriginalPackage = String.format(getString(R.string.install_from_source), packageInfo1.applicationInfo.loadLabel(mPm));
+            mInstallFromSource.setText(mInstallOriginalPackage);
+        } catch (NameNotFoundException e) {
+            //ignored
+        }
+
+        mAutoDeleteApkTitle.setText(String.format(getString(R.string.delete_apk_when_installed), mApkFileSize));
+
+        mAppLabelView.setText(mAppSnippet.label);
+        mVersionName = getString(R.string.app_info_version) + mAppSnippet.versionName +
+                "\t\t" + getString(R.string.app_info_size) + mApkFileSize;
+        mVersionNameView.setText(mVersionName);
+        Button mInstallButton = findViewById(R.id.install_button);
+        Button mCancelButton = findViewById(R.id.cancel_button);
+        mInstallButton.setOnClickListener(view -> {
+            if (mOk.isEnabled()) {
+                if (mSessionId != -1) {
+                    mInstaller.setPermissionsResult(mSessionId, true);
+                    finish();
+                } else {
+                    startInstall();
+                }
+            }
+        });
+        mCancelButton.setOnClickListener(view -> {
+            // Cancel and finish
+            setResult(RESULT_CANCELED);
+            if (mSessionId != -1) {
+                mInstaller.setPermissionsResult(mSessionId, false);
+            }
+            finish();
+        });
+
+        mDeleteApkLayout.setVisibility(View.VISIBLE);
+        Switch mDeleteApkView = findViewById(R.id.delete_apk);
+        mDeleteApkView.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) -> {
+            mIsDeleteApkEnabled = b;
+        });
+
+        //mOk = mInstallButton.setOnClickListener(DialogInterface.BUTTON_POSITIVE);
+        mOk = mInstallButton;
         mOk.setEnabled(false);
+        File sourceFile = new File(mPackageURI.getPath());
+        PackageParser.Package parsed = PackageUtil.getPackageInfo(this, sourceFile);
+
+        // Check for parse errors
+        if (parsed == null) {
+            Log.w(TAG, "Parse error when parsing manifest. Discontinuing installation");
+            showDialogInner(DLG_PACKAGE_ERROR);
+            setPmResult(PackageManager.INSTALL_FAILED_INVALID_APK);
+            return;
+        }
+        PackageInfo packageInfo = mPm.getPackageArchiveInfo(String.valueOf(sourceFile), 0);
+        PackageInfo packageInfo_forInstallTime;
+        long packageFirstInstallTime;
+        long packageLastUpdateTime;
+        String packageName = mPkgInfo.packageName;
+        try {
+            packageInfo_forInstallTime = getPackageManager().getPackageInfo(packageName, 0);
+        } catch (NameNotFoundException e) {
+            packageInfo_forInstallTime = null;
+        }
+        if (packageInfo_forInstallTime != null) {
+            packageFirstInstallTime = packageInfo_forInstallTime.firstInstallTime;
+            packageLastUpdateTime = packageInfo_forInstallTime.lastUpdateTime;
+        } else {
+            packageFirstInstallTime = 0;
+            packageLastUpdateTime = 0;
+        }
+
+        long versionCode = packageInfo.versionCode;
+        String packageLabel = mAppSnippet.label.toString();
+        String versionName = (String) mAppSnippet.versionName;
+        //初始化intent start
+        Intent intent = new Intent(this, InstallPackageInfoActivity.class);
+        intent.putExtra("key_package_label", packageLabel);
+        intent.putExtra("key_package_name", packageName);
+        intent.putExtra("key_package_first_install_time", packageFirstInstallTime);
+        intent.putExtra("key_package_last_update_time", packageLastUpdateTime);
+        intent.putExtra("key_versionName", versionName);
+        intent.putExtra("key_versionCode", versionCode);
+        //初始化intent end
+
+        app_icon.setOnLongClickListener(view -> {
+            startActivity(intent);
+            return true;
+        });
+
     }
 
     /**
@@ -492,13 +631,13 @@ public class PackageInstallerActivity extends AlertActivity {
      * Parse the Uri and set up the installer for this package.
      *
      * @param packageUri The URI to parse
-     *
      * @return {@code true} iff the installer could be set up
      */
     private boolean processPackageUri(final Uri packageUri) {
         mPackageURI = packageUri;
 
         final String scheme = packageUri.getScheme();
+        CharSequence versionName;
 
         switch (scheme) {
             case SCHEME_PACKAGE: {
@@ -515,9 +654,12 @@ public class PackageInstallerActivity extends AlertActivity {
                     setPmResult(PackageManager.INSTALL_FAILED_INVALID_APK);
                     return false;
                 }
-                mAppSnippet = new PackageUtil.AppSnippet(mPm.getApplicationLabel(mPkgInfo.applicationInfo),
+                versionName = mPkgInfo.versionName;
+
+                mAppSnippet = new PackageUtil.AppSnippet(mPm.getApplicationLabel(mPkgInfo.applicationInfo), versionName,
                         mPm.getApplicationIcon(mPkgInfo.applicationInfo));
-            } break;
+            }
+            break;
 
             case ContentResolver.SCHEME_FILE: {
                 File sourceFile = new File(packageUri.getPath());
@@ -534,7 +676,8 @@ public class PackageInstallerActivity extends AlertActivity {
                         PackageManager.GET_PERMISSIONS, 0, 0, null,
                         new PackageUserState());
                 mAppSnippet = PackageUtil.getAppSnippet(this, mPkgInfo.applicationInfo, sourceFile);
-            } break;
+            }
+            break;
 
             default: {
                 throw new IllegalArgumentException("Unexpected URI scheme " + packageUri);
@@ -558,6 +701,10 @@ public class PackageInstallerActivity extends AlertActivity {
         newIntent.putExtra(PackageUtil.INTENT_ATTR_APPLICATION_INFO,
                 mPkgInfo.applicationInfo);
         newIntent.setData(mPackageURI);
+        newIntent.putExtra("ORIGINAL_LOCATION", getIntent().getStringExtra("ORIGINAL_LOCATION"));
+        newIntent.putExtra("DELETE_APK_ENABLE", mIsDeleteApkEnabled);
+        newIntent.putExtra("kew_fromSource", mInstallOriginalPackage);
+        newIntent.putExtra("key_versionName", mVersionName);
         newIntent.setClass(this, InstallInstalling.class);
         String installerPackageName = getIntent().getStringExtra(
                 Intent.EXTRA_INSTALLER_PACKAGE_NAME);
@@ -578,7 +725,7 @@ public class PackageInstallerActivity extends AlertActivity {
             newIntent.putExtra(Intent.EXTRA_RETURN_RESULT, true);
         }
         newIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        if(localLOGV) Log.i(TAG, "downloaded app uri="+mPackageURI);
+        if (localLOGV) Log.i(TAG, "downloaded app uri=" + mPackageURI);
         startActivity(newIntent);
         finish();
     }

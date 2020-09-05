@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"Az alkalmazás nincs telepítve."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"A csomag telepítését letiltotta a rendszer."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"A nem csomagként telepített alkalmazás ütközik egy már létező csomaggal."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"A nem alkalmazásként telepített alkalmazás nem kompatibilis az Ön táblagépével."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Ez az alkalmazás nem kompatibilis az Ön tévéjével."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"A nem alkalmazásként telepített alkalmazás nem kompatibilis az Ön táblagépével."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Ez az alkalmazás nem kompatibilis az Ön tévéjével."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"A nem alkalmazásként telepített alkalmazás nem kompatibilis az Ön telefonjával."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"A nem csomagként telepített alkalmazás érvénytelen."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"A(z) <xliff:g id="APP_NAME">%1$s</xliff:g> alkalmazás nem telepíthető a táblagépére."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"A(z) <xliff:g id="APP_NAME">%1$s</xliff:g> alkalmazás nem telepíthető a tévéjére."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"A(z) <xliff:g id="APP_NAME">%1$s</xliff:g> alkalmazás nem telepíthető a táblagépére."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"A(z) <xliff:g id="APP_NAME">%1$s</xliff:g> alkalmazás nem telepíthető a tévéjére."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"A(z) <xliff:g id="APP_NAME">%1$s</xliff:g> alkalmazás nem telepíthető a telefonjára."</string>
     <string name="launch" msgid="3952550563999890101">"Megnyitás"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"A rendszergazda nem engedélyezi az ismeretlen forrásokból származó alkalmazások telepítését"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"A Wear nem támogatja a telepítés/eltávolítás műveletet."</string>
     <string name="message_staging" msgid="8032722385658438567">"Alkalmazás fokozatos közzététele…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"Ismeretlen"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Az Ön biztonsága érdekében táblagépe nem telepíthet ebből a forrásból származó ismeretlen alkalmazásokat."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Az Ön biztonsága érdekében tévéje nem telepíthet ebből a forrásból származó ismeretlen alkalmazásokat."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Az Ön biztonsága érdekében táblagépe nem telepíthet ebből a forrásból származó ismeretlen alkalmazásokat."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Az Ön biztonsága érdekében tévéje nem telepíthet ebből a forrásból származó ismeretlen alkalmazásokat."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"Az Ön biztonsága érdekében telefonja nem telepíthet ebből a forrásból származó ismeretlen alkalmazásokat."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"Telefonja és személyes adatai fokozott kockázatnak vannak kitéve az ismeretlen alkalmazások támadásaival szemben. Az alkalmazás telepítésével elfogadja, hogy Ön a felelős az alkalmazás használatából eredő esetleges adatvesztésért és a telefont ért károkért."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Táblagépe és személyes adatai fokozott kockázatnak vannak kitéve az ismeretlen alkalmazások támadásaival szemben. Az alkalmazás telepítésével elfogadja, hogy Ön a felelős az alkalmazás használatából eredő esetleges adatvesztésért és a táblagépet ért károkért."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Tévéje és személyes adatai fokozott kockázatnak vannak kitéve az ismeretlen alkalmazások támadásaival szemben. Az alkalmazás telepítésével elfogadja, hogy Ön a felelős az alkalmazás használatából eredő esetleges adatvesztésért és a tévét ért károkért."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Táblagépe és személyes adatai fokozott kockázatnak vannak kitéve az ismeretlen alkalmazások támadásaival szemben. Az alkalmazás telepítésével elfogadja, hogy Ön a felelős az alkalmazás használatából eredő esetleges adatvesztésért és a táblagépet ért károkért."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Tévéje és személyes adatai fokozott kockázatnak vannak kitéve az ismeretlen alkalmazások támadásaival szemben. Az alkalmazás telepítésével elfogadja, hogy Ön a felelős az alkalmazás használatából eredő esetleges adatvesztésért és a tévét ért károkért."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Tovább"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Beállítások"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Wear-alkalmazások telepítése/törlése"</string>

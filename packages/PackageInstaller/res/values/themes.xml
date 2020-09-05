@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,12 +20,27 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="Theme.AlertDialogActivity"
-            parent="@android:style/Theme.DeviceDefault.Light.Dialog.Alert" />
+    <style name="Theme.AlertDialogActivity" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:colorPrimary">@color/exthmui_primary_color</item>
+        <item name="android:colorAccent">@color/exthmui_primary_color</item>
+        <item name="colorPrimary">@color/exthmui_primary_color</item>
+        <item name="colorAccent">@color/exthmui_primary_color</item>
+    </style>
 
     <style name="Theme.AlertDialogActivity.NoActionBar">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="elevation">0dp</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>

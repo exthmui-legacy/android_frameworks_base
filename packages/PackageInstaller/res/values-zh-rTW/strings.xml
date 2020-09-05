@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"未安裝應用程式。"</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"系統已封鎖這個套件，因此無法安裝。"</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"應用程式套件與現有套件衝突，因此未能完成安裝。"</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"應用程式與你的平板電腦不相容，因此未能完成安裝。"</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"這個應用程式與您的電視不相容。"</string>
-    <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"應用程式與你的手機不相容，因此未能完成安裝。"</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"應用程式與你的平板電腦不相容，因此未能完成安裝。"</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"這個應用程式與您的電視不相容。"</string> -->
+    <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">應用程式與你的手機不相容</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"應用程式套件無效，因此未能完成安裝。"</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"無法在你的平板電腦上安裝「<xliff:g id="APP_NAME">%1$s</xliff:g>」。"</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"無法在你的電視上安裝「<xliff:g id="APP_NAME">%1$s</xliff:g>」。"</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"無法在你的平板電腦上安裝「<xliff:g id="APP_NAME">%1$s</xliff:g>」。"</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"無法在你的電視上安裝「<xliff:g id="APP_NAME">%1$s</xliff:g>」。"</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"無法在你的手機上安裝「<xliff:g id="APP_NAME">%1$s</xliff:g>」。"</string>
     <string name="launch" msgid="3952550563999890101">"開啟"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"你的管理員不允許安裝不明來源的應用程式"</string>
@@ -80,16 +80,61 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Wear 不支援安裝及解除安裝操作。"</string>
     <string name="message_staging" msgid="8032722385658438567">"正在準備應用程式安裝程序…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"不明"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"為了安全起見，你的平板電腦禁止安裝這個來源提供的不明應用程式。"</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"為了安全起見，你的電視禁止安裝這個來源提供的不明應用程式。"</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"為了安全起見，你的平板電腦禁止安裝這個來源提供的不明應用程式。"</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"為了安全起見，你的電視禁止安裝這個來源提供的不明應用程式。"</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"為了安全起見，你的手機禁止安裝這個來源提供的不明應用程式。"</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"來歷不明的應用程式可能會損害你的手機和個人資料。如因安裝及使用這個應用程式，導致你的手機受損或資料遺失，請自行負責。"</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"來歷不明的應用程式可能會損害你的平板電腦和個人資料。如因安裝及使用這個應用程式，導致你的平板電腦受損或資料遺失，請自行負責。"</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"來歷不明的應用程式可能會損害你的電視和個人資料。如因安裝及使用這個應用程式，導致你的電視受損或資料遺失，請自行負責。"</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"來歷不明的應用程式可能會損害你的平板電腦和個人資料。如因安裝及使用這個應用程式，導致你的平板電腦受損或資料遺失，請自行負責。"</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"來歷不明的應用程式可能會損害你的電視和個人資料。如因安裝及使用這個應用程式，導致你的電視受損或資料遺失，請自行負責。"</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"繼續"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"設定"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"安裝/解除安裝中的 Wear 應用程式"</string>
     <string name="app_installed_notification_channel_description" msgid="2695385797601574123">"「應用程式已安裝」通知"</string>
     <string name="notification_installation_success_message" msgid="6450467996056038442">"安裝成功"</string>
     <string name="notification_installation_success_status" msgid="3172502643504323321">"已成功安裝「<xliff:g id="APPNAME">%1$s</xliff:g>」"</string>
+    <string name="delete_apk_when_installed">自动删除安装包</string>
+    <string name="install_from_source">"來自「%1$s」 "</string>
+    <string name="install_failed_exit">退出</string>
+    <string name="install_failed_already_exists">已经存在相同名称的应用</string>
+    <string name="install_failed_bad_manifest">解析失败：无法读取安装包的Manifest 文件</string>
+    <string name="install_failed_bad_package_name">解析失败：安装包的包名不存在</string>
+    <string name="install_failed_bad_shared_user_id">解析失败：安装包的共享UID无效</string>
+    <string name="install_failed_certificate_encoding">解析失败：安装包的签名编码异常</string>
+    <string name="install_failed_conflicting_provider">与“%1$s”存在不兼容，无法同时安装</string>
+    <string name="install_failed_container_error">无法找到SD存储卡</string>
+    <string name="install_failed_cpu_abi_incompatible">（CPU）与您的手机不兼容</string>
+    <string name="install_failed_dexopt">优化和验证dex文件失败</string>
+    <string name="install_failed_duplicate_package">已存在相同包名的应用</string>
+    <string name="install_failed_inconsistent_certificates">已安裝了簽名衝突的應用程式</string>
+    <string name="install_failed_insufficient_storage">存储空间不足</string>
+    <string name="install_failed_internal_error">解析失败：系统错误</string>
+    <string name="install_failed_invaild_apk">安装包异常</string>
+    <string name="install_failed_invaild_install_location">安装位置有错误</string>
+    <string name="install_failed_invaild_uri">安装包文件路径有错误</string>
+    <string name="install_failed_manifest_empty">解析失败：安装包的manifest文件是空的</string>
+    <string name="install_failed_manifest_malformed">解析失败：安装包的manifest文件格式不正确</string>
+    <string name="install_failed_media_unavailable">安装位置不可用</string>
+    <string name="install_failed_missing_feature">安装包使用了系统不存在的功能</string>
+    <string name="install_failed_missing_shared_library">共享库丢失</string>
+    <string name="install_failed_newer_sdk">安装包的SDK版本低于系统SDK要求</string>
+    <string name="install_failed_no_certificates">解析失败：安装包没有签名文件</string>
+    <string name="install_failed_no_shared_user">共享用户不存在</string>
+    <string name="install_failed_not_apk">解析失败：后缀不是 .apk</string>
+    <string name="install_failed_older_sdk">要求更高的系统版本</string>
+    <string name="install_failed_replace_couldnt_delete">共享库不可用</string>
+    <string name="install_failed_shared_user_incompatible">共享用户签名错误</string>
+    <string name="install_failed_test_only">安装包仅供测试，请联系开发者</string>
+    <string name="install_failed_unexpected_exception">解析失败：安装发生意外</string>
+    <string name="install_failed_update_incompatible">安装包和当前版本不兼容</string>
+    <string name="install_failed_user_restricted">手机已禁止安装应用</string>
+    <string name="install_failed_verification_failure">安装包验证失败</string>
+    <string name="install_failed_verification_timeout">安装包验证超时</string>
+    <string name="install_failed_version_downgrade">已安装了更高的版本</string>
+    <string name="install_status_code">錯誤代碼：%1$s</string>
+    <string name="install_package_info">安装包信息</string>
+    <string name="package_info_package_label">安装包名称</string>
+    <string name="package_info_package_name">安装包包名</string>
+    <string name="package_info_package_version_name">安装包版本</string>
+    <string name="package_info_package_first_install_time">第一次安装时间</string>
+    <string name="package_info_package_version_code">安装包版本号</string>
 </resources>

@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"التطبيق ليس مثبتًا."</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"تم حظر تثبيت الحزمة."</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"لم يتم تثبيت التطبيق لأن حزمة التثبيت تتعارض مع حزمة حالية."</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"لم يتم تثبيت التطبيق لأنه ليس متوافقًا مع جهازك اللوحي."</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"هذا التطبيق لا يتوافق مع جهاز التلفزيون."</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"لم يتم تثبيت التطبيق لأنه ليس متوافقًا مع جهازك اللوحي."</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"هذا التطبيق لا يتوافق مع جهاز التلفزيون."</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"لم يتم تثبيت التطبيق لأنه ليس متوافقًا مع هاتفك."</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"لم يتم تثبيت التطبيق لأن الحزمة تبدو غير صالحة."</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"تعذر تثبيت <xliff:g id="APP_NAME">%1$s</xliff:g> على جهازك اللوحي."</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"تعذَّر تثبيت <xliff:g id="APP_NAME">%1$s</xliff:g> على جهاز التلفزيون."</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"تعذر تثبيت <xliff:g id="APP_NAME">%1$s</xliff:g> على جهازك اللوحي."</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"تعذَّر تثبيت <xliff:g id="APP_NAME">%1$s</xliff:g> على جهاز التلفزيون."</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"تعذر تثبيت <xliff:g id="APP_NAME">%1$s</xliff:g> على هاتفك."</string>
     <string name="launch" msgid="3952550563999890101">"فتح"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"لا يسمح المشرف بتثبيت التطبيقات التي يتم الحصول عليها من مصادر غير معروفة"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"‏لا تتوافق إجراءات التثبيت/إلغاء التثبيت مع نظام Android Wear."</string>
     <string name="message_staging" msgid="8032722385658438567">"جارٍ الطرح المرحلي للتطبيق…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"غير معروف"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"لأغراض الأمان، غير مسموح لجهازك اللوحي بتثبيت تطبيقات غير معروفة من هذا المصدر."</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"لأغراض الأمان، غير مسموح لجهاز التلفزيون الذي تستخدمه بتثبيت تطبيقات غير معروفة من هذا المصدر."</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"لأغراض الأمان، غير مسموح لجهازك اللوحي بتثبيت تطبيقات غير معروفة من هذا المصدر."</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"لأغراض الأمان، غير مسموح لجهاز التلفزيون الذي تستخدمه بتثبيت تطبيقات غير معروفة من هذا المصدر."</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"لأغراض الأمان، غير مسموح لهاتفك بتثبيت تطبيقات غير معروفة من هذا المصدر."</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"يعتبر الهاتف والبيانات الشخصية أكثر عرضة لهجوم التطبيقات غير المعروفة. من خلال تثبيت هذا التطبيق، توافق على تحمل مسؤولية أي ضرر يحدث لهاتفك أو فقدان البيانات الذي قد ينتج عن استخدامه."</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"يعتبر الجهاز اللوحي والبيانات الشخصية أكثر عرضة لهجوم التطبيقات غير المعروفة. من خلال تثبيت هذا التطبيق، توافق على تحمل مسؤولية أي ضرر يحدث للجهاز اللوحي أو فقدان البيانات الذي قد ينتج عن استخدامه."</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"يعتبر جهاز التلفزيون والبيانات الشخصية أكثر عرضة لهجوم التطبيقات غير المعروفة. من خلال تثبيت هذا التطبيق، توافق على تحمل مسؤولية أي ضرر يحدث لجهاز التلفزيون أو فقدان البيانات الذي قد ينتج عن استخدامه."</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"يعتبر الجهاز اللوحي والبيانات الشخصية أكثر عرضة لهجوم التطبيقات غير المعروفة. من خلال تثبيت هذا التطبيق، توافق على تحمل مسؤولية أي ضرر يحدث للجهاز اللوحي أو فقدان البيانات الذي قد ينتج عن استخدامه."</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"يعتبر جهاز التلفزيون والبيانات الشخصية أكثر عرضة لهجوم التطبيقات غير المعروفة. من خلال تثبيت هذا التطبيق، توافق على تحمل مسؤولية أي ضرر يحدث لجهاز التلفزيون أو فقدان البيانات الذي قد ينتج عن استخدامه."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"متابعة"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"الإعدادات"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"‏تثبيت / إلغاء تثبيت تطبيقات Android Wear"</string>

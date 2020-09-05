@@ -21,7 +21,7 @@ import static android.app.AppOpsManager.MODE_ALLOWED;
 import static com.android.packageinstaller.PackageUtil.getMaxTargetSdkVersionForUid;
 
 import android.Manifest;
-import android.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.annotation.StringRes;
 import android.app.Activity;
 import android.app.ActivityManager;

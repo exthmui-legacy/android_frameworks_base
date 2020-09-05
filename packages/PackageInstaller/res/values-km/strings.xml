@@ -29,12 +29,12 @@
     <string name="install_failed" msgid="5777824004474125469">"មិន​បាន​ដំឡើង​កម្មវិធីទេ។"</string>
     <string name="install_failed_blocked" msgid="8512284352994752094">"កញ្ចប់ត្រូវបានទប់ស្កាត់​មិន​ឱ្យ​ដំឡើង។"</string>
     <string name="install_failed_conflict" msgid="3493184212162521426">"កម្មវិធីមិនបានដំឡើងទេ ដោយសារកញ្ចប់កម្មវិធីមិនត្រូវគ្នាជាមួយកញ្ចប់ដែលមានស្រាប់។"</string>
-    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"កម្មវិធីមិនបានដំឡើងទេ ដោយសារកម្មវិធីមិនត្រូវគ្នាជាមួយថេប្លេតរបស់អ្នក។"</string>
-    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"កម្មវិធីនេះមិនត្រូវគ្នាជាមួយទូរទស្សន៍របស់អ្នកទេ។"</string>
+<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"កម្មវិធីមិនបានដំឡើងទេ ដោយសារកម្មវិធីមិនត្រូវគ្នាជាមួយថេប្លេតរបស់អ្នក។"</string> -->
+<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"កម្មវិធីនេះមិនត្រូវគ្នាជាមួយទូរទស្សន៍របស់អ្នកទេ។"</string> -->
     <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"កម្មវិធីមិនបានដំឡើងទេ ដោយសារកម្មវិធីមិនត្រូវគ្នាជាមួយទូរសព្ទរបស់អ្នក។"</string>
     <string name="install_failed_invalid_apk" msgid="8581007676422623930">"កម្មវិធីមិនបានដំឡើងទេ ដោយសារកញ្ចប់គ្មានសុពលភាព។"</string>
-    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"មិន​អាច​ដំឡើង <xliff:g id="APP_NAME">%1$s</xliff:g> នៅលើថេប្លេត​​របស់​អ្នកបានទេ។"</string>
-    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"មិនអាចដំឡើង <xliff:g id="APP_NAME">%1$s</xliff:g> នៅលើទូរទស្សន៍របស់បានអ្នកទេ។"</string>
+<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"មិន​អាច​ដំឡើង <xliff:g id="APP_NAME">%1$s</xliff:g> នៅលើថេប្លេត​​របស់​អ្នកបានទេ។"</string> -->
+<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"មិនអាចដំឡើង <xliff:g id="APP_NAME">%1$s</xliff:g> នៅលើទូរទស្សន៍របស់បានអ្នកទេ។"</string> -->
     <string name="install_failed_msg" product="default" msgid="6484461562647915707">"មិន​អាច​ដំឡើង <xliff:g id="APP_NAME">%1$s</xliff:g> នៅលើទូរសព្ទ​របស់​អ្នកបាន​ទេ។"</string>
     <string name="launch" msgid="3952550563999890101">"បើក"</string>
     <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"អ្នក​គ្រប់គ្រង​របស់​អ្នក​មិន​អនុញ្ញាត​ឱ្យដំឡើង​កម្មវិធី​ ដែល​បាន​មក​ពី​ប្រភព​មិន​ស្គាល់ទេ"</string>
@@ -80,12 +80,12 @@
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"សកម្មភាព​ដំឡើង/លុបចេញមិនអាចប្រើ​នៅលើ Wear បានទេ។"</string>
     <string name="message_staging" msgid="8032722385658438567">"កំពុងសាកល្បងកម្មវិធី…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"មិនស្គាល់"</string>
-    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"ដើម្បីសុវតិ្ថភាពរបស់អ្នក ថេប្លេតរបស់អ្នកមិនត្រូវបានអនុញ្ញាតឱ្យដំឡើងកម្មវិធីដែលមិនស្គាល់ពីប្រភពនេះទេ។"</string>
-    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"ដើម្បីសុវតិ្ថភាពរបស់អ្នក ទូរទស្សន៍របស់អ្នកមិនត្រូវបានអនុញ្ញាតឱ្យ​ដំឡើងកម្មវិធីដែលមិនស្គាល់ពីប្រភពនេះទេ។"</string>
+<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"ដើម្បីសុវតិ្ថភាពរបស់អ្នក ថេប្លេតរបស់អ្នកមិនត្រូវបានអនុញ្ញាតឱ្យដំឡើងកម្មវិធីដែលមិនស្គាល់ពីប្រភពនេះទេ។"</string> -->
+<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"ដើម្បីសុវតិ្ថភាពរបស់អ្នក ទូរទស្សន៍របស់អ្នកមិនត្រូវបានអនុញ្ញាតឱ្យ​ដំឡើងកម្មវិធីដែលមិនស្គាល់ពីប្រភពនេះទេ។"</string> -->
     <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"ដើម្បីសុវតិ្ថភាពរបស់អ្នក ទូរសព្ទរបស់អ្នកមិនត្រូវបានអនុញ្ញាតឱ្យដំឡើងកម្មវិធីដែលមិនស្គាល់ពីប្រភពនេះទេ។"</string>
     <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"ទូរសព្ទ និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតទាំងឡាយចំពោះទូរសព្ទ ឬការបាត់បង់ទិន្នន័យរបស់អ្នក ដែលអាចបណ្ដាលមកពីការប្រើប្រាស់កម្មវិធីនេះ។"</string>
-    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"ថេប្លេត និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតទាំងឡាយចំពោះថេប្លេត ឬការបាត់បង់ទិន្នន័យរបស់អ្នក ដែលអាចបណ្ដាលមកពីការប្រើប្រាស់កម្មវិធីនេះ។"</string>
-    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"ទូរទស្សន៍ និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតទាំងឡាយចំពោះទូរទស្សន៍ ឬការបាត់បង់ទិន្នន័យរបស់អ្នក ដែលអាចបណ្ដាលមកពីការប្រើប្រាស់កម្មវិធីនេះ។"</string>
+<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"ថេប្លេត និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតទាំងឡាយចំពោះថេប្លេត ឬការបាត់បង់ទិន្នន័យរបស់អ្នក ដែលអាចបណ្ដាលមកពីការប្រើប្រាស់កម្មវិធីនេះ។"</string> -->
+<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"ទូរទស្សន៍ និងទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នកងាយនឹងរងគ្រោះពីការវាយប្រហារពីកម្មវិធីដែលមិនស្គាល់។ ប្រសិនបើដំឡើងកម្មវិធីនេះ មានន័យថាអ្នកទទួលខុសត្រូវលើការខូចខាតទាំងឡាយចំពោះទូរទស្សន៍ ឬការបាត់បង់ទិន្នន័យរបស់អ្នក ដែលអាចបណ្ដាលមកពីការប្រើប្រាស់កម្មវិធីនេះ។"</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"បន្ត"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"ការកំណត់"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"ការដំឡើង/ការលុបកម្មវិធីឧបករណ៍​ពាក់​"</string>

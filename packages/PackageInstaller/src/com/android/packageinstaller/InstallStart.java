@@ -19,7 +19,7 @@ package com.android.packageinstaller;
 import static com.android.packageinstaller.PackageUtil.getMaxTargetSdkVersionForUid;
 
 import android.Manifest;
-import android.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AppGlobals;
@@ -27,14 +27,20 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageParser;
 import android.content.pm.ProviderInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
+import android.provider.UserDictionary;
 import android.util.Log;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * Select which activity is the first visible activity of the installation and forward the intent to
@@ -104,10 +110,13 @@ public class InstallStart extends Activity {
         nextActivity.putExtra(PackageInstallerActivity.EXTRA_ORIGINAL_SOURCE_INFO, sourceInfo);
         nextActivity.putExtra(Intent.EXTRA_ORIGINATING_UID, originatingUid);
 
+
         if (isSessionInstall) {
             nextActivity.setClass(this, PackageInstallerActivity.class);
         } else {
             Uri packageUri = intent.getData();
+
+            nextActivity.putExtra("ORIGINAL_LOCATION", getIntent().getData().toString());
 
             if (packageUri != null && packageUri.getScheme().equals(
                     ContentResolver.SCHEME_CONTENT)) {
