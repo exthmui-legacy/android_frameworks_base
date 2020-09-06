@@ -4639,6 +4639,12 @@ public final class Settings {
         public static final String GAMING_MODE_USE_GAME_DRIVER = "gaming_mode_use_game_driver";
 
         /**
+         * Show app volume rows in volume panel
+         * @hide
+         */
+        public static final String SHOW_APP_VOLUME = "show_app_volume";
+
+        /**
          * Enable/Disable screenshot sound
          * @hide
          */
