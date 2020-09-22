@@ -20,6 +20,10 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.palette.graphics.Palette;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -37,6 +41,7 @@ import android.os.Bundle;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,7 +68,7 @@ public class InstallSuccess extends Activity {
 
     private CardView mDeleteApkLayout;
     private CardView mAppInfoContainer;
-    private TextView mAutoDeleteApkTitle;
+    private Button mInstallButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +85,7 @@ public class InstallSuccess extends Activity {
 
         mAppInfoContainer = findViewById(R.id.app_info_container);
         mDeleteApkLayout = findViewById(R.id.delete_apk_view);
-        mAutoDeleteApkTitle = findViewById(R.id.auto_delete_apk_title);
+        mInstallButton = findViewById(R.id.install_button);
 
         if (getIntent().getBooleanExtra(Intent.EXTRA_RETURN_RESULT, false)) {
             // Return result if requested
@@ -138,30 +143,16 @@ public class InstallSuccess extends Activity {
             mVersionNameView.setText(mVersionName);
 
             Palette.from(PaletteUtil.getIconBitmap(as.icon)).generate(palette1 -> {
-                int defaultColor = Color.WHITE;
+                int defaultColor = 0x5eb5f7;
                 int darkVibrantColor = palette1.getDarkVibrantColor(defaultColor);
                 int lightVibrantColor = palette1.getLightVibrantColor(defaultColor);
                 int darkMutedColor = palette1.getDarkMutedColor(defaultColor);
                 int lightMutedColor = palette1.getLightMutedColor(defaultColor);
                 int vibrantColor = palette1.getVibrantColor(defaultColor);
                 int mutedColor = palette1.getMutedColor(defaultColor);
-
-                Palette.Swatch[] vibrantSwatchs = {palette1.getDarkMutedSwatch(), palette1.getLightMutedSwatch(),
-                        palette1.getDarkMutedSwatch(), palette1.getLightMutedSwatch(),
-                        palette1.getMutedSwatch(), palette1.getVibrantSwatch(),
-                        palette1.getDominantSwatch()};
-
-                for (Palette.Swatch vibrantSwatch : vibrantSwatchs) {
-                    if (vibrantSwatch != null) {
-                        int color = vibrantSwatch.getRgb();
-                        mAppLabelView.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
-                        mVersionNameView.setTextColor(vibrantSwatch.getBodyTextColor());
-                        mAppInfoContainer.setCardBackgroundColor(color);
-                        mDeleteApkLayout.setCardBackgroundColor(color);
-                        mAutoDeleteApkTitle.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
-                        return;
-                    }
-                }
+                mAppInfoContainer.setCardBackgroundColor(PaletteUtil.ColorBurn(lightVibrantColor));
+                mDeleteApkLayout.setCardBackgroundColor(PaletteUtil.ColorBurn(lightVibrantColor));
+                mInstallButton.setBackgroundColor(PaletteUtil.ColorBurn(lightVibrantColor));
             });
 
             Button mInstallButton = findViewById(R.id.install_button);
@@ -223,8 +214,6 @@ public class InstallSuccess extends Activity {
             } else {
                 launchButton.setEnabled(false);
             }
-
-
         }
     }
 

@@ -17,6 +17,11 @@
 package com.android.packageinstaller;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.RevealAnimator;
 import android.annotation.StringRes;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -38,12 +43,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PackageParser;
 import android.content.pm.PackageUserState;
+import android.content.pm.PermissionInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.AdaptiveIconDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.icu.util.Measure;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Process;
@@ -52,17 +59,27 @@ import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.palette.graphics.Palette;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.packageinstaller.ui.InstallPackageInfo;
+import com.android.packageinstaller.ui.InstallPackageInfoAdapter;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This activity is launched when a new application is installed via side loading
@@ -141,21 +158,23 @@ public class PackageInstallerActivity extends Activity {
     private CardView mDeleteApkLayout;
     private CardView mAppInfoContainer;
     private TextView mAutoDeleteApkTitle;
+    private Button mInstallButton;
+    private Button mCancelButton;
     private String mVersionName;
 
     private void startInstallConfirm() {
         TextView mInstallConfirmQuestions = findViewById(R.id.install_confirm_questions);
+        PackageInfo pkgInfo = new PackageInfo();
+        try {
+            pkgInfo = mPm.getPackageInfo(mPkgInfo.packageName, 0);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+        }
         if (mAppInfo != null) {
             if ((mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 mInstallConfirmQuestions.setText(getString(R.string.install_confirm_question_update_system));
             } else {
                 mInstallConfirmQuestions.setText(getString(R.string.install_confirm_question_update));
-            }
-            PackageInfo pkgInfo = new PackageInfo();
-            try {
-                pkgInfo = mPm.getPackageInfo(mPkgInfo.packageName, 0);
-            } catch (NameNotFoundException e) {
-                e.printStackTrace();
             }
             mVersionName = getString(R.string.app_info_version) + mAppSnippet.versionName
                     + String.format(getString(R.string.app_info_installed_version), pkgInfo.versionName)
@@ -392,6 +411,8 @@ public class PackageInstallerActivity extends Activity {
         mDeleteApkLayout = findViewById(R.id.delete_apk_view);
         mAutoDeleteApkTitle = findViewById(R.id.auto_delete_apk_title);
         mApkFileSize = Formatter.formatFileSize(this, new File(getIntent().getData().getPath()).length());
+        mInstallButton = findViewById(R.id.install_button);
+        mCancelButton = findViewById(R.id.cancel_button);
         bindUi();
         checkIfAllowedAndInitiateInstall();
     }
@@ -422,11 +443,33 @@ public class PackageInstallerActivity extends Activity {
         outState.putBoolean(ALLOW_UNKNOWN_SOURCES_KEY, mAllowUnknownSources);
     }
 
+    private static Animator setViewAnim(View resId, float alphaStart, float alphaEnd, int duration) {
+        return ObjectAnimator.ofFloat(resId, "alpha", alphaStart, alphaEnd).setDuration(duration);
+    }
+
+    private static Animator setVisibleAnim(View view) {
+        return setViewAnim(view, 0.0f, 1.0f, 500);
+    }
+
+    public static Animator getAnimator(View view) {
+
+        int x = (view.getLeft() + view.getRight()) / 2;
+        int y = (view.getTop() + view.getBottom()) / 2;
+        float endRadius = (float) Math.hypot(x, y);
+
+        try {
+            return ViewAnimationUtils.createCircularReveal(view, x,
+                    y, 0f, endRadius);
+        } catch (IllegalStateException e) {
+            return setVisibleAnim(view);
+        }
+    }
+
     private void bindUi() {
         ImageView app_icon = findViewById(R.id.app_icon);
         app_icon.setImageDrawable(mAppSnippet.icon);
         Palette.from(PaletteUtil.getIconBitmap(mAppSnippet.icon)).generate(palette1 -> {
-            int defaultColor = Color.WHITE;
+            int defaultColor = 0x5eb5f7;
             int darkVibrantColor = palette1.getDarkVibrantColor(defaultColor);
             int lightVibrantColor = palette1.getLightVibrantColor(defaultColor);
             int darkMutedColor = palette1.getDarkMutedColor(defaultColor);
@@ -434,24 +477,55 @@ public class PackageInstallerActivity extends Activity {
             int vibrantColor = palette1.getVibrantColor(defaultColor);
             int mutedColor = palette1.getMutedColor(defaultColor);
 
-            Palette.Swatch[] vibrantSwatchs = {palette1.getDarkMutedSwatch(), palette1.getLightMutedSwatch(),
-                    palette1.getDarkMutedSwatch(), palette1.getLightMutedSwatch(),
-                    palette1.getMutedSwatch(), palette1.getVibrantSwatch(),
-                    palette1.getDominantSwatch()};
+            AnimatorSet animatorSet = new AnimatorSet();
 
-            for (Palette.Swatch vibrantSwatch : vibrantSwatchs) {
-                if (vibrantSwatch != null) {
-                    int color = vibrantSwatch.getRgb();
-                    mAppLabelView.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
-                    mInstallFromSource.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
-                    mVersionNameView.setTextColor(vibrantSwatch.getBodyTextColor());
-                    mAppInfoContainer.setCardBackgroundColor(color);
-                    mDeleteApkLayout.setCardBackgroundColor(color);
-                    mAutoDeleteApkTitle.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
-                    return;
+            Animator[] animators = {getAnimator(mAppInfoContainer), getAnimator(mDeleteApkLayout), getAnimator(mInstallButton)};
+            animatorSet.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                    mAppInfoContainer.setCardBackgroundColor(PaletteUtil.ColorBurn(lightVibrantColor));
+                    mDeleteApkLayout.setCardBackgroundColor(PaletteUtil.ColorBurn(lightVibrantColor));
+                    mInstallButton.setBackgroundColor(PaletteUtil.ColorBurn(lightVibrantColor));
                 }
-            }
+            });
+            animatorSet.playTogether(animators);
+            animatorSet.setDuration(500);
+            animatorSet.start();
         });
+
+//        String[] permissionInfoList = mPkgInfo.requestedPermissions;
+//        String group;
+//        ArrayList<String> label = new ArrayList<>();
+//        ArrayList<String> info = new ArrayList<>();
+//        List<InstallPackageInfo> infos = new ArrayList<>();
+//        for (int i=0;i<permissionInfoList.length; i++){
+//            try {
+//                PermissionInfo permissionInfo = getPackageManager().getPermissionInfo(permissionInfoList[i], 0);
+//                group = permissionInfo.group;
+//                CharSequence labell = permissionInfo.loadLabel(getPackageManager());
+//
+//
+//                label.add((String) labell);
+//                String infoo;
+//                try{
+//                    infoo = permissionInfo.loadDescription(getPackageManager()).toString();
+//                }catch (Exception e){
+//                    infoo = "";
+//                }
+//
+//                info.add(infoo);
+//                infos.add(new InstallPackageInfo(permissionInfoList[i], (String) labell));
+//                RecyclerView mPermissionList = findViewById(R.id.permission_list_view);
+//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//                mPermissionList.setLayoutManager(linearLayoutManager);
+//                mPermissionList.setAdapter(new InstallPackageInfoAdapter(infos));
+//                Log.e(this.getClass().getSimpleName(), permissionInfoList[i]+" "+labell);
+//            } catch (NameNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
 
         PackageInfo packageInfo1;
         try {
@@ -468,8 +542,7 @@ public class PackageInstallerActivity extends Activity {
         mVersionName = getString(R.string.app_info_version) + mAppSnippet.versionName +
                 "\t\t" + getString(R.string.app_info_size) + mApkFileSize;
         mVersionNameView.setText(mVersionName);
-        Button mInstallButton = findViewById(R.id.install_button);
-        Button mCancelButton = findViewById(R.id.cancel_button);
+
         mInstallButton.setOnClickListener(view -> {
             if (mOk.isEnabled()) {
                 if (mSessionId != -1) {

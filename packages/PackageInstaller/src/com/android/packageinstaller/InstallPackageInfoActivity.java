@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.packageinstaller.ui.InstallPackageInfo;
 import com.android.packageinstaller.ui.InstallPackageInfoAdapter;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class InstallPackageInfoActivity extends AppCompatActivity {
 
@@ -70,6 +72,7 @@ public class InstallPackageInfoActivity extends AppCompatActivity {
     }
 
     private String time2String(long time) {
-        return new SimpleDateFormat("yyyy年M月d日 HH:mm:ss").format(new Date(time));
+         Locale locale = new Locale(Locale.getDefault().getLanguage());
+        return DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.DEFAULT,locale).format(new Date(time));
     }
 }
