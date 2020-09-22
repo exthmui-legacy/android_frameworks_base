@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name" msgid="7488448184431507488">"Усталёўшчык пакетаў"</string>
     <string name="install" msgid="711829760615509273">"Усталяваць"</string>
     <string name="done" msgid="6632441120016885253">"Гатова"</string>
@@ -27,17 +25,15 @@
     <string name="install_confirm_question_update" msgid="7942235418781274635">"Хочаце ўсталяваць абнаўленне для гэтай праграмы? Існуючыя даныя не будуць страчаны."</string>
     <string name="install_confirm_question_update_system" msgid="4713001702777910263">"Хочаце ўсталяваць абнаўленне для ўбудаванай праграмы? Існуючыя даныя не будуць страчаны."</string>
     <string name="install_failed" msgid="5777824004474125469">"Праграма не ўсталявана."</string>
-    <string name="install_failed_blocked" msgid="8512284352994752094">"Усталяванне пакета заблакіравана."</string>
-    <string name="install_failed_conflict" msgid="3493184212162521426">"Праграма не ўсталявана, таму што пакет канфліктуе з існуючым пакетам."</string>
-<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Праграма не ўсталявана, таму што яна несумяшчальная з вашым планшэтам."</string> -->
-<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Гэта праграма несумяшчальная з вашым тэлевізарам."</string> -->
-    <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"Праграма не ўсталявана, таму што яна несумяшчальная з вашым тэлефонам."</string>
-    <string name="install_failed_invalid_apk" msgid="8581007676422623930">"Праграма не ўсталявана, таму што пакет, магчыма, з\'яўляецца несапраўдным."</string>
-<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"На вашым планшэце не ўдалося ўсталяваць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"."</string> -->
-<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"На вашым тэлевізары не ўдалося ўсталяваць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"."</string> -->
-    <string name="install_failed_msg" product="default" msgid="6484461562647915707">"На вашым тэлефоне не ўдалося ўсталяваць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"."</string>
+    <!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Праграма не ўсталявана, таму што яна несумяшчальная з вашым планшэтам."</string> -->
+    <!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Гэта праграма несумяшчальная з вашым тэлевізарам."</string> -->
+
+    <string name="install_failed_incompatible" msgid="7254630419511645826" product="default">"Праграма не ўсталявана, таму што яна несумяшчальная з вашым тэлефонам."</string>
+    <!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"На вашым планшэце не ўдалося ўсталяваць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"."</string> -->
+    <!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"На вашым тэлевізары не ўдалося ўсталяваць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"."</string> -->
+
+    <string name="install_failed_msg" msgid="6484461562647915707" product="default">"На вашым тэлефоне не ўдалося ўсталяваць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"."</string>
     <string name="launch" msgid="3952550563999890101">"Адкрыць"</string>
-    <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"Ваш адміністратар не дазваляе ўсталёўку праграм з невядомых крыніц"</string>
     <string name="unknown_apps_user_restriction_dlg_text" msgid="151020786933988344">"Гэты карыстальнік не можа ўсталёўваць невядомыя праграмы"</string>
     <string name="install_apps_user_restriction_dlg_text" msgid="2154119597001074022">"Гэты карыстальнік не можа ўсталёўваць праграмы"</string>
     <string name="ok" msgid="7871959885003339302">"ОК"</string>
@@ -74,18 +70,16 @@
     <string name="uninstall_blocked_device_owner" msgid="6724602931761073901">"Гэта праграма патрэбная адміністратару вашай прылады і не можа быць выдалена."</string>
     <string name="manage_device_administrators" msgid="3092696419363842816">"Кіраваць праграмамі адміністратара прылады"</string>
     <string name="manage_users" msgid="1243995386982560813">"Кіраваць карыстальнікамі"</string>
-    <string name="uninstall_failed_msg" msgid="2176744834786696012">"Не ўдалося выдаліць праграму \"<xliff:g id="APP_NAME">%1$s</xliff:g>\"."</string>
     <string name="Parse_error_dlg_text" msgid="1661404001063076789">"Пры аналізе пакета адбылася памылка."</string>
-    <string name="wear_not_allowed_dlg_title" msgid="8664785993465117517">"Android Wear"</string>
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Дзеянні па ўсталяванні або выдаленні не падтрымліваюцца на Wear."</string>
     <string name="message_staging" msgid="8032722385658438567">"Праграма падрыхтоўваецца…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"Невядома"</string>
-<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"У мэтах бяспекі вашаму планшэту забаронена ўсталёўваць невядомыя праграмы з гэтай крыніцы."</string> -->
-<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"У мэтах бяспекі вашаму тэлевізару забаронена ўсталёўваць невядомыя праграмы з гэтай крыніцы."</string> -->
-    <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"У мэтах бяспекі вашаму тэлефону забаронена ўсталёўваць невядомыя праграмы з гэтай крыніцы."</string>
-    <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"Ваш тэлефон і асабістыя даныя больш прыступныя для атак невядомых праграм. Усталёўваючы гэту праграму, вы згаджаецеся з тым, што несяце адказнасць за любыя пашкоджанні тэлефона ці страту даных, якія могуць адбыцца ў выніку выкарыстання гэтай праграмы."</string>
-<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Ваш планшэт і асабістыя даныя больш прыступныя для атак невядомых праграм. Усталёўваючы гэту праграму, вы згаджаецеся з тым, што несяце адказнасць за любыя пашкоджанні планшэта ці страту даных, якія могуць адбыцца ў выніку выкарыстання гэтай праграмы."</string> -->
-<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Ваш тэлевізар і асабістыя даныя больш прыступныя для атак невядомых праграм. Усталёўваючы гэту праграму, вы згаджаецеся з тым, што несяце адказнасць за любыя пашкоджанні тэлевізара ці страту даных, якія могуць адбыцца ў выніку выкарыстання гэтай праграмы."</string> -->
+    <!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"У мэтах бяспекі вашаму планшэту забаронена ўсталёўваць невядомыя праграмы з гэтай крыніцы."</string> -->
+    <!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"У мэтах бяспекі вашаму тэлевізару забаронена ўсталёўваць невядомыя праграмы з гэтай крыніцы."</string> -->
+    <string name="untrusted_external_source_warning" msgid="7279739265754475165" product="default">"У мэтах бяспекі вашаму тэлефону забаронена ўсталёўваць невядомыя праграмы з гэтай крыніцы."</string>
+    <string name="anonymous_source_warning" msgid="2784902545920822500" product="default">"Ваш тэлефон і асабістыя даныя больш прыступныя для атак невядомых праграм. Усталёўваючы гэту праграму, вы згаджаецеся з тым, што несяце адказнасць за любыя пашкоджанні тэлефона ці страту даных, якія могуць адбыцца ў выніку выкарыстання гэтай праграмы."</string>
+    <!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Ваш планшэт і асабістыя даныя больш прыступныя для атак невядомых праграм. Усталёўваючы гэту праграму, вы згаджаецеся з тым, што несяце адказнасць за любыя пашкоджанні планшэта ці страту даных, якія могуць адбыцца ў выніку выкарыстання гэтай праграмы."</string> -->
+    <!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Ваш тэлевізар і асабістыя даныя больш прыступныя для атак невядомых праграм. Усталёўваючы гэту праграму, вы згаджаецеся з тым, што несяце адказнасць за любыя пашкоджанні тэлевізара ці страту даных, якія могуць адбыцца ў выніку выкарыстання гэтай праграмы."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Далей"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Налады"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Усталяванне і выдаленне праграм Wear"</string>

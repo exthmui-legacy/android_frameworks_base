@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -45,34 +44,28 @@
     <string name="install_failed">Installation failed</string>
     <!-- Reason displayed when installation fails because the package was blocked
         from being installed (e.g., device policy, verification, ...) [CHAR LIMIT=100] -->
-    <string name="install_failed_blocked">The package was blocked from being installed.</string>
     <!-- Reason displayed when installation fails because the package conflicts with
         an existing application (e.g., incompatible certificates) [CHAR LIMIT=100] -->
-    <string name="install_failed_conflict">App not installed as package conflicts with an existing package.</string>
     <!-- Reason displayed when installation fails because the package is incompatible with
        the current tablet (e.g., missing native code for the current ABI, newer SDK, ...) [CHAR LIMIT=100] -->
-<!--     <string name="install_failed_incompatible" product="tablet">App not installed as app isn\'t compatible with your tablet.</string> -->
+     <!--    <string name="install_failed_incompatible" product="tablet">App not installed as app isn\'t compatible with your tablet.</string> -->
     <!-- Reason displayed when installation fails because the package is incompatible with
        the current TV (e.g., missing native code for the current ABI, newer SDK, ...) [CHAR LIMIT=100] -->
-<!--     <string name="install_failed_incompatible" product="tv">This app isn\'t
-        compatible with your TV.</string>-->
+     <!--     <string name="install_failed_incompatible" product="tv">This app isn\'t compatible with your TV.</string>-->
     <!-- Reason displayed when installation fails because the package is incompatible with
        the current phone (e.g., missing native code for the current ABI, newer SDK, ...) [CHAR LIMIT=100] -->
     <string name="install_failed_incompatible" product="default">App isn\'t compatible with your phone.</string>
     <!-- Reason displayed when installation fails because the installation package itself is invalid
         in some way (e.g., corrupt) [CHAR LIMIT=100] -->
-    <string name="install_failed_invalid_apk">App not installed as package appears to be invalid.</string>
     <!-- Message presented when an application could not be installed on the tablet for some reason. [CHAR LIMIT=100] -->
-<!--     <string name="install_failed_msg" product="tablet"><xliff:g id="app_name">%1$s</xliff:g> couldn\'t be installed on your tablet.</string> -->
+     <!--    <string name="install_failed_msg" product="tablet"><xliff:g id="app_name">%1$s</xliff:g> couldn\'t be installed on your tablet.</string> -->
     <!-- Message presented when an application could not be installed on the TV for some reason. [CHAR LIMIT=100] -->
-<!--     <string name="install_failed_msg" product="tv"><xliff:g id="app_name">%1$s</xliff:g> couldn\'t be installed on your TV.</string> -->
+     <!--     <string name="install_failed_msg" product="tv"><xliff:g id="app_name">%1$s</xliff:g> couldn\'t be installed on your TV.</string>  -->
     <!-- Message presented when an application could not be installed on the phone for some reason. [CHAR LIMIT=100] -->
     <string name="install_failed_msg" product="default"><xliff:g id="app_name">%1$s</xliff:g> couldn\'t be installed on your phone.</string>
     <string name="launch">Open App</string>
 
     <!-- Message presented in a dialog box when the device administrator restricts the installation of apps from unknown sources. [CHAR LIMIT=none] -->
-    <string name="unknown_apps_admin_dlg_text">Your admin doesn\'t allow installation of apps
-        obtained from unknown sources</string>
     <!-- Message presented in a dialog box when the user restriction set by the system restricts the installation of apps from unknown sources. [CHAR LIMIT=none] -->
     <string name="unknown_apps_user_restriction_dlg_text">Unknown apps can\'t be installed by this
         user</string>
@@ -118,7 +111,7 @@
     <!--  [CHAR LIMIT=none] -->
     <string name="uninstall_update_text_multiuser">Replace this app with the factory version? All data will be removed. This affects all users of this device, including those with work profiles.</string>
     <!-- Label of a checkbox that allows to keep the data (e.g. files, settings) of the app on uninstall [CHAR LIMIT=none] -->
-    <string name="uninstall_keep_data">Keep <xliff:g id="size" example="1.5MB">%1$s</xliff:g> of app data.</string>
+    <string name="uninstall_keep_data">Keep <xliff:g example="1.5MB" id="size">%1$s</xliff:g> of app data.</string>
 
     <!-- Label for the notification channel containing notifications for current uninstall operations [CHAR LIMIT=40] -->
     <string name="uninstalling_notification_channel">Running uninstalls</string>
@@ -165,13 +158,11 @@
         the app. [CHAR LIMIT=50] -->
     <string name="manage_users">Manage users</string>
     <!-- [CHAR LIMIT=none] -->
-    <string name="uninstall_failed_msg"><xliff:g id="app_name">%1$s</xliff:g> couldn\'t be uninstalled.</string>
 
     <!-- Dialog attributes to indicate parse errors -->
     <string name="Parse_error_dlg_text">There was a problem parsing the package.</string>
 
     <!-- Title of dialog telling users that Install/Uninstall action is not supported on Android Wear. [CHAR LIMIT=30] -->
-    <string name="wear_not_allowed_dlg_title">Android Wear</string>
     <!-- Title of dialog telling users that Install/Uninstall action is not supported on Android Wear. [CHAR LIMIT=none] -->
     <string name="wear_not_allowed_dlg_text">Install/Uninstall actions not supported on Wear.</string>
 
@@ -182,13 +173,12 @@
     <string name="app_name_unknown">Unknown</string>
 
     <!-- Help URL, application permissions [DO NOT TRANSLATE] -->
-    <string name="help_app_permissions" translatable="false"></string>
 
     <!-- Text to show in warning dialog on the tablet when the app source is not trusted [CHAR LIMIT=NONE] -->
 <!--     <string name="untrusted_external_source_warning" product="tablet">For your security, your tablet is not allowed to install unknown apps from this source.</string> -->
 
     <!-- Text to show in warning dialog on the tv when the app source is not trusted [CHAR LIMIT=NONE] -->
-<!--     <string name="untrusted_external_source_warning" product="tv">For your security, your TV is not allowed to install unknown apps from this source.</string> -->
+     <!--     <string name="untrusted_external_source_warning" product="tv">For your security, your TV is not allowed to install unknown apps from this source.</string>  -->
 
     <!-- Text to show in warning dialog on the phone when the app source is not trusted [CHAR LIMIT=NONE] -->
     <string name="untrusted_external_source_warning" product="default">For your security, your phone is not allowed to install unknown apps from this source.</string>
@@ -210,12 +200,12 @@
     </string>-->
 
     <!-- Text to show in warning dialog on the tv when the app source cannot be identified [CHAR LIMIT=NONE] -->
-<!--     <string name="anonymous_source_warning" product="tv">
-        Your TV and personal data are more vulnerable
-        to attack by unknown apps. By installing this app, you
-        agree that you are responsible for any damage to your
-        TV or loss of data that may result from its use.
-    </string>-->
+     <!--     <string name="anonymous_source_warning" product="tv">
+            Your TV and personal data are more vulnerable
+            to attack by unknown apps. By installing this app, you
+            agree that you are responsible for any damage to your
+            TV or loss of data that may result from its use.
+        </string>-->
 
     <!-- Label for button to continue install of an app whose source cannot be identified [CHAR LIMIT=40] -->
     <string name="anonymous_source_continue">Continue</string>
@@ -235,7 +225,7 @@
 
     <!-- Notification shown in status bar when an application is successfully installed.
          [CHAR LIMIT=50] -->
-    <string name="notification_installation_success_status">Successfully installed \u201c<xliff:g id="appname" example="Package Installer">%1$s</xliff:g>\u201d</string>
+    <string name="notification_installation_success_status">Successfully installed \u201c<xliff:g example="Package Installer" id="appname">%1$s</xliff:g>\u201d</string>
     <string name="delete_apk_when_installed">Auto-delete APK (%1$s)</string>
     <string name="install_from_source">From \"%1$s\"</string>
     <string name="app_info_version">"Version: "</string>
@@ -243,15 +233,15 @@
     <string name="app_info_installed_version">(%1$s has been installed)</string>
     <string name="install_failed_exit">Exit</string>
     <string name="install_failed_already_exists">App with the Same Name Already Exists</string>
-    <string name="install_failed_bad_manifest">解析失败：无法读取安装包的Manifest 文件</string>
-    <string name="install_failed_bad_package_name">解析失败：安装包的包名不存在</string>
-    <string name="install_failed_bad_shared_user_id">解析失败：安装包的共享UID无效</string>
-    <string name="install_failed_certificate_encoding">解析失败：安装包的签名编码异常</string>
-    <string name="install_failed_conflicting_provider">与“%1$s”存在不兼容，无法同时安装</string>
-    <string name="install_failed_container_error">无法找到SD存储卡</string>
-    <string name="install_failed_cpu_abi_incompatible">（CPU）与您的手机不兼容</string>
-    <string name="install_failed_dexopt">优化和验证dex文件失败</string>
-    <string name="install_failed_duplicate_package">已存在相同包名的应用</string>
+    <string name="install_failed_bad_manifest">Parsing failed: Unable to read the APK manifest file</string>
+    <string name="install_failed_bad_package_name">Parsing failed: APK package name does not exist</string>
+    <string name="install_failed_bad_shared_user_id">Parsing failed: APK shared UID is invaild</string>
+    <string name="install_failed_certificate_encoding">Parsing failed: APK signature encoding failed</string>
+    <string name="install_failed_conflicting_provider">Not compatible with \"%1$s\". These cannot be installed at the same time</string>
+    <string name="install_failed_container_error">Unable to Find SD Card</string>
+    <string name="install_failed_cpu_abi_incompatible">(CPU) Incompatible with your phone</string>
+    <string name="install_failed_dexopt">Optimization and Verification of dex Files Failed</string>
+    <string name="install_failed_duplicate_package">An app with the same package name already exists</string>
     <string name="install_failed_inconsistent_certificates">An app with the same signature has already been installed</string>
     <string name="install_failed_internal_error">Parsing failed: System error</string>
     <string name="install_failed_invaild_apk">APK Error</string>
@@ -278,11 +268,11 @@
     <string name="install_failed_version_downgrade">A newer version has been installed</string>
     <string name="install_failed_insufficient_storage">Insufficient storage space</string>
     <string name="install_status_code">Error code: %1$s</string>
-    <string name="install_package_info">安装包信息</string>
-    <string name="package_info_package_label">安装包名称</string>
-    <string name="package_info_package_name">安装包包名</string>
-    <string name="package_info_package_version_name">安装包版本</string>
-    <string name="package_info_package_first_install_time">第一次安装时间</string>
-    <string name="package_info_package_last_update_time">最后一次升级时间</string>
-    <string name="package_info_package_version_code">安装包内部版本号</string>
+    <string name="install_package_info">Pckage Info</string>
+    <string name="package_info_package_label">Package label</string>
+    <string name="package_info_package_name">Package name</string>
+    <string name="package_info_package_version_name">Package Version Name</string>
+    <string name="package_info_package_first_install_time">The first install time</string>
+    <string name="package_info_package_last_update_time">The last install time</string>
+    <string name="package_info_package_version_code">Package Version Code</string>
 </resources>

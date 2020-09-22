@@ -16,8 +16,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Generic text to indicate a yes. [CHAR LIMIT=10] -->
-    <string name="generic_yes">Yes</string>
 
     <!-- Generic text to indicate Cancel. [CHAR LIMIT=10] -->
-    <string name="generic_cancel">Cancel</string>
 </resources>

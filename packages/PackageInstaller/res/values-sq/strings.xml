@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name" msgid="7488448184431507488">"Instaluesi i paketës"</string>
     <string name="install" msgid="711829760615509273">"Instalo"</string>
     <string name="done" msgid="6632441120016885253">"U krye"</string>
@@ -27,17 +25,13 @@
     <string name="install_confirm_question_update" msgid="7942235418781274635">"Dëshiron të instalosh një përditësim të këtij aplikacioni ekzistues? Të dhënat e tua ekzistuese nuk do të humbasin."</string>
     <string name="install_confirm_question_update_system" msgid="4713001702777910263">"Dëshiron të instalosh një përditësim të këtij aplikacioni ekzistues? Të dhënat e tua ekzistuese nuk do të humbasin."</string>
     <string name="install_failed" msgid="5777824004474125469">"Aplikacioni nuk u instalua."</string>
-    <string name="install_failed_blocked" msgid="8512284352994752094">"Instalimi paketës u bllokua."</string>
-    <string name="install_failed_conflict" msgid="3493184212162521426">"Aplikacioni nuk u instalua pasi paketa është në konflikt me një paketë ekzistuese."</string>
-<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Aplikacioni nuk u instalua pasi nuk është i përputhet me tabletin tënd."</string> -->
-<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Ky aplikacion është i papërshtatshëm me televizorin tënd."</string> -->
-    <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"Aplikacioni nuk u instalua pasi nuk përputhet me telefonin tënd."</string>
-    <string name="install_failed_invalid_apk" msgid="8581007676422623930">"Aplikacioni nuk u instalua pasi paketa duket se nuk është e vlefshme."</string>
-<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> nuk mund të instalohej në tablet."</string> -->
-<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> nuk mund të instalohej në televizor."</string> -->
-    <string name="install_failed_msg" product="default" msgid="6484461562647915707">"<xliff:g id="APP_NAME">%1$s</xliff:g> nuk mund të instalohej në telefon."</string>
+    <!--    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Aplikacioni nuk u instalua pasi nuk është i përputhet me tabletin tënd."</string> -->
+    <!--    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Ky aplikacion është i papërshtatshëm me televizorin tënd."</string> -->
+    <string name="install_failed_incompatible" msgid="7254630419511645826" product="default">"Aplikacioni nuk u instalua pasi nuk përputhet me telefonin tënd."</string>
+    <!--    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> nuk mund të instalohej në tablet."</string> -->
+    <!--    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> nuk mund të instalohej në televizor."</string> -->
+    <string name="install_failed_msg" msgid="6484461562647915707" product="default">"<xliff:g id="APP_NAME">%1$s</xliff:g> nuk mund të instalohej në telefon."</string>
     <string name="launch" msgid="3952550563999890101">"Hap"</string>
-    <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"Administratori nuk lejon instalimin e aplikacioneve nga burime të panjohura."</string>
     <string name="unknown_apps_user_restriction_dlg_text" msgid="151020786933988344">"Aplikacionet e panjohura nuk mund të instalohen nga ky përdorues"</string>
     <string name="install_apps_user_restriction_dlg_text" msgid="2154119597001074022">"Ky përdorues nuk lejohet të instalojë aplikacione"</string>
     <string name="ok" msgid="7871959885003339302">"Në rregull"</string>
@@ -74,18 +68,16 @@
     <string name="uninstall_blocked_device_owner" msgid="6724602931761073901">"Ky aplikacion kërkohet nga administratori i pajisjes dhe nuk mund të çinstalohet."</string>
     <string name="manage_device_administrators" msgid="3092696419363842816">"Menaxho aplikacionet e administratorit të pajisjes"</string>
     <string name="manage_users" msgid="1243995386982560813">"Menaxho përdoruesit"</string>
-    <string name="uninstall_failed_msg" msgid="2176744834786696012">"<xliff:g id="APP_NAME">%1$s</xliff:g> nuk mund të çinstalohej."</string>
     <string name="Parse_error_dlg_text" msgid="1661404001063076789">"Kishte një problem me analizimin e paketës."</string>
-    <string name="wear_not_allowed_dlg_title" msgid="8664785993465117517">"Android Wear"</string>
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Instalo/çinstalo veprimet që nuk mbështeten në Wear."</string>
     <string name="message_staging" msgid="8032722385658438567">"Po vihet në përdorim aplikacioni..."</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"I panjohur"</string>
-<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Për sigurinë tënde, tableti yt nuk lejohet të instalojë aplikacione të panjohura nga ky burim."</string> -->
-<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Për sigurinë tënde, televizori yt nuk lejohet të instalojë aplikacione të panjohura nga ky burim."</string> -->
-    <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"Për sigurinë tënde, telefoni yt nuk lejohet të instalojë aplikacione të panjohura nga ky burim."</string>
-    <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"Telefoni dhe të dhënat e tua personale janë më të cenueshme për t\'u sulmuar nga aplikacione të panjohura. Duke instaluar këtë aplikacion, ti pranon se je përgjegjës për çdo dëm ndaj telefonit tënd ose çdo humbje të dhënash që mund të rezultojë nga përdorimi i tij."</string>
-<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Tableti dhe të dhënat e tua personale janë më të cenueshme për t\'u sulmuar nga aplikacione të panjohura. Duke instaluar këtë aplikacion, ti pranon se je përgjegjës për çdo dëm ndaj tabletit tënd ose çdo humbje të dhënash që mund të rezultojë nga përdorimi i tij."</string> -->
-<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Televizori dhe të dhënat e tua personale janë më të cenueshme për t\'u sulmuar nga aplikacione të panjohura. Duke instaluar këtë aplikacion, ti pranon se je përgjegjës për çdo dëm ndaj televizorit tënd ose çdo humbje të dhënash që mund të rezultojë nga përdorimi i tij."</string> -->
+    <!--    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Për sigurinë tënde, tableti yt nuk lejohet të instalojë aplikacione të panjohura nga ky burim."</string> -->
+    <!--    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Për sigurinë tënde, televizori yt nuk lejohet të instalojë aplikacione të panjohura nga ky burim."</string> -->
+    <string name="untrusted_external_source_warning" msgid="7279739265754475165" product="default">"Për sigurinë tënde, telefoni yt nuk lejohet të instalojë aplikacione të panjohura nga ky burim."</string>
+    <string name="anonymous_source_warning" msgid="2784902545920822500" product="default">"Telefoni dhe të dhënat e tua personale janë më të cenueshme për t\'u sulmuar nga aplikacione të panjohura. Duke instaluar këtë aplikacion, ti pranon se je përgjegjës për çdo dëm ndaj telefonit tënd ose çdo humbje të dhënash që mund të rezultojë nga përdorimi i tij."</string>
+    <!--    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Tableti dhe të dhënat e tua personale janë më të cenueshme për t\'u sulmuar nga aplikacione të panjohura. Duke instaluar këtë aplikacion, ti pranon se je përgjegjës për çdo dëm ndaj tabletit tënd ose çdo humbje të dhënash që mund të rezultojë nga përdorimi i tij."</string> -->
+    <!--    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Televizori dhe të dhënat e tua personale janë më të cenueshme për t\'u sulmuar nga aplikacione të panjohura. Duke instaluar këtë aplikacion, ti pranon se je përgjegjës për çdo dëm ndaj televizorit tënd ose çdo humbje të dhënash që mund të rezultojë nga përdorimi i tij."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Vazhdo"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Cilësimet"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Instalimi/çinstalimi i aplikacioneve të Wear"</string>

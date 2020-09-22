@@ -20,7 +20,7 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="Theme.AlertDialogActivity" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.AlertDialogActivity" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:fitsSystemWindows">true</item>
@@ -31,6 +31,7 @@
         <item name="android:colorAccent">@color/exthmui_primary_color</item>
         <item name="colorPrimary">@color/exthmui_primary_color</item>
         <item name="colorAccent">@color/exthmui_primary_color</item>
+
     </style>
 
     <style name="Theme.AlertDialogActivity.NoActionBar">

@@ -16,7 +16,5 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- START: Ported values -->
-    <integer name="short_title_length">13</integer>
-    <integer name="char_limit_per_line">18</integer>
     <!-- END: Ported values -->
 </resources>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name" msgid="7488448184431507488">"ຕົວຕິດຕັ້ງແພັກເກດ"</string>
     <string name="install" msgid="711829760615509273">"ຕິດຕັ້ງ"</string>
     <string name="done" msgid="6632441120016885253">"ແລ້ວໆ"</string>
@@ -27,17 +25,13 @@
     <string name="install_confirm_question_update" msgid="7942235418781274635">"ທ່ານຕ້ອງການຕິດຕັ້ງອັບເດດຫາແອັບພລິເຄຊັນທີ່ມີຢູ່ກ່ອນແລ້ວນີ້ບໍ່? ຂໍ້ມູນເກົ່າຂອງທ່ານຈະບໍ່ເສຍໄປໃສ."</string>
     <string name="install_confirm_question_update_system" msgid="4713001702777910263">"ທ່ານຕ້ອງການຕິດຕັ້ງອັບເດດໃສ່ແອັບພລິເຄຊັນແບບມີມາໃນຕົວນີ້ບໍ່? ຂໍ້ມູນເກົ່າຂອງທ່ານຈະບໍ່ເສຍໄປໃສ."</string>
     <string name="install_failed" msgid="5777824004474125469">"ບໍ່ໄດ້ຕິດຕັ້ງແອັບເທື່ອ."</string>
-    <string name="install_failed_blocked" msgid="8512284352994752094">"ແພັກ​ເກດ​ຖືກບ​ລັອກ​ບໍ່​ໃຫ້​ໄດ້​ຮັບ​ການ​ຕິດ​ຕັ້ງ."</string>
-    <string name="install_failed_conflict" msgid="3493184212162521426">"ບໍ່ໄດ້ຕິດຕັ້ງແອັບເນື່ອງຈາກແພັກເກດຂັດແຍ່ງກັບແພັກເກດທີ່ມີຢູ່ກ່ອນແລ້ວ."</string>
-<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"ບໍ່ໄດ້ຕິດຕັ້ງແອັບເນື່ອງຈາກແອັບບໍ່ສາມາດໃຊ້ຮ່ວມກັບແທັບເລັດຂອງທ່ານໄດ້."</string> -->
-<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"ແອັບນີ້ໃຊ້ຮ່ວມກັບໂທລະທັດຂອງທ່ານບໍ່ໄດ້."</string> -->
-    <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"ບໍ່ໄດ້ຕິດຕັ້ງແອັບເນື່ອງຈາກແອັບບໍ່ສາມາດໃຊ້ຮ່ວມກັບໂທລະສັບຂອງທ່ານໄດ້."</string>
-    <string name="install_failed_invalid_apk" msgid="8581007676422623930">"ບໍ່ໄດ້ຕິດຕັ້ງແອັບເນື່ອງຈາກແພັກເກດບໍ່ຖືກຕ້ອງ."</string>
-<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"ບໍ່ສາມາດຕິດຕັ້ງ <xliff:g id="APP_NAME">%1$s</xliff:g> ຢູ່ແທັບເລັດຂອງທ່ານໄດ້."</string> -->
-<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"ບໍ່ສາມາດຕິດຕັ້ງ <xliff:g id="APP_NAME">%1$s</xliff:g> ຢູ່ໂທລະທັດຂອງທ່ານໄດ້."</string> -->
-    <string name="install_failed_msg" product="default" msgid="6484461562647915707">"ບໍ່​ສາ​ມາດ​ຕິດ​ຕັ້ງ​ <xliff:g id="APP_NAME">%1$s</xliff:g> ຢູ່ໂທລະສັບຂອງທ່ານໄດ້."</string>
+    <!--    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"ບໍ່ໄດ້ຕິດຕັ້ງແອັບເນື່ອງຈາກແອັບບໍ່ສາມາດໃຊ້ຮ່ວມກັບແທັບເລັດຂອງທ່ານໄດ້."</string> -->
+    <!--    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"ແອັບນີ້ໃຊ້ຮ່ວມກັບໂທລະທັດຂອງທ່ານບໍ່ໄດ້."</string> -->
+    <string name="install_failed_incompatible" msgid="7254630419511645826" product="default">"ບໍ່ໄດ້ຕິດຕັ້ງແອັບເນື່ອງຈາກແອັບບໍ່ສາມາດໃຊ້ຮ່ວມກັບໂທລະສັບຂອງທ່ານໄດ້."</string>
+    <!--    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"ບໍ່ສາມາດຕິດຕັ້ງ <xliff:g id="APP_NAME">%1$s</xliff:g> ຢູ່ແທັບເລັດຂອງທ່ານໄດ້."</string> -->
+    <!--    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"ບໍ່ສາມາດຕິດຕັ້ງ <xliff:g id="APP_NAME">%1$s</xliff:g> ຢູ່ໂທລະທັດຂອງທ່ານໄດ້."</string> -->
+    <string name="install_failed_msg" msgid="6484461562647915707" product="default">"ບໍ່​ສາ​ມາດ​ຕິດ​ຕັ້ງ​ <xliff:g id="APP_NAME">%1$s</xliff:g> ຢູ່ໂທລະສັບຂອງທ່ານໄດ້."</string>
     <string name="launch" msgid="3952550563999890101">"ເປີດ"</string>
-    <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"ຜູ້ເບິ່ງແຍງລະບົບຂອງທ່ານບໍ່ອະນຸຍາດໃຫ້ຕິດຕັ້ງແອັບທີ່ໄດ້ມາຈາກແຫຼ່ງທີ່ບໍ່ຮູ້ຈັກ"</string>
     <string name="unknown_apps_user_restriction_dlg_text" msgid="151020786933988344">"ຜູ້ໃຊ້ນີ້ບໍ່ສາມາດຕິດຕັ້ງແອັບທີ່ບໍ່ຮູ້ຈັກໄດ້"</string>
     <string name="install_apps_user_restriction_dlg_text" msgid="2154119597001074022">"ຜູ້ໃຊ້ນີ້ບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ຕິດຕັ້ງແອັບໄດ້"</string>
     <string name="ok" msgid="7871959885003339302">"ຕົກລົງ"</string>
@@ -74,18 +68,16 @@
     <string name="uninstall_blocked_device_owner" msgid="6724602931761073901">"​ແອັບ​ນີ້​ຕ້ອງ​ໃຊ້​ໂດຍ​ຜູ້​ເບິ່ງ​ແຍງ​ລະ​ບົບ​ຂອງ​ທ່ານ ແລະ​ ບໍ່​ສາ​ມາດ​ຖອນ​ການ​ຕິດ​ຕັ້ງ​ໄດ້."</string>
     <string name="manage_device_administrators" msgid="3092696419363842816">"ຈັດການແອັບຜູ້ເບິ່ງແຍງອຸປະກອນ"</string>
     <string name="manage_users" msgid="1243995386982560813">"ຈັດການຜູ້ໃຊ້"</string>
-    <string name="uninstall_failed_msg" msgid="2176744834786696012">"<xliff:g id="APP_NAME">%1$s</xliff:g> ບໍ່ສາມາດຖອນອອກໄດ້."</string>
     <string name="Parse_error_dlg_text" msgid="1661404001063076789">"ເກີດບັນຫາໃນການແຍກວິເຄາະແພັກເກດ."</string>
-    <string name="wear_not_allowed_dlg_title" msgid="8664785993465117517">"Android Wear"</string>
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"ຕິດຕັ້ງ/ຖອນການຕິດຕັ້ງ ຄຳສັ່ງທີ່ບໍ່ຮອງຮັບຢູ່ Wear."</string>
     <string name="message_staging" msgid="8032722385658438567">"ກຳລັງຮຽງແອັບ…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"ບໍ່ຮູ້ຈັກ"</string>
-<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"ເພື່ອຄວາມປອດໄພຂອງທ່ານ, ແທັບເລັດຂອງທ່ານບໍ່ສາມາດຕິດຕັ້ງແອັບຈາກແຫລ່ງຂໍ້ມູນນີ້ໄດ້."</string> -->
-<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"ເພື່ອຄວາມປອດໄພຂອງທ່ານ, ໂທລະທັດຂອງທ່ານບໍ່ສາມາດຕິດຕັ້ງແອັບຈາກແຫລ່ງຂໍ້ມູນນີ້ໄດ້."</string> -->
-    <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"ເພື່ອຄວາມປອດໄພຂອງທ່ານ, ໂທລະສັບຂອງທ່ານບໍ່ສາມາດຕິດຕັ້ງແອັບຈາກແຫລ່ງຂໍ້ມູນນີ້ໄດ້."</string>
-    <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"ໂທລະສັບ ແລະ ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານອາດຖືກໂຈມຕີໄດ້ໂດຍແອັບທີ່ບໍ່ຮູ້ຈັກ. ໂດຍການຕິດຕັ້ງແອັບນີ້, ແມ່ນທ່ານຍອມຮັບວ່າທ່ານຈະຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍໃດໆກໍຕາມທີ່ເກີດຂຶ້ນຕໍ່ໂທລະທັດຂອງທ່ານ ຫຼື ການສູນເສຍຂໍ້ມູນທີ່ອາດເກີດຈາກການນຳໃຊ້ມັນ."</string>
-<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"ແທັບເລັດ ແລະ ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານອາດຖືກໂຈມຕີໄດ້ໂດຍແອັບທີ່ບໍ່ຮູ້ຈັກ. ໂດຍການຕິດຕັ້ງແອັບນີ້, ແມ່ນທ່ານຍອມຮັບວ່າທ່ານຈະຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍໃດໆກໍຕາມທີ່ເກີດຂຶ້ນຕໍ່ໂທລະທັດຂອງທ່ານ ຫຼື ການສູນເສຍຂໍ້ມູນທີ່ອາດເກີດຈາກການນຳໃຊ້ມັນ."</string> -->
-<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"ໂທລະທັດ ແລະ ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານອາດຖືກໂຈມຕີໄດ້ໂດຍແອັບທີ່ບໍ່ຮູ້ຈັກ. ໂດຍການຕິດຕັ້ງແອັບນີ້, ແມ່ນທ່ານຍອມຮັບວ່າທ່ານຈະຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍໃດໆກໍຕາມທີ່ເກີດຂຶ້ນຕໍ່ໂທລະທັດຂອງທ່ານ ຫຼື ການສູນເສຍຂໍ້ມູນທີ່ອາດເກີດຈາກການນຳໃຊ້ມັນ."</string> -->
+    <!--    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"ເພື່ອຄວາມປອດໄພຂອງທ່ານ, ແທັບເລັດຂອງທ່ານບໍ່ສາມາດຕິດຕັ້ງແອັບຈາກແຫລ່ງຂໍ້ມູນນີ້ໄດ້."</string> -->
+    <!--    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"ເພື່ອຄວາມປອດໄພຂອງທ່ານ, ໂທລະທັດຂອງທ່ານບໍ່ສາມາດຕິດຕັ້ງແອັບຈາກແຫລ່ງຂໍ້ມູນນີ້ໄດ້."</string> -->
+    <string name="untrusted_external_source_warning" msgid="7279739265754475165" product="default">"ເພື່ອຄວາມປອດໄພຂອງທ່ານ, ໂທລະສັບຂອງທ່ານບໍ່ສາມາດຕິດຕັ້ງແອັບຈາກແຫລ່ງຂໍ້ມູນນີ້ໄດ້."</string>
+    <string name="anonymous_source_warning" msgid="2784902545920822500" product="default">"ໂທລະສັບ ແລະ ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານອາດຖືກໂຈມຕີໄດ້ໂດຍແອັບທີ່ບໍ່ຮູ້ຈັກ. ໂດຍການຕິດຕັ້ງແອັບນີ້, ແມ່ນທ່ານຍອມຮັບວ່າທ່ານຈະຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍໃດໆກໍຕາມທີ່ເກີດຂຶ້ນຕໍ່ໂທລະທັດຂອງທ່ານ ຫຼື ການສູນເສຍຂໍ້ມູນທີ່ອາດເກີດຈາກການນຳໃຊ້ມັນ."</string>
+    <!--    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"ແທັບເລັດ ແລະ ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານອາດຖືກໂຈມຕີໄດ້ໂດຍແອັບທີ່ບໍ່ຮູ້ຈັກ. ໂດຍການຕິດຕັ້ງແອັບນີ້, ແມ່ນທ່ານຍອມຮັບວ່າທ່ານຈະຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍໃດໆກໍຕາມທີ່ເກີດຂຶ້ນຕໍ່ໂທລະທັດຂອງທ່ານ ຫຼື ການສູນເສຍຂໍ້ມູນທີ່ອາດເກີດຈາກການນຳໃຊ້ມັນ."</string> -->
+    <!--    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"ໂທລະທັດ ແລະ ຂໍ້ມູນສ່ວນຕົວຂອງທ່ານອາດຖືກໂຈມຕີໄດ້ໂດຍແອັບທີ່ບໍ່ຮູ້ຈັກ. ໂດຍການຕິດຕັ້ງແອັບນີ້, ແມ່ນທ່ານຍອມຮັບວ່າທ່ານຈະຮັບຜິດຊອບຕໍ່ຄວາມເສຍຫາຍໃດໆກໍຕາມທີ່ເກີດຂຶ້ນຕໍ່ໂທລະທັດຂອງທ່ານ ຫຼື ການສູນເສຍຂໍ້ມູນທີ່ອາດເກີດຈາກການນຳໃຊ້ມັນ."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"ສືບຕໍ່"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"ການຕັ້ງຄ່າ"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"ການຕິດຕັ້ງ/ຖອນການຕິດຕັ້ງແອັບ Wear"</string>

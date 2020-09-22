@@ -16,5 +16,4 @@
 
 <resources>
     <!-- Copied from wearable support -->
-    <color name="circular_button_disabled">#757575</color>
 </resources>

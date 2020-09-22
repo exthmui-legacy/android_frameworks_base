@@ -18,10 +18,6 @@
 <resources>
     <color name="bigIconColor">#C8CCCE</color>
     <color name="exthmui_primary_color">#ffdb4437</color>
-    <color name="exthmui_primary_color_70_percent">#ccdb4437</color>
-    <color name="exthmui_primary_color_disabled">#33000000</color>
 
     <color name="exthmui_installer_color">#ffebebeb</color>
-    <color name="exthmui_installer_color_70_percent">#ccdb4437</color>
-    <color name="exthmui_installer_color_disabled">#33000000</color>
 </resources>

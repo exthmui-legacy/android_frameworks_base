@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name" msgid="7488448184431507488">"软件包安装程序"</string>
     <string name="install" msgid="711829760615509273">"安装"</string>
     <string name="done" msgid="6632441120016885253">"完成"</string>
@@ -27,17 +25,13 @@
     <string name="install_confirm_question_update" msgid="7942235418781274635">"要为此应用安装更新吗？您现有的数据将不会丢失。"</string>
     <string name="install_confirm_question_update_system" msgid="4713001702777910263">"要为此内置应用安装更新吗？您现有的数据将不会丢失。"</string>
     <string name="install_failed" msgid="5777824004474125469">安装失败</string>
-    <string name="install_failed_blocked" msgid="8512284352994752094">"系统已禁止安装该软件包。"</string>
-    <string name="install_failed_conflict" msgid="3493184212162521426">"应用未安装：软件包与现有软件包存在冲突。"</string>
-<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"应用未安装：应用与您的平板电脑不兼容。"</string> -->
-<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"此应用与您的电视不兼容。"</string> -->
-    <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">此应用与您的手机不兼容</string>
-    <string name="install_failed_invalid_apk" msgid="8581007676422623930">"应用未安装：软件包似乎无效。"</string>
-<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"无法在您的平板电脑上安装<xliff:g id="APP_NAME">%1$s</xliff:g>。"</string> -->
-<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"无法在您的电视上安装<xliff:g id="APP_NAME">%1$s</xliff:g>。"</string> -->
-    <string name="install_failed_msg" product="default" msgid="6484461562647915707">"无法在您的手机上安装<xliff:g id="APP_NAME">%1$s</xliff:g>。"</string>
+    <!--    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"应用未安装：应用与您的平板电脑不兼容。"</string> -->
+    <!--    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"此应用与您的电视不兼容。"</string> -->
+    <string name="install_failed_incompatible" msgid="7254630419511645826" product="default">此应用与您的手机不兼容</string>
+    <!--    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"无法在您的平板电脑上安装<xliff:g id="APP_NAME">%1$s</xliff:g>。"</string> -->
+    <!--    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"无法在您的电视上安装<xliff:g id="APP_NAME">%1$s</xliff:g>。"</string> -->
+    <string name="install_failed_msg" msgid="6484461562647915707" product="default">"无法在您的手机上安装<xliff:g id="APP_NAME">%1$s</xliff:g>。"</string>
     <string name="launch" msgid="3952550563999890101">打开应用</string>
-    <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"管理员不允许安装来源不明的应用"</string>
     <string name="unknown_apps_user_restriction_dlg_text" msgid="151020786933988344">"该用户无法安装未知应用"</string>
     <string name="install_apps_user_restriction_dlg_text" msgid="2154119597001074022">"此用户无权安装应用"</string>
     <string name="ok" msgid="7871959885003339302">"确定"</string>
@@ -74,18 +68,16 @@
     <string name="uninstall_blocked_device_owner" msgid="6724602931761073901">"这是设备管理员要求安装的应用，因此无法卸载。"</string>
     <string name="manage_device_administrators" msgid="3092696419363842816">"管理设备管理应用"</string>
     <string name="manage_users" msgid="1243995386982560813">"管理用户"</string>
-    <string name="uninstall_failed_msg" msgid="2176744834786696012">"无法卸载<xliff:g id="APP_NAME">%1$s</xliff:g>。"</string>
     <string name="Parse_error_dlg_text" msgid="1661404001063076789">"解析软件包时出现问题。"</string>
-    <string name="wear_not_allowed_dlg_title" msgid="8664785993465117517">"Android Wear"</string>
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Wear 不支持安装/卸载操作。"</string>
     <string name="message_staging" msgid="8032722385658438567">"正在准备安装应用…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"未知"</string>
-<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"出于安全考虑，已禁止您的平板电脑安装来自此来源的未知应用。"</string> -->
-<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"出于安全考虑，已禁止您的电视安装来自此来源的未知应用。"</string> -->
-    <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"出于安全考虑，已禁止您的手机安装来自此来源的未知应用。"</string>
-    <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"来历不明的应用很可能会损害您的手机和个人数据。安装该应用即表示，您同意对于因使用该应用可能导致的任何手机损坏或数据丢失情况，您负有全部责任。"</string>
-<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"来历不明的应用很可能会损害您的平板电脑和个人数据。安装该应用即表示，您同意对于因使用该应用可能导致的任何平板电脑损坏或数据丢失情况，您负有全部责任。"</string> -->
-<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"来历不明的应用很可能会损害您的电视和个人数据。安装该应用即表示，您同意对于因使用该应用可能导致的任何电视损坏或数据丢失情况，您负有全部责任。"</string> -->
+    <!--    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"出于安全考虑，已禁止您的平板电脑安装来自此来源的未知应用。"</string> -->
+    <!--    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"出于安全考虑，已禁止您的电视安装来自此来源的未知应用。"</string> -->
+    <string name="untrusted_external_source_warning" msgid="7279739265754475165" product="default">"出于安全考虑，已禁止您的手机安装来自此来源的未知应用。"</string>
+    <string name="anonymous_source_warning" msgid="2784902545920822500" product="default">"来历不明的应用很可能会损害您的手机和个人数据。安装该应用即表示，您同意对于因使用该应用可能导致的任何手机损坏或数据丢失情况，您负有全部责任。"</string>
+    <!--    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"来历不明的应用很可能会损害您的平板电脑和个人数据。安装该应用即表示，您同意对于因使用该应用可能导致的任何平板电脑损坏或数据丢失情况，您负有全部责任。"</string> -->
+    <!--    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"来历不明的应用很可能会损害您的电视和个人数据。安装该应用即表示，您同意对于因使用该应用可能导致的任何电视损坏或数据丢失情况，您负有全部责任。"</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"继续"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"设置"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"正在安装/卸载 Wear 应用"</string>
@@ -140,4 +132,5 @@
     <string name="package_info_package_version_name">安装包版本</string>
     <string name="package_info_package_first_install_time">第一次安装时间</string>
     <string name="package_info_package_version_code">安装包版本号</string>
+    <string name="package_info_package_last_update_time">最后升级时间</string>
 </resources>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name" msgid="7488448184431507488">"Инсталатор на пакет"</string>
     <string name="install" msgid="711829760615509273">"Инсталирај"</string>
     <string name="done" msgid="6632441120016885253">"Готово"</string>
@@ -27,17 +25,13 @@
     <string name="install_confirm_question_update" msgid="7942235418781274635">"Дали сакате да инсталирате ажурирање на оваа постоечка апликација? Постоечките податоци нема да се изгубат."</string>
     <string name="install_confirm_question_update_system" msgid="4713001702777910263">"Дали сакате да инсталирате ажурирање на оваа вградена апликација? Постоечките податоци нема да се изгубат."</string>
     <string name="install_failed" msgid="5777824004474125469">"Апликацијата не е инсталирана."</string>
-    <string name="install_failed_blocked" msgid="8512284352994752094">"Инсталирањето на пакетот е блокирано."</string>
-    <string name="install_failed_conflict" msgid="3493184212162521426">"Апликација што не е инсталирана како пакет е во конфликт со постоечки пакет."</string>
-<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Апликација што не е инсталирана како апликација не е компатибилна со вашиот таблет."</string> -->
-<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Оваа апликација не е компатибилна со вашиот телевизор."</string> -->
-    <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"Апликација што не е инсталирана како апликација не е компатибилна со вашиот телефон."</string>
-    <string name="install_failed_invalid_apk" msgid="8581007676422623930">"Апликација што не е инсталирана како пакет се чини дека е неважечка."</string>
-<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> не можеше да се инсталира на вашиот таблет."</string> -->
-<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> не можеше да се инсталира на вашиот телевизор."</string> -->
-    <string name="install_failed_msg" product="default" msgid="6484461562647915707">"<xliff:g id="APP_NAME">%1$s</xliff:g> не можеше да се инсталира на вашиот телефон."</string>
+    <!--    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Апликација што не е инсталирана како апликација не е компатибилна со вашиот таблет."</string> -->
+    <!--    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Оваа апликација не е компатибилна со вашиот телевизор."</string> -->
+    <string name="install_failed_incompatible" msgid="7254630419511645826" product="default">"Апликација што не е инсталирана како апликација не е компатибилна со вашиот телефон."</string>
+    <!--    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"<xliff:g id="APP_NAME">%1$s</xliff:g> не можеше да се инсталира на вашиот таблет."</string> -->
+    <!--    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"<xliff:g id="APP_NAME">%1$s</xliff:g> не можеше да се инсталира на вашиот телевизор."</string> -->
+    <string name="install_failed_msg" msgid="6484461562647915707" product="default">"<xliff:g id="APP_NAME">%1$s</xliff:g> не можеше да се инсталира на вашиот телефон."</string>
     <string name="launch" msgid="3952550563999890101">"Отвори"</string>
-    <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"Вашиот администратор не дозволува инсталација на апликации добиени од непознати извори"</string>
     <string name="unknown_apps_user_restriction_dlg_text" msgid="151020786933988344">"Корисников не може да инсталира непознати апликации"</string>
     <string name="install_apps_user_restriction_dlg_text" msgid="2154119597001074022">"На корисников не му е дозволено да инсталира апликации"</string>
     <string name="ok" msgid="7871959885003339302">"Во ред"</string>
@@ -74,18 +68,16 @@
     <string name="uninstall_blocked_device_owner" msgid="6724602931761073901">"Апликацијата е неопходна за администраторот на вашиот уред и не може да се деинсталира."</string>
     <string name="manage_device_administrators" msgid="3092696419363842816">"Управувај со аплик. за администраторот на уредот"</string>
     <string name="manage_users" msgid="1243995386982560813">"Управувај со корисници"</string>
-    <string name="uninstall_failed_msg" msgid="2176744834786696012">"<xliff:g id="APP_NAME">%1$s</xliff:g> не може да се деинсталира."</string>
     <string name="Parse_error_dlg_text" msgid="1661404001063076789">"Настана проблем при анализирањето на пакетот."</string>
-    <string name="wear_not_allowed_dlg_title" msgid="8664785993465117517">"Android Wear"</string>
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Дејствата „Инсталирај/деинсталирај“ не се поддржани на Wear."</string>
     <string name="message_staging" msgid="8032722385658438567">"Апликацијата се поставува…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"Непозната"</string>
-<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"За ваша безбедност, таблетот нема дозвола за инсталирање непознати апликации од изворов."</string> -->
-<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"За ваша безбедност, телевизорот нема дозвола за инсталирање непознати апликации од изворов."</string> -->
-    <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"За ваша безбедност, телефонот нема дозвола за инсталирање непознати апликации од изворов."</string>
-    <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"Телефонот и личните податоци се поподложни на напади од непознати апликации. Ако ја инсталирате апликацијава, се согласувате дека сте одговорни за каква било штета на телефонот или губењето податоци што може да произлезат од нејзиното користење."</string>
-<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Таблетот и личните податоци се поподложни на напади од непознати апликации. Ако ја инсталирате апликацијава, се согласувате дека сте одговорни за каква било штета на таблетот или губењето податоци што може да произлезат од нејзиното користење."</string> -->
-<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Телевизорот и личните податоци се поподложни на напади од непознати апликации. Ако ја инсталирате апликацијава, се согласувате дека сте одговорни за каква било штета на телевизорот или губењето податоци што може да произлезат од нејзиното користење."</string> -->
+    <!--    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"За ваша безбедност, таблетот нема дозвола за инсталирање непознати апликации од изворов."</string> -->
+    <!--    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"За ваша безбедност, телевизорот нема дозвола за инсталирање непознати апликации од изворов."</string> -->
+    <string name="untrusted_external_source_warning" msgid="7279739265754475165" product="default">"За ваша безбедност, телефонот нема дозвола за инсталирање непознати апликации од изворов."</string>
+    <string name="anonymous_source_warning" msgid="2784902545920822500" product="default">"Телефонот и личните податоци се поподложни на напади од непознати апликации. Ако ја инсталирате апликацијава, се согласувате дека сте одговорни за каква било штета на телефонот или губењето податоци што може да произлезат од нејзиното користење."</string>
+    <!--    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Таблетот и личните податоци се поподложни на напади од непознати апликации. Ако ја инсталирате апликацијава, се согласувате дека сте одговорни за каква било штета на таблетот или губењето податоци што може да произлезат од нејзиното користење."</string> -->
+    <!--    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Телевизорот и личните податоци се поподложни на напади од непознати апликации. Ако ја инсталирате апликацијава, се согласувате дека сте одговорни за каква било штета на телевизорот или губењето податоци што може да произлезат од нејзиното користење."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Продолжи"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Поставки"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Се инсталираат/деинсталираат аплик. Wear"</string>

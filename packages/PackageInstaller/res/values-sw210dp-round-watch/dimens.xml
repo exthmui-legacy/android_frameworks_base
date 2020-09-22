@@ -15,5 +15,4 @@
 -->
 <resources>
     <!-- Dimens for dialog layouts -->
-    <dimen name="diag_button_size">54dp</dimen>
 </resources>

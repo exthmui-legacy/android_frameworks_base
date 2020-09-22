@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name" msgid="7488448184431507488">"Pakotnes instalēš. progr."</string>
     <string name="install" msgid="711829760615509273">"Instalēt"</string>
     <string name="done" msgid="6632441120016885253">"Gatavs"</string>
@@ -27,17 +25,13 @@
     <string name="install_confirm_question_update" msgid="7942235418781274635">"Vai vēlaties instalēt šīs lietojumprogrammas atjauninājumu? Esošie dati netiks zaudēti."</string>
     <string name="install_confirm_question_update_system" msgid="4713001702777910263">"Vai vēlaties instalēt šīs iebūvētās lietojumprogrammas atjauninājumu? Esošie dati netiks zaudēti."</string>
     <string name="install_failed" msgid="5777824004474125469">"Lietotne nav instalēta."</string>
-    <string name="install_failed_blocked" msgid="8512284352994752094">"Pakotnes instalēšana tika bloķēta."</string>
-    <string name="install_failed_conflict" msgid="3493184212162521426">"Lietotne netika instalēta, jo pastāv pakotnes konflikts ar esošu pakotni."</string>
-<!--     <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Lietotne netika instalēta, jo tā nav saderīga ar jūsu planšetdatoru."</string> -->
-<!--     <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Šī lietotne nav saderīga ar jūsu televizoru."</string> -->
-    <string name="install_failed_incompatible" product="default" msgid="7254630419511645826">"Lietotne netika instalēta, jo tā nav saderīga ar jūsu tālruni."</string>
-    <string name="install_failed_invalid_apk" msgid="8581007676422623930">"Lietotne netika instalēta, jo šķiet, ka pakotne nav derīga."</string>
-<!--     <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"Lietotni <xliff:g id="APP_NAME">%1$s</xliff:g> nevarēja instalēt jūsu planšetdatorā."</string> -->
-<!--     <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"Lietotni <xliff:g id="APP_NAME">%1$s</xliff:g> nevarēja instalēt jūsu televizorā."</string> -->
-    <string name="install_failed_msg" product="default" msgid="6484461562647915707">"Lietotni <xliff:g id="APP_NAME">%1$s</xliff:g> nevarēja instalēt jūsu tālrunī."</string>
+    <!--    <string name="install_failed_incompatible" product="tablet" msgid="6019021440094927928">"Lietotne netika instalēta, jo tā nav saderīga ar jūsu planšetdatoru."</string> -->
+    <!--    <string name="install_failed_incompatible" product="tv" msgid="2890001324362291683">"Šī lietotne nav saderīga ar jūsu televizoru."</string> -->
+    <string name="install_failed_incompatible" msgid="7254630419511645826" product="default">"Lietotne netika instalēta, jo tā nav saderīga ar jūsu tālruni."</string>
+    <!--    <string name="install_failed_msg" product="tablet" msgid="6298387264270562442">"Lietotni <xliff:g id="APP_NAME">%1$s</xliff:g> nevarēja instalēt jūsu planšetdatorā."</string> -->
+    <!--    <string name="install_failed_msg" product="tv" msgid="1920009940048975221">"Lietotni <xliff:g id="APP_NAME">%1$s</xliff:g> nevarēja instalēt jūsu televizorā."</string> -->
+    <string name="install_failed_msg" msgid="6484461562647915707" product="default">"Lietotni <xliff:g id="APP_NAME">%1$s</xliff:g> nevarēja instalēt jūsu tālrunī."</string>
     <string name="launch" msgid="3952550563999890101">"Atvērt"</string>
-    <string name="unknown_apps_admin_dlg_text" msgid="4456572224020176095">"Jūsu administrators neļauj instalēt lietotnes, kas iegūtas no nezināmiem avotiem."</string>
     <string name="unknown_apps_user_restriction_dlg_text" msgid="151020786933988344">"Šis lietotājs nevar instalēt nezināmas lietotnes"</string>
     <string name="install_apps_user_restriction_dlg_text" msgid="2154119597001074022">"Šim lietotājam nav atļauts instalēt lietotnes"</string>
     <string name="ok" msgid="7871959885003339302">"Labi"</string>
@@ -74,18 +68,16 @@
     <string name="uninstall_blocked_device_owner" msgid="6724602931761073901">"Ierīces administrators ir noteicis, ka lietotne ir obligāta un to nevar atinstalēt."</string>
     <string name="manage_device_administrators" msgid="3092696419363842816">"Pārvaldīt ierīces administratora lietotnes"</string>
     <string name="manage_users" msgid="1243995386982560813">"Pārvaldīt lietotājus"</string>
-    <string name="uninstall_failed_msg" msgid="2176744834786696012">"Lietotni <xliff:g id="APP_NAME">%1$s</xliff:g> nevarēja atinstalēt."</string>
     <string name="Parse_error_dlg_text" msgid="1661404001063076789">"Parsējot pakotni, radās problēma."</string>
-    <string name="wear_not_allowed_dlg_title" msgid="8664785993465117517">"Android Wear"</string>
     <string name="wear_not_allowed_dlg_text" msgid="704615521550939237">"Operētājsistēmā Wear netiek atbalstīta instalēšana/atinstalēšana."</string>
     <string name="message_staging" msgid="8032722385658438567">"Lietotne tiek izstādīta…"</string>
     <string name="app_name_unknown" msgid="6881210203354323926">"Nezināma"</string>
-<!--     <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Drošības nolūkos jūsu planšetdatorā ir aizliegts instalēt no šī avota iegūtas nezināmas lietotnes."</string> -->
-<!--     <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Drošības nolūkos jūsu televizorā ir aizliegts instalēt no šī avota iegūtas nezināmas lietotnes."</string> -->
-    <string name="untrusted_external_source_warning" product="default" msgid="7279739265754475165">"Drošības nolūkos jūsu tālrunī ir aizliegts instalēt no šī avota iegūtas nezināmas lietotnes."</string>
-    <string name="anonymous_source_warning" product="default" msgid="2784902545920822500">"Jūsu tālrunis un personas dati ir neaizsargātāki pret uzbrukumiem no nezināmām lietotnēm. Instalējot šo lietotni, jūs piekrītat, ka esat atbildīgs par tālruņa bojājumiem vai datu zudumu, kas var rasties lietotnes dēļ."</string>
-<!--     <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Jūsu planšetdators un personas dati ir neaizsargātāki pret uzbrukumiem no nezināmām lietotnēm. Instalējot šo lietotni, jūs piekrītat, ka esat atbildīgs par planšetdatora bojājumiem vai datu zudumu, kas var rasties lietotnes dēļ."</string> -->
-<!--     <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Jūsu televizors un personas dati ir neaizsargātāki pret uzbrukumiem no nezināmām lietotnēm. Instalējot šo lietotni, jūs piekrītat, ka esat atbildīgs par televizora bojājumiem vai datu zudumu, kas var rasties lietotnes dēļ."</string> -->
+    <!--    <string name="untrusted_external_source_warning" product="tablet" msgid="6539403649459942547">"Drošības nolūkos jūsu planšetdatorā ir aizliegts instalēt no šī avota iegūtas nezināmas lietotnes."</string> -->
+    <!--    <string name="untrusted_external_source_warning" product="tv" msgid="1206648674551321364">"Drošības nolūkos jūsu televizorā ir aizliegts instalēt no šī avota iegūtas nezināmas lietotnes."</string> -->
+    <string name="untrusted_external_source_warning" msgid="7279739265754475165" product="default">"Drošības nolūkos jūsu tālrunī ir aizliegts instalēt no šī avota iegūtas nezināmas lietotnes."</string>
+    <string name="anonymous_source_warning" msgid="2784902545920822500" product="default">"Jūsu tālrunis un personas dati ir neaizsargātāki pret uzbrukumiem no nezināmām lietotnēm. Instalējot šo lietotni, jūs piekrītat, ka esat atbildīgs par tālruņa bojājumiem vai datu zudumu, kas var rasties lietotnes dēļ."</string>
+    <!--    <string name="anonymous_source_warning" product="tablet" msgid="3939101621438855516">"Jūsu planšetdators un personas dati ir neaizsargātāki pret uzbrukumiem no nezināmām lietotnēm. Instalējot šo lietotni, jūs piekrītat, ka esat atbildīgs par planšetdatora bojājumiem vai datu zudumu, kas var rasties lietotnes dēļ."</string> -->
+    <!--    <string name="anonymous_source_warning" product="tv" msgid="5599483539528168566">"Jūsu televizors un personas dati ir neaizsargātāki pret uzbrukumiem no nezināmām lietotnēm. Instalējot šo lietotni, jūs piekrītat, ka esat atbildīgs par televizora bojājumiem vai datu zudumu, kas var rasties lietotnes dēļ."</string> -->
     <string name="anonymous_source_continue" msgid="4375745439457209366">"Tālāk"</string>
     <string name="external_sources_settings" msgid="4046964413071713807">"Iestatījumi"</string>
     <string name="wear_app_channel" msgid="1960809674709107850">"Wear lietotņu instalēšana/atinstalēšana"</string>

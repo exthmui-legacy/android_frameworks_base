@@ -15,6 +15,4 @@
   ~ limitations under the License
   -->
 
-<resources>
-    <style name="DialogWhenLarge" parent="@android:style/Theme.DeviceDefault.NoActionBar"/>
-</resources>
+<resources></resources>
