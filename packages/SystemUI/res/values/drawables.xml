@@ -94,4 +94,6 @@
     <item type="drawable" name="exthm_stat_sys_battery_charging_23">@drawable/stat_sys_dnd</item>
     <item type="drawable" name="exthm_stat_sys_battery_charging_24">@drawable/stat_sys_dnd</item>
     <item type="drawable" name="exthm_stat_sys_battery_charging_25">@drawable/stat_sys_dnd</item>
+
+    <item type="drawable" name="qs_background_statusbar">#ff000000</item>
 </resources>
