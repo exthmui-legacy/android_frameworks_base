@@ -240,10 +240,6 @@ public class NotificationMediaManager implements Dumpable, TunerService.Tunable 
         mStatusBar = statusBar;
     }
 
-    public void addCallback(StatusBar statusBar) {
-        mStatusBar = statusBar;
-    }
-
     @Override
     public void onTuningChanged(String key, String newValue) {
         if (LOCKSCREEN_MEDIA_METADATA.equals(key)) {
