@@ -335,6 +335,11 @@ public class StatusBarNotificationPresenter implements NotificationPresenter,
                     mStatusBar.mTicker.removeEntry(old);
                 } catch (Exception e) {}
             }
+            if (mStatusBar != null && mStatusBar.mLyricTicker != null && mStatusBar.mLyricEnabled) {
+                try {
+                    mStatusBar.mLyricTicker.removeEntry(old);
+                } catch (Exception e) {}
+            }
             if (CLOSE_PANEL_WHEN_EMPTIED && !hasActiveNotifications()
                     && !mNotificationPanel.isTracking() && !mNotificationPanel.isQsExpanded()) {
                 if (mStatusBarStateController.getState() == StatusBarState.SHADE) {

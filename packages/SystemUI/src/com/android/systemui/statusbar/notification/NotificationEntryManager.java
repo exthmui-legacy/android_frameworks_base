@@ -479,6 +479,20 @@ public class NotificationEntryManager implements
         }
 
         Notification n = notification.getNotification();
+        boolean isForCurrentUser = Dependency.get(KeyguardEnvironment.class)
+                .isNotificationForCurrentProfiles(notification);
+        if (DEBUG) {
+            // Is this for you?
+            Log.d(TAG, "notification is " + (isForCurrentUser ? "" : "not ") + "for you");
+        }
+
+        if (mStatusBar != null && isForCurrentUser) {
+            mStatusBar.updateLyricTicker(notification);
+        }
+        if ((n.flags & Notification.FLAG_ONLY_UPDATE_TICKER) != 0) {
+            return;
+        }
+
         // Notification is updated so it is essentially re-added and thus alive again.  Don't need
         // to keep its lifetime extended.
         cancelLifetimeExtension(entry);
@@ -493,15 +507,8 @@ public class NotificationEntryManager implements
                 REASON_CANCEL));
         updateNotifications();
 
-        boolean isForCurrentUser = Dependency.get(KeyguardEnvironment.class)
-                .isNotificationForCurrentProfiles(notification);
-        if (DEBUG) {
-            // Is this for you?
-            Log.d(TAG, "notification is " + (isForCurrentUser ? "" : "not ") + "for you");
-        }
-        boolean updateTicker = n.tickerText != null
-                && !TextUtils.equals(n.tickerText,
-                entry.notification.getNotification().tickerText);
+        boolean updateTicker = (n.tickerText != null
+                && !TextUtils.equals(n.tickerText, entry.notification.getNotification().tickerText));
         // Restart the ticker if it's still running
         if (updateTicker && isForCurrentUser) {
             if (mStatusBar != null) {
