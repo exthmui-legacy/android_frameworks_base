@@ -49,6 +49,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.packageinstaller.utils.ContentUriUtils;
+import com.android.packageinstaller.utils.NotificationUtil;
 
 import java.io.File;
 import java.util.List;
@@ -76,7 +77,7 @@ public class InstallSuccess extends Activity {
 
         setContentView(R.layout.install_main);
 
-        mFromSource = getIntent().getStringExtra("kew_fromSource");
+        mFromSource = getIntent().getStringExtra("key_fromSource");
         mVersionName = getIntent().getStringExtra("key_versionName");
 
         mAppLabelView = findViewById(R.id.app_name);
@@ -117,22 +118,22 @@ public class InstallSuccess extends Activity {
                 as = PackageUtil.getAppSnippet(this, appInfo, sourceFile);
             }
 
+            //TODO: 完成翻译
             if (getIntent().getBooleanExtra("DELETE_APK_ENABLE", false)) {
                 Uri dataUri = Uri.parse(getIntent().getStringExtra("ORIGINAL_LOCATION"));
                 File apkfile;
                 try {
                     getContentResolver().delete(dataUri, null, null);
-                    Toast.makeText(this, "已清理" + Formatter.formatFileSize(this, new File(intent.getData().getPath()).length()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, appInfo.packageName + "安装完成，" + "已清理" + Formatter.formatFileSize(this, new File(intent.getData().getPath()).length()), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Log.e(this.getClass().getSimpleName(), dataUri.getAuthority());
                     try {
                         apkfile = new File(ContentUriUtils.getPath(this, dataUri));
                         apkfile.delete();
-                        Toast.makeText(this, "已清理" + Formatter.formatFileSize(this, new File(intent.getData().getPath()).length()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, appInfo.packageName + "安装完成，" + "已清理" + Formatter.formatFileSize(this, new File(intent.getData().getPath()).length()), Toast.LENGTH_SHORT).show();
                     } catch (Exception e1) {
                         //Ignore
                     }
-
                 }
             }
 
@@ -186,19 +187,18 @@ public class InstallSuccess extends Activity {
                 if (list != null && list.size() > 0) {
                     enabled = true;
                 }
-            }else {
+            } else {
                 content = getString(R.string.install_done);
                 pendingIntent = null;
             }
             //创建Notification通知  start
             String title = as.label.toString();
 
-            createNotificationChannel(this, "id1", "安装成功通知", NotificationManager.IMPORTANCE_MAX);
             NotificationManager notificationManager =
                     this.getSystemService(NotificationManager.class);
-            int uninstallId = intent.getIntExtra("com.android.packageinstaller.extra.INSTALL_ID", 0);
+            int installId = intent.getIntExtra("com.android.packageinstaller.extra.INSTALL_ID", 0);
 
-            notificationManager.notify(uninstallId, buildNotification(this, pendingIntent, "id1", title, content, R.drawable.ic_packageinstaller_logo, as.label));
+            notificationManager.notify(installId, NotificationUtil.buildNotification(this, pendingIntent, "id1", title, content, R.drawable.ic_packageinstaller_logo, as.label));
             //创建Notification通知  end
 
             Button launchButton = mInstallButton;
@@ -216,30 +216,4 @@ public class InstallSuccess extends Activity {
             }
         }
     }
-
-    public static Notification buildNotification(Context context, PendingIntent pendingIntent, String channelId, String title, String message, int icon, CharSequence ticker) {
-        Notification.Builder mBuilder;
-        mBuilder = new Notification.Builder(context, channelId);
-
-        mBuilder.setContentTitle(title)
-                .setContentText(message)
-                .setContentIntent(pendingIntent)
-                .setTicker(title)
-                .setDefaults(Notification.DEFAULT_SOUND)
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(icon)
-                .setAutoCancel(true);
-
-        return mBuilder.build();
-    }
-
-    public static void createNotificationChannel(Context context, String channelId, String channelName, int importance) {
-        NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (notificationManager != null) {
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
-
-
 }

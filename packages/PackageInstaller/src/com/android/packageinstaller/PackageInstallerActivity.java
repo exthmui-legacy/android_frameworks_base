@@ -150,6 +150,7 @@ public class PackageInstallerActivity extends Activity {
     private boolean mEnableOk = false;
 
     private boolean mIsDeleteApkEnabled;
+    private boolean mIsBackTaskEnabled;
     private String mInstallOriginalPackage;
     private String mApkFileSize;
     private TextView mAppLabelView;
@@ -536,7 +537,7 @@ public class PackageInstallerActivity extends Activity {
             //ignored
         }
 
-        mAutoDeleteApkTitle.setText(String.format(getString(R.string.delete_apk_when_installed), mApkFileSize));
+        mAutoDeleteApkTitle.setText(getString(R.string.delete_apk_when_installed, mApkFileSize));
 
         mAppLabelView.setText(mAppSnippet.label);
         mVersionName = getString(R.string.app_info_version) + mAppSnippet.versionName +
@@ -564,6 +565,10 @@ public class PackageInstallerActivity extends Activity {
 
         mDeleteApkLayout.setVisibility(View.VISIBLE);
         Switch mDeleteApkView = findViewById(R.id.delete_apk);
+        Switch mRunInBg = findViewById(R.id.back_task_switch);
+        mRunInBg.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) -> {
+            mIsBackTaskEnabled = b;
+        });
         mDeleteApkView.setOnCheckedChangeListener((CompoundButton compoundButton, boolean b) -> {
             mIsDeleteApkEnabled = b;
         });
@@ -776,7 +781,8 @@ public class PackageInstallerActivity extends Activity {
         newIntent.setData(mPackageURI);
         newIntent.putExtra("ORIGINAL_LOCATION", getIntent().getStringExtra("ORIGINAL_LOCATION"));
         newIntent.putExtra("DELETE_APK_ENABLE", mIsDeleteApkEnabled);
-        newIntent.putExtra("kew_fromSource", mInstallOriginalPackage);
+        newIntent.putExtra("key_backInstall", mIsBackTaskEnabled);
+        newIntent.putExtra("key_fromSource", mInstallOriginalPackage);
         newIntent.putExtra("key_versionName", mVersionName);
         newIntent.setClass(this, InstallInstalling.class);
         String installerPackageName = getIntent().getStringExtra(

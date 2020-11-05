@@ -24,5 +24,6 @@ public class PackageInstallerApplication extends Application {
     public void onCreate() {
         super.onCreate();
         PackageItemInfo.forceSafeLabels();
+
     }
 }

@@ -16,9 +16,7 @@
   -->
 
 <resources>
-    <color name="bigIconColor">#C8CCCE</color>
-    <color name="exthmui_primary_color">#ffdb4437</color>
     <color name="exthmui_installer_color">#ffebebeb</color>
-    <color name="pkginfo_rv_primary_color">#ff000000</color>
-    <color name="pkginfo_rv_secondary_color">#bc000000</color>
+    <color name="pkginfo_rv_primary_color">#ffffffff</color>
+    <color name="pkginfo_rv_secondary_color">#bcffffff</color>
 </resources>

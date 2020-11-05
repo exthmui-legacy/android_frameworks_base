@@ -20,34 +20,41 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageParser;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.palette.graphics.Palette;
 
 import com.android.internal.content.PackageHelper;
+import com.android.packageinstaller.utils.ContentUriUtils;
+import com.android.packageinstaller.utils.NotificationUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import static android.content.pm.PackageInstaller.SessionParams.UID_UNKNOWN;
 
@@ -107,13 +114,15 @@ public class InstallInstalling extends Activity {
     private CardView mAppInfoContainer;
     private TextView mAutoDeleteApkTitle;
 
+    private PackageUtil.AppSnippet as;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.install_main);
 
-        mFromSource = getIntent().getStringExtra("kew_fromSource");
+        mFromSource = getIntent().getStringExtra("key_fromSource");
         mVersionName = getIntent().getStringExtra("key_versionName");
 
         mAppLabelView = findViewById(R.id.app_name);
@@ -133,7 +142,7 @@ public class InstallInstalling extends Activity {
         } else {
             final File sourceFile = new File(mPackageURI.getPath());
 
-            PackageUtil.AppSnippet as = PackageUtil.getAppSnippet(this, appInfo, sourceFile);
+            as = PackageUtil.getAppSnippet(this, appInfo, sourceFile);
             ImageView app_icon = findViewById(R.id.app_icon);
             app_icon.setImageDrawable(as.icon);
 
@@ -249,10 +258,61 @@ public class InstallInstalling extends Activity {
         successIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         successIntent.putExtra("ORIGINAL_LOCATION", getIntent().getStringExtra("ORIGINAL_LOCATION"));
         successIntent.putExtra("DELETE_APK_ENABLE", getIntent().getBooleanExtra("DELETE_APK_ENABLE", false));
-        successIntent.putExtra("kew_fromSource", mFromSource);
+        successIntent.putExtra("key_fromSource", mFromSource);
         successIntent.putExtra("key_versionName", mVersionName);
+        if (getIntent().getBooleanExtra("key_backInstall", false)){
+            Intent intent = getIntent();
+            ApplicationInfo appInfo =
+                    intent.getParcelableExtra(PackageUtil.INTENT_ATTR_APPLICATION_INFO);
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage(
+                    appInfo.packageName);
+            PendingIntent pendingIntent;
+            String content;
+            if (launchIntent != null) {
+                content = getString(R.string.launch);
+                pendingIntent = PendingIntent.getActivity(this, 0, launchIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+                List<ResolveInfo> list = getPackageManager().queryIntentActivities(launchIntent,
+                        0);
+                if (list != null && list.size() > 0) {
+                }
+            }else {
+                content = getString(R.string.install_done);
+                pendingIntent = null;
+            }
+            //创建Notification通知  start
+            String title = as.label.toString();
 
-        startActivity(successIntent);
+            NotificationManager notificationManager =
+                    this.getSystemService(NotificationManager.class);
+            int installId = intent.getIntExtra("com.android.packageinstaller.extra.INSTALL_ID", 0);
+
+            notificationManager.notify(installId, NotificationUtil.buildNotification(this, pendingIntent, "id1", title, content, R.drawable.ic_packageinstaller_logo, as.label));
+            //创建Notification通知  end
+            //TODO: 完成翻译
+            if (getIntent().getBooleanExtra("DELETE_APK_ENABLE", false)) {
+                Uri dataUri = Uri.parse(intent.getStringExtra("ORIGINAL_LOCATION"));
+                File apkfile;
+                try {
+                    getContentResolver().delete(dataUri, null, null);
+                    Toast.makeText(this, appInfo.packageName + "安装完成，" + "已清理" + Formatter.formatFileSize(this, new File(intent.getData().getPath()).length()), Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Log.e(this.getClass().getSimpleName(), dataUri.getAuthority());
+                    try {
+                        apkfile = new File(ContentUriUtils.getPath(this, dataUri));
+                        apkfile.delete();
+                        Toast.makeText(this, appInfo.packageName + "安装完成，" + "已清理" + Formatter.formatFileSize(this, new File(intent.getData().getPath()).length()), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e1) {
+                        //Ignore
+                    }
+                }
+            }
+            File file = new File(mPackageURI.getPath());
+            if (file.exists()){
+                file.delete();
+            }
+        }else {
+            startActivity(successIntent);
+        }
         finish();
     }
 
@@ -268,11 +328,103 @@ public class InstallInstalling extends Activity {
         failureIntent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         failureIntent.putExtra(PackageInstaller.EXTRA_LEGACY_STATUS, legacyStatus);
         failureIntent.putExtra(PackageInstaller.EXTRA_STATUS_MESSAGE, statusMessage);
-        failureIntent.putExtra("kew_fromSource", mFromSource);
+        failureIntent.putExtra("key_fromSource", mFromSource);
         failureIntent.putExtra("key_versionName", mVersionName);
+        if (getIntent().getBooleanExtra("key_backInstall", false)){
+            File file = new File(mPackageURI.getPath());
+            if (file.exists()){
+                file.delete();
+            }
+            Toast.makeText(this, setExplanationFromErrorCode(legacyStatus), Toast.LENGTH_SHORT).show();
+        }else {
+            startActivity(failureIntent);
+        }
 
-        startActivity(failureIntent);
         finish();
+    }
+
+    private String setExplanationFromErrorCode(int statusCode) {
+        Log.d(LOG_TAG, "Installation status code: " + statusCode);
+
+        switch (statusCode) {
+            case PackageManager.INSTALL_FAILED_ALREADY_EXISTS:
+                return getString(R.string.install_failed_already_exists);
+            case PackageManager.INSTALL_PARSE_FAILED_BAD_MANIFEST:
+                return getString(R.string.install_failed_bad_manifest);
+            case PackageManager.INSTALL_PARSE_FAILED_BAD_PACKAGE_NAME:
+                return getString(R.string.install_failed_bad_package_name);
+            case PackageManager.INSTALL_PARSE_FAILED_BAD_SHARED_USER_ID:
+                return getString(R.string.install_failed_bad_shared_user_id);
+            case PackageManager.INSTALL_PARSE_FAILED_CERTIFICATE_ENCODING:
+                return getString(R.string.install_failed_certificate_encoding);
+            case PackageManager.INSTALL_FAILED_CONFLICTING_PROVIDER:
+                return String.format(getString(R.string.install_failed_conflicting_provider), as.label);
+            case PackageManager.INSTALL_FAILED_CONTAINER_ERROR:
+                return getString(R.string.install_failed_container_error);
+            case PackageManager.INSTALL_FAILED_CPU_ABI_INCOMPATIBLE:
+                return getString(R.string.install_failed_cpu_abi_incompatible);
+            case PackageManager.INSTALL_FAILED_DEXOPT:
+                return getString(R.string.install_failed_dexopt);
+            case PackageManager.INSTALL_FAILED_DUPLICATE_PACKAGE:
+                return getString(R.string.install_failed_duplicate_package);
+            case PackageManager.INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES:
+                return getString(R.string.install_failed_inconsistent_certificates);
+            case PackageManager.INSTALL_FAILED_INSUFFICIENT_STORAGE:
+                return getString(R.string.install_failed_insufficient_storage);
+            case PackageManager.INSTALL_FAILED_NO_MATCHING_ABIS:
+                return getString(R.string.install_failed_incompatible);
+            case PackageManager.INSTALL_FAILED_INTERNAL_ERROR:
+                return getString(R.string.install_failed_internal_error);
+            case PackageManager.INSTALL_FAILED_PACKAGE_CHANGED:
+            case PackageManager.INSTALL_FAILED_UID_CHANGED:
+            case PackageManager.INSTALL_FAILED_INVALID_APK:
+                return getString(R.string.install_failed_invaild_apk);
+            case PackageManager.INSTALL_FAILED_INVALID_INSTALL_LOCATION:
+                return getString(R.string.install_failed_invaild_install_location);
+            case PackageManager.INSTALL_FAILED_INVALID_URI:
+                return getString(R.string.install_failed_invaild_uri);
+            case PackageManager.INSTALL_PARSE_FAILED_MANIFEST_EMPTY:
+                return getString(R.string.install_failed_manifest_empty);
+            case PackageManager.INSTALL_PARSE_FAILED_MANIFEST_MALFORMED:
+                return getString(R.string.install_failed_manifest_malformed);
+            case PackageManager.INSTALL_FAILED_MEDIA_UNAVAILABLE:
+                return getString(R.string.install_failed_media_unavailable);
+            case PackageManager.INSTALL_FAILED_MISSING_FEATURE:
+                return getString(R.string.install_failed_missing_feature);
+            case PackageManager.INSTALL_FAILED_MISSING_SHARED_LIBRARY:
+                return getString(R.string.install_failed_missing_shared_library);
+            case PackageManager.INSTALL_FAILED_NEWER_SDK:
+                return getString(R.string.install_failed_newer_sdk);
+            case PackageManager.INSTALL_PARSE_FAILED_NO_CERTIFICATES:
+                return getString(R.string.install_failed_no_certificates);
+            case PackageManager.INSTALL_FAILED_NO_SHARED_USER:
+                return getString(R.string.install_failed_no_shared_user);
+            case PackageManager.INSTALL_PARSE_FAILED_NOT_APK:
+                return getString(R.string.install_failed_not_apk);
+            case PackageManager.INSTALL_FAILED_OLDER_SDK:
+                return getString(R.string.install_failed_older_sdk);
+            case PackageManager.INSTALL_FAILED_REPLACE_COULDNT_DELETE:
+                return getString(R.string.install_failed_replace_couldnt_delete);
+            case PackageManager.INSTALL_FAILED_SHARED_USER_INCOMPATIBLE:
+                return getString(R.string.install_failed_shared_user_incompatible);
+            case PackageManager.INSTALL_FAILED_TEST_ONLY:
+                return getString(R.string.install_failed_test_only);
+            case PackageManager.INSTALL_PARSE_FAILED_UNEXPECTED_EXCEPTION:
+                return getString(R.string.install_failed_unexpected_exception);
+            case PackageManager.INSTALL_FAILED_UPDATE_INCOMPATIBLE:
+                return getString(R.string.install_failed_update_incompatible);
+            case PackageManager.INSTALL_FAILED_USER_RESTRICTED:
+                return getString(R.string.install_failed_user_restricted);
+            case PackageManager.INSTALL_FAILED_VERIFICATION_FAILURE:
+                return getString(R.string.install_failed_verification_failure);
+            case PackageManager.INSTALL_FAILED_VERIFICATION_TIMEOUT:
+                return getString(R.string.install_failed_verification_timeout);
+            case PackageManager.INSTALL_FAILED_VERSION_DOWNGRADE:
+                return getString(R.string.install_failed_version_downgrade);
+            default:
+                throw new IllegalStateException("Unexpected value: " + statusCode);
+        }
+
     }
 
     @Override
@@ -294,6 +446,9 @@ public class InstallInstalling extends Activity {
             if (sessionInfo != null && !sessionInfo.isActive()) {
                 mInstallingTask = new InstallingAsyncTask();
                 mInstallingTask.execute();
+                if (getIntent().getBooleanExtra("key_backInstall", false)){
+                    moveTaskToBack(true);
+                }
             } else {
                 // we will receive a broadcast when the install is finished
                 mCancelButton.setEnabled(false);
@@ -396,7 +551,7 @@ public class InstallInstalling extends Activity {
      * Send the package to the package installer and then register a event result observer that
      * will call {@link #launchFinishBasedOnResult(int, int, String)}
      */
-    private final class InstallingAsyncTask extends AsyncTask<Void, Void,
+    public final class InstallingAsyncTask extends AsyncTask<Void, Void,
             PackageInstaller.Session> {
         volatile boolean isDone;
 

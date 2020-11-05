@@ -36,6 +36,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -164,7 +165,7 @@ public class InstallFailed extends Activity {
                 PackageInstaller.STATUS_FAILURE);
 
         setContentView(R.layout.install_main);
-        mFromSource = getIntent().getStringExtra("kew_fromSource");
+        mFromSource = getIntent().getStringExtra("key_fromSource");
         mVersionName = getIntent().getStringExtra("key_versionName");
 
         mAppLabelView = findViewById(R.id.app_name);
@@ -218,30 +219,14 @@ public class InstallFailed extends Activity {
             mVersionNameView.setText(mVersionName);
 
             Palette.from(PaletteUtil.getIconBitmap(as.icon)).generate(palette1 -> {
-                int defaultColor = Color.WHITE;
+                int defaultColor = 0x5eb5f7;
                 int darkVibrantColor = palette1.getDarkVibrantColor(defaultColor);
                 int lightVibrantColor = palette1.getLightVibrantColor(defaultColor);
                 int darkMutedColor = palette1.getDarkMutedColor(defaultColor);
                 int lightMutedColor = palette1.getLightMutedColor(defaultColor);
                 int vibrantColor = palette1.getVibrantColor(defaultColor);
                 int mutedColor = palette1.getMutedColor(defaultColor);
-
-                Palette.Swatch[] vibrantSwatchs = {palette1.getDarkMutedSwatch(), palette1.getLightMutedSwatch(),
-                        palette1.getDarkMutedSwatch(), palette1.getLightMutedSwatch(),
-                        palette1.getMutedSwatch(), palette1.getVibrantSwatch(),
-                        palette1.getDominantSwatch()};
-
-                for (Palette.Swatch vibrantSwatch : vibrantSwatchs) {
-                    if (vibrantSwatch != null) {
-                        int color = vibrantSwatch.getRgb();
-                        mAppLabelView.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
-                        mVersionNameView.setTextColor(vibrantSwatch.getBodyTextColor());
-                        mAppInfoContainer.setCardBackgroundColor(color);
-                        mDeleteApkLayout.setCardBackgroundColor(color);
-                        mAutoDeleteApkTitle.setTextColor(PaletteUtil.toMaxAlpha(vibrantSwatch.getBodyTextColor()));
-                        return;
-                    }
-                }
+                mAppInfoContainer.setCardBackgroundColor(PaletteUtil.ColorBurn(lightVibrantColor));
             });
 
             Button mInstallButton = findViewById(R.id.install_button);
