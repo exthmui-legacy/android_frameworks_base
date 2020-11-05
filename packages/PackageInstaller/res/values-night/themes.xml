@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.AlertDialogActivity" parent="@style/Theme.MaterialComponents.NoActionBar">
+    <style name="Theme.AppActivity" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
@@ -10,6 +10,9 @@
         <item name="android:colorAccent">@color/exthmui_primary_color</item>
         <item name="colorPrimary">@color/exthmui_primary_color</item>
         <item name="colorAccent">@color/exthmui_primary_color</item>
+    </style>
+
+    <style name="Theme.AlertDialogActivity" parent="android:Theme.DeviceDefault.Dialog.Alert">
     </style>
 
 </resources>

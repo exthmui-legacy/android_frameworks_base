@@ -16,11 +16,11 @@
 
 <resources>
 
-    <style name="Theme.AlertDialogActivity.NoAnimation">
+    <style name="Theme.AppActivity.NoAnimation">
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
-    <style name="Theme.AlertDialogActivity" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.AppActivity" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:fitsSystemWindows">true</item>
@@ -31,17 +31,19 @@
         <item name="android:colorAccent">@color/exthmui_primary_color</item>
         <item name="colorPrimary">@color/exthmui_primary_color</item>
         <item name="colorAccent">@color/exthmui_primary_color</item>
-
     </style>
 
-    <style name="Theme.AlertDialogActivity.NoActionBar">
+    <style name="Theme.AppActivity.NoActionBar">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
+    <style name="Theme.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="elevation">0dp</item>
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.AlertDialogActivity" parent="android:Theme.DeviceDefault.Light.Dialog.Alert">
     </style>
 
 </resources>

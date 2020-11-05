@@ -30,7 +30,7 @@
         android:icon="@drawable/ic_app_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AlertDialogActivity">
+        android:theme="@style/Theme.AppActivity">
 
         <receiver
             android:name=".TemporaryFileManager"
@@ -92,7 +92,7 @@
         <activity
             android:name=".InstallInstalling"
             android:exported="false"
-            android:theme="@style/Theme.AlertDialogActivity.NoAnimation" />
+            android:theme="@style/Theme.AppActivity.NoAnimation" />
 
         <receiver
             android:name=".InstallEventReceiver"
@@ -106,19 +106,19 @@
         <activity
             android:name=".InstallSuccess"
             android:exported="false"
-            android:theme="@style/Theme.AlertDialogActivity.NoAnimation" />
+            android:theme="@style/Theme.AppActivity.NoAnimation" />
 
         <activity
             android:name=".InstallFailed"
             android:exported="false"
-            android:theme="@style/Theme.AlertDialogActivity.NoAnimation" />
+            android:theme="@style/Theme.AppActivity.NoAnimation" />
 
         <activity
             android:name=".UninstallerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:excludeFromRecents="true"
             android:noHistory="true"
-            android:theme="@style/Theme.AlertDialogActivity.NoActionBar">
+            android:theme="@style/Theme.AlertDialogActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.DELETE" />
                 <action android:name="android.intent.action.UNINSTALL_PACKAGE" />
