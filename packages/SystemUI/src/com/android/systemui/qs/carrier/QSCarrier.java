@@ -30,6 +30,7 @@ import com.android.settingslib.graph.SignalDrawable;
 import com.android.systemui.DualToneHandler;
 import com.android.systemui.R;
 import com.android.systemui.qs.QuickStatusBarHeader;
+import com.android.systemui.statusbar.CustomSignalDrawable; 
 
 import java.util.Objects;
 
@@ -69,7 +70,7 @@ public class QSCarrier extends LinearLayout {
         mMobileRoaming = findViewById(R.id.mobile_roaming);
         mCarrierText = findViewById(R.id.qs_carrier_text);
 
-        mMobileSignal.setImageDrawable(new SignalDrawable(mContext));
+        mMobileSignal.setImageDrawable(CustomSignalDrawable.create(mContext));
 
         int colorForeground = Utils.getColorAttrDefaultColor(mContext,
                 android.R.attr.colorForeground);

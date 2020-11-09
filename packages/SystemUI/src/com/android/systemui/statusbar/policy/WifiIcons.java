@@ -21,6 +21,14 @@ import com.android.systemui.R;
 public class WifiIcons {
 
     static final int[] WIFI_FULL_ICONS = {
+            R.drawable.ic_wifi_signal_0,
+            R.drawable.ic_wifi_signal_1,
+            R.drawable.ic_wifi_signal_2,
+            R.drawable.ic_wifi_signal_3,
+            R.drawable.ic_wifi_signal_4
+    };
+
+    static final int[] QS_WIFI_FULL_ICONS = {
             com.android.internal.R.drawable.ic_wifi_signal_0,
             com.android.internal.R.drawable.ic_wifi_signal_1,
             com.android.internal.R.drawable.ic_wifi_signal_2,
@@ -38,9 +46,12 @@ public class WifiIcons {
 
     public static final int[][] QS_WIFI_SIGNAL_STRENGTH = {
             WIFI_NO_INTERNET_ICONS,
+            QS_WIFI_FULL_ICONS
+    };
+    static final int[][] WIFI_SIGNAL_STRENGTH = {
+            WIFI_NO_INTERNET_ICONS,
             WIFI_FULL_ICONS
     };
-    static final int[][] WIFI_SIGNAL_STRENGTH = QS_WIFI_SIGNAL_STRENGTH;
 
     public static final int QS_WIFI_DISABLED = com.android.internal.R.drawable.ic_wifi_signal_0;
     public static final int QS_WIFI_NO_NETWORK = com.android.internal.R.drawable.ic_wifi_signal_0;
