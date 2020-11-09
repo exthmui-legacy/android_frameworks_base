@@ -26,9 +26,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settingslib.Utils;
-import com.android.settingslib.graph.SignalDrawable;
 import com.android.systemui.DualToneHandler;
 import com.android.systemui.R;
+import com.android.systemui.statusbar.CustomSignalDrawable;
 
 public class QSCarrier extends LinearLayout {
 
@@ -78,7 +78,7 @@ public class QSCarrier extends LinearLayout {
             ColorStateList colorStateList = ColorStateList.valueOf(
                     mDualToneHandler.getSingleColor(mColorForegroundIntensity));
             mMobileRoaming.setImageTintList(colorStateList);
-            mMobileSignal.setImageDrawable(new SignalDrawable(mContext));
+            mMobileSignal.setImageDrawable(CustomSignalDrawable.create(mContext));
             mMobileSignal.setImageTintList(colorStateList);
             mMobileSignal.setImageLevel(state.mobileSignalIconId);
 

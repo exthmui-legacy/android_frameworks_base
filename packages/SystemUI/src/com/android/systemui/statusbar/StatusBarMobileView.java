@@ -35,10 +35,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settingslib.graph.SignalDrawable;
 import com.android.systemui.DualToneHandler;
 import com.android.systemui.R;
 import com.android.systemui.plugins.DarkIconDispatcher.DarkReceiver;
+import com.android.systemui.statusbar.CustomSignalDrawable;
 import com.android.systemui.statusbar.phone.StatusBarSignalPolicy.MobileIconState;
 
 public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
@@ -51,7 +51,7 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
     private LinearLayout mMobileGroup;
     private String mSlot;
     private MobileIconState mState;
-    private SignalDrawable mMobileDrawable;
+    private CustomSignalDrawable mMobileDrawable;
     private View mInoutContainer;
     private ImageView mIn;
     private ImageView mOut;
@@ -110,7 +110,7 @@ public class StatusBarMobileView extends FrameLayout implements DarkReceiver,
         mOut = findViewById(R.id.mobile_out);
         mInoutContainer = findViewById(R.id.inout_container);
 
-        mMobileDrawable = new SignalDrawable(getContext());
+        mMobileDrawable = CustomSignalDrawable.create(getContext());
         mMobile.setImageDrawable(mMobileDrawable);
 
         initDotView();

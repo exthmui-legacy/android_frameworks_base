@@ -3,4 +3,6 @@
 <resources>
     <!-- Asus stitch editor component name -->
     <string name="config_stitchEditor">com.asus.stitchimage/com.asus.stitchimage.editor.ScreenshotEditorActivity</string>
+    <string-array name="custom_dark_icons">
+    </string-array>
 </resources>

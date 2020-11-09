@@ -56,6 +56,7 @@ import com.android.systemui.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.notification.NotificationIconDozeHelper;
 import com.android.systemui.statusbar.notification.NotificationUtils;
+import com.android.systemui.util.DarkIconUtil;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
@@ -116,6 +117,9 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
     private int mStatusBarIconDrawingSize = 1;
     private int mStatusBarIconSize = 1;
     private StatusBarIcon mIcon;
+    private Drawable mIconDrawable;
+    private Drawable mDarkIconDrawable;
+    private boolean mIsDark;
     @ViewDebug.ExportedProperty private String mSlot;
     private Drawable mNumberBackground;
     private Paint mNumberPain;
@@ -364,22 +368,26 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         if (mIcon == null) {
             return false;
         }
-        Drawable drawable;
         try {
-            drawable = getIcon(mIcon);
+            mIconDrawable = getIcon(mIcon, false);
+            mDarkIconDrawable = getIcon(mIcon, true);
         } catch (OutOfMemoryError e) {
             Log.w(TAG, "OOM while inflating " + mIcon.icon + " for slot " + mSlot);
             return false;
         }
 
-        if (drawable == null) {
+        if (mIconDrawable == null) {
             Log.w(TAG, "No icon for slot " + mSlot + "; " + mIcon.icon);
             return false;
         }
         if (withClear) {
             setImageDrawable(null);
         }
-        setImageDrawable(drawable);
+        if (mIsDark && mDarkIconDrawable != null) {
+            setImageDrawable(mDarkIconDrawable);
+        } else {
+            setImageDrawable(mIconDrawable);
+        }
         return true;
     }
 
@@ -387,10 +395,10 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
         return mIcon.icon;
     }
 
-    private Drawable getIcon(StatusBarIcon icon) {
+    private Drawable getIcon(StatusBarIcon icon, boolean isDark) {
         Context notifContext = mNotification != null ?
                 mNotification.getPackageContext(getContext()) : getContext();
-        return getIcon(getContext(), notifContext, icon);
+        return getIcon(getContext(), notifContext, icon, isDark);
     }
 
     /**
@@ -403,12 +411,22 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
      */
     public static Drawable getIcon(Context sysuiContext,
             Context context, StatusBarIcon statusBarIcon) {
+        return getIcon(sysuiContext, context, statusBarIcon, false);
+    }
+
+    public static Drawable getIcon(Context sysuiContext,
+            Context context, StatusBarIcon statusBarIcon, boolean isDark) {
         int userId = statusBarIcon.user.getIdentifier();
         if (userId == UserHandle.USER_ALL) {
             userId = UserHandle.USER_SYSTEM;
         }
 
-        Drawable icon = statusBarIcon.icon.loadDrawableAsUser(context, userId);
+        Drawable icon;
+        if (isDark) {
+            icon = DarkIconUtil.getCustomDarkDrawable(context, statusBarIcon.icon.getResId());
+        } else {
+            icon = statusBarIcon.icon.loadDrawableAsUser(context, userId);
+        }
 
         TypedValue typedValue = new TypedValue();
         sysuiContext.getResources().getValue(R.dimen.status_bar_icon_scale_factor,
@@ -617,16 +635,26 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
 
     private void updateIconColor() {
         if (mCurrentSetColor != NO_COLOR) {
-            if (mMatrixColorFilter == null) {
-                mMatrix = new float[4 * 5];
-                mMatrixColorFilter = new ColorMatrixColorFilter(mMatrix);
+            if (mDarkIconDrawable != null) {
+                mIsDark = DarkIconUtil.isDark(mCurrentSetColor);
+                if (mIsDark) {
+                    setImageDrawable(mDarkIconDrawable);
+                } else {
+                    setImageDrawable(mIconDrawable);
+                }
+                setColorFilter(null);
+            } else {
+                if (mMatrixColorFilter == null) {
+                    mMatrix = new float[4 * 5];
+                    mMatrixColorFilter = new ColorMatrixColorFilter(mMatrix);
+                }
+                int color = NotificationUtils.interpolateColors(
+                        mCurrentSetColor, Color.WHITE, mDozeAmount);
+                updateTintMatrix(mMatrix, color, DARK_ALPHA_BOOST * mDozeAmount);
+                mMatrixColorFilter.setColorMatrixArray(mMatrix);
+                setColorFilter(null);  // setColorFilter only invalidates if the instance changed.
+                setColorFilter(mMatrixColorFilter);
             }
-            int color = NotificationUtils.interpolateColors(
-                    mCurrentSetColor, Color.WHITE, mDozeAmount);
-            updateTintMatrix(mMatrix, color, DARK_ALPHA_BOOST * mDozeAmount);
-            mMatrixColorFilter.setColorMatrixArray(mMatrix);
-            setColorFilter(null);  // setColorFilter only invalidates if the instance changed.
-            setColorFilter(mMatrixColorFilter);
         } else {
             mDozer.updateGrayscale(this, mDozeAmount);
         }
@@ -938,7 +966,16 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
     public void onDarkChanged(Rect area, float darkIntensity, int tint) {
         int areaTint = getTint(area, this, tint);
         ColorStateList color = ColorStateList.valueOf(areaTint);
-        setImageTintList(color);
+        mIsDark = darkIntensity >= 0.5f;
+        if (mDarkIconDrawable != null) {
+            if (mIsDark) {
+                setImageDrawable(mDarkIconDrawable);
+            } else {
+                setImageDrawable(mIconDrawable);
+            }
+        } else {
+            setImageTintList(color);
+        }
         setDecorColor(areaTint);
     }
 

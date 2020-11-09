@@ -30,6 +30,7 @@ import android.graphics.Path.FillType;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
 import android.os.Handler;
 import android.telephony.SignalStrength;
@@ -83,8 +84,14 @@ public class SignalDrawable extends DrawableWrapper {
     private boolean mAnimating;
     private int mCurrentDot;
 
+    private boolean mTintDrawable = true;
+
     public SignalDrawable(Context context) {
-        super(context.getDrawable(com.android.internal.R.drawable.ic_signal_cellular));
+        this(context, context.getDrawable(com.android.internal.R.drawable.ic_signal_cellular));
+    }
+
+    public SignalDrawable(Context context, Drawable drawable) {
+        super(drawable);
         final String xPathString = context.getString(
                 com.android.internal.R.string.config_signalXPath);
         mXPath.set(PathParser.createPathFromPathData(xPathString));
@@ -134,6 +141,11 @@ public class SignalDrawable extends DrawableWrapper {
         }
     }
 
+    public void setTintDrawable(boolean val)
+    {
+        mTintDrawable = val;
+    }
+
     @Override
     protected boolean onLevelChange(int packedState) {
         super.onLevelChange(unpackLevel(packedState));
@@ -159,7 +171,11 @@ public class SignalDrawable extends DrawableWrapper {
 
     @Override
     public void setTintList(ColorStateList tint) {
-        super.setTintList(tint);
+        if (mTintDrawable){
+            super.setTintList(tint);
+        } else {
+            super.setTintList(null);
+        }
         int colorForeground = mForegroundPaint.getColor();
         mForegroundPaint.setColor(tint.getDefaultColor());
         if (colorForeground != mForegroundPaint.getColor()) invalidateSelf();

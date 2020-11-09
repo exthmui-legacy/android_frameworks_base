@@ -42,6 +42,7 @@ import android.view.View;
 
 import com.android.settingslib.Utils;
 import com.android.systemui.R;
+import com.android.systemui.util.DarkIconUtil;
 
 /**
  * Drawable for {@link KeyButtonView}s that supports tinting between two colors, rotation and shows
@@ -80,14 +81,22 @@ public class KeyButtonDrawable extends Drawable {
     private final Paint mShadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
     private final ShadowDrawableState mState;
     private AnimatedVectorDrawable mAnimatedDrawable;
+    private boolean mIsDark = false;
+    private boolean mUseCustomDarkIcon = false;
 
     public KeyButtonDrawable(Drawable d, @ColorInt int lightColor, @ColorInt int darkColor,
             boolean horizontalFlip, Color ovalBackgroundColor) {
-        this(d, new ShadowDrawableState(lightColor, darkColor,
+        this(d, null, new ShadowDrawableState(lightColor, darkColor,
                 d instanceof AnimatedVectorDrawable, horizontalFlip, ovalBackgroundColor));
     }
 
-    private KeyButtonDrawable(Drawable d, ShadowDrawableState state) {
+    public KeyButtonDrawable(Drawable d, Drawable darkD, @ColorInt int lightColor, @ColorInt int darkColor,
+            boolean horizontalFlip, Color ovalBackgroundColor) {
+        this(d, darkD, new ShadowDrawableState(lightColor, darkColor,
+                d instanceof AnimatedVectorDrawable, horizontalFlip, ovalBackgroundColor));
+    }
+
+    private KeyButtonDrawable(Drawable d, Drawable darkD, ShadowDrawableState state) {
         mState = state;
         if (d != null) {
             mState.mBaseHeight = d.getIntrinsicHeight();
@@ -95,18 +104,36 @@ public class KeyButtonDrawable extends Drawable {
             mState.mChangingConfigurations = d.getChangingConfigurations();
             mState.mChildState = d.getConstantState();
         }
+        if (darkD != null) {
+            mState.mDarkChildState = darkD.getConstantState();
+            mUseCustomDarkIcon = true;
+        }
+        updateAnimateDrawable();
+    }
+
+    private void updateAnimateDrawable() {
         if (canAnimate()) {
-            mAnimatedDrawable = (AnimatedVectorDrawable) mState.mChildState.newDrawable().mutate();
+            if (mIsDark && mUseCustomDarkIcon) {
+                mAnimatedDrawable = (AnimatedVectorDrawable) mState.mDarkChildState.newDrawable().mutate();
+            } else {
+                mAnimatedDrawable = (AnimatedVectorDrawable) mState.mChildState.newDrawable().mutate();
+            }
             setDrawableBounds(mAnimatedDrawable);
         }
     }
 
     public void setDarkIntensity(float intensity) {
         mState.mDarkIntensity = intensity;
-        final int color = (int) ArgbEvaluator.getInstance()
-                .evaluate(intensity, mState.mLightColor, mState.mDarkColor);
+        mIsDark = intensity >= 0.5f;
         updateShadowAlpha();
-        setColorFilter(new PorterDuffColorFilter(color, Mode.SRC_ATOP));
+        if (mUseCustomDarkIcon) {
+            updateAnimateDrawable();
+            invalidateSelf();
+        } else {
+            final int color = (int) ArgbEvaluator.getInstance()
+                    .evaluate(intensity, mState.mLightColor, mState.mDarkColor);
+            setColorFilter(new PorterDuffColorFilter(color, Mode.SRC_ATOP));
+        }
     }
 
     public void setRotation(float degrees) {
@@ -296,7 +323,12 @@ public class KeyButtonDrawable extends Drawable {
         final Canvas canvas = new Canvas(bitmap);
 
         // Call mutate, so that the pixel allocation by the underlying vector drawable is cleared.
-        final Drawable d = mState.mChildState.newDrawable().mutate();
+        final Drawable d;
+        if (mIsDark && mUseCustomDarkIcon) {
+            d = mState.mDarkChildState.newDrawable().mutate();
+        } else {
+            d = mState.mChildState.newDrawable().mutate();
+        }
         setDrawableBounds(d);
         canvas.save();
         if (mState.mHorizontalFlip) {
@@ -324,7 +356,12 @@ public class KeyButtonDrawable extends Drawable {
         Canvas canvas = new Canvas(bitmap);
 
         // Call mutate, so that the pixel allocation by the underlying vector drawable is cleared.
-        final Drawable d = mState.mChildState.newDrawable().mutate();
+        final Drawable d;
+        if (mIsDark && mUseCustomDarkIcon) {
+            d = mState.mDarkChildState.newDrawable().mutate();
+        } else {
+            d = mState.mChildState.newDrawable().mutate();
+        }
         setDrawableBounds(d);
         canvas.save();
         if (mState.mHorizontalFlip) {
@@ -389,6 +426,7 @@ public class KeyButtonDrawable extends Drawable {
         Bitmap mLastDrawnIcon;
         Bitmap mLastDrawnShadow;
         ConstantState mChildState;
+        ConstantState mDarkChildState;
 
         final int mLightColor;
         final int mDarkColor;
@@ -407,7 +445,7 @@ public class KeyButtonDrawable extends Drawable {
 
         @Override
         public Drawable newDrawable() {
-            return new KeyButtonDrawable(null, this);
+            return new KeyButtonDrawable(null, null, this);
         }
 
         @Override
@@ -471,7 +509,8 @@ public class KeyButtonDrawable extends Drawable {
         final Resources res = context.getResources();
         boolean isRtl = res.getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
         Drawable d = context.getDrawable(iconResId);
-        final KeyButtonDrawable drawable = new KeyButtonDrawable(d, lightColor, darkColor,
+        Drawable darkD = DarkIconUtil.getCustomDarkDrawable(context, iconResId);
+        final KeyButtonDrawable drawable = new KeyButtonDrawable(d, darkD, lightColor, darkColor,
                 isRtl && d.isAutoMirrored(), ovalBackgroundColor);
         if (hasShadow) {
             int offsetX = res.getDimensionPixelSize(R.dimen.nav_key_button_shadow_offset_x);
