@@ -130,4 +130,22 @@
     <!-- toast -->
     <item type="drawable" name="exthm_toast_dark">@drawable/toast_frame</item>
     <item type="drawable" name="exthm_toast_light">@drawable/toast_frame</item>
+
+    <!-- activity/window background element -->
+    <item type="drawable" name="exthm_background_element_00_dark">@null</item>
+    <item type="drawable" name="exthm_background_element_01_dark">@null</item>
+    <item type="drawable" name="exthm_background_element_02_dark">@null</item>
+    <item type="drawable" name="exthm_background_element_03_dark">@null</item>
+    <item type="drawable" name="exthm_background_element_04_dark">@null</item>
+    <item type="drawable" name="exthm_background_element_05_dark">@null</item>
+    <item type="drawable" name="exthm_background_element_06_dark">@null</item>
+    <item type="drawable" name="exthm_background_element_07_dark">@null</item>
+    <item type="drawable" name="exthm_background_element_00_light">@null</item>
+    <item type="drawable" name="exthm_background_element_01_light">@null</item>
+    <item type="drawable" name="exthm_background_element_02_light">@null</item>
+    <item type="drawable" name="exthm_background_element_03_light">@null</item>
+    <item type="drawable" name="exthm_background_element_04_light">@null</item>
+    <item type="drawable" name="exthm_background_element_05_light">@null</item>
+    <item type="drawable" name="exthm_background_element_06_light">@null</item>
+    <item type="drawable" name="exthm_background_element_07_light">@null</item>
 </resources>
