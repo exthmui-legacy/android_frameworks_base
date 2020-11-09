@@ -3189,5 +3189,23 @@
           <public name="exthm_switch_thumb_to_off_10_light" />
           <public name="exthm_switch_thumb_to_off_11_light" />
           <public name="exthm_switch_thumb_to_off_12_light" />
+
+          <!-- activity/window background element -->
+          <public name="exthm_background_element_00_dark" />
+          <public name="exthm_background_element_01_dark" />
+          <public name="exthm_background_element_02_dark" />
+          <public name="exthm_background_element_03_dark" />
+          <public name="exthm_background_element_04_dark" />
+          <public name="exthm_background_element_05_dark" />
+          <public name="exthm_background_element_06_dark" />
+          <public name="exthm_background_element_07_dark" />
+          <public name="exthm_background_element_00_light" />
+          <public name="exthm_background_element_01_light" />
+          <public name="exthm_background_element_02_light" />
+          <public name="exthm_background_element_03_light" />
+          <public name="exthm_background_element_04_light" />
+          <public name="exthm_background_element_05_light" />
+          <public name="exthm_background_element_06_light" />
+          <public name="exthm_background_element_07_light" />
     </public-group>
 </resources>
