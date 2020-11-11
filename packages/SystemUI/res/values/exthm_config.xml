@@ -5,4 +5,6 @@
     <string name="config_stitchEditor">com.asus.stitchimage/com.asus.stitchimage.editor.ScreenshotEditorActivity</string>
     <string-array name="custom_dark_icons">
     </string-array>
+
+    <bool name="qs_custom_header">false</bool>
 </resources>
