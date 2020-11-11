@@ -155,13 +155,20 @@ public class BatteryMeterView extends LinearLayout implements
         mThemedDrawable = new ThemedBatteryDrawable(context, frameColor);
         atts.recycle();
 
-        mCustomNormalDrawable[0] = context.getResources().getDrawable(R.drawable.exthm_stat_sys_battery_normal);
-        mCustomNormalDrawable[1] = DarkIconUtil.getCustomDarkDrawable(context, R.drawable.exthm_stat_sys_battery_normal);
-        mCustomChargingDrawable[0] = context.getResources().getDrawable(R.drawable.exthm_stat_sys_battery_charging);
-        mCustomChargingDrawable[1] = DarkIconUtil.getCustomDarkDrawable(context, R.drawable.exthm_stat_sys_battery_charging);
-        mCustomPowersaveDrawable[0] = context.getResources().getDrawable(R.drawable.exthm_stat_sys_battery_powersave);
-        mCustomPowersaveDrawable[1] = DarkIconUtil.getCustomDarkDrawable(context, R.drawable.exthm_stat_sys_battery_powersave);
         mUseCustomDrawable = context.getResources().getBoolean(R.bool.exthm_use_custom_battery);
+        if (mUseCustomDrawable) {
+            try {
+                mCustomNormalDrawable[0] = context.getResources().getDrawable(R.drawable.exthm_stat_sys_battery_normal);
+                mCustomNormalDrawable[1] = DarkIconUtil.getCustomDarkDrawable(context, R.drawable.exthm_stat_sys_battery_normal);
+                mCustomChargingDrawable[0] = context.getResources().getDrawable(R.drawable.exthm_stat_sys_battery_charging);
+                mCustomChargingDrawable[1] = DarkIconUtil.getCustomDarkDrawable(context, R.drawable.exthm_stat_sys_battery_charging);
+                mCustomPowersaveDrawable[0] = context.getResources().getDrawable(R.drawable.exthm_stat_sys_battery_powersave);
+                mCustomPowersaveDrawable[1] = DarkIconUtil.getCustomDarkDrawable(context, R.drawable.exthm_stat_sys_battery_powersave);
+            } catch (Exception e) {
+                e.printStackTrace();
+                mUseCustomDrawable = false;
+            }
+        }
 
         mSettingObserver = new SettingObserver(new Handler(context.getMainLooper()));
 
