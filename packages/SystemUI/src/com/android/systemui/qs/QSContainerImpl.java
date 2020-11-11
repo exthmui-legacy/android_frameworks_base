@@ -22,9 +22,12 @@ import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.dynamicanimation.animation.FloatPropertyCompat;
 import androidx.dynamicanimation.animation.SpringForce;
@@ -74,6 +77,12 @@ public class QSContainerImpl extends FrameLayout {
     private int mContentPaddingEnd = -1;
     private boolean mAnimateBottomOnNextLayout;
 
+    private ImageView mBackgroundImage;
+    private Drawable mStatusBarBackgroundDrawable;
+
+    private boolean mLandscape;
+    private boolean mHeaderImageEnabled;
+
     public QSContainerImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -90,7 +99,13 @@ public class QSContainerImpl extends FrameLayout {
         mBackground = findViewById(R.id.quick_settings_background);
         mStatusBarBackground = findViewById(R.id.quick_settings_status_bar_background);
         mBackgroundGradient = findViewById(R.id.quick_settings_gradient_view);
+        mBackgroundImage = findViewById(R.id.qs_header_image_view);
+        mBackgroundImage.setClipToOutline(true);
+
+        mStatusBarBackgroundDrawable = mStatusBarBackground.getBackground();
+
         updateResources();
+
         mHeader.getHeaderQsPanel().setMediaVisibilityChangedListener((visible) -> {
             if (mHeader.getHeaderQsPanel().isShown()) {
                 mAnimateBottomOnNextLayout = true;
@@ -101,7 +116,6 @@ public class QSContainerImpl extends FrameLayout {
                 mAnimateBottomOnNextLayout = true;
             }
         });
-
 
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
@@ -124,6 +138,7 @@ public class QSContainerImpl extends FrameLayout {
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         setBackgroundGradientVisibility(newConfig);
+        mLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
         updateResources();
         mSizePoint.set(0, 0); // Will be retrieved on next measure pass.
     }
@@ -195,13 +210,24 @@ public class QSContainerImpl extends FrameLayout {
         mQsDisabled = disabled;
         setBackgroundGradientVisibility(getResources().getConfiguration());
         mBackground.setVisibility(mQsDisabled ? View.GONE : View.VISIBLE);
+        updateHeaderVisibility();
     }
 
     private void updateResources() {
+        mHeaderImageEnabled = mContext.getResources().getBoolean(R.bool.qs_custom_header);
+        int topMargin = mContext.getResources().getDimensionPixelSize(
+                com.android.internal.R.dimen.quick_qs_offset_height) + (mHeaderImageEnabled ?
+                mContext.getResources().getDimensionPixelSize(R.dimen.qs_header_image_offset) : 0);
         LayoutParams layoutParams = (LayoutParams) mQSPanelContainer.getLayoutParams();
-        layoutParams.topMargin = mContext.getResources().getDimensionPixelSize(
-                com.android.internal.R.dimen.quick_qs_offset_height);
+        layoutParams.topMargin = topMargin;
         mQSPanelContainer.setLayoutParams(layoutParams);
+
+        int statusBarSideMargin = mHeaderImageEnabled ? mContext.getResources().getDimensionPixelSize(
+                R.dimen.qs_header_image_side_margin) : 0;
+        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mStatusBarBackground.getLayoutParams();
+        lp.height = topMargin;
+        lp.setMargins(statusBarSideMargin, 0, statusBarSideMargin, 0);
+        mStatusBarBackground.setLayoutParams(lp);
 
         mSideMargins = getResources().getDimensionPixelSize(R.dimen.notification_side_paddings);
         mContentPaddingStart = getResources().getDimensionPixelSize(
@@ -213,6 +239,8 @@ public class QSContainerImpl extends FrameLayout {
         if (marginsChanged) {
             updatePaddingsAndMargins();
         }
+
+        updateHeaderVisibility();
     }
 
     /**
@@ -310,5 +338,15 @@ public class QSContainerImpl extends FrameLayout {
             getDisplay().getRealSize(mSizePoint);
         }
         return mSizePoint.y;
+    }
+
+    private void updateHeaderVisibility() {
+        boolean hideGradient = mLandscape || mHeaderImageEnabled || mQsDisabled;
+        boolean hideStatusbar = mLandscape && !mHeaderImageEnabled;
+
+        mBackgroundImage.setVisibility(mHeaderImageEnabled ? View.VISIBLE : View.GONE);
+        mBackgroundGradient.setVisibility(hideGradient ? View.INVISIBLE : View.VISIBLE);
+        mStatusBarBackground.setBackground(hideGradient ? null : mStatusBarBackgroundDrawable);
+        mStatusBarBackground.setVisibility(hideStatusbar ? View.INVISIBLE : View.VISIBLE);
     }
 }

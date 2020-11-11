@@ -179,6 +179,7 @@
     <item type="drawable" name="exthm_stat_sys_battery_charging_25_dark">@null</item>
 
     <item type="drawable" name="qs_background_statusbar">#ff000000</item>
+    <item type="drawable" name="qs_header_image">#00000000</item>
 
     <!-- Navigation bar icons -->
     <item type="drawable" name="ic_sysbar_accessibility_button_dark">@null</item>
