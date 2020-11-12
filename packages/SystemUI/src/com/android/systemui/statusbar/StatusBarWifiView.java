@@ -262,7 +262,6 @@ public class StatusBarWifiView extends FrameLayout implements DarkReceiver,
         int areaTint = getTint(area, this, tint);
         ColorStateList color = ColorStateList.valueOf(areaTint);
         mIsDark = darkIntensity >= 0.5f;
-        Log.d("SBW", "isDark? " +  mIsDark + ", darkint=" + darkIntensity + ", is dark icon null? " + (mCurrentWifiIconDark == null));
         if (mCurrentWifiIconDark != null) {
             updateIcon();
         } else {
