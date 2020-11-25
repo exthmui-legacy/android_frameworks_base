@@ -3208,4 +3208,29 @@
           <public name="exthm_background_element_06_light" />
           <public name="exthm_background_element_07_light" />
     </public-group>
+
+    <public-group type="drawable" first-id="0x010802dc">
+        <public name="exthm_btn_check_dark" />
+        <public name="exthm_btn_check_light" />
+        <public name="exthm_btn_radio_dark" />
+        <public name="exthm_btn_radio_light" />
+        <public name="exthm_dialog_background_dark" />
+        <public name="exthm_dialog_background_light" />
+        <public name="exthm_switch_background_dark" />
+        <public name="exthm_switch_background_light" />
+        <public name="exthm_switch_thumb_dark" />
+        <public name="exthm_switch_thumb_light" />
+        <public name="exthm_switch_track_dark" />
+        <public name="exthm_switch_track_light" />
+        <public name="exthm_switch_track_off_dark" />
+        <public name="exthm_switch_track_off_disabled_dark" />
+        <public name="exthm_switch_track_off_disabled_light" />
+        <public name="exthm_switch_track_off_light" />
+        <public name="exthm_switch_track_on_dark" />
+        <public name="exthm_switch_track_on_disabled_dark" />
+        <public name="exthm_switch_track_on_disabled_light" />
+        <public name="exthm_switch_track_on_light" />
+        <public name="exthm_window_background_dark" />
+        <public name="exthm_window_background_light" />
+    </public-group>
 </resources>
