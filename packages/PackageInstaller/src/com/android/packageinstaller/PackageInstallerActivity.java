@@ -411,7 +411,7 @@ public class PackageInstallerActivity extends Activity {
         mAppInfoContainer = findViewById(R.id.app_info_container);
         mDeleteApkLayout = findViewById(R.id.delete_apk_view);
         mAutoDeleteApkTitle = findViewById(R.id.auto_delete_apk_title);
-        mApkFileSize = Formatter.formatFileSize(this, new File(getIntent().getData().getPath()).length());
+        mApkFileSize = Formatter.formatFileSize(this, new File(packageUri.getPath()).length());
         mInstallButton = findViewById(R.id.install_button);
         mCancelButton = findViewById(R.id.cancel_button);
         bindUi();
