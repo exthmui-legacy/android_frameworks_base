@@ -23,6 +23,7 @@ import android.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Animatable;
 import android.util.AttributeSet;
 import android.util.Pair;
@@ -42,6 +43,7 @@ import com.android.systemui.Dependency;
 import com.android.systemui.FontSizeUtils;
 import com.android.systemui.R;
 import com.android.systemui.SysUiServiceProvider;
+import com.android.systemui.DessertCaseView.RescalingContainer;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.qs.DetailAdapter;
 import com.android.systemui.statusbar.CommandQueue;
@@ -94,10 +96,18 @@ public class QSDetail extends LinearLayout {
             mDetailViews.valueAt(i).dispatchConfigurationChanged(newConfig);
         }
 
+        updateHeader();
+    }
+
+    private void updateHeader() {
+        Resources res = mContext.getResources();
         // Update top space height in orientation change
         mQsDetailTopSpace.getLayoutParams().height =
-                mContext.getResources().getDimensionPixelSize(
+                res.getDimensionPixelSize(
                         com.android.internal.R.dimen.quick_qs_offset_height);
+        if (res.getBoolean(R.bool.qs_custom_header)) {
+            mQsDetailTopSpace.getLayoutParams().height += res.getDimensionPixelSize(R.dimen.qs_header_image_offset);
+        }
         mQsDetailTopSpace.setLayoutParams(mQsDetailTopSpace.getLayoutParams());
     }
 
@@ -114,6 +124,7 @@ public class QSDetail extends LinearLayout {
         mQsDetailHeaderProgress = findViewById(R.id.qs_detail_header_progress);
         mQsDetailTopSpace = findViewById(R.id.qs_detail_top_space);
 
+        updateHeader();
         updateDetailText();
 
         mClipper = new QSDetailClipper(findViewById(R.id.detail_container));
