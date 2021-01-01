@@ -26,7 +26,7 @@ public class DarkIconUtil {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            // ignore
         }
         return null;
     }
