@@ -423,7 +423,7 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
 
         Drawable icon;
         if (isDark) {
-            icon = DarkIconUtil.getCustomDarkDrawable(context, statusBarIcon.icon.getResId());
+            icon = DarkIconUtil.getCustomDarkDrawable(sysuiContext, statusBarIcon.icon.getResId());
         } else {
             icon = statusBarIcon.icon.loadDrawableAsUser(context, userId);
         }
