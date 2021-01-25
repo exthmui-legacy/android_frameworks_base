@@ -70,6 +70,10 @@ public class DeviceInfoUtils {
             return formatKernelVersion(context, Os.uname());
     }
 
+    public static String getSimpleFormattedKernelVersion() {
+        return Os.uname().release;
+    }
+
     @VisibleForTesting
     static String formatKernelVersion(Context context, StructUtsname uname) {
         if (uname == null) {
