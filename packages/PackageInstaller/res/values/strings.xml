@@ -275,4 +275,6 @@
     <string name="package_info_package_first_install_time">The first install time</string>
     <string name="package_info_package_last_update_time">The last install time</string>
     <string name="package_info_package_version_code">Package Version Code</string>
+    <string name="install_in_background">Install in backtask</string>
+    <string name="install_success_toast">%1$s install successfully, %2$s has been cleared.</string>
 </resources>

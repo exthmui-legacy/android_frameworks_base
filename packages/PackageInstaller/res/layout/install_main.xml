@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.0"
                     android:textColor="@android:color/white"
-                    android:text="在后台安装"
+                    android:text="@string/install_in_background"
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textSize="14sp" />
 

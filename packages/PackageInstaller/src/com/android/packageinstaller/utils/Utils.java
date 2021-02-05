@@ -5,17 +5,20 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.os.Bundle;
+import android.text.format.Formatter;
 
-public class NotificationUtil {
+import java.io.File;
+
+public class Utils {
 
     public static Notification buildNotification(Context context, PendingIntent pendingIntent, String channelId, String title, String message, int icon, CharSequence ticker) {
-        Notification.Builder mBuilder;
-        mBuilder = new Notification.Builder(context, channelId);
+        Notification.Builder mBuilder = new Notification.Builder(context, channelId);
 
         mBuilder.setContentTitle(title)
                 .setContentText(message)
                 .setContentIntent(pendingIntent)
-                .setTicker(title)
+                .setTicker(ticker)
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(icon)
@@ -32,4 +35,9 @@ public class NotificationUtil {
         }
     }
 
+    public static String getFileSize(Context context, String filePath){
+        return Formatter.formatFileSize(context, new File(filePath).length());
+    }
+
 }
+

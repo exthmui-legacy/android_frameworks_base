@@ -133,4 +133,6 @@
     <string name="package_info_package_first_install_time">第一次安装时间</string>
     <string name="package_info_package_version_code">安装包版本号</string>
     <string name="package_info_package_last_update_time">最后升级时间</string>
+    <string name="install_in_background">在后台安装</string>
+    <string name="install_success_toast">%1$s 安装完成，共清理%2$s</string>
 </resources>

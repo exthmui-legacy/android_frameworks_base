@@ -16,9 +16,6 @@
 
 package com.android.packageinstaller;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -28,11 +25,9 @@ import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageParser;
 import android.content.pm.ResolveInfo;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -47,7 +42,7 @@ import androidx.palette.graphics.Palette;
 
 import com.android.internal.content.PackageHelper;
 import com.android.packageinstaller.utils.ContentUriUtils;
-import com.android.packageinstaller.utils.NotificationUtil;
+import com.android.packageinstaller.utils.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -286,21 +281,20 @@ public class InstallInstalling extends Activity {
                     this.getSystemService(NotificationManager.class);
             int installId = intent.getIntExtra("com.android.packageinstaller.extra.INSTALL_ID", 0);
 
-            notificationManager.notify(installId, NotificationUtil.buildNotification(this, pendingIntent, "id1", title, content, R.drawable.ic_packageinstaller_logo, as.label));
+            notificationManager.notify(installId, Utils.buildNotification(this, pendingIntent, getString(R.string.install_done), title, content, R.drawable.ic_packageinstaller_logo, as.label));
             //创建Notification通知  end
-            //TODO: 完成翻译
             if (getIntent().getBooleanExtra("DELETE_APK_ENABLE", false)) {
-                Uri dataUri = Uri.parse(intent.getStringExtra("ORIGINAL_LOCATION"));
+                Uri dataUri = Uri.parse(getIntent().getStringExtra("ORIGINAL_LOCATION"));
                 File apkfile;
+                String apkFileSize = Utils.getFileSize(this, getIntent().getData().getPath());
                 try {
                     getContentResolver().delete(dataUri, null, null);
-                    Toast.makeText(this, appInfo.packageName + "安装完成，" + "已清理" + Formatter.formatFileSize(this, new File(intent.getData().getPath()).length()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.install_success_toast, as.label, apkFileSize), Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
-                    Log.e(this.getClass().getSimpleName(), dataUri.getAuthority());
                     try {
                         apkfile = new File(ContentUriUtils.getPath(this, dataUri));
                         apkfile.delete();
-                        Toast.makeText(this, appInfo.packageName + "安装完成，" + "已清理" + Formatter.formatFileSize(this, new File(intent.getData().getPath()).length()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.install_success_toast, as.label, apkFileSize), Toast.LENGTH_SHORT).show();
                     } catch (Exception e1) {
                         //Ignore
                     }
