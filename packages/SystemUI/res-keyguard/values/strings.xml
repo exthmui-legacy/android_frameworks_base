@@ -413,5 +413,13 @@ number">%d</xliff:g> remaining attempts before SIM becomes permanently unusable.
     <string name="clock_title_bubble">Bubble</string>
     <!-- Name of the "Analog" clock face [CHAR LIMIT=15]-->
     <string name="clock_title_analog">Analog</string>
+    <!-- Name for code lang, such as Java, C++, Python, and so on-->
+    <string name="clock_title_java">Java</string>
+    <!-- The content for coding, must contains '%s' or '%1$s'-->
+    <string name="java_clock_text" translatable="false">"public class AODView {
+    public static void main(String[] args) {
+        System.out.println(\"It\'s: <xliff:g id="time">%s</xliff:g> now.\");
+    }
+}"</string>
 
 </resources>
