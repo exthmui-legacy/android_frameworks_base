@@ -34,8 +34,6 @@ import com.android.systemui.plugins.ClockPlugin;
 
 import java.util.TimeZone;
 
-import static com.android.systemui.statusbar.phone.KeyguardClockPositionAlgorithm.CLOCK_USE_DEFAULT_Y;
-
 /**
  * Plugin for the default clock face used only to provide a preview.
  */
@@ -173,7 +171,7 @@ public class IDEClockController implements ClockPlugin {
 
     @Override
     public int getPreferredY(int totalHeight) {
-        return CLOCK_USE_DEFAULT_Y;
+        return totalHeight / 3;
     }
 
     @Override
@@ -212,10 +210,10 @@ public class IDEClockController implements ClockPlugin {
     @Override
     public void onTimeTick() {
         mView.onTimeChanged();
-        mTime.refreshTime();
-        mDate.refreshTime();
-        mDay.refreshTime();
-        mMonth.refreshTime();
+        mTime.refresh();
+        mDate.refresh();
+        mDay.refresh();
+        mMonth.refresh();
     }
 
     @Override
