@@ -420,7 +420,10 @@ public class StatusBarIconView extends AnimatedImageView implements StatusIconDi
 
         Drawable icon;
         if (isDark) {
-            icon = DarkIconUtil.getCustomDarkDrawable(context, statusBarIcon.icon.getResId());
+            if (statusBarIcon.icon.getType() == Icon.TYPE_RESOURCE) {
+                icon = DarkIconUtil.getCustomDarkDrawable(context, statusBarIcon.icon.getResId());
+            }
+            return null;
         } else {
             icon = statusBarIcon.icon.loadDrawableAsUser(context, userId);
         }
