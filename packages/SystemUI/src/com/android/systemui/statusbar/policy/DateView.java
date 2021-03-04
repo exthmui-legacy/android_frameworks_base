@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.TypedArray;
+import android.icu.util.Calendar;
 import android.icu.text.DateFormat;
 import android.icu.text.DisplayContext;
 import android.os.Handler;
@@ -120,7 +121,7 @@ public class DateView extends TextView {
 
         mCurrentTime.setTime(System.currentTimeMillis());
 
-        final String text = mDateFormat.format(mCurrentTime);
+        final String text = mDateFormat.format(mCurrentTime)+" "+getLunarDay();
         if (!text.equals(mLastText)) {
             setText(text);
             mLastText = text;
@@ -137,4 +138,20 @@ public class DateView extends TextView {
             updateClock();
         }
     }
+
+     /**
+     * 获取现在农历的日期
+     */
+    public static String getLunarDay() {
+        ChineseCalendarProvider lunarCalender = new ChineseCalendarProvider();
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH)+1;
+        int day = calendar.get(Calendar.DATE);
+        //String lunarAnimal = lunarCalender.animalsYear(year);
+        //String lunarGanZhi = lunarCalender.cyclical(year,month,day);
+        String lunarString = lunarCalender.getLunarString(year, month, day);
+        return lunarString;
+    }
+
 }
