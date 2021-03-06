@@ -10,22 +10,14 @@ import android.graphics.drawable.Drawable;
 public class PaletteUtil {
 
     public static Bitmap getIconBitmap(Drawable drawable) {
-        try {
-            if (drawable == null) {
-                return null;
-            }
-            if (drawable instanceof AdaptiveIconDrawable) {
-                Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-                drawable.draw(canvas);
-                return bitmap;
-            } else {
-                return ((BitmapDrawable) drawable).getBitmap();
-            }
-        } catch (Exception e) {
+        if (drawable == null) {
             return null;
         }
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 
     public static int ColorBurn(int RGBValues) {
