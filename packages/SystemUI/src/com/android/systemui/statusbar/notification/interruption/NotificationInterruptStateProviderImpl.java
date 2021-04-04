@@ -130,11 +130,7 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
 
     @Override
     public boolean shouldBubbleUp(NotificationEntry entry) {
-        if (entry.isAppLocked()) {
-            return false;
-        }
-
-	final StatusBarNotification sbn = entry.getSbn();
+        final StatusBarNotification sbn = entry.getSbn();
 
         if (!canAlertCommon(entry)) {
             return false;
@@ -186,12 +182,7 @@ public class NotificationInterruptStateProviderImpl implements NotificationInter
     }
 
     private boolean shouldHeadsUpWhenAwake(NotificationEntry entry) {
-        if (mStatusBarStateController.getState() != StatusBarState.KEYGUARD
-                && entry.secureContent()) {
-            return false;
-        }
-	    
-	StatusBarNotification sbn = entry.getSbn();
+        StatusBarNotification sbn = entry.getSbn();
 
         if (!mUseHeadsUp) {
             if (DEBUG_HEADS_UP) {

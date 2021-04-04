@@ -16,7 +16,6 @@
 
 package com.android.systemui.statusbar.notification.dagger;
 
-import android.app.AppLockManager;
 import android.app.INotificationManager;
 import android.content.Context;
 import android.content.pm.LauncherApps;
@@ -80,8 +79,7 @@ public interface NotificationsModule {
     @Singleton
     @Provides
     static NotificationEntryManager provideNotificationEntryManager(
-            AppLockManager appLockManager,
-	    NotificationEntryManagerLogger logger,
+            NotificationEntryManagerLogger logger,
             NotificationGroupManager groupManager,
             NotificationRankingManager rankingManager,
             NotificationEntryManager.KeyguardEnvironment keyguardEnvironment,
@@ -92,8 +90,7 @@ public interface NotificationsModule {
             Lazy<BubbleController> bubbleController,
             ForegroundServiceDismissalFeatureController fgsFeatureController) {
         return new NotificationEntryManager(
-                appLockManager,
-		logger,
+                logger,
                 groupManager,
                 rankingManager,
                 keyguardEnvironment,

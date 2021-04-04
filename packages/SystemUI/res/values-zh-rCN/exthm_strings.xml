@@ -115,11 +115,5 @@
     <string name="global_action_restart_download_progress">重启至Download模式中\u2026</string>
     <!-- Restart to fastboot mode progress dialog. This is shown if the user chooses to restart the device. -->
     <string name="global_action_restart_fastboot_progress">重启至Fastbootd模式中\u2026</string>
-    <!-- App Lock -->
-    <string name="applock_locked">&#160;已经上锁</string>
-    <string name="applock_fingerprint_face">, 用指纹,或者你的脸来解锁</string>
-    <string name="applock_face">&#160;或者用你的脸来解锁</string>
-    <string name="applock_fingerprint">&#160;或者用你的指纹来解锁</string>
-    <string name="applock_credential">&#160;来解锁</string>
-    <string name="applock_unlock">解锁</string>
+
 </resources>

@@ -1,4 +1,4 @@
-W/*
+/*
  * Copyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -924,15 +924,6 @@ public final class SystemServiceRegistry {
                         return new BiometricManager(ctx.getOuterContext(), service);
                     }
                 });
-
-        registerService(Context.APPLOCK_SERVICE, AppLockManager.class,
-                new CachedServiceFetcher<AppLockManager>() {
-            @Override
-            public AppLockManager createService(ContextImpl ctx) throws ServiceNotFoundException {
-                IBinder b = ServiceManager.getServiceOrThrow(Context.APPLOCK_SERVICE);
-                IAppLockService service = IAppLockService.Stub.asInterface(b);
-                return new AppLockManager(service);
-            }});
 
         registerService(Context.TV_INPUT_SERVICE, TvInputManager.class,
                 new CachedServiceFetcher<TvInputManager>() {

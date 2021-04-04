@@ -3714,16 +3714,6 @@ public abstract class Context {
     public abstract @Nullable String getSystemServiceName(@NonNull Class<?> serviceClass);
 
     /**
-     * Use with {@link #getSystemService} to retrieve a
-     * {@link android.app.AppLockManager} for accessing and setting locked apps state.
-     *
-     * @hide
-     * @see #getSystemService
-     * @see android.app.AppLockManager
-     */
-    public static final String APPLOCK_SERVICE = "applock";
-
-    /**
      * Use with {@link #getSystemService(String)} to retrieve a
      * {@link android.os.PowerManager} for controlling power management,
      * including "wake locks," which let you keep the device on while
