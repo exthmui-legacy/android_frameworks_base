@@ -16,6 +16,7 @@
 
 package com.android.systemui.biometrics;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 import static android.view.Gravity.CENTER;
 
 import android.animation.Animator;
@@ -59,8 +60,6 @@ import java.util.List;
 public abstract class AuthBiometricView extends LinearLayout {
 
     private static final String TAG = "BiometricPrompt/AuthBiometricView";
-
-    private static final String FOD = "vendor.aospa.biometrics.fingerprint.inscreen";
 
     /**
      * Authentication hardware idle.
@@ -196,7 +195,6 @@ public abstract class AuthBiometricView extends LinearLayout {
     protected Bundle mSavedState;
 
     protected final PackageManager mPackageManager;
-    protected boolean mHasFod;
 
     /**
      * Delay after authentication is confirmed, before the dialog should be animated away.
@@ -265,7 +263,6 @@ public abstract class AuthBiometricView extends LinearLayout {
         mInjector.mBiometricView = this;
 
         mPackageManager = context.getPackageManager();
-        mHasFod = mPackageManager.hasSystemFeature(FOD);
 
         mAccessibilityManager = context.getSystemService(AccessibilityManager.class);
 
@@ -563,10 +560,6 @@ public abstract class AuthBiometricView extends LinearLayout {
         mSavedState = savedState;
     }
 
-    public boolean getHasFod() {
-        return mHasFod;
-    }
-
     private void setTextOrHide(TextView view, String string) {
         if (TextUtils.isEmpty(string)) {
             view.setVisibility(View.GONE);
@@ -649,28 +642,6 @@ public abstract class AuthBiometricView extends LinearLayout {
             mTryAgainButton.setVisibility(View.GONE);
             Utils.notifyAccessibilityContentChanged(mAccessibilityManager, this);
         });
-
-        if (this instanceof AuthBiometricFingerprintView) {
-            if (mHasFod) {
-                final int navbarHeight = getResources().getDimensionPixelSize(
-                        com.android.internal.R.dimen.navigation_bar_height);
-                final int fodMargin = getResources().getDimensionPixelSize(
-                        R.dimen.biometric_dialog_fod_margin);
-
-                mIconView.setVisibility(View.INVISIBLE);
-                // The view is invisible, so it still takes space and
-                // we use that to adjust for the FOD
-                mIconView.setPadding(0, 0, 0, fodMargin - navbarHeight);
-
-                // Add Errortext above the biometric icon
-                this.removeView(mIndicatorView);
-                this.addView(mIndicatorView, this.indexOfChild(mIconView));
-            } else {
-                mIconView.setVisibility(View.VISIBLE);
-            }
-        } else if (this instanceof AuthBiometricFaceView) {
-            mIconView.setVisibility(View.VISIBLE);
-        }
     }
 
     /**
