@@ -4984,6 +4984,12 @@ public final class Settings {
         public static final String GAMING_MODE_USE_GAME_DRIVER = "gaming_mode_use_game_driver";
 
         /**
+         * Screenshot image compression
+         * @hide
+         */
+        public static final String SCREENSHOT_COMPRESSION = "screenshot_compression";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
