@@ -407,6 +407,7 @@
     <string name="quick_settings_flashlight_camera_in_use" msgid="4820591564526512571">"相机正在使用中"</string>
     <string name="quick_settings_cellular_detail_title" msgid="792977203299358893">"移动数据"</string>
     <string name="quick_settings_cellular_detail_data_usage" msgid="6105969068871138427">"流量使用情况"</string>
+    <string name="quick_settings_cellular_detail_data_sim">移动数据 SIM</string>
     <string name="quick_settings_cellular_detail_remaining_data" msgid="1136599216568805644">"剩余流量"</string>
     <string name="quick_settings_cellular_detail_over_limit" msgid="4561921367680636235">"超出上限"</string>
     <string name="quick_settings_cellular_detail_data_used" msgid="6798849610647988987">"已使用<xliff:g id="DATA_USED">%s</xliff:g>"</string>
