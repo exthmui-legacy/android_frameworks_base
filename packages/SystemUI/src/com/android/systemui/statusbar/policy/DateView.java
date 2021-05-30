@@ -148,10 +148,8 @@ public class DateView extends TextView {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH)+1;
         int day = calendar.get(Calendar.DATE);
-        //String lunarAnimal = lunarCalender.animalsYear(year);
-        //String lunarGanZhi = lunarCalender.cyclical(year,month,day);
         String lunarString = lunarCalender.getLunarString(year, month, day);
-        return lunarString;
+        return "农历"+lunarString;
     }
 
 }
