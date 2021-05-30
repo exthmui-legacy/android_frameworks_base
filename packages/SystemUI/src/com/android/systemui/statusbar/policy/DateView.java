@@ -149,7 +149,24 @@ public class DateView extends TextView {
         int month = calendar.get(Calendar.MONTH)+1;
         int day = calendar.get(Calendar.DATE);
         String lunarString = lunarCalender.getLunarString(year, month, day);
-        return "农历"+lunarString;
+	if (isZhCN(false)){
+		return "农历"+lunarString;
+	} else{
+		return "";
+	}
+    }
+
+    public static boolean isZhCN(boolean excludeSAR) {
+	    Locale locale = Locale.getDefault();
+	    if (locale.getLanguage().startsWith(Locale.CHINESE.getLanguage())) {
+		    if (excludeSAR) {
+			    return locale.getCountry().equals("CN");
+		    } else {
+			    return !locale.getCountry().equals("SG");
+		    }
+	    } else {
+		    return false;
+	    }
     }
 
 }

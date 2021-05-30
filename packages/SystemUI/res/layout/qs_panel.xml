@@ -36,7 +36,7 @@
         android:layout_height="@*android:dimen/quick_qs_offset_height"
         android:clipToPadding="false"
         android:clipChildren="false"
-        android:background="@drawable/qs_background_statusbar" >
+        android:background="#10000000" >
         <ImageView android:id="@+id/qs_header_image_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -52,7 +52,7 @@
     <View
         android:id="@+id/quick_settings_gradient_view"
         android:layout_width="match_parent"
-        android:layout_height="126dp"
+        android:layout_height="10dp"
         android:layout_marginTop="@*android:dimen/quick_qs_offset_height"
         android:clipToPadding="false"
         android:clipChildren="false"
