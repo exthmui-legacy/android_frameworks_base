@@ -177,9 +177,9 @@ class NotificationShadeDepthController @Inject constructor(
         // Home controls have black background, this means that we should not have blur when they
         // are fully visible, otherwise we'll enter Client Composition unnecessarily.
         var globalActionsRadius = globalActionsSpring.radius
-        if (showingHomeControls) {
+        /*if (showingHomeControls) {
             globalActionsRadius = 0
-        }
+        }*/
         var blur = max(shadeRadius.toInt(), globalActionsRadius)
 
         // Make blur be 0 if it is necessary to stop blur effect.
