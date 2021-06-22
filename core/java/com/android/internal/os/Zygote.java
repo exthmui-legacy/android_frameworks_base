@@ -47,6 +47,8 @@ import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.android.internal.util.ResetPropsUtils;
+
 /** @hide */
 public final class Zygote {
     /*
@@ -284,6 +286,11 @@ public final class Zygote {
      * @hide for internal use only
      */
     public static final String USAP_POOL_SECONDARY_SOCKET_NAME = "usap_pool_secondary";
+
+    /**
+     * @hide
+     */
+    public static final String EXTHM_STATUS_BAR_LYRIC_PROP = "sys.status_bar_lyric.fakeprop";
 
     private Zygote() {}
 
@@ -793,6 +800,9 @@ public final class Zygote {
             Process.setArgV0(args.mPackageName);
         } else {
             Log.w(loggingTag, "Unable to set package name.");
+        }
+        if (SystemProperties.getBoolean(EXTHM_STATUS_BAR_LYRIC_PROP, false)) {
+            ResetPropsUtils.setProps(args.mPackageName);
         }
     }
 
