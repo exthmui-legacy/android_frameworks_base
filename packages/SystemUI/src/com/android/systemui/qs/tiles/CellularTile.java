@@ -370,7 +370,7 @@ public class CellularTile extends QSTileImpl<SignalState> {
             mTelephonyManager.createForSubscriptionId(subId).setDataEnabled(true);
             mSubscriptionManager.setDefaultDataSubId(subId);
             mDataController.setMobileDataEnabled(mobileDataEnabled);
-            refreshState();
+            showDetail(false);
         }
 
         public void setMobileDataEnabled(boolean enabled) {

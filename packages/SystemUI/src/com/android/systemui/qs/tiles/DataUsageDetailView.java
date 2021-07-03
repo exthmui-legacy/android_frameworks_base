@@ -26,6 +26,7 @@ import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -47,10 +48,12 @@ public class DataUsageDetailView extends LinearLayout {
 
     private final DecimalFormat FORMAT = new DecimalFormat("#.##");
     private DataSimSwitchListener mDataSimSwitchListener;
+    private int mCurrentSubId = -1;
     private RadioGroup.OnCheckedChangeListener mSubsGroupListener = new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (mDataSimSwitchListener == null) return;
+                if (mDataSimSwitchListener == null || mCurrentSubId == checkedId) return;
+                mCurrentSubId = checkedId;
                 mDataSimSwitchListener.onSwitch(checkedId);
             }
         };
@@ -146,10 +149,14 @@ public class DataUsageDetailView extends LinearLayout {
         final LinearLayout subsLayout = findViewById(R.id.data_sim_switch);
         final RadioGroup subsGroup = findViewById(R.id.data_sim_group);
 
+        mCurrentSubId = selectedSubId;
+
         if (subInfoList != null && subInfoList.size() > 1) {
             subsGroup.removeAllViews();
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             for (SubscriptionInfo info : subInfoList) {
                 RadioButton rb = new RadioButton(mContext);
+                rb.setLayoutParams(params);
                 rb.setId(info.getSubscriptionId());
                 rb.setText(info.getCarrierName());
                 rb.setChecked(selectedSubId == info.getSubscriptionId());
