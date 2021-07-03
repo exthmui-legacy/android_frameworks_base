@@ -158,7 +158,7 @@ public class DataUsageDetailView extends LinearLayout {
                 RadioButton rb = new RadioButton(mContext);
                 rb.setLayoutParams(params);
                 rb.setId(info.getSubscriptionId());
-                rb.setText(info.getCarrierName());
+                rb.setText(info.getDisplayName());
                 rb.setChecked(selectedSubId == info.getSubscriptionId());
                 subsGroup.addView(rb);
             }
