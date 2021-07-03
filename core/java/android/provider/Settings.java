@@ -3670,13 +3670,7 @@ public final class Settings {
         public static void setShowGTalkServiceStatusForUser(ContentResolver cr, boolean flag,
                 int userHandle) {
             putIntForUser(cr, SHOW_GTALK_SERVICE_STATUS, flag ? 1 : 0, userHandle);
-	}
-
-        /**
-	 * Whether to change the transparency of the notifications
-	 * @hide
-	 */
-        public static final String NOTIFICATION_BG_ALPHA = "notification_bg_alpha";
+        }
 
         /**
          * @deprecated Use {@link android.provider.Settings.Global#STAY_ON_WHILE_PLUGGED_IN} instead
