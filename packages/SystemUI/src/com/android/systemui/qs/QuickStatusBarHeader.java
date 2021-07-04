@@ -120,6 +120,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             "lineagesecure:" + LineageSettings.Secure.QS_SHOW_AUTO_BRIGHTNESS;
     private static final String QS_SHOW_BRIGHTNESS_SLIDER =
             "lineagesecure:" + LineageSettings.Secure.QS_SHOW_BRIGHTNESS_SLIDER;
+    private static final String QS_SHOW_LUNAR_CALENDAR =
+            "system:" + Settings.System.QS_SHOW_LUNAR_CALENDAR;
 
     private final NextAlarmController mAlarmController;
     private final ZenModeController mZenController;
@@ -309,7 +311,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
 
         Dependency.get(TunerService.class).addTunable(this,
                 StatusBarIconController.ICON_BLACKLIST,
-                QS_SHOW_AUTO_BRIGHTNESS, QS_SHOW_BRIGHTNESS_SLIDER);
+                QS_SHOW_AUTO_BRIGHTNESS, QS_SHOW_BRIGHTNESS_SLIDER, QS_SHOW_LUNAR_CALENDAR);
     }
 
     public QuickQSPanel getHeaderQsPanel() {
@@ -841,6 +843,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         } else if (StatusBarIconController.ICON_BLACKLIST.equals(key)) {
             mClockView.setClockVisibleByUser(!StatusBarIconController.getIconBlacklist(
                     mContext, newValue).contains("clock"));
+        } else if (QS_SHOW_LUNAR_CALENDAR.equals(key)) {
+            mDateView.setShowLunarCalendar(TunerService.parseIntegerSwitch(newValue, false));
         }
     }
 }
