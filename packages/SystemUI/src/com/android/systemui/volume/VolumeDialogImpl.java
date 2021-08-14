@@ -429,8 +429,7 @@ public class VolumeDialogImpl implements VolumeDialog,
                 if (mVolumePanelOnLeft != volumePanelOnLeft) {
                     mVolumePanelOnLeft = volumePanelOnLeft;
                     mHandler.post(() -> {
-                        // Trigger panel rebuild on next show
-                        mConfigChanged = true;
+                        mControllerCallbackH.onConfigurationChanged();
                     });
                 }
             } else if (key.equals(SHOW_APP_VOLUME)) {
