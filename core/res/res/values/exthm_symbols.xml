@@ -16,6 +16,9 @@
 -->
 <resources>
 
-    <!-- DC Dimming -->
-    <java-symbol type="string" name="config_deviceDcDimmingSysfsNode" />
+  <!-- DC Dimming -->
+  <java-symbol type="string" name="config_deviceDcDimmingSysfsNode" />
+
+  <!-- Whether to use old mobile type icons as default -->
+  <java-symbol type="bool" name="config_useOldMobileIcons" />
 </resources>
