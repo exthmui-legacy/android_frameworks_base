@@ -20,4 +20,6 @@
     <string name="config_deviceDcDimmingSysfsNode"></string>
     <!-- Whether to use old mobile type icons as default -->
     <bool name="config_useOldMobileIcons">false</bool>
+    <!-- Wheter device supports an gaming mode profiles -->
+    <bool name="config_gamingmode_performance">false</bool>
 </resources>
