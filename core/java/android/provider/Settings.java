@@ -4885,6 +4885,11 @@ public final class Settings {
         public static final String GAMING_MODE_ACTIVE = "gaming_mode_active";
 
         /**
+         * @hide
+         */
+        public static final String GAMING_MODE_USE_OVERLAY_MENU = "gaming_mode_use_overlay_menu";
+
+        /**
           * Dynamically identify the top application and add it to the list
           * @hide
           */
