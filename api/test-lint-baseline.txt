@@ -7,16 +7,14 @@ AcronymName: android.app.NotificationChannel#setImportanceLockedByOEM(boolean):
 
 ActionValue: android.location.Location#EXTRA_NO_GPS_LOCATION:
     
-// Tethering broadcast action / extras cannot change name for backwards compatibility
 ActionValue: android.net.TetheringManager#ACTION_TETHER_STATE_CHANGED:
-    Inconsistent action value; expected `android.net.action.TETHER_STATE_CHANGED`, was `android.net.conn.TETHER_STATE_CHANGED`
+    
 ActionValue: android.net.TetheringManager#EXTRA_ACTIVE_TETHER:
-    Inconsistent extra value; expected `android.net.extra.ACTIVE_TETHER`, was `tetherArray`
+    
 ActionValue: android.net.TetheringManager#EXTRA_AVAILABLE_TETHER:
-    Inconsistent extra value; expected `android.net.extra.AVAILABLE_TETHER`, was `availableArray`
+    
 ActionValue: android.net.TetheringManager#EXTRA_ERRORED_TETHER:
-    Inconsistent extra value; expected `android.net.extra.ERRORED_TETHER`, was `erroredArray`
-
+    
 ActionValue: android.telephony.ims.ImsCallProfile#EXTRA_ADDITIONAL_CALL_INFO:
     
 ActionValue: android.telephony.ims.ImsCallProfile#EXTRA_CALL_RAT_TYPE:
@@ -75,6 +73,12 @@ ActionValue: android.telephony.mbms.vendor.VendorUtils#EXTRA_TEMP_LIST:
 
 ArrayReturn: android.app.UiAutomation#executeShellCommandRw(String):
     
+ArrayReturn: android.hardware.soundtrigger.SoundTrigger.KeyphraseSoundModel#KeyphraseSoundModel(java.util.UUID, java.util.UUID, byte[], android.hardware.soundtrigger.SoundTrigger.Keyphrase[]) parameter #3:
+    Method parameter should be Collection<Keyphrase> (or subclass) instead of raw array; was `android.hardware.soundtrigger.SoundTrigger.Keyphrase[]`
+ArrayReturn: android.hardware.soundtrigger.SoundTrigger.KeyphraseSoundModel#KeyphraseSoundModel(java.util.UUID, java.util.UUID, byte[], android.hardware.soundtrigger.SoundTrigger.Keyphrase[], int) parameter #3:
+    Method parameter should be Collection<Keyphrase> (or subclass) instead of raw array; was `android.hardware.soundtrigger.SoundTrigger.Keyphrase[]`
+ArrayReturn: android.hardware.soundtrigger.SoundTrigger.KeyphraseSoundModel#getKeyphrases():
+    Method should return Collection<Keyphrase> (or subclass) instead of raw array; was `android.hardware.soundtrigger.SoundTrigger.Keyphrase[]`
 ArrayReturn: android.location.GnssMeasurementsEvent#GnssMeasurementsEvent(android.location.GnssClock, android.location.GnssMeasurement[]) parameter #1:
     
 ArrayReturn: android.media.AudioRecordingConfiguration#AudioRecordingConfiguration(int, int, int, android.media.AudioFormat, android.media.AudioFormat, int, String, int, boolean, int, android.media.audiofx.AudioEffect.Descriptor[], android.media.audiofx.AudioEffect.Descriptor[]) parameter #10:
@@ -117,6 +121,8 @@ ArrayReturn: android.telephony.ims.ImsUtListener#onUtConfigurationCallWaitingQue
     
 ArrayReturn: android.telephony.ims.stub.ImsRegistrationImplBase#onSubscriberAssociatedUriChanged(android.net.Uri[]) parameter #0:
     
+ArrayReturn: android.view.Display#getSupportedWideColorGamut():
+    Method should return Collection<ColorSpace> (or subclass) instead of raw array; was `android.graphics.ColorSpace[]`
 ArrayReturn: android.view.FocusFinder#sort(android.view.View[], int, int, android.view.ViewGroup, boolean) parameter #0:
     
 ArrayReturn: android.view.contentcapture.ViewNode#getAutofillOptions():
@@ -345,8 +351,12 @@ ExecutorRegistration: android.os.IncidentManager#requestAuthorization(int, Strin
     
 ExecutorRegistration: android.os.RemoteCallback#RemoteCallback(android.os.RemoteCallback.OnResultListener, android.os.Handler):
     
+ExecutorRegistration: android.permission.PermissionControllerManager#countPermissionApps(java.util.List<java.lang.String>, int, android.permission.PermissionControllerManager.OnCountPermissionAppsResultCallback, android.os.Handler):
+    Registration methods should have overload that accepts delivery Executor: `countPermissionApps`
 ExecutorRegistration: android.permission.PermissionControllerManager#getAppPermissions(String, android.permission.PermissionControllerManager.OnGetAppPermissionResultCallback, android.os.Handler):
     
+ExecutorRegistration: android.service.watchdog.ExplicitHealthCheckService#setCallback(android.os.RemoteCallback):
+    Registration methods should have overload that accepts delivery Executor: `setCallback`
 ExecutorRegistration: android.telephony.ims.stub.ImsCallSessionImplBase#setListener(android.telephony.ims.ImsCallSessionListener):
     
 ExecutorRegistration: android.telephony.ims.stub.ImsUtImplBase#setListener(android.telephony.ims.ImsUtListener):
@@ -365,6 +375,8 @@ ExecutorRegistration: android.telephony.mbms.vendor.MbmsStreamingServiceBase#ini
     
 ExecutorRegistration: android.telephony.mbms.vendor.MbmsStreamingServiceBase#startStreaming(int, String, android.telephony.mbms.StreamingServiceCallback):
     
+ExecutorRegistration: android.window.WindowOrganizer#applySyncTransaction(android.window.WindowContainerTransaction, android.window.WindowContainerTransactionCallback):
+    Registration methods should have overload that accepts delivery Executor: `applySyncTransaction`
 
 
 ForbiddenSuperClass: android.app.AppDetailsActivity:
@@ -406,13 +418,13 @@ GetterSetterNames: android.location.GnssClock#setElapsedRealtimeUncertaintyNanos
 GetterSetterNames: android.location.GnssClock#setFullBiasNanos(long):
     
 GetterSetterNames: android.location.GnssClock#setLeapSecond(int):
-
-GetterSetterNames: android.location.GnssClock#setReferenceConstellationTypeForIsb(int):
-
+    
 GetterSetterNames: android.location.GnssClock#setReferenceCarrierFrequencyHzForIsb(double):
-
+    
 GetterSetterNames: android.location.GnssClock#setReferenceCodeTypeForIsb(String):
-
+    
+GetterSetterNames: android.location.GnssClock#setReferenceConstellationTypeForIsb(int):
+    
 GetterSetterNames: android.location.GnssClock#setTimeUncertaintyNanos(double):
     
 GetterSetterNames: android.location.GnssMeasurement#setBasebandCn0DbHz(double):
@@ -420,15 +432,15 @@ GetterSetterNames: android.location.GnssMeasurement#setBasebandCn0DbHz(double):
 GetterSetterNames: android.location.GnssMeasurement#setCarrierFrequencyHz(float):
     
 GetterSetterNames: android.location.GnssMeasurement#setCodeType(String):
-
+    
 GetterSetterNames: android.location.GnssMeasurement#setFullInterSignalBiasNanos(double):
-
+    
 GetterSetterNames: android.location.GnssMeasurement#setFullInterSignalBiasUncertaintyNanos(double):
-
+    
 GetterSetterNames: android.location.GnssMeasurement#setSatelliteInterSignalBiasNanos(double):
-
+    
 GetterSetterNames: android.location.GnssMeasurement#setSatelliteInterSignalBiasUncertaintyNanos(double):
-
+    
 GetterSetterNames: android.location.GnssMeasurement#setSnrInDb(double):
     
 GetterSetterNames: android.location.LocationRequest#isLocationSettingsIgnored():
@@ -461,6 +473,8 @@ IntentBuilderName: android.app.backup.BackupManager#getConfigurationIntent(Strin
     
 IntentBuilderName: android.app.backup.BackupManager#getDataManagementIntent(String):
     
+IntentBuilderName: android.hardware.soundtrigger.KeyphraseEnrollmentInfo#getManageKeyphraseIntent(int, String, java.util.Locale):
+    Methods creating an Intent should be named `create<Foo>Intent()`, was `getManageKeyphraseIntent`
 
 
 IntentName: android.provider.Settings.Secure#VOICE_INTERACTION_SERVICE:
@@ -509,6 +523,8 @@ ListenerLast: android.hardware.camera2.CameraDevice#createCustomCaptureSession(a
     
 ListenerLast: android.location.LocationManager#requestLocationUpdates(android.location.LocationRequest, android.location.LocationListener, android.os.Looper) parameter #2:
     
+ListenerLast: android.permission.PermissionControllerManager#countPermissionApps(java.util.List<java.lang.String>, int, android.permission.PermissionControllerManager.OnCountPermissionAppsResultCallback, android.os.Handler) parameter #3:
+    Listeners should always be at end of argument list (method `countPermissionApps`)
 ListenerLast: android.permission.PermissionControllerManager#getAppPermissions(String, android.permission.PermissionControllerManager.OnGetAppPermissionResultCallback, android.os.Handler) parameter #2:
     
 ListenerLast: android.telephony.mbms.vendor.MbmsGroupCallServiceBase#initialize(android.telephony.mbms.MbmsGroupCallSessionCallback, int) parameter #1:
@@ -2301,6 +2317,8 @@ NotCloseable: android.app.ActivityView:
     
 NotCloseable: android.app.prediction.AppPredictor:
     
+NotCloseable: android.net.EthernetManager.TetheredInterfaceRequest:
+    Classes that release resources (release()) should implement AutoClosable and CloseGuard: class android.net.EthernetManager.TetheredInterfaceRequest
 NotCloseable: android.os.HwParcel:
     
 NotCloseable: android.telephony.ims.stub.ImsUtImplBase:
@@ -2317,6 +2335,8 @@ OnNameExpected: android.service.notification.NotificationAssistantService#attach
     
 OnNameExpected: android.service.quicksettings.TileService#isQuickSettingsSupported():
     
+OnNameExpected: android.service.watchdog.ExplicitHealthCheckService#setCallback(android.os.RemoteCallback):
+    If implemented by developer, should follow the on<Something> style; otherwise consider marking final
 OnNameExpected: android.telephony.ims.ImsService#createMmTelFeature(int):
     
 OnNameExpected: android.telephony.ims.ImsService#createRcsFeature(int):
@@ -2532,7 +2552,7 @@ SamShouldBeLast: android.database.sqlite.SQLiteDebug#dump(android.util.Printer, 
 SamShouldBeLast: android.database.sqlite.SQLiteDirectCursorDriver#query(android.database.sqlite.SQLiteDatabase.CursorFactory, String[]):
     
 SamShouldBeLast: android.location.LocationManager#requestLocationUpdates(android.location.LocationRequest, android.location.LocationListener, android.os.Looper):
-    SAM-compatible parameters (such as parameter 2, "listener", in android.location.LocationManager.requestLocationUpdates) should be last to improve Kotlin interoperability; see https://kotlinlang.org/docs/reference/java-interop.html#sam-conversions
+    
 SamShouldBeLast: android.location.LocationManager#requestLocationUpdates(android.location.LocationRequest, java.util.concurrent.Executor, android.location.LocationListener):
     
 SamShouldBeLast: android.os.BugreportManager#startBugreport(android.os.ParcelFileDescriptor, android.os.ParcelFileDescriptor, android.os.BugreportParams, java.util.concurrent.Executor, android.os.BugreportManager.BugreportCallback):
@@ -2541,6 +2561,8 @@ SamShouldBeLast: android.os.IHwBinder#linkToDeath(android.os.IHwBinder.DeathReci
     
 SamShouldBeLast: android.os.StrictMode.ViolationInfo#dump(android.util.Printer, String):
     
+SamShouldBeLast: android.permission.PermissionControllerManager#countPermissionApps(java.util.List<java.lang.String>, int, android.permission.PermissionControllerManager.OnCountPermissionAppsResultCallback, android.os.Handler):
+    SAM-compatible parameters (such as parameter 3, "callback", in android.permission.PermissionControllerManager.countPermissionApps) should be last to improve Kotlin interoperability; see https://kotlinlang.org/docs/reference/java-interop.html#sam-conversions
 SamShouldBeLast: android.permission.PermissionControllerManager#getAppPermissions(String, android.permission.PermissionControllerManager.OnGetAppPermissionResultCallback, android.os.Handler):
     
 SamShouldBeLast: android.permission.PermissionControllerManager#revokeRuntimePermissions(java.util.Map<java.lang.String,java.util.List<java.lang.String>>, boolean, int, java.util.concurrent.Executor, android.permission.PermissionControllerManager.OnRevokeRuntimePermissionsCallback):
@@ -2609,12 +2631,24 @@ StreamFiles: android.provider.MediaStore#scanVolume(android.content.Context, jav
     
 
 
+UseIcu: android.hardware.soundtrigger.KeyphraseEnrollmentInfo#getKeyphraseMetadata(String, java.util.Locale) parameter #1:
+    Type `java.util.Locale` should be replaced with richer ICU type `android.icu.util.ULocale`
+UseIcu: android.hardware.soundtrigger.KeyphraseEnrollmentInfo#getManageKeyphraseIntent(int, String, java.util.Locale) parameter #2:
+    Type `java.util.Locale` should be replaced with richer ICU type `android.icu.util.ULocale`
+UseIcu: android.hardware.soundtrigger.KeyphraseMetadata#supportsLocale(java.util.Locale) parameter #0:
+    Type `java.util.Locale` should be replaced with richer ICU type `android.icu.util.ULocale`
+UseIcu: android.hardware.soundtrigger.SoundTrigger.Keyphrase#Keyphrase(int, int, java.util.Locale, String, int[]) parameter #2:
+    Type `java.util.Locale` should be replaced with richer ICU type `android.icu.util.ULocale`
+UseIcu: android.hardware.soundtrigger.SoundTrigger.Keyphrase#getLocale():
+    Type `java.util.Locale` should be replaced with richer ICU type `android.icu.util.ULocale`
+
+
 UseParcelFileDescriptor: android.util.proto.ProtoOutputStream#ProtoOutputStream(java.io.FileDescriptor) parameter #0:
     
 
 
 UserHandle: android.app.ActivityManager#switchUser(android.os.UserHandle):
-    When a method overload is needed to target a specific UserHandle, callers should be directed to use Context.createPackageContextAsUser() and re-obtain the relevant Manager, and no new API should be added
+    
 UserHandle: android.app.admin.DevicePolicyManager#getOwnerInstalledCaCerts(android.os.UserHandle):
     
 UserHandle: android.app.role.RoleManager#addOnRoleHoldersChangedListenerAsUser(java.util.concurrent.Executor, android.app.role.OnRoleHoldersChangedListener, android.os.UserHandle):
@@ -2630,11 +2664,13 @@ UserHandle: android.app.role.RoleManager#removeOnRoleHoldersChangedListenerAsUse
 UserHandle: android.app.role.RoleManager#removeRoleHolderAsUser(String, String, int, android.os.UserHandle, java.util.concurrent.Executor, java.util.function.Consumer<java.lang.Boolean>):
     
 UserHandle: android.app.usage.StorageStatsManager#queryCratesForPackage(java.util.UUID, String, android.os.UserHandle):
-    When a method overload is needed to target a specific UserHandle, callers should be directed to use Context.createPackageContextAsUser() and re-obtain the relevant Manager, and no new API should be added
+    
 UserHandle: android.app.usage.StorageStatsManager#queryCratesForUser(java.util.UUID, android.os.UserHandle):
-    When a method overload is needed to target a specific UserHandle, callers should be directed to use Context.createPackageContextAsUser() and re-obtain the relevant Manager, and no new API should be added
+    
 UserHandle: android.companion.CompanionDeviceManager#isDeviceAssociated(String, android.net.MacAddress, android.os.UserHandle):
     
+UserHandle: android.companion.CompanionDeviceManager#isDeviceAssociatedForWifiConnection(String, android.net.MacAddress, android.os.UserHandle):
+    When a method overload is needed to target a specific UserHandle, callers should be directed to use Context.createPackageContextAsUser() and re-obtain the relevant Manager, and no new API should be added
 UserHandle: android.content.pm.PackageManager#getInstallReason(String, android.os.UserHandle):
     
 UserHandle: android.content.pm.PackageManager#getPermissionFlags(String, String, android.os.UserHandle):
@@ -2643,6 +2679,8 @@ UserHandle: android.content.pm.PackageManager#grantRuntimePermission(String, Str
     
 UserHandle: android.content.pm.PackageManager#revokeRuntimePermission(String, String, android.os.UserHandle):
     
+UserHandle: android.content.pm.PackageManager#revokeRuntimePermission(String, String, android.os.UserHandle, String):
+    When a method overload is needed to target a specific UserHandle, callers should be directed to use Context.createPackageContextAsUser() and re-obtain the relevant Manager, and no new API should be added
 UserHandle: android.content.pm.PackageManager#updatePermissionFlags(String, String, int, int, android.os.UserHandle):
     
 UserHandle: android.location.LocationManager#setLocationEnabledForUser(boolean, android.os.UserHandle):
@@ -2653,6 +2691,8 @@ UserHandle: android.permission.PermissionControllerManager#getRuntimePermissionB
     
 UserHandle: android.permission.PermissionControllerManager#stageAndApplyRuntimePermissionsBackup(byte[], android.os.UserHandle):
     
+UserHandle: android.telecom.TelecomManager#getDefaultDialerPackage(android.os.UserHandle):
+    When a method overload is needed to target a specific UserHandle, callers should be directed to use Context.createPackageContextAsUser() and re-obtain the relevant Manager, and no new API should be added
 
 
 UserHandleName: android.app.ActivityView#startActivity(android.content.Intent, android.os.UserHandle):

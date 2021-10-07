@@ -18,5 +18,7 @@
     <string name="aerr_copy">复制崩溃日志链接</string>
     <string name="url_copy_success">链接复制成功</string>
     <string name="url_copy_failed">将日志上载到dogbin时出错</string>
+    <string name="app_pip_not_support">此应用不支持画中画模式</string>
+
 
 </resources>

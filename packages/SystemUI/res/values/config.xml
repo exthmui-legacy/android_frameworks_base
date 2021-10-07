@@ -345,6 +345,9 @@
     <string name="config_navBarLayout" translatable="false">left[.5W],back[1WC];home;recent[1WC],right[.5W]</string>
     <string name="config_navBarLayoutQuickstep" translatable="false">back[1.7WC];home;contextual[1.7WC]</string>
     <string name="config_navBarLayoutHandle" translatable="false">back[40AC];home_handle;ime_switcher[40AC]</string>
+    <!-- region @boringdroid -->
+    <string name="boring_config_navBarLayout" translatable="false">back,home,recent;;</string>
+    <!-- endregion -->
 
     <bool name="quick_settings_show_full_alarm">false</bool>
 

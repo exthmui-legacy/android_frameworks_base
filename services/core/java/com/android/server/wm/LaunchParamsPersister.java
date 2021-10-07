@@ -17,6 +17,7 @@
 package com.android.server.wm;
 
 import android.annotation.Nullable;
+import android.app.WindowConfiguration;
 import android.content.ComponentName;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManagerInternal;
@@ -30,6 +31,7 @@ import android.util.SparseArray;
 import android.util.Xml;
 import android.view.DisplayInfo;
 
+import com.android.internal.BoringdroidManager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.util.FastXmlSerializer;
 import com.android.server.LocalServices;
@@ -324,6 +326,15 @@ class LaunchParamsPersister {
         }
         outParams.mWindowingMode = persistableParams.mWindowingMode;
         outParams.mBounds.set(persistableParams.mBounds);
+        // region @boringdroid
+        if (name != null
+                && BoringdroidManager.getPackageWindowingMode(
+                        WindowManagerService.getWMSContext(), name.getPackageName())
+                != WindowConfiguration.WINDOWING_MODE_FREEFORM) {
+            outParams.mWindowingMode = WindowConfiguration.WINDOWING_MODE_UNDEFINED;
+            outParams.mBounds.setEmpty();
+        }
+        // endregion
     }
 
     void removeRecordForPackage(String packageName) {

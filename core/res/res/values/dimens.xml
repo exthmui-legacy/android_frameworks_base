@@ -859,4 +859,7 @@
     <dimen name="waterfall_display_top_edge_size">0px</dimen>
     <dimen name="waterfall_display_right_edge_size">0px</dimen>
     <dimen name="waterfall_display_bottom_edge_size">0px</dimen>
+    <!-- region @boringdroid -->
+    <item name="decor_corner_radius" type="dimen">8dp</item>
+    <!-- endregion -->
 </resources>

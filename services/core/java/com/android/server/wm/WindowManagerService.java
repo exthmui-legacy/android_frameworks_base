@@ -146,6 +146,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManagerInternal;
@@ -257,6 +258,7 @@ import android.view.WindowManager.TransitionType;
 import android.view.WindowManagerGlobal;
 import android.view.WindowManagerPolicyConstants.PointerEventListener;
 
+import com.android.internal.BoringdroidManager;
 import com.android.internal.R;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.os.BackgroundThread;
@@ -8013,14 +8015,12 @@ public class WindowManagerService extends IWindowManager.Stub
     private void onPointerDownOutsideFocusLocked(IBinder touchedToken) {
         WindowState touchedWindow = mInputToWindowMap.get(touchedToken);
         if (touchedWindow == null) {
-            // if a user taps outside the currently focused window onto an embedded window, treat
-            // it as if the host window was tapped.
+            // 如果在当前聚焦窗口外部的用户抽头到嵌入式窗口上，请将其视为拍摄主机窗口。
             touchedWindow = mEmbeddedWindowController.getHostWindow(touchedToken);
         }
 
         if (touchedWindow == null || !touchedWindow.canReceiveKeys(true /* fromUserTouch */)) {
-            // If the window that received the input event cannot receive keys, don't move the
-            // display it's on to the top since that window won't be able to get focus anyway.
+            // 如果接收到输入事件的窗口无法接收键，则不会将显示屏移动到顶部，因为该窗口无论如何都无法获得焦点。
             return;
         }
 
@@ -8038,9 +8038,7 @@ public class WindowManagerService extends IWindowManager.Stub
             return;
         }
 
-        // We ignore home stack since we don't want home stack to move to front when touched.
-        // Specifically, in freeform we don't want tapping on home to cause the freeform apps to go
-        // behind home. See b/117376413
+        //我们忽略了家庭堆栈，因为我们不希望在触摸时向前移动到前面。具体而言，在Freeform中，我们不希望在家中窃听，导致自由形式应用程序在家后面。见B / 117376413
         if (task.isActivityTypeHome()) {
             // Only ignore home stack if the requested focus home Task is in the same
             // TaskDisplayArea as the current focus Task.
@@ -8284,4 +8282,27 @@ public class WindowManagerService extends IWindowManager.Stub
             Binder.restoreCallingIdentity(origId);
         }
     }
+
+    // region @boringdroid
+    /**
+     * @hide
+     */
+    public static Context getWMSContext() {
+        return getInstance().mContext;
+    }
+
+    /**
+     * @hide
+     */
+    public int getPackageOverlayWindowingMode(String packageName) {
+        return BoringdroidManager.getPackageOverlayWindowingMode(getWMSContext(), packageName);
+    }
+
+    /**
+     * @hide
+     */
+    public void savePackageOverlayWindowingMode(String packageName, int windowingMode) {
+        BoringdroidManager.savePackageOverlayWindowingMode(getWMSContext(), packageName, windowingMode);
+    }
+    // endregion
 }

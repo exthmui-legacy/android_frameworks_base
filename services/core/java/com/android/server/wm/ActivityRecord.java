@@ -2467,6 +2467,12 @@ final class ActivityRecord extends WindowToken implements WindowManagerService.A
         }
 
         stack.moveToFront(reason, task);
+        // region @boringdroid
+        // We should notify task moved to front event if we change focused task
+        if (task != null) {
+            mAtmService.getTaskChangeNotificationController().notifyTaskMovedToFront(task.getTaskInfo());
+        }
+        // endregion
         // Report top activity change to tracking services and WM
         if (mRootWindowContainer.getTopResumedActivity() == this) {
             mAtmService.setResumedActivityUncheckLocked(this, reason);

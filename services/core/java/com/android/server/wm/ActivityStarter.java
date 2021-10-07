@@ -115,6 +115,7 @@ import android.util.DebugUtils;
 import android.util.Pools.SynchronizedPool;
 import android.util.Slog;
 
+import com.android.internal.BoringdroidManager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.app.HeavyWeightSwitcherActivity;
 import com.android.internal.app.IVoiceInteractor;
