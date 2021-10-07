@@ -5096,7 +5096,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         } else if (NOTIFICATION_MATERIAL_DISMISS.equals(key)) {
             mShowDimissButton = TunerService.parseIntegerSwitch(newValue, false);
             updateDismissAllVisibility(true);
-        } else if (QS_ROWS_PORTRAIT.equals(key) || QS_ROWS_LANDSCAPE.equals(key) || QS_COLUMNS_PORTRAIT.equals(key) || QS_ROWS_LANDSCAPE.equals(key)) {
+        } else if (QS_ROWS_PORTRAIT.equals(key) || QS_ROWS_LANDSCAPE.equals(key) || QS_COLUMNS_PORTRAIT.equals(key) || QS_COLUMNS_LANDSCAPE.equals(key)) {
             if (mQSPanel != null) {
                 mQSPanel.updateResources();
             }
