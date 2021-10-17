@@ -35,6 +35,7 @@ import android.system.Os;
 import android.util.Log;
 
 import com.android.internal.net.NetworkUtilsInternal;
+import com.android.internal.util.DeviceHookPropsUtils;
 
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
@@ -883,6 +884,9 @@ public final class Zygote {
         } else {
             Log.w(loggingTag, "Unable to set package name.");
         }
+
+        // Set pixel props
+        DeviceHookPropsUtils.setProps(args.mPackageName);
     }
 
     private static final String USAP_ERROR_PREFIX = "Invalid command to USAP: ";
