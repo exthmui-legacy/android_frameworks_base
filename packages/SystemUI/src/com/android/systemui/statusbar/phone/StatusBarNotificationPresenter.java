@@ -311,6 +311,17 @@ public class StatusBarNotificationPresenter implements NotificationPresenter,
         if (SPEW) Log.d(TAG, "removeNotification key=" + key + " old=" + old);
 
         if (old != null) {
+            // Cancel the ticker if it's still running
+            if (mStatusBar != null && mStatusBar.isTickerEnabled()) {
+                try {
+                    mStatusBar.getTicker().removeEntry(old);
+                } catch (Exception e) {}
+            }
+            if (mStatusBar != null && mStatusBar.mLyricTicker != null && mStatusBar.mLyricEnabled) {
+                try {
+                    mStatusBar.mLyricTicker.removeEntry(old);
+                } catch (Exception e) {}
+            }
             if (CLOSE_PANEL_WHEN_EMPTIED && !hasActiveNotifications()
                     && !mNotificationPanel.isTracking() && !mNotificationPanel.isQsExpanded()) {
                 if (mStatusBarStateController.getState() == StatusBarState.SHADE

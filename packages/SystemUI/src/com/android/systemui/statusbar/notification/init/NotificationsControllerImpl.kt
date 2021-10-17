@@ -130,6 +130,8 @@ class NotificationsControllerImpl @Inject constructor(
 
             entryManager.setRanker(legacyRanker)
             entryManager.attach(notificationListener)
+            entryManager.setStatusBar(statusBar)
+            headsUpController.setStatusBar(statusBar)
         }
 
         peopleSpaceWidgetManager.attach(notificationListener)

@@ -29,6 +29,7 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.service.notification.NotificationListenerService.RankingMap;
 import android.service.notification.StatusBarNotification;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
@@ -56,6 +57,7 @@ import com.android.systemui.statusbar.notification.collection.notifcollection.Di
 import com.android.systemui.statusbar.notification.collection.notifcollection.NotifCollectionListener;
 import com.android.systemui.statusbar.notification.dagger.NotificationsModule;
 import com.android.systemui.statusbar.notification.logging.NotificationLogger;
+import com.android.systemui.statusbar.phone.StatusBar;
 import com.android.systemui.util.Assert;
 import com.android.systemui.util.leak.LeakDetector;
 
@@ -130,7 +132,10 @@ public class NotificationEntryManager implements
             new ArrayMap<>();
 
     private final NotificationEntryManagerLogger mLogger;
+    private final KeyguardEnvironment mKeyguardEnvironment;
 
+    // We need reference to status bar for notification ticker
+    private StatusBar mStatusBar;
     private final IStatusBarService mStatusBarService;
 
     // Lazily retrieved dependencies
@@ -205,6 +210,7 @@ public class NotificationEntryManager implements
             Lazy<NotificationRemoteInputManager> notificationRemoteInputManagerLazy,
             LeakDetector leakDetector,
             ForegroundServiceDismissalFeatureController fgsFeatureController,
+            KeyguardEnvironment keyguardEnvironment,
             IStatusBarService statusBarService
     ) {
         mLogger = logger;
@@ -215,6 +221,7 @@ public class NotificationEntryManager implements
         mLeakDetector = leakDetector;
         mFgsFeatureController = fgsFeatureController;
         mStatusBarService = statusBarService;
+        mKeyguardEnvironment = keyguardEnvironment;
     }
 
     /** Once called, the NEM will start processing notification events from system server. */
@@ -672,6 +679,21 @@ public class NotificationEntryManager implements
             return;
         }
 
+        Notification n = notification.getNotification();
+        boolean isForCurrentUser = mKeyguardEnvironment
+                .isNotificationForCurrentProfiles(notification);
+        if (DEBUG) {
+            // Is this for you?
+            Log.d(TAG, "notification is " + (isForCurrentUser ? "" : "not ") + "for you");
+        }
+
+        if (mStatusBar != null && isForCurrentUser) {
+            mStatusBar.updateLyricTicker(notification);
+        }
+        if ((n.flags & Notification.FLAG_ONLY_UPDATE_TICKER) != 0) {
+            return;
+        }
+
         // Notification is updated so it is essentially re-added and thus alive again.  Don't need
         // to keep its lifetime extended.
         cancelLifetimeExtension(entry);
@@ -697,6 +719,18 @@ public class NotificationEntryManager implements
         }
 
         updateNotifications("updateNotificationInternal");
+
+        boolean updateTicker = oldSbn.getNotification().tickerText != null
+                && !TextUtils.equals(oldSbn.getNotification().tickerText,
+                entry.getSbn().getNotification().tickerText);
+        // Restart the ticker if it's still running
+        if (updateTicker && isForCurrentUser) {
+            if (mStatusBar != null) {
+                mStatusBar.haltTicker();
+                mStatusBar.tick(notification, false, false, null, null);
+            }
+        }
+
 
         for (NotificationEntryListener listener : mNotificationEntryListeners) {
             listener.onPostEntryUpdated(entry);
@@ -976,4 +1010,9 @@ public class NotificationEntryManager implements
         /** true if the notification is for the current profiles */
         boolean isNotificationForCurrentProfiles(StatusBarNotification sbn);
     }
+
+    public void setStatusBar(StatusBar statusBar) {
+        mStatusBar = statusBar;
+    }
+
 }

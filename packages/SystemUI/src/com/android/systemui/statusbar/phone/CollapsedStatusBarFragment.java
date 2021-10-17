@@ -35,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.ImageSwitcher;
 import android.widget.LinearLayout;
 
 import com.android.systemui.R;
@@ -48,6 +49,7 @@ import com.android.systemui.statusbar.events.SystemStatusAnimationScheduler;
 import com.android.systemui.statusbar.phone.StatusBarIconController.DarkIconManager;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallController;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallListener;
+import com.android.systemui.statusbar.phone.TickerView;
 import com.android.systemui.statusbar.policy.EncryptionHelper;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.NetworkController;
@@ -89,6 +91,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private DarkIconManager mDarkIconManager;
     private View mOperatorNameFrame;
     private final CommandQueue mCommandQueue;
+    private View mTickerViewFromStub;
+    private View mTickerViewContainer;
+    private View mLyricViewFromStub;
+    private View mLyricViewContainer;
     private final OngoingCallController mOngoingCallController;
     private final SystemStatusAnimationScheduler mAnimationScheduler;
     private final StatusBarLocationPublisher mLocationPublisher;
@@ -170,6 +176,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         showClock(false);
         initEmergencyCryptkeeperText();
         initOperatorName();
+        initTickerView();
+        initLyricView();
         initNotificationIconArea();
         mAnimationScheduler.addCallback(this);
     }
@@ -247,9 +255,13 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             if ((state1 & DISABLE_SYSTEM_INFO) != 0 || ((state2 & DISABLE2_SYSTEM_ICONS) != 0)) {
                 hideSystemIconArea(animate);
                 hideOperatorName(animate);
+                hideTicker(animate);
+                hideLyric(animate);
             } else {
                 showSystemIconArea(animate);
                 showOperatorName(animate);
+                showTicker(animate);
+                showLyric(animate);
             }
         }
 
@@ -359,6 +371,30 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         int state = mAnimationScheduler.getAnimationState();
         if (state == IDLE || state == SHOWING_PERSISTENT_DOT) {
             animateShow(mSystemIconArea, animate);
+        }
+    }
+
+    public void showLyric(boolean animate) {
+        if (mLyricViewContainer != null) {
+            animateShow(mLyricViewContainer, animate);
+        }
+    }
+
+    public void hideLyric(boolean animate) {
+        if (mLyricViewContainer != null) {
+            animateHide(mLyricViewContainer, animate);
+        }
+    }
+
+    public void showTicker(boolean animate) {
+        if (mTickerViewContainer != null) {
+            animateShow(mTickerViewContainer, animate);
+        }
+    }
+    
+    public void hideTicker(boolean animate) {
+        if (mTickerViewContainer != null) {
+            animateHide(mTickerViewContainer, animate);
         }
     }
 
@@ -503,6 +539,32 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     public void onDozingChanged(boolean isDozing) {
         disable(getContext().getDisplayId(), mDisabled1, mDisabled2, false /* animate */);
     }
+
+    private void initTickerView() {
+        mTickerViewContainer = mStatusBar.findViewById(R.id.ticker_container);
+        View tickerStub = mStatusBar.findViewById(R.id.ticker_stub);
+        if (mTickerViewFromStub == null && tickerStub != null) {
+            mTickerViewFromStub = ((ViewStub) tickerStub).inflate();
+        }
+        TickerView tickerView = (TickerView) mStatusBar.findViewById(R.id.tickerText);
+        ImageSwitcher tickerIcon = (ImageSwitcher) mStatusBar.findViewById(R.id.tickerIcon);
+        mStatusBarComponent.createTicker(
+                getContext(), mStatusBar, tickerView, tickerIcon, mTickerViewFromStub);
+    }
+
+    private void initLyricView() {
+        mLyricViewContainer = mStatusBar.findViewById(R.id.lyric_container);
+        View lyricStub = mStatusBar.findViewById(R.id.lyric_stub);
+        if (mLyricViewFromStub == null && lyricStub != null) {
+            mLyricViewFromStub = ((ViewStub) lyricStub).inflate();
+        }
+        TickerView tickerView = (TickerView) mStatusBar.findViewById(R.id.lyricText);
+        ImageSwitcher tickerIcon = (ImageSwitcher) mStatusBar.findViewById(R.id.lyricIcon);
+        mStatusBarComponent.createLyricTicker(
+               getContext(), mStatusBar, tickerView, tickerIcon, mLyricViewFromStub);
+    }
+
+
 
     @Override
     public void onSystemChromeAnimationStart() {

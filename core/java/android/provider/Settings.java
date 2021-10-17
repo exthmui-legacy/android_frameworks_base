@@ -5160,6 +5160,34 @@ public final class Settings {
          */
 
         /**
+         * Whether to show the lyric on the status bar
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_LYRIC = "status_bar_show_lyric";
+
+        /**
+         * Whether to show the notification ticker on the status bar
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_TICKER = "status_bar_show_ticker";
+
+        /**
+         * Ticker animation
+         * 0: Fade animation
+         * 1: Scrolling ticker
+         * @hide
+         */
+        public static final String STATUS_BAR_TICKER_ANIMATION_MODE =
+                "status_bar_ticker_animation_mode";
+
+        /**
+         * Status bar ticker duration in milliseconds.
+         * @hide
+         */
+        public static final String STATUS_BAR_TICKER_TICK_DURATION =
+                "status_bar_ticker_tick_duration";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
