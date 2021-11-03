@@ -111,6 +111,20 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
      */
     private boolean mTransitioningToFullShade;
 
+    /**
+     * Is there currently an unocclusion animation running. Used to avoid bright flickers
+     * of the notification scrim.
+     */
+    private boolean mUnOcclusionAnimationRunning;
+
+    /**
+     * Set whether an unocclusion animation is currently running on the notification panel. Used
+     * to avoid bright flickers of the notification scrim.
+     */
+    public void setUnocclusionAnimationRunning(boolean unocclusionAnimationRunning) {
+        mUnOcclusionAnimationRunning = unocclusionAnimationRunning;
+    }
+
     @IntDef(prefix = {"VISIBILITY_"}, value = {
             TRANSPARENT,
             SEMI_TRANSPARENT,
@@ -172,6 +186,7 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
     private UnlockedScreenOffAnimationController mUnlockedScreenOffAnimationController;
 
     private GradientColors mColors;
+    private GradientColors mBehindColors;
     private boolean mNeedsDrawableColorUpdate;
 
     private float mScrimBehindAlphaKeyguard = KEYGUARD_SCRIM_ALPHA;
@@ -270,6 +285,7 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
         });
 
         mColors = new GradientColors();
+        mBehindColors = new GradientColors();
     }
 
     /**
@@ -418,7 +434,7 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
         if (mKeyguardUpdateMonitor.needsSlowUnlockTransition() && mState == ScrimState.UNLOCKED) {
             mAnimationDelay = StatusBar.FADE_KEYGUARD_START_DELAY;
             scheduleUpdate();
-        } else if ((oldState == ScrimState.AOD  // leaving doze
+        } else if (((oldState == ScrimState.AOD || oldState == ScrimState.PULSING)  // leaving doze
                 && (!mDozeParameters.getAlwaysOn() || mState == ScrimState.UNLOCKED))
                 || (mState == ScrimState.AOD && !mDozeParameters.getDisplayNeedsBlanking())) {
             // Scheduling a frame isn't enough when:
@@ -466,6 +482,7 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
 
     public void onExpandingFinished() {
         mTracking = false;
+        setUnocclusionAnimationRunning(false);
     }
 
     @VisibleForTesting
@@ -675,7 +692,7 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
                 mNotificationsAlpha = behindAlpha;
                 mNotificationsTint = behindTint;
                 mBehindAlpha = 1;
-                mBehindTint = Color.BLACK;
+                mBehindTint = Color.TRANSPARENT;
             } else {
                 mBehindAlpha = behindAlpha;
                 if (mState == ScrimState.SHADE_LOCKED) {
@@ -693,6 +710,11 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
                 }
                 mNotificationsTint = mState.getNotifTint();
                 mBehindTint = behindTint;
+            }
+            if (mUnOcclusionAnimationRunning && mState == ScrimState.KEYGUARD) {
+                // We're unoccluding the keyguard and don't want to have a bright flash.
+                mNotificationsAlpha = KEYGUARD_SCRIM_ALPHA;
+                mNotificationsTint = ScrimState.KEYGUARD.getNotifTint();
             }
         }
         if (isNaN(mBehindAlpha) || isNaN(mInFrontAlpha) || isNaN(mNotificationsAlpha)) {
@@ -829,7 +851,7 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
                     && !mBlankScreen;
 
             mScrimInFront.setColors(mColors, animateScrimInFront);
-            mScrimBehind.setColors(mColors, animateBehindScrim);
+            mScrimBehind.setColors(mBehindColors, animateBehindScrim);
             mNotificationsScrim.setColors(mColors, animateScrimNotifications);
 
             dispatchBackScrimState(mScrimBehind.getViewAlpha());
@@ -1185,11 +1207,17 @@ public class ScrimController implements ViewTreeObserver.OnPreDrawListener, Dump
         if (mScrimBehind == null) return;
         int background = Utils.getColorAttr(mScrimBehind.getContext(),
                 android.R.attr.colorBackgroundFloating).getDefaultColor();
+        int surfaceBackground = Utils.getColorAttr(mScrimBehind.getContext(),
+                com.android.internal.R.attr.colorSurfaceHeader).getDefaultColor();
         int accent = Utils.getColorAccent(mScrimBehind.getContext()).getDefaultColor();
         mColors.setMainColor(background);
         mColors.setSecondaryColor(accent);
         mColors.setSupportsDarkText(
                 ColorUtils.calculateContrast(mColors.getMainColor(), Color.WHITE) > 4.5);
+        mBehindColors.setMainColor(surfaceBackground);
+        mBehindColors.setSecondaryColor(accent);
+        mBehindColors.setSupportsDarkText(
+                ColorUtils.calculateContrast(mBehindColors.getMainColor(), Color.WHITE) > 4.5);
         mNeedsDrawableColorUpdate = true;
     }
 

@@ -456,7 +456,8 @@ public class AuthController extends SystemUI implements CommandQueue.Callbacks,
                     (float) faceAuthLocation[1]);
         }
 
-        mFingerprintLocation = new PointF(DisplayUtils.getWidth(mContext) / 2,
+        mFingerprintLocation = new PointF(
+                DisplayUtils.getWidth(mContext) / (mFingerprintManager.isPowerbuttonFps() ? 1 : 2),
                 mContext.getResources().getDimensionPixelSize(
                 com.android.systemui.R.dimen.physical_fingerprint_sensor_center_screen_location_y));
 
@@ -786,7 +787,7 @@ public class AuthController extends SystemUI implements CommandQueue.Callbacks,
                 .build(sensorIds, credentialAllowed, mFpProps, mFaceProps);
     }
 
-    interface Callback {
+    public interface Callback {
         /**
          * Called when authenticators are registered. If authenticators are already
          * registered before this call, this callback will never be triggered.
