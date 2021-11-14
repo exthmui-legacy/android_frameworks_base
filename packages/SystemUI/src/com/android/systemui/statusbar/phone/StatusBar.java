@@ -63,6 +63,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -72,6 +73,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -153,6 +155,7 @@ import com.android.keyguard.ViewMediatorCallback;
 import com.android.systemui.ActivityIntentHelper;
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.DejankUtils;
+import com.android.systemui.Dependency;
 import com.android.systemui.Dumpable;
 import com.android.systemui.EventLogTags;
 import com.android.systemui.InitController;
@@ -254,6 +257,7 @@ import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener;
 import com.android.systemui.statusbar.policy.ExtensionController;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
+import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.OnHeadsUpChangedListener;
 import com.android.systemui.statusbar.policy.RemoteInputQuickSettingsDisabler;
@@ -696,6 +700,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     };
 
+    private FlashlightController mFlashlightController;
     private final UserSwitcherController mUserSwitcherController;
     private final NetworkController mNetworkController;
     private final LifecycleRegistry mLifecycle = new LifecycleRegistry(this);
@@ -1037,6 +1042,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         } else if (DEBUG) {
             Log.v(TAG, "start(): no wallpaper service ");
         }
+
+        mSbSettingsObserver.observe();
+        mSbSettingsObserver.update();
 
         // Set up the initial notification state. This needs to happen before CommandQueue.disable()
         setUpPresenter();
@@ -1424,6 +1432,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         // Private API call to make the shadows look better for Recents
         ThreadedRenderer.overrideProperty("ambientRatio", String.valueOf(1.5f));
+
+        mFlashlightController = Dependency.get(FlashlightController.class);
     }
 
 
@@ -1890,7 +1900,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         flagdbg.append(0 != ((state2 & StatusBarManager.DISABLE2_NOTIFICATION_SHADE))   ? 'N' : 'n');
         flagdbg.append(0 != ((diff2  & StatusBarManager.DISABLE2_NOTIFICATION_SHADE))   ? '!' : ' ');
         flagdbg.append('>');
-        Log.d(TAG, flagdbg.toString());
+        if (DEBUG) Log.d(TAG, flagdbg.toString());
 
         if ((diff1 & StatusBarManager.DISABLE_EXPAND) != 0) {
             if ((state1 & StatusBarManager.DISABLE_EXPAND) != 0) {
@@ -2353,6 +2363,16 @@ public class StatusBar extends SystemUI implements DemoMode,
     public void showPinningEscapeToast() {
         if (getNavigationBarView() != null) {
             getNavigationBarView().showPinningEscapeToast();
+        }
+    }
+
+    @Override
+    public void toggleCameraFlash() {
+        if (DEBUG) {
+            Log.d(TAG, "Toggling camera flashlight");
+        }
+        if (mFlashlightController.isAvailable()) {
+            mFlashlightController.setFlashlight(!mFlashlightController.isEnabled());
         }
     }
 
@@ -3149,6 +3169,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         pw.println("   Secure camera: " + CameraIntents.getSecureCameraIntent(mContext));
         pw.println("   Override package: "
                 + String.valueOf(CameraIntents.getOverrideCameraPackage(mContext)));
+
+        if (mFlashlightController != null) {
+            mFlashlightController.dump(fd, pw, args);
+        }
     }
 
     public static void dumpBarTransitions(
@@ -4916,6 +4940,43 @@ public class StatusBar extends SystemUI implements DemoMode,
                     mLockscreenUserManager.getCurrentUserId(), notificationUserId));
         }
         return mLockscreenUserManager.isCurrentProfile(notificationUserId);
+    
+    private SbSettingsObserver mSbSettingsObserver = new SbSettingsObserver(mHandler);
+    private class SbSettingsObserver extends ContentObserver {
+        SbSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.DOUBLE_TAP_TO_WAKE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (uri.equals(Settings.Secure.getUriFor(
+                    Settings.Secure.DOUBLE_TAP_TO_WAKE))
+                    || uri.equals(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_SLEEP_GESTURE))) {
+                setDoubleTapToSleepGesture();
+            }
+        }
+
+        public void update() {
+            setDoubleTapToSleepGesture();
+        }
+    }
+
+    private void setDoubleTapToSleepGesture() {
+        if (mNotificationShadeWindowViewController != null) {
+            mNotificationShadeWindowViewController.setDoubleTapToSleepGesture();
+        }
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {

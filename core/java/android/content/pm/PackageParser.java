@@ -3581,11 +3581,7 @@ public class PackageParser {
             ai.privateFlags |= ApplicationInfo.PRIVATE_FLAG_ALLOW_CLEAR_USER_DATA_ON_FAILED_RESTORE;
         }
 
-        if (sa.getBoolean(
-                R.styleable.AndroidManifestApplication_allowAudioPlaybackCapture,
-                owner.applicationInfo.targetSdkVersion >= Build.VERSION_CODES.Q)) {
-            ai.privateFlags |= ApplicationInfo.PRIVATE_FLAG_ALLOW_AUDIO_PLAYBACK_CAPTURE;
-        }
+        ai.privateFlags |= ApplicationInfo.PRIVATE_FLAG_ALLOW_AUDIO_PLAYBACK_CAPTURE;
 
         if (sa.getBoolean(
                 R.styleable.AndroidManifestApplication_requestLegacyExternalStorage,
@@ -4663,10 +4659,8 @@ public class PackageParser {
      * ratio set.
      */
     private void setMaxAspectRatio(Package owner) {
-        // Default to (1.86) 16.7:9 aspect ratio for pre-O apps and unset for O and greater.
-        // NOTE: 16.7:9 was the max aspect ratio Android devices can support pre-O per the CDD.
-        float maxAspectRatio = owner.applicationInfo.targetSdkVersion < O
-                ? DEFAULT_PRE_O_MAX_ASPECT_RATIO : 0;
+        // Start at an unlimited aspect ratio unless we get a more restrictive one
+        float maxAspectRatio = 0;
 
         if (owner.applicationInfo.maxAspectRatio != 0) {
             // Use the application max aspect ration as default if set.
