@@ -4940,6 +4940,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                     mLockscreenUserManager.getCurrentUserId(), notificationUserId));
         }
         return mLockscreenUserManager.isCurrentProfile(notificationUserId);
+    }
     
     private SbSettingsObserver mSbSettingsObserver = new SbSettingsObserver(mHandler);
     private class SbSettingsObserver extends ContentObserver {
