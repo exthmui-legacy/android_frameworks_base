@@ -5203,8 +5203,10 @@ public final class Settings {
          * @hide
          */
         public static final String STATUS_BAR_TICKER_TICK_DURATION =
-                "status_bar_ticker_tick_duration";
-        /* 
+        	"status_bar_ticker_tick_duration";
+        
+	@SuppressLint("NoSettingsProvider")
+	/* 
 	 * Enable statusbar double tap gesture to put device to sleep
          * @hide
          */
@@ -5228,7 +5230,9 @@ public final class Settings {
          */
         public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
 
-        /** Volume rocker music control
+        @SuppressLint("NoSettingsProvider")
+        /** 
+         * Volume rocker music control
          * @hide
          */
         public static final String VOLUME_BUTTON_MUSIC_CONTROL = "volume_button_music_control";
