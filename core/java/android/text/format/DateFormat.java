@@ -516,8 +516,12 @@ public class DateFormat {
             switch (c) {
                 case 'A':
                 case 'a':
-                    replacement = amPm[inDate.get(Calendar.AM_PM) - Calendar.AM];
-                    break;
+                    if (isSupportLanguage(false)) {
+			            replacement = DateUtils.getAMPMCNString(inDate.get(Calendar.HOUR), inDate.get(Calendar.AM_PM));
+		            }else{
+		                replacement = amPm[inDate.get(Calendar.AM_PM) - Calendar.AM];
+		            }
+		            break;
                 case 'd':
                     replacement = zeroPad(inDate.get(Calendar.DATE), count);
                     break;
@@ -713,4 +717,17 @@ public class DateFormat {
     public static DateFormatSymbols getIcuDateFormatSymbols(Locale locale) {
         return new DateFormatSymbols(android.icu.util.GregorianCalendar.class, locale);
     }
+
+    public static boolean isSupportLanguage(boolean excludeSAR) {
+            Locale locale = Locale.getDefault();
+            if (locale.getLanguage().startsWith(Locale.CHINESE.getLanguage())) {
+                if (excludeSAR) {
+                return locale.getCountry().equals("CN");
+            } else {
+                    return !locale.getCountry().equals("SG");
+                }
+        } else {
+            return false;
+            }
+        }
 }

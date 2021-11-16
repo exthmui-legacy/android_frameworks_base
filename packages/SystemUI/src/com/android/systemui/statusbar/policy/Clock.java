@@ -119,7 +119,7 @@ public class Clock extends TextView implements
                 R.styleable.Clock,
                 0, 0);
         try {
-            mAmPmStyle = a.getInt(R.styleable.Clock_amPmStyle, AM_PM_STYLE_GONE);
+            mAmPmStyle = a.getInt(R.styleable.Clock_amPmStyle, AM_PM_STYLE_NORMAL);
             mNonAdaptedColor = getCurrentTextColor();
         } finally {
             a.recycle();
@@ -413,7 +413,7 @@ public class Clock extends TextView implements
         } else {
             sdf = mClockFormat;
         }
-        String result = sdf.format(mCalendar.getTime());
+        String result = is24 ? sdf.format(mCalendar.getTime()) : DateFormat.format(format, mCalendar.getTime()).toString();
 
         if (mAmPmStyle != AM_PM_STYLE_NORMAL) {
             int magic1 = result.indexOf(MAGIC1);

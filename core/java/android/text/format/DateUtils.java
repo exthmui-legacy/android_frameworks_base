@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2006 The Android Open Source Project
+ * Copyright (C) 2015-2018 The MoKee Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,6 +57,15 @@ public class DateUtils
     public static final long HOUR_IN_MILLIS = MINUTE_IN_MILLIS * 60;
     public static final long DAY_IN_MILLIS = HOUR_IN_MILLIS * 24;
     public static final long WEEK_IN_MILLIS = DAY_IN_MILLIS * 7;
+
+    /**
+     *      * Exact time display for Chinese
+     *
+     */
+    private static final String[] sAmPmCN = new String[] {
+        "凌晨", "早上", "上午", "中午", "下午", "晚上", "深夜"
+    };
+
     /**
      * @deprecated Not all years have the same number of days, and this constant is actually the
      * length of 364 days. Please use other date/time constructs such as
@@ -234,6 +244,41 @@ public class DateUtils
         String[] amPm = DateFormat.getIcuDateFormatSymbols(Locale.getDefault()).getAmPmStrings();
         return amPm[ampm - Calendar.AM];
     }
+
+    /**
+     * Return a Chinese localized string for AM or PM.
+     * @hide
+     */
+
+    public static String getAMPMCNString(int hours,int ampm){
+        if (ampm == Calendar.AM){
+            if (hours < 5){
+	            return sAmPmCN[0];
+	        }else if (hours >= 5 && hours < 7){
+	            return sAmPmCN[1];
+	        }else if (hours >= 7 && hours < 11){
+	            return sAmPmCN[2];
+	        }else if (hours >= 11 && hours < 12){
+	            return sAmPmCN[3];
+	        }else {
+	            return sAmPmCN[0];
+	        }
+        }else {
+            if (hours == 0){
+                return sAmPmCN[3];
+            }else if (hours < 6){
+                return sAmPmCN[4];
+            }else if (hours >= 6 && hours <= 10){
+                return sAmPmCN[5];
+            }else if (hours > 10 && hours < 12){
+                return sAmPmCN[6];
+            }else if (hours == 12){
+                return sAmPmCN[3];
+            }else {
+                return sAmPmCN[3];
+            }
+        }
+   }
 
     /**
      * Return a localized string for the month of the year.
