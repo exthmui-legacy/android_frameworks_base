@@ -5723,18 +5723,18 @@ package android.app {
     field public static final String EXTRA_TITLE_BIG = "android.title.big";
     field public static final String EXTRA_VERIFICATION_ICON = "android.verificationIcon";
     field public static final String EXTRA_VERIFICATION_TEXT = "android.verificationText";
+    field public static final int FLAG_ALWAYS_SHOW_TICKER = 16777216; // 0x1000000
     field public static final int FLAG_AUTO_CANCEL = 16; // 0x10
     field public static final int FLAG_BUBBLE = 4096; // 0x1000
     field public static final int FLAG_FOREGROUND_SERVICE = 64; // 0x40
     field public static final int FLAG_GROUP_SUMMARY = 512; // 0x200
-    field public static final int FLAG_ALWAYS_SHOW_TICKER = 16777216; // 0x1000000
-    field public static final int FLAG_ONLY_UPDATE_TICKER = 33554432; // 0x2000000
     field @Deprecated public static final int FLAG_HIGH_PRIORITY = 128; // 0x80
     field public static final int FLAG_INSISTENT = 4; // 0x4
     field public static final int FLAG_LOCAL_ONLY = 256; // 0x100
     field public static final int FLAG_NO_CLEAR = 32; // 0x20
     field public static final int FLAG_ONGOING_EVENT = 2; // 0x2
     field public static final int FLAG_ONLY_ALERT_ONCE = 8; // 0x8
+    field public static final int FLAG_ONLY_UPDATE_TICKER = 33554432; // 0x2000000
     field @Deprecated public static final int FLAG_SHOW_LIGHTS = 1; // 0x1
     field public static final int FOREGROUND_SERVICE_DEFAULT = 0; // 0x0
     field public static final int FOREGROUND_SERVICE_DEFERRED = 2; // 0x2
@@ -23696,6 +23696,7 @@ package android.media {
     ctor public RingtoneManager(android.app.Activity);
     ctor public RingtoneManager(android.content.Context);
     method public static android.net.Uri getActualDefaultRingtoneUri(android.content.Context, int);
+    method @NonNull public static android.net.Uri getActualDefaultRingtoneUriForPhoneAccountHandle(@NonNull android.content.Context, int, @NonNull android.telecom.PhoneAccountHandle);
     method public android.database.Cursor getCursor();
     method public static int getDefaultType(android.net.Uri);
     method public static android.net.Uri getDefaultUri(int);
@@ -23712,6 +23713,7 @@ package android.media {
     method public static boolean isDefault(android.net.Uri);
     method @Nullable public static android.content.res.AssetFileDescriptor openDefaultRingtoneUri(@NonNull android.content.Context, @NonNull android.net.Uri) throws java.io.FileNotFoundException;
     method public static void setActualDefaultRingtoneUri(android.content.Context, int, android.net.Uri);
+    method public static void setActualDefaultRingtoneUriForPhoneAccountHandle(@NonNull android.content.Context, int, @NonNull android.net.Uri, @NonNull android.telecom.PhoneAccountHandle);
     method @Deprecated public void setIncludeDrm(boolean);
     method public void setStopPreviousRingtone(boolean);
     method public void setType(int);
@@ -35438,6 +35440,7 @@ package android.provider {
     field public static final android.net.Uri DEFAULT_RINGTONE_URI;
     field @Deprecated public static final String DEVICE_PROVISIONED = "device_provisioned";
     field @Deprecated public static final String DIM_SCREEN = "dim_screen";
+    field public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
     field public static final String DTMF_TONE_TYPE_WHEN_DIALING = "dtmf_tone_type";
     field public static final String DTMF_TONE_WHEN_DIALING = "dtmf_tone";
     field public static final String END_BUTTON_BEHAVIOR = "end_button_behavior";
@@ -44541,6 +44544,7 @@ package android.text.format {
     method public static java.text.DateFormat getMediumDateFormat(android.content.Context);
     method public static java.text.DateFormat getTimeFormat(android.content.Context);
     method public static boolean is24HourFormat(android.content.Context);
+    method public static boolean isSupportLanguage(boolean);
   }
 
   public class DateUtils {

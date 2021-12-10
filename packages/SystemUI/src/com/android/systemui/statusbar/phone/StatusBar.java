@@ -310,13 +310,13 @@ public class StatusBar extends SystemUI implements DemoMode,
     private static final String BANNER_ACTION_SETUP =
             "com.android.systemui.statusbar.banner_action_setup";
     private static final String STATUS_BAR_SHOW_TICKER =
-            "system:" + Settings.System.STATUS_BAR_SHOW_TICKER;
+            Settings.Secure.STATUS_BAR_SHOW_TICKER;
     private static final String STATUS_BAR_TICKER_ANIMATION_MODE =
-            "system:" + Settings.System.STATUS_BAR_TICKER_ANIMATION_MODE;
+            Settings.Secure.STATUS_BAR_TICKER_ANIMATION_MODE;
     private static final String STATUS_BAR_SHOW_LYRIC =
-            "system:" + Settings.System.STATUS_BAR_SHOW_LYRIC;
+            Settings.Secure.STATUS_BAR_SHOW_LYRIC;
     private static final String STATUS_BAR_TICKER_TICK_DURATION =
-            "system:" + Settings.System.STATUS_BAR_TICKER_TICK_DURATION;
+            Settings.Secure.STATUS_BAR_TICKER_TICK_DURATION;
 
     public static final String TAG = "StatusBar";
     public static final boolean DEBUG = false;
