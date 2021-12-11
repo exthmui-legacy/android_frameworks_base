@@ -28,38 +28,7 @@ public class DeviceHookPropsUtils {
     private static final String TAG = DeviceHookPropsUtils.class.getSimpleName();
     private static final boolean DEBUG = false;
 
-    private static final Map<String, Object> propsToChangeGoogle;
-    private static final Map<String, Object> propsToChangePixel3XLGoogle;
     private static final Map<String, Object> propsToChangeMeizu;
-
-    private static final String[] packagesToChangeGoogle = {
-            "com.breel.wallpapers20",
-            "com.google.android.apps.customization.pixel",
-            "com.google.android.apps.fitness",
-            "com.google.android.apps.photos",
-            "com.google.android.apps.recorder",
-            "com.google.android.apps.subscriptions.red",
-            "com.google.android.apps.tachyon",
-            "com.google.android.apps.turboadapter",
-            "com.google.android.apps.wallpaper.pixel",
-            "com.google.android.as",
-            "com.google.android.dialer",
-            "com.google.android.gms.location.history",
-            "com.google.android.inputmethod.latin",
-            "com.google.android.soundpicker",
-            "com.google.pixel.dynamicwallpapers",
-            "com.google.pixel.livewallpaper",
-            "com.google.android.apps.safetyhub",
-            "com.google.android.apps.turbo",
-            "com.google.android.apps.wallpaper",
-            "com.google.android.apps.maps",
-            "com.google.android.gms",
-            "com.google.android.apps.nexuslauncher"
-    };
-
-    private static final String[] packagesToChangePixel3XLGoogle = {
-            "com.google.android.googlequicksearchbox"
-    };
 
     private static final String[] packagesToChangeMeizu = {
             "com.netease.cloudmusic",
@@ -71,20 +40,6 @@ public class DeviceHookPropsUtils {
     };
 
     static {
-        propsToChangeGoogle = new HashMap<>();
-        propsToChangeGoogle.put("BRAND", "google");
-        propsToChangeGoogle.put("MANUFACTURER", "Google");
-        propsToChangeGoogle.put("DEVICE", "redfin");
-        propsToChangeGoogle.put("PRODUCT", "redfin");
-        propsToChangeGoogle.put("MODEL", "Pixel 5");
-        propsToChangeGoogle.put("FINGERPRINT", "google/redfin/redfin:11/RQ2A.210505.003/7255357:user/release-keys");
-        propsToChangePixel3XLGoogle = new HashMap<>();
-        propsToChangePixel3XLGoogle.put("BRAND", "google");
-        propsToChangePixel3XLGoogle.put("MANUFACTURER", "Google");
-        propsToChangePixel3XLGoogle.put("DEVICE", "crosshatch");
-        propsToChangePixel3XLGoogle.put("PRODUCT", "crosshatch");
-        propsToChangePixel3XLGoogle.put("MODEL", "Pixel 3 XL");
-        propsToChangePixel3XLGoogle.put("FINGERPRINT", "google/crosshatch/crosshatch:11/RQ2A.210505.002/7246365:user/release-keys");
         propsToChangeMeizu = new HashMap<>();
         propsToChangeMeizu.put("BRAND", "meizu");
         propsToChangeMeizu.put("MANUFACTURER", "meizu");
@@ -98,26 +53,6 @@ public class DeviceHookPropsUtils {
         if (packageName == null){
             return;
         }
-        if (Arrays.asList(packagesToChangeGoogle).contains(packageName)){
-            if (DEBUG){
-                Log.d(TAG, "Defining props for: " + packageName);
-            }
-            for (Map.Entry<String, Object> prop : propsToChangeGoogle.entrySet()) {
-                String key = prop.getKey();
-                Object value = prop.getValue();
-                setPropValue(key, value);
-            }
-        }
-        if (Arrays.asList(packagesToChangePixel3XLGoogle).contains(packageName)){
-            if (DEBUG){
-                Log.d(TAG, "Defining props for: " + packageName);
-            }
-            for (Map.Entry<String, Object> prop : propsToChangePixel3XLGoogle.entrySet()) {
-                String key = prop.getKey();
-                Object value = prop.getValue();
-                setPropValue(key, value);
-            }
-        }
         if (Arrays.asList(packagesToChangeMeizu).contains(packageName)){
             if (DEBUG){
                 Log.d(TAG, "Defining props for: " + packageName);
@@ -128,10 +63,6 @@ public class DeviceHookPropsUtils {
                 setPropValue(key, value);
             }
         }
-        // Set proper indexing fingerprint
-        /*if (packageName.equals("com.google.android.settings.intelligence")){
-            setPropValue("FINGERPRINT", Build.DATE);
-        }*/
     }
 
     private static void setPropValue(String key, Object value){
