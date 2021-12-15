@@ -2559,7 +2559,7 @@ public class ActivityTaskSupervisor implements RecentTasks.Callbacks {
                         "startActivityFromRecents: Task " + taskId + " not found.");
             }
 
-            if (moveHomeTaskForward) {
+            if (moveHomeTaskForward && windowingMode != WINDOWING_MODE_FREEFORM ) {
                 // We always want to return to the home activity instead of the recents activity
                 // from whatever is started from the recents activity, so move the home root task
                 // forward.
