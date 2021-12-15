@@ -7439,6 +7439,10 @@ message MetricsEvent {
     // ARROW Metrics
     ARROW = 2772;
 
+    // exTHmUI Settings
+    EXTHMUI_SETTINGS = 4000;
+
+    // Ticker Settings
     CUSTOM_SETTINGS = 1999;
   }
 }
