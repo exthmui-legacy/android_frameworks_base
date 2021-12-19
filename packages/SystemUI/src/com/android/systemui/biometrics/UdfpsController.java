@@ -160,6 +160,7 @@ public class UdfpsController implements DozeReceiver, UdfpsHbmProvider {
     private Runnable mAodInterruptRunnable;
     private boolean mOnFingerDown;
     private boolean mAttemptedToDismissKeyguard;
+    private final int mUdfpsVendorCode;
     private Set<Callback> mCallbacks = new HashSet<>();
 
     @VisibleForTesting
@@ -316,7 +317,7 @@ public class UdfpsController implements DozeReceiver, UdfpsHbmProvider {
             mFgExecutor.execute(() -> {
                 if (acquiredInfo == 6 && (mStatusBarStateController.isDozing() || !mScreenOn)) {
                     if (vendorCode == mUdfpsVendorCode) {
-                        mPowerManager.wakeUp(SystemClock.uptimeMillis(),
+                        mPowerManager.wakeUp(mSystemClock.uptimeMillis(),
                                 PowerManager.WAKE_REASON_GESTURE, TAG);
                         onAodInterrupt(0, 0, 0, 0); // To-Do pass proper values
                     }
@@ -1044,4 +1045,22 @@ public class UdfpsController implements DozeReceiver, UdfpsHbmProvider {
          */
         void onFingerDown();
     }
+
+    @Override
+    public void enableHbm(@HbmType int hbmType, @Nullable Surface surface,
+            @Nullable Runnable onHbmEnabled) {
+        // TO-DO send call to lineage biometric hal and/or add dummy jni that device could override
+        if (onHbmEnabled != null) {
+            onHbmEnabled.run();
+        }
+    }
+
+    @Override
+    public void disableHbm(@Nullable Runnable onHbmDisabled) {
+        // TO-DO send call to lineage biometric hal and/or add dummy jni that device could override
+        if (onHbmDisabled != null) {
+            onHbmDisabled.run();
+        }
+    }
+
 }

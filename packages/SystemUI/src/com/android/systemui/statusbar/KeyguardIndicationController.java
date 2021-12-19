@@ -813,11 +813,7 @@ public class KeyguardIndicationController {
                 String message = mContext.getString(R.string.keyguard_retry);
                 mStatusBarKeyguardViewManager.showBouncerMessage(message, mInitialTextColorState);
             }
-<<<<<<< HEAD
-        } else if (mKeyguardUpdateMonitor.isScreenOn()) {
-=======
         } else {
->>>>>>> ad30407070fadfc91132ed2b69d2343839c94fee
             showTransientIndication(mContext.getString(R.string.keyguard_unlock),
                     false /* isError */, true /* hideOnScreenOff */);
         }
