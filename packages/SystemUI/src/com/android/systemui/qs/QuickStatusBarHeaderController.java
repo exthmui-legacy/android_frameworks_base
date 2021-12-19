@@ -72,7 +72,6 @@ class QuickStatusBarHeaderController extends ViewController<QuickStatusBarHeader
     private final QSExpansionPathInterpolator mQSExpansionPathInterpolator;
     private final FeatureFlags mFeatureFlags;
 
-    private final VariableDateViewController mVariableDateViewControllerDateView;
     private final VariableDateViewController mVariableDateViewControllerClockDateView;
 
     private boolean mListening;
@@ -159,9 +158,6 @@ class QuickStatusBarHeaderController extends ViewController<QuickStatusBarHeader
         mPrivacyChip = mView.findViewById(R.id.privacy_chip);
         mClockView = mView.findViewById(R.id.clock);
         mIconContainer = mView.findViewById(R.id.statusIcons);
-        mVariableDateViewControllerDateView = variableDateViewControllerFactory.create(
-                mView.requireViewById(R.id.date)
-        );
         mVariableDateViewControllerClockDateView = variableDateViewControllerFactory.create(
                 mView.requireViewById(R.id.date_clock)
         );
@@ -217,7 +213,6 @@ class QuickStatusBarHeaderController extends ViewController<QuickStatusBarHeader
 
         mDemoModeController.addCallback(mDemoModeReceiver);
 
-        mVariableDateViewControllerDateView.init();
         mVariableDateViewControllerClockDateView.init();
     }
 

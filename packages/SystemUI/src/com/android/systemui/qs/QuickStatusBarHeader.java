@@ -22,6 +22,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Pair;
 import android.view.DisplayCutout;
@@ -36,13 +37,16 @@ import androidx.annotation.NonNull;
 
 import com.android.settingslib.Utils;
 import com.android.systemui.BatteryMeterView;
+import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSDetail.Callback;
 import com.android.systemui.statusbar.phone.StatusBarIconController.TintedIconManager;
 import com.android.systemui.statusbar.phone.StatusBarWindowView;
 import com.android.systemui.statusbar.phone.StatusIconContainer;
 import com.android.systemui.statusbar.policy.Clock;
+import com.android.systemui.statusbar.policy.DateView;
 import com.android.systemui.statusbar.policy.VariableDateView;
+import com.android.systemui.tuner.TunerService;
 
 import java.util.List;
 
@@ -50,7 +54,7 @@ import java.util.List;
  * View that contains the top-most bits of the QS panel (primarily the status bar with date, time,
  * battery, carrier info and privacy icons) and also contains the {@link QuickQSPanel}.
  */
-public class QuickStatusBarHeader extends FrameLayout {
+public class QuickStatusBarHeader extends FrameLayout implements TunerService.Tunable {
 
     private boolean mExpanded;
     private boolean mQsDisabled;
@@ -62,7 +66,7 @@ public class QuickStatusBarHeader extends FrameLayout {
 
     protected QuickQSPanel mHeaderQsPanel;
     private View mDatePrivacyView;
-    private View mDateView;
+    private DateView mDateView;
     // DateView next to clock. Visible on QQS
     private VariableDateView mClockDateView;
     private View mSecurityHeaderView;
@@ -100,6 +104,8 @@ public class QuickStatusBarHeader extends FrameLayout {
 
     private boolean mHasCenterCutout;
     private boolean mConfigShowBatteryEstimate;
+    private static final String QS_SHOW_LUNAR_CALENDAR =
+            Settings.Secure.QS_SHOW_LUNAR_CALENDAR;
 
     public QuickStatusBarHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -140,6 +146,8 @@ public class QuickStatusBarHeader extends FrameLayout {
         mBatteryRemainingIcon = findViewById(R.id.batteryRemainingIcon);
 
         updateResources();
+
+        Dependency.get(TunerService.class).addTunable(this,QS_SHOW_LUNAR_CALENDAR);
 
         // Don't need to worry about tuner settings for this icon
         mBatteryRemainingIcon.setIgnoreTunerUpdates(true);
@@ -515,4 +523,12 @@ public class QuickStatusBarHeader extends FrameLayout {
         mClockIconsView.setScrollY(scrollY);
         mDatePrivacyView.setScrollY(scrollY);
     }
+
+    @Override
+    public void onTuningChanged(String key, String newValue) {
+        if (QS_SHOW_LUNAR_CALENDAR.equals(key)) {
+            mDateView.setShowLunarCalendar(TunerService.parseIntegerSwitch(newValue, false));
+        }
+    }
+
 }

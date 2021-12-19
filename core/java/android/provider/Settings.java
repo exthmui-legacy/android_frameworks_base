@@ -6772,6 +6772,12 @@ public final class Settings {
                 "status_bar_ticker_tick_duration";
 
         /**
+         * Show chinese lunar calendar in QuickSetting's header
+         * @hide
+         */
+        public static final String QS_SHOW_LUNAR_CALENDAR = "qs_show_lunar_calendar";
+
+        /**
          * Indicates that the user has not started setup personalization.
          * One of the possible states for {@link #USER_SETUP_PERSONALIZATION_STATE}.
          *
