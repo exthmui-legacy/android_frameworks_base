@@ -339,9 +339,7 @@ public class StatusBarNotificationPresenter implements NotificationPresenter,
                     mCommandQueue.animateCollapsePanels();
                 } else if (mStatusBarStateController.getState() == StatusBarState.SHADE_LOCKED
                         && !isCollapsing()) {
-                    mStatusBarStateController.setState(StatusBarState.KEYGUARD);
-                }
-            }
+                mStatusBarStateController.setState(StatusBarState.KEYGUARD);
         }
     }
 
