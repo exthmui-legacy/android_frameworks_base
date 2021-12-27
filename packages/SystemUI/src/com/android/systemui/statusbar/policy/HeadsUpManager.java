@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.ContentObserver;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -252,15 +253,11 @@ public abstract class HeadsUpManager extends AlertingNotificationManager {
                     Toast toast = Toast.makeText(mContext,
                     mContext.getString(R.string.heads_up_snooze_message_one_minute, appName),
                             Toast.LENGTH_LONG);
-                    TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
-                    if( v != null) v.setGravity(Gravity.CENTER);
                     toast.show();
                 } else {
                     Toast toast = Toast.makeText(mContext,
                     mContext.getString(R.string.heads_up_snooze_message, appName,
                     mSnoozeLengthMs / 60 / 1000), Toast.LENGTH_LONG);
-                    TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
-                    if( v != null) v.setGravity(Gravity.CENTER);
                     toast.show();
                 }
             }
