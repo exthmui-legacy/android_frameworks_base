@@ -722,8 +722,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private PendingIntent mTorchOffPendingIntent;
 
     private boolean mLongSwipeDown;
-    private static final int LONG_SWIPE_FLAGS = KeyEvent.FLAG_LONG_PRESS
-            | KeyEvent.FLAG_FROM_SYSTEM | KeyEvent.FLAG_VIRTUAL_HARD_KEY;
 
     private LineageHardwareManager mLineageHardware;
 
@@ -1031,7 +1029,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         // Reset back key state for long press
         mBackKeyHandled = false;
 
-        if (hasLongPressOnBackBehavior()) {
+        if (hasLongPressOnBackBehavior() && !mHandler.hasMessages(MSG_BACK_LONG_PRESS)) {
             Message msg = mHandler.obtainMessage(MSG_BACK_LONG_PRESS, event);
             msg.setAsynchronous(true);
             mHandler.sendMessageDelayed(msg,
@@ -4293,7 +4291,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         // Handle special keys.
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK: {
-                boolean isLongSwipe = (event.getFlags() & LONG_SWIPE_FLAGS) == LONG_SWIPE_FLAGS;
+                boolean isLongSwipe = (event.getFlags() & KeyEvent.FLAG_LONG_SWIPE) != 0;
                 if (mLongSwipeDown && isLongSwipe && !down) {
                     // Trigger long swipe action
                     performKeyAction(mEdgeLongSwipeAction, event);
@@ -4312,6 +4310,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
                 if (down) {
                     interceptBackKeyDown(event);
+
+                    // Don't pass repeated events to app if user has custom long press action
+                    // set up in settings
+                    if (event.getRepeatCount() > 0 && hasLongPressOnBackBehavior()) {
+                        result &= ~ACTION_PASS_TO_USER;
+                    }
                 } else {
                     boolean handled = interceptBackKeyUp(event);
 
