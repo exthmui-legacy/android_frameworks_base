@@ -2157,6 +2157,13 @@ public class Vpn {
                     "usepeerdns", "idle", "1800", "mtu", "1400", "mru", "1400",
                     (profile.mppe ? "+mppe" : "nomppe"),
                 };
+                if (profile.mppe) {
+                    // Disallow PAP authentication when MPPE is requested, as MPPE cannot work
+                    // with PAP anyway, and users may not expect PAP (plain text) to be used when
+                    // MPPE was requested.
+                    mtpd = Arrays.copyOf(mtpd, mtpd.length + 1);
+                    mtpd[mtpd.length - 1] = "-pap";
+                }
                 break;
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
             case VpnProfile.TYPE_L2TP_IPSEC_RSA:
@@ -2516,6 +2523,9 @@ public class Vpn {
                         return; // VPN has been shut down.
                     }
 
+                    // Clear mInterface to prevent Ikev2VpnRunner being cleared when
+                    // interfaceRemoved() is called.
+                    mInterface = null;
                     // Without MOBIKE, we have no way to seamlessly migrate. Close on old
                     // (non-default) network, and start the new one.
                     resetIkeState();

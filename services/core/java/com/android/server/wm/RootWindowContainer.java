@@ -571,8 +571,9 @@ class RootWindowContainer extends WindowContainer<DisplayContent>
     /**
      * Returns {@code true} if the callingUid has any non-toast window currently visible to the
      * user. Also ignores {@link android.view.WindowManager.LayoutParams#TYPE_APPLICATION_STARTING},
-     * since those windows don't belong to apps.
-     * @see WindowState#isNonToastOrStarting()
+     * and{@link android.view.WindowManager.LayoutParams#TYPE_PRIVATE_PRESENTATION}, as they
+     * should not count towards the apps visibility
+     * @see WindowState#isNonToastOrStartingOrPrivatePresentation()
      */
     boolean isAnyNonToastWindowVisibleForUid(int callingUid) {
         final PooledPredicate p = PooledLambda.obtainPredicate(
@@ -1990,7 +1991,8 @@ class RootWindowContainer extends WindowContainer<DisplayContent>
 
         try {
             if (mStackSupervisor.realStartActivityLocked(r, app,
-                    top == r && r.isFocusable() /*andResume*/, true /*checkConfig*/)) {
+                    top == r && r.getTask().canBeResumed(r) /*andResume*/,
+                    true /*checkConfig*/)) {
                 mTmpBoolean = true;
             }
         } catch (RemoteException e) {
@@ -2238,7 +2240,27 @@ class RootWindowContainer extends WindowContainer<DisplayContent>
         ensureActivitiesVisible(null, 0, false /* preserveWindows */);
         resumeFocusedStacksTopActivities();
 
-        mService.getTaskChangeNotificationController().notifyActivityPinned(r);
+        notifyActivityPipModeChanged(r.getTask(), r);
+    }
+
+    /**
+     * Notifies when an activity enters or leaves PIP mode.
+     *
+     * @param task the task of {@param r}
+     * @param r indicates the activity currently in PIP, can be null to indicate no activity is
+     *          currently in PIP mode.
+     */
+    void notifyActivityPipModeChanged(@NonNull Task task, @Nullable ActivityRecord r) {
+        final boolean inPip = r != null;
+        if (inPip) {
+            mService.getTaskChangeNotificationController().notifyActivityPinned(r);
+        } else {
+            mService.getTaskChangeNotificationController().notifyActivityUnpinned();
+        }
+        mWindowManager.mPolicy.setPipVisibilityLw(inPip);
+        mWmService.mTransactionFactory.get()
+                .setTrustedOverlay(task.getSurfaceControl(), inPip)
+                .apply();
     }
 
     void executeAppTransitionForAllDisplay() {

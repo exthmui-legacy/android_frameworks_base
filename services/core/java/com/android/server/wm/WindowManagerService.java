@@ -56,10 +56,12 @@ import static android.view.WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
 import static android.view.WindowManager.LayoutParams.FLAG_SECURE;
 import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER;
 import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
+import static android.view.WindowManager.LayoutParams.FLAG_SLIPPERY;
 import static android.view.WindowManager.LayoutParams.INPUT_FEATURE_NO_INPUT_CHANNEL;
 import static android.view.WindowManager.LayoutParams.LAST_APPLICATION_WINDOW;
 import static android.view.WindowManager.LayoutParams.LAST_SUB_WINDOW;
 import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_IS_ROUNDED_CORNERS_OVERLAY;
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_TRUSTED_OVERLAY;
 import static android.view.WindowManager.LayoutParams.SYSTEM_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 import static android.view.WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY;
 import static android.view.WindowManager.LayoutParams.TYPE_APPLICATION_STARTING;
@@ -1570,6 +1572,7 @@ public class WindowManagerService extends IWindowManager.Stub
 
             final DisplayPolicy displayPolicy = displayContent.getDisplayPolicy();
             displayPolicy.adjustWindowParamsLw(win, win.mAttrs, callingPid, callingUid);
+            attrs.flags = sanitizeFlagSlippery(attrs.flags, win.getName(), callingUid, callingPid);
 
             res = displayPolicy.validateAddingWindowLw(attrs, callingPid, callingUid);
             if (res != WindowManagerGlobal.ADD_OKAY) {
@@ -1653,6 +1656,7 @@ public class WindowManagerService extends IWindowManager.Stub
 
             win.mToken.addWindow(win);
             displayPolicy.addWindowLw(win, attrs);
+            displayPolicy.setDropInputModePolicy(win, win.mAttrs);
             if (type == TYPE_INPUT_METHOD) {
                 displayContent.setInputMethodWindowLocked(win);
                 imMayMove = false;
@@ -2154,6 +2158,7 @@ public class WindowManagerService extends IWindowManager.Stub
             if (attrs != null) {
                 displayPolicy.adjustWindowParamsLw(win, attrs, pid, uid);
                 win.mToken.adjustWindowParams(win, attrs);
+                attrs.flags = sanitizeFlagSlippery(attrs.flags, win.getName(), uid, pid);
                 // if they don't have the permission, mask out the status bar bits
                 if (seq == win.mSeq) {
                     int systemUiVisibility = attrs.systemUiVisibility
@@ -8059,6 +8064,23 @@ public class WindowManagerService extends IWindowManager.Stub
     }
 
     /**
+     * You need ALLOW_SLIPPERY_TOUCHES permission to be able to set FLAG_SLIPPERY.
+     */
+    private int sanitizeFlagSlippery(int flags, String windowName, int callingUid, int callingPid) {
+        if ((flags & FLAG_SLIPPERY) == 0) {
+            return flags;
+        }
+        final int permissionResult = mContext.checkPermission(
+                    android.Manifest.permission.ALLOW_SLIPPERY_TOUCHES, callingPid, callingUid);
+        if (permissionResult != PackageManager.PERMISSION_GRANTED) {
+            Slog.w(TAG, "Removing FLAG_SLIPPERY from '" + windowName
+                    + "' because it doesn't have ALLOW_SLIPPERY_TOUCHES permission");
+            return flags & ~FLAG_SLIPPERY;
+        }
+        return flags;
+    }
+
+    /**
      * Assigns an InputChannel to a SurfaceControl and configures it to receive
      * touch input according to it's on-screen geometry.
      *
@@ -8066,7 +8088,7 @@ public class WindowManagerService extends IWindowManager.Stub
      * views.
      */
     void grantInputChannel(int callingUid, int callingPid, int displayId, SurfaceControl surface,
-            IWindow window, IBinder hostInputToken, int flags, int type,
+            IWindow window, IBinder hostInputToken, int flags, int privateFlags, int type,
             InputChannel outInputChannel) {
         final InputApplicationHandle applicationHandle;
         final String name;
@@ -8082,7 +8104,7 @@ public class WindowManagerService extends IWindowManager.Stub
         }
 
         updateInputChannel(clientChannel.getToken(), callingUid, callingPid, displayId, surface,
-                name, applicationHandle, flags, type, null /* region */);
+                name, applicationHandle, flags, privateFlags, type, null /* region */);
 
         clientChannel.transferTo(outInputChannel);
         clientChannel.dispose();
@@ -8090,13 +8112,15 @@ public class WindowManagerService extends IWindowManager.Stub
 
     private void updateInputChannel(IBinder channelToken, int callingUid, int callingPid,
             int displayId, SurfaceControl surface, String name,
-            InputApplicationHandle applicationHandle, int flags, int type, Region region) {
+            InputApplicationHandle applicationHandle, int flags, int privateFlags, int type,
+            Region region) {
         InputWindowHandle h = new InputWindowHandle(applicationHandle, displayId);
         h.token = channelToken;
         h.name = name;
 
-        final int sanitizedFlags = flags & (LayoutParams.FLAG_NOT_TOUCHABLE
-                | LayoutParams.FLAG_SLIPPERY);
+        flags = sanitizeFlagSlippery(flags, name, callingUid, callingPid);
+
+        final int sanitizedFlags = flags & (LayoutParams.FLAG_NOT_TOUCHABLE | FLAG_SLIPPERY);
         h.layoutParamsFlags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | sanitizedFlags;
         h.layoutParamsType = type;
         h.dispatchingTimeoutNanos = DEFAULT_INPUT_DISPATCHING_TIMEOUT_NANOS;
@@ -8118,6 +8142,9 @@ public class WindowManagerService extends IWindowManager.Stub
             h.setTouchableRegionCrop(surface);
         }
 
+        //  Check private trusted overlay flag to set trustedOverlay field of input window handle.
+        h.trustedOverlay = (privateFlags & PRIVATE_FLAG_TRUSTED_OVERLAY) != 0;
+
         SurfaceControl.Transaction t = mTransactionFactory.get();
         t.setInputWindowInfo(surface, h);
         t.apply();
@@ -8131,7 +8158,7 @@ public class WindowManagerService extends IWindowManager.Stub
      * is undefined.
      */
     void updateInputChannel(IBinder channelToken, int displayId, SurfaceControl surface,
-            int flags, Region region) {
+            int flags, int privateFlags, Region region) {
         final InputApplicationHandle applicationHandle;
         final String name;
         final EmbeddedWindowController.EmbeddedWindow win;
@@ -8146,7 +8173,7 @@ public class WindowManagerService extends IWindowManager.Stub
         }
 
         updateInputChannel(channelToken, win.mOwnerUid, win.mOwnerPid, displayId, surface, name,
-                applicationHandle, flags, win.mWindowType, region);
+                applicationHandle, flags, privateFlags, win.mWindowType, region);
     }
 
     /** Return whether layer tracing is enabled */

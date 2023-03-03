@@ -17,12 +17,14 @@
 package com.android.keyguard;
 
 import android.content.Context;
+import android.os.UserHandle;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
+import com.android.keyguard.KeyguardSecurityModel.SecurityMode;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
 import com.android.systemui.Dependency;
@@ -132,8 +134,9 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
             });
         }
 
-        mScramblePin = LineageSettings.System.getInt(getContext().getContentResolver(),
-                LineageSettings.System.LOCKSCREEN_PIN_SCRAMBLE_LAYOUT, 0) == 1;
+        mScramblePin = LineageSettings.System.getIntForUser(getContext().getContentResolver(),
+                LineageSettings.System.LOCKSCREEN_PIN_SCRAMBLE_LAYOUT, 0,
+                UserHandle.USER_CURRENT) == 1;
         if (mScramblePin) {
             Collections.shuffle(sNumbers);
             // get all children who are NumPadKey's
@@ -226,5 +229,10 @@ public class KeyguardPINView extends KeyguardPinBasedInputView {
     @Override
     public boolean hasOverlappingRendering() {
         return false;
+    }
+
+    @Override
+    public SecurityMode getSecurityMode() {
+        return SecurityMode.PIN;
     }
 }
